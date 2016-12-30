@@ -38,7 +38,9 @@ namespace IST.Repository.Repositories
 
         #region Public
 
-
+        /// <summary>
+        /// Search
+        /// </summary>
         public IEnumerable<Student> SearchByName(string name)
         {
             var searchNameSpecified = !string.IsNullOrEmpty(name);
