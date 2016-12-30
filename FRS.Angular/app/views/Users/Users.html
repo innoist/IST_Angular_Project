@@ -1,0 +1,76 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a ui-sref="app.Profile" class="btn btn-info btn-labeled" ng-if="uc.SysAdmin">
+            <span class="btn-label">
+                <i class="fa fa-plus"></i>
+            </span><span class="hidden-480">New</span>
+        </a>
+        <button class="btn btn-warning btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
+            <span class="btn-label">
+                <i class="fa fa-filter"></i>
+            </span><span class="hidden-480">Filter</span>
+        </button>
+    </div>
+    <!-- END Language list    -->
+    Users
+    <small>Details</small>
+</h3>
+<div class="container-fluid" ng-hide="isFilterOpen">
+    <div class="panel panel-default">
+        <form class="panel-body" ng-submit="uc.fiterData()">
+            <div class="col-md-3">
+                <input type="text"
+                       placeholder="Name"
+                       ng-change="uc.fiterData()"
+                       class="form-control" 
+                       ng-model="uc.name" />
+            </div>
+            <div class="col-md-3">
+                <input type="text"
+                       placeholder="Email"
+                       ng-change="uc.fiterData()"
+                       class="form-control" 
+                       ng-model="uc.email"/>
+            </div>
+            <div class="col-md-3">
+                <input type="text"
+                       placeholder="Username"
+                       ng-change="uc.fiterData()"
+                       class="form-control" 
+                       ng-model="uc.userName"/>
+            </div>
+            <!-- Dropdown List -->
+            <!--<div class="col-md-3">
+                <ui-select ng-model="uc.Roles.selected" theme="bootstrap" ng-disabled="uc.disabled">
+                    <ui-select-match placeholder="Select a Role...">{{$select.selected.Name}}</ui-select-match>
+                    <ui-select-choices repeat="role in uc.Roles | propsFilter: {Name: $select.search}">
+                        <div ng-bind-html="role.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>-->
+            <div class="col-md-3">
+                <button class="btn btn-success" type="submit">Filter</button>
+                <button class="btn btn-default" ng-click="uc.resetFilter()">Reset</button>
+                <a class="pull-right"
+                   uib-tooltip="{{'Hide filter'}}"
+                   uib-tooltip-trigger="focus"
+                   ng-click="isFilterOpen = !isFilterOpen">
+                    <i class="fa fa-compress"></i>
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <!-- If serverside paging -->
+            <table datatable="" dt-options="uc.dtOptions" dt-columns="uc.dtColumns" dt-instance="uc.dtInstance" class="row-border hover" id="dataTable"></table>
+        </div>
+    </div>
+</div>

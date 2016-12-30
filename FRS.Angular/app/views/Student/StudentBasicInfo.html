@@ -1,0 +1,174 @@
+﻿
+<legend>Basic Information</legend>
+<!-- START row-->
+<div class="row">
+    <div class="col-md-12">
+        <aside class="col-md-3 col-xs-4">
+            <img class="img-responsive img-thumbnail StudentImage" src="/app/img/user/default.png" />
+        </aside>
+        <label class="control-label col-md-9" style="text-align: left">Profile Image</label>
+        <div class="col-md-4 col-xs-8">
+            <input filestyle="" type="file" data-button-text="Select Image" data-class-button="btn btn-success"
+                   file-model="spc.Student.Image"
+                   data-classinput="form-control inline" nv-file-select=""
+                   class="form-control"
+                   id="loadFile"
+                   accept="image/*"
+                   onchange="angular.element(this).scope().readFile(this)"
+                   ng-disabled="!spc.edit" />
+            <button class="btn btn-labeled btn-danger" style="margin-top: 4px" ng-click="spc.ResetImage()" ng-disabled="!spc.edit">
+                <span class="btn-label">
+                    <i class="icon-trash"></i>
+                </span><span class="hidden-480">Remove</span>
+            </button>
+        </div>
+
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.FirstName.$invalid }">
+        <div class="form-group">
+            <label for="FirstName" class="control-label requiredLabel">First Name</label>
+            <input id="FirstName" type="text" placeholder="Enter First Name Here"
+                   ng-model="spc.Student.FirstName" name="FirstName"
+                   uib-tooltip="{{ formStep1.$submitted && formStep1.FirstName.$invalid ? 'First Name is required.' : '' }}"
+                   uib-tooltip-trigger="focus"
+                   tooltip-class="tooltip-danger"  
+                   required class="form-control"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="MiddleName" class="control-label">Middle Name</label>
+            <input id="MiddleName" type="text" placeholder="Enter Middle Name Here"
+                   ng-model="spc.Student.MiddleName" name="MiddleName"
+                   class="form-control"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.LastName.$invalid }">
+        <div class="form-group">
+            <label for="LastName" class="control-label requiredLabel">Last Name</label>
+            <input id="LastName" type="text" placeholder="Enter Last Name Here"
+                   ng-model="spc.Student.LastName" name="LastName"
+                   uib-tooltip="{{ formStep1.$submitted && formStep1.LastName.$invalid ? 'Last Name is required.' : '' }}"
+                   uib-tooltip-trigger="focus"
+                   tooltip-class="tooltip-danger"  
+                   class="form-control"
+                   required="required"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.DateOfBirth.$invalid }">
+        <div class="form-group">
+            <label for="DateOfBirth" class="control-label requiredLabel">Date of Birth</label>
+            <span ng-if="spc.Student.Age">&nbsp; (Age : {{spc.Student.Age}})</span>
+            <p class="input-group">
+                <input type="text" placeholder="Select Date of Birth - (dd-MM-yyyy)" ng-focus="spc.open($event)"
+                       name="DateOfBirth"
+                       required
+                       ng-change="spc.calculateAge()"
+                       uib-tooltip="{{ formStep1.$submitted && formStep1.DateOfBirth.$invalid ? 'Date of Birth is required.' : '' }}"
+                       uib-tooltip-trigger="focus"
+                       tooltip-class="tooltip-danger"  
+                       id="DateOfBirth"
+                       uib-datepicker-popup="{{spc.format}}"
+                       ng-model="spc.Student.DateOfBirth"
+                       is-open="spc.opened"
+                       max-date="spc.maxDate"
+                       uib-datepicker-options="spc.dateOptions"
+                       close-text="Close"
+                       class="form-control" />
+                <span class="input-group-btn">
+                    <button type="button" ng-click="spc.open($event)" class="btn btn-default">
+                        <em class="fa fa-calendar"></em>
+                    </button>
+                </span>
+            </p>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.GuardianFirstName.$invalid }">
+        <div class="form-group">
+            <label for="GuardianFirstName" class="control-label requiredLabel">Guardian's First Name</label>
+            <input id="GuardianFirstName" type="text" placeholder="Enter Guardian's First Name Here"
+                   ng-model="spc.Student.GuardianFirstName" name="GuardianFirstName"
+                   uib-tooltip="{{ formStep1.$submitted && formStep1.GuardianFirstName.$invalid ? 'Guardian\'s First Name is required.' : '' }}"
+                   uib-tooltip-trigger="focus"
+                   tooltip-class="tooltip-danger"  
+                   required class="form-control"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.GuardianLastName.$invalid }">
+        <div class="form-group">
+            <label for="GuardianLastName" class="control-label requiredLabel">Guardian's Last Name</label>
+            <input id="GuardianLastName" type="text" placeholder="Enter Guardian's Last Name Here"
+                   ng-model="spc.Student.GuardianLastName" name="GuardianLastName"
+                   uib-tooltip="{{ formStep1.$submitted && formStep1.GuardianLastName.$invalid ? 'Guardian\'s First last is required.' : '' }}"
+                   uib-tooltip-trigger="focus"
+                   tooltip-class="tooltip-danger"  
+                   required class="form-control"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.GuardianPhone.$invalid }">
+        <div class="form-group">
+            <label for="GuardianPhone" class="control-label requiredLabel">Guardian's Phone</label>
+            <input id="GuardianPhone" type="text" placeholder="Enter Guardian's Phone Here"
+                   ng-model="spc.Student.GuardianPhone" name="GuardianPhone"
+                   uib-tooltip="{{ formStep1.$submitted && formStep1.GuardianPhone.$invalid ? 'Guardian\'s phone is required.' : '' }}"
+                   uib-tooltip-trigger="focus"
+                   tooltip-class="tooltip-danger"  
+                   required class="form-control"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12" ng-class="{ 'has-error': formStep1.$submitted && formStep1.GuardianEmail.$invalid }">
+        <div class="form-group">
+            <label for="GuardianEmail" class="control-label">Guardian's Email</label>
+            <input id="GuardianEmail" type="email" placeholder="Enter Guardian's Email Here"
+                   ng-model="spc.Student.GuardianEmail" name="GuardianEmail"
+                   uib-tooltip="{{ formStep1.$submitted && formStep1.GuardianEmail.$invalid ? 'Guardian\'s Email is required.' : '' }}"
+                   uib-tooltip-trigger="focus"
+                   tooltip-class="tooltip-danger"  
+                   class="form-control"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                   maxlength="100">
+        </div>
+    </div>
+</div>
+<div class="row mt">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="HilalCategories" class="control-label">Hilal Category</label>
+            <ui-select name="HilalCategories" id="HilalCategories" ng-model="spc.HilalCategories.selected" theme="bootstrap">
+                <ui-select-match placeholder="Select a Hilal Category">
+                    {{$select.selected.DisplayName}}
+                    <span class="resetDdl" ng-click="spc.clearHilalCategories($event)" ng-if="spc.edit">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </ui-select-match>
+                <ui-select-choices repeat="obj in spc.HilalCategories | propsFilter: {DisplayName: $select.search}" class="animated fadeInDown">
+                    <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+</div>
+<!-- END row-->

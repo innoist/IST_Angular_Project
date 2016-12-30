@@ -1,0 +1,44 @@
+<div class="block-center mt-xl wd-xl">
+    <!-- START panel-->
+    <div class="panel panel-dark panel-flat">
+        <div class="panel-heading text-center">
+            <a ui-sref="account.login">
+                <img src="/app/img/preloader/preloader.empty.png" alt="Image" height="80" class="block-center img-rounded" />
+            </a>
+        </div>
+        <div class="panel-body">
+         <p class="text-center pv">FORGOT PASSWORD</p>
+            <form role="form" name="forgotPassword.recoverForm" novalidate="" class="form-validate" ng-submit="forgotPassword.recoverPassword()">
+              <p class="text-center">Enter your e-mail address to receive the link, to reset your password.</p>
+                <div class="form-group has-feedback">
+                    <label class="text-muted">Email address</label>
+                    <input type="email" name="email" placeholder="Enter email" autocomplete="off" ng-model="forgotPassword.Email" required="" class="form-control" ng-disabled="forgotPassword.submitButton" />
+                    <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                    <span ng-show="forgotPassword.recoverForm.email.$dirty &amp;&amp; forgotPassword.recoverForm.email.$error.required" class="text-danger">This field is required</span>
+                    <span ng-show="forgotPassword.recoverForm.email.$dirty &amp;&amp; forgotPassword.recoverForm.email.$error.email" class="text-danger">This field must be a valid email address</span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" ng-disabled="forgotPassword.submitButton">Reset</button>
+            </form>
+            <br />
+            <div ng-show="forgotPassword.authMsg" class="text-left col-md-12">
+                <div class="alert row" ng-class="{'alert-danger' : forgotPassword.hasError, 'alert-success' : !forgotPassword.hasError}">
+                    <div class="col-md-2">
+                        <i class="fa fa-2x"
+                           ng-class="{'fa-exclamation-triangle' : forgotPassword.hasError, 'fa-check-square' : !forgotPassword.hasError}">
+                        </i>
+                    </div>
+                    <div class="col-md-10" ng-bind-html="forgotPassword.authMsg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END panel-->
+    <div class="p-lg text-center">
+        <span>&copy;</span>
+        <span ng-bind="app.year"></span>
+        <span>-</span>
+        <span ng-bind="app.name"></span>
+        <br />
+        <span ng-bind="app.description"></span>
+    </div>
+</div>

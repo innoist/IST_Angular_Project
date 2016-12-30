@@ -1,0 +1,231 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a ui-sref="app.dashboard" class="btn btn-inverse btn-labeled">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span><span class="hidden-480">Back</span>
+        </a>
+    </div>
+    <!-- END Language list -->
+    Room Students - {{rsc.RoomTitle}}
+    <small>Details</small>
+
+</h3>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="panelDemo2" class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Students</strong>
+                </div>
+                <div uib-collapse="panelDemo2" class="panel-wrapper">
+                    <div class="panel-body">
+                        <div class="form-group col-md-12 form-horizontal">
+                            <div class="col-md-12">
+                                <input class="form-control" ng-model="searchStudent.name" type="text" placeholder="Search students..." />
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-lg">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="bb mt0">Students (Present) </h3>
+                                    <div ng-if="!rsc.PresentStudents.length" class="text-center">
+                                        <p>
+                                            <i class="fa fa-info-circle fa-2x"></i>
+                                            <strong class="lead ml-sm">
+                                                No present students in this room.
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div ng-repeat="student in rsc.PresentStudents | filter : {FullName : searchStudent.name} as result0">
+
+                                    <div class="col-sm-2">
+                                        <!-- START widget-->
+                                        <div class="panel widget shadow-emboss">
+                                            <div class="panel-body text-center bg-inverse-light">
+                                                <div class="radial-bar radial-bar radial-bar-100 m0"
+                                                     ng-class="{'radial-bar-danger' : student.Anaphylactic,'radial-bar-success':!student.Anaphylactic}" 
+                                                     uib-tooltip="{{ student.Anaphylactic ? 'This Student is Anaphylactic.' : ''}}" tooltip-placement="top" tooltip-class="tooltip-danger">
+                                                    <img ng-src="{{student.Image ? student.Image : '/app/img/user/default.png'}}" alt="Profile Image" />
+                                                </div>
+                                                <p>
+                                                    <h5 title="{{student.FullName}}"><strong>{{student.FullName | customLimitTo}}</strong></h5>
+                                                </p>
+                                                <div class="pull-left"
+                                                     uib-tooltip="{{ student.StudentIngredientCategoriesCount == 0 ? 'This Student has no allergies.' : 'View Allergies'}}"
+                                                     uib-tooltip-trigger="focus">
+                                                    <button ng-click="rsc.viewStudentAllergies(student)"
+                                                            ng-hide="{{student.StudentIngredientCategoriesCount== 0}}" class="btn btn-xs btn-warning">
+                                                        Allergies
+                                                    </button>
+                                                </div>
+
+                                                <div class="pull-right">
+                                                    <a ui-sref="app.CreateStudent({Id:student.StudentId})" target="_blank" class="btn btn-xs btn-default">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- END widget-->
+                                    </div>
+
+                                </div>
+                                <p ng-if="!result0.length && searchStudent.name && rsc.PresentStudents.length" class="text-center h4">
+                                    No student(s) match your search.
+                                </p>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="bb mt0">Students (Absent) </h3>
+                                    <div ng-if="!rsc.AbsentStudents.length" 
+                                         class="text-center">
+                                        <p>
+                                            <i class="fa fa-info-circle fa-2x"></i>
+                                            <strong class="lead ml-sm">
+                                                No absent students in this room.
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div ng-repeat="student in rsc.AbsentStudents | filter : {FullName : searchStudent.name} as result1">
+                                    <div class="col-sm-2">
+                                        <!-- START widget-->
+                                        <div class="panel widget shadow-emboss">
+                                            <div class="panel-body text-center bg-inverse-light">
+                                                <div class="radial-bar radial-bar radial-bar-100 m0" ng-class="{'radial-bar-danger' : student.Anaphylactic,'radial-bar-success':!student.Anaphylactic}" uib-tooltip="{{ student.Anaphylactic ? 'This Student is Anaphylactic.' : ''}}" tooltip-placement="top" tooltip-class="tooltip-danger">
+                                                    <img ng-src="{{student.Image ? student.Image : '/app/img/user/default.png'}}" alt="Profile Image" />
+                                                </div>
+                                                <p>
+                                                    <h5 title="{{student.FullName}}"><strong>{{student.FullName | customLimitTo}}</strong></h5>
+                                                </p>
+
+                                                <div class="pull-left"
+                                                     uib-tooltip="{{ student.StudentIngredientCategoriesCount == 0 ? 'This Student has no allergies.' : 'View Allergies'}}"
+                                                     uib-tooltip-trigger="focus">
+                                                    <button ng-click="rsc.viewStudentAllergies(student)"
+                                                            ng-disabled="{{student.StudentIngredientCategoriesCount == 0}}" class="btn btn-xs btn-warning">
+                                                        Allergies
+                                                    </button>
+                                                </div>
+
+                                                <div class="pull-right">
+                                                    <a ui-sref="app.CreateStudent({Id:student.StudentId})" target="_blank" class="btn btn-xs btn-default">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- END widget-->
+                                    </div>
+                                </div>
+                                <p ng-if="!result1.length && searchStudent.name && rsc.AbsentStudents.length" class="text-center h4">
+                                    No student(s) match your search.
+                                </p>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="bb mt0">Students (Partial Absent) </h3>
+                                    <div ng-if="!rsc.PartialAbsentStudents.length" 
+                                         class="text-center">
+                                        <p>
+                                            <i class="fa fa-info-circle fa-2x"></i>
+                                            <strong class="lead ml-sm">
+                                                No partial absent students in this room.
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div ng-repeat="student in rsc.PartialAbsentStudents | filter : {FullName : searchStudent.name} as result2">
+                                    <div class="col-sm-2">
+                                        <!-- START widget-->
+                                        <div class="panel widget shadow-emboss">
+                                            <div class="panel-body text-center bg-inverse-light">
+                                                <div class="radial-bar radial-bar-100 radial-bar m0" ng-class="{'radial-bar-danger' : student.Anaphylactic,'radial-bar-success':!student.Anaphylactic}" uib-tooltip="{{ student.Anaphylactic ? 'This Student is Anaphylactic.' : ''}}" tooltip-placement="top" tooltip-class="tooltip-danger">
+                                                    <img ng-src="{{student.Image ? student.Image : '/app/img/user/default.png'}}" alt="Profile Image"/>
+                                                </div>
+                                                <p>
+                                                    <h5 title="{{student.FullName}}"><strong>{{student.FullName | customLimitTo}}</strong></h5>
+                                                </p>
+                                                <h6><strong>Meals</strong> : {{rsc.Meals}}</h6>
+
+                                                <div class="pull-left"
+                                                     uib-tooltip="{{ student.StudentIngredientCategoriesCount == 0 ? 'This Student has no allergies.' : 'View Allergies'}}"
+                                                     uib-tooltip-trigger="focus">
+                                                    <button ng-click="rsc.viewStudentAllergies(student)"
+                                                            ng-disabled="{{student.StudentIngredientCategoriesCount == 0}}" class="btn btn-xs btn-warning">
+                                                        Allergies
+                                                    </button>
+                                                </div>
+
+                                                <div class="pull-right">
+                                                    <a ui-sref="app.CreateStudent({Id:student.StudentId})" target="_blank" class="btn btn-xs btn-default">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- END widget-->
+                                    </div>
+                                </div>
+                                <p ng-if="!result2.length && searchStudent.name && rsc.PartialAbsentStudents.length" class="text-center h4">
+                                    No student(s) match your search.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<div class="panel-footer">Panel Footer</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="studentAllergies">
+    <style>
+        .ngdialog.ngdialog-theme-default {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+        }
+
+            .ngdialog.ngdialog-theme-default .ngdialog-content {
+                max-width: 80% !important;
+                width: auto !important;
+            }
+
+        .panel .table {
+            border: 1px solid #eeeeee !important;
+        }
+    </style>
+    <div class="container-fluid">
+        <!--<div class="col-md-9">-->
+        <div class="col-md-12">
+            <p class="bb mt0">
+                <span class="lead">
+                    <strong>Name: </strong>{{ngDialogData.Student.FullName}}
+                </span>
+                <span class="ml-lg mb-sm" ng-if="ngDialogData.Student.Anaphylactic">
+                    <label class="label label-danger blink">Anaphylactic</label>
+                </span>
+            </p>
+
+        </div>
+        <div class="col-md-12">
+            <scrollable height="400">
+                <div ng-init="ngDialogData.Student.StudentIngredientCategories = ngDialogData.response"
+                     ng-bind-html="mc.getStudentAllergies(ngDialogData.Student)">
+                </div>
+            </scrollable>
+        </div>
+        <button type="button" class="btn btn-danger pull-right" ng-click="mc.closeDialog()">
+            <i class="fa fa-times"></i> Close
+        </button>
+    </div>
+</script>

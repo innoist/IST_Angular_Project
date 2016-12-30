@@ -1,0 +1,130 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using IST.Interfaces.IServices;
+using IST.Interfaces.Repository;
+using IST.Models.Common.DropDown;
+using IST.Models.DomainModels;
+using IST.Models.RequestModels;
+using IST.Models.ResponseModels;
+using IST.Models.ModelCopier;
+namespace IST.Implementation.Services
+{
+    public class ItemService:IItemService
+    {
+        #region Private
+
+        private readonly IItemRepository itemRepository;
+        private readonly ICategoryService categoryService;
+        private readonly IBrandService brandService;
+        private readonly IIngredientService ingredientService;
+
+        #endregion
+
+        #region Constructor
+
+        public ItemService(IItemRepository itemRepository, ICategoryService categoryService, IBrandService brandService, ISchoolGroupService dayCareGroupService, IIngredientService ingredientService)
+        {
+            this.categoryService = categoryService;
+            this.brandService = brandService;
+            this.ingredientService = ingredientService;
+            this.itemRepository = itemRepository;
+        }
+
+        #endregion
+        public ItemBaseData GetBaseData(int keyId, int id)
+        {
+            var baseData=new ItemBaseData
+            {
+                Item = id > 0 ? itemRepository.GetById(keyId,id) : null,
+                Brands = brandService.GetAll(keyId)?.Select(x=> new DropDownModel {Id = x.BrandId, DisplayName = x.Name}),
+                Categories = categoryService.GetAll(keyId)?.Select(x=> new DropDownModel {Id = x.CategoryId, DisplayName = x.Name}),
+                Ingredients = ingredientService.GetAll(keyId)?.Select(x=> new DropDownModel {Id = x.IngredientId, DisplayName = x.Name})
+            };
+            return baseData;
+        }
+
+        public bool SaveOrUpdate(Item item)
+        {
+            var oldItem = itemRepository.GetByTitle(item.DayCareGroupId, item.ItemId ,item.Name.Trim());
+            if (oldItem != null)
+                return false;
+            if (item.ItemId > 0)
+            {
+                var dbVersion = itemRepository.GetById(item.DayCareGroupId, item.ItemId);
+                dbVersion.CopyFrom(item);
+                var existingIngredientIds = dbVersion.Ingredients.Select(x => x.IngredientId).ToList();
+                var tobeProcessed = item.Ingredients.Select(x => x.IngredientId).ToList();
+
+                var newToBeInserted = tobeProcessed.Except(existingIngredientIds);
+                var toBeDeleted = existingIngredientIds.Except(tobeProcessed);
+
+                var toBeInserted = ingredientService.GetByIngredientIds(item.DayCareGroupId, newToBeInserted.ToArray());
+
+                var toBeDeletedObj = ingredientService.GetByIngredientIds(item.DayCareGroupId, toBeDeleted.ToArray());
+
+                foreach (var newIngredient in toBeInserted)
+                {
+                    dbVersion.Ingredients.Add(newIngredient);
+                }
+
+                foreach (Ingredient ingredient in toBeDeletedObj)
+                {
+                    dbVersion.Ingredients.Remove(ingredient);
+                }
+
+                itemRepository.Update(dbVersion);
+            }
+            else
+            {
+                var result = ingredientService.GetByIngredientIds(item.DayCareGroupId,
+                   item.Ingredients.Select(x => x.IngredientId).ToArray());
+
+                item.Ingredients = new List<Ingredient>();
+                foreach (var newIngredient in result)
+                {
+                    item.Ingredients.Add(newIngredient);
+                }
+                itemRepository.Add(item);
+            }
+
+            itemRepository.SaveChanges();
+            return true;
+        }
+        public bool Delete(int dayCareGroupId, int id)
+        {
+            var toDelete = itemRepository.GetById(dayCareGroupId, id);
+            if (toDelete != null)
+            {
+                toDelete.IsDeleted = true;
+                itemRepository.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public SearchTemplateResponse<Item> Search(ItemSearchRequest searchRequest)
+        {
+            return itemRepository.Search(searchRequest);
+        }
+        public IEnumerable<Item> GetAll(int keyId)
+        {
+            return itemRepository.GetAll(keyId);
+        }
+
+<<<<<<< HEAD
+        public IEnumerable<DropDownModel> GetAllBrands(int keyId)
+        {
+            return
+                brandService.GetAll(keyId)?
+                    .Select(x => new DropDownModel { DisplayName = x.Name, Subtitle = x.Name, Id = x.BrandId });
+        }
+
+        public IEnumerable<DropDownModel> GetAllCategories(int keyId)
+        {
+            return
+                categoryService.GetAll(keyId)?
+                    .Select(x => new DropDownModel {DisplayName = x.Name, Subtitle = x.Code, Id = x.CategoryId});
+        }
+=======
+>>>>>>> f9ea32952a3b67ad8d32670d1e97411834737eeb
+    }
+}

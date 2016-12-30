@@ -1,0 +1,76 @@
+<div ng-controller="RegisterFormController as reg" class="block-center mt-xl wd-xl">
+   <!-- START panel-->
+   <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+         <a href="#">
+            <img src="app/img/logo4.png" alt="Image" class="block-center img-rounded" height="60"/>
+         </a>
+      </div>
+      <div class="panel-body">
+         <p class="text-center pv">SIGNUP TO GET INSTANT ACCESS.</p>
+         <form role="form" name="reg.registerForm" novalidate="" ng-submit="reg.register()" class="form-validate mb-lg">
+             <div class="form-group has-feedback">
+                 <label class="text-muted">Email address</label>
+                 <input type="email" name="account_email" placeholder="Enter email" autocomplete="off" ng-model="reg.register.email" required="" class="form-control" />
+                 <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                 <span ng-show="reg.registerForm.account_email.$dirty &amp;&amp; reg.registerForm.account_email.$error.required" class="text-danger">Email is required</span>
+                 <span ng-show="reg.registerForm.account_email.$dirty &amp;&amp; reg.registerForm.account_email.$error.email" class="text-danger">This field must be a valid email address</span>
+             </div>
+             <div class="form-group has-feedback">
+                 <label class="text-muted">First Name</label>
+                 <input type="text" name="account_FirstName" placeholder="Enter First Name" autocomplete="off" ng-model="reg.register.FirstName" required="" class="form-control" />
+                 <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                 <span ng-show="reg.registerForm.account_FirstName.$dirty &amp;&amp; reg.registerForm.account_FirstName.$error.required" class="text-danger">First Name is required</span>
+             </div>
+             <div class="form-group has-feedback">
+                 <label class="text-muted">Last Name</label>
+                 <input type="text" name="account_LastName" placeholder="Enter Last Name" autocomplete="off" ng-model="reg.register.LastName" required="" class="form-control"/>
+                 <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                 <span ng-show="reg.registerForm.account_LastName.$dirty &amp;&amp; reg.registerForm.account_LastName.$error.required" class="text-danger">Last Name is required</span>
+             </div>
+             <div class="form-group has-feedback">
+                 <label class="text-muted">Username</label>
+                 <input type="text" name="account_UserName" placeholder="Enter UserName" autocomplete="off" ng-model="reg.register.UserName" required="" class="form-control" />
+                 <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                 <span ng-show="reg.registerForm.account_UserName.$dirty &amp;&amp; reg.registerForm.account_UserName.$error.required" class="text-danger">UserName is required</span>
+             </div>
+            <div class="form-group has-feedback">
+               <label class="text-muted">Password</label>
+               <input id="id-password" placeholder="Password" type="password" name="account_password" ng-model="reg.register.password" ng-pattern="/^[a-zA-Z0-9]{6,10}$/" required="" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="reg.registerForm.account_password.$dirty &amp;&amp; reg.registerForm.account_password.$error.required" class="text-danger">Password is required</span>
+               <span ng-show="reg.registerForm.account_password.$dirty &amp;&amp; reg.registerForm.account_password.$error.pattern" class="text-danger">Input should match 'a-zA-Z0-9' and 6-10 length</span>
+            </div>
+             <div class="form-group has-feedback">
+                 <label class="text-muted">Retype Password</label>
+                 <input type="password" placeholder="Confirm Password" name="account_password_confirm" ng-model="reg.register.account_password_confirm" ui-validate="'$value==reg.register.password'" ui-validate-watch="'password'" class="form-control" />
+                 <span class="fa fa-lock form-control-feedback text-muted"></span>
+                 <span ng-show="reg.registerForm.account_password_confirm.$dirty &amp;&amp; reg.registerForm.account_password_confirm.$error.required" class="text-danger">Confirm Password is required</span>
+                 <span ng-show="reg.registerForm.account_password_confirm.$dirty &amp;&amp; reg.registerForm.account_password_confirm.$error.validator" class="text-danger">Password does Not match</span>
+             </div>
+             
+            <!--<div class="clearfix">
+               <div class="checkbox c-checkbox pull-left mt0">
+                  <label>
+                     <input type="checkbox" required="" name="account_agreed" ng-model="reg.register.agreed" />
+                     <span class="fa fa-check"></span>I agree with the <a href="#">terms</a>
+                  </label>
+               </div>
+            </div>-->
+            <!--<div ng-show="reg.registerForm.account_agreed.$dirty &amp;&amp; reg.registerForm.account_agreed.$error.required" class="text-danger">You must agree the terms</div>-->
+             <button type="submit" class="btn btn-block btn-primary mt-lg" ng-disabled="reg.submitBtn">Create account</button>
+         </form>
+         <div ng-show="reg.authMsg" class="alert alert-danger text-center">{{reg.authMsg}}</div>
+         <p class="pt-lg text-center">Have an account?</p><a ui-sref="account.login" class="btn btn-block btn-default">Signin</a>
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span>2016</span>
+      <span>-</span>
+      <span>Innostark</span>
+      <br/>
+      <span>Innostark Technologies Pvt. Ltd.</span>
+   </div>
+</div>

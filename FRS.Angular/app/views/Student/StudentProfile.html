@@ -1,0 +1,166 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <button class="btn btn-labeled btn-danger" ng-click="spc.cancelBtn()">
+            <span class="btn-label">
+                <i class="fa fa-times"></i>
+            </span><span class="hidden-480">Cancel</span>
+        </button>
+    </div>
+    <!-- END Language list    -->
+    Student Profile
+    <small>New Student Wizard</small>
+</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form action="/" form-wizard="" steps="7" validate-steps="true" name="spc.formValidate" class="form-validate">
+            <div class="form-wizard wizard-horizontal">
+                <!-- START wizard steps indicator-->
+                <ol class="row">
+                    <li ng-class="{'active':wizard.active(1)}" ng-click="wizard.go(1)" class="col-md-2 wizardTabFixedHeight">
+                        <h4>Basic Info</h4>
+                        <small class="text-muted">Provide basic information of student.</small>
+                    </li>
+                    <li ng-class="{'active':wizard.active(2)}" ng-click="wizard.go(2)" class="col-md-2 wizardTabFixedHeight">
+                        <h4>Schedule</h4>
+                        <small class="text-muted">Set up schedule for the student.</small>
+                    </li>
+                    <li ng-class="{'active':wizard.active(3)}" ng-click="spc.validateSchedule(wizard)" class="col-md-2 wizardTabFixedHeight">
+                        <h4>Requirements</h4>
+                        <small class="text-muted">Select some requirements.</small>
+                    </li>
+                    <li ng-class="{'active':wizard.active(4)}" ng-click="wizard.go(4)" class="col-md-2 wizardTabFixedHeight">
+                        <h4>Allergy(Important)</h4>
+                        <small class="text-muted">Information about which ingredient the student is allergic to.</small>
+                    </li>
+                    <li ng-class="{'active':wizard.active(5), 'notAllowed' : !spc.traversed}" ng-click="wizard.go(5)" class="col-md-2 wizardTabFixedHeight">
+                        <h4>Allergy(Optional)</h4>
+                        <small class="text-muted">Other allergies.</small>
+                    </li>
+                    <li ng-class="{'active':wizard.active(6),'notAllowed' : !spc.traversed }" ng-click="wizard.go(6)" class="col-md-2 wizardTabFixedHeight">
+                        <h4>Done!</h4>
+                        <small class="text-muted">You are all done.</small>
+                    </li>
+                </ol>
+                <!-- END wizard steps indicator-->
+                <!-- START Wizard Step inputs-->
+                <div id="step1" ng-show="wizard.active(1)">
+                    <!-- Wizard with validation require inner forms to group step inputs to be validated-->
+                    <fieldset ng-form="formStep1">
+                        <div ng-include="'../../app/views/Student/StudentBasicInfo.html'"></div>
+                    </fieldset>
+
+                    <ul class="pager">
+                        <li class="next">
+                            <a class="btn btn-info" ng-click="wizard.go(2)">Next<span>&rarr;</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Wizard Step inputs-->
+                <!-- START Wizard Step inputs-->
+                <div id="step2" ng-show="wizard.active(2)">
+                    <!-- Wizard with validation require inner forms to group step inputs to be validated-->
+                    <fieldset ng-form="formStep2">
+                        <div ng-include="'../../app/views/Student/StudentSchedule.html'"></div>
+                    </fieldset>
+                    <ul class="pager">
+                        <li class="previous">
+                            <a href="" ng-click="wizard.go(1)">
+                                <span>&larr; Previous</span>
+                            </a>
+                        </li>
+                        <li class="next">
+                            <a href="" class="btn btn-info" ng-click="spc.validateSchedule(wizard)">Next<span>&rarr;</span></a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- END Wizard Step inputs-->
+                <!-- START Wizard Step inputs-->
+                <div id="step3" ng-show="wizard.active(3)">
+                    <!-- Wizard with validation require inner forms to group step inputs to be validated-->
+                    <fieldset ng-form="formStep3">
+                        <div ng-include="'../../app/views/Student/StudentAddons.html'"></div>
+                    </fieldset>
+                    <ul class="pager">
+                        <li class="previous">
+                            <a href="" ng-click="wizard.go(2)">
+                                <span>&larr; Previous</span>
+                            </a>
+                        </li>
+                        <li class="next">
+                            <a href="" class="btn btn-info" ng-click="wizard.go(4)">Next<span>&rarr;</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Wizard Step inputs-->
+                <!-- START Wizard Step inputs-->
+                <div id="step4" ng-show="wizard.active(4)">
+
+                    <fieldset ng-form="formStep4">
+                        <div class="row mt-lg customPager">
+                            <div class="col-md-12" ng-include="'../../app/views/Student/StudentAllergy(Important).html'"></div>
+                        </div>
+                    </fieldset>
+
+                    <hr class="divider" />
+                    <!--<ul class="pager">
+                        <li class="previous">
+                            <a href="" class="btn btn-inverse" ng-click="wizard.go(3)">
+                                <span>&larr; Previous</span>
+                            </a>
+                        </li>
+                        <li class="next">
+                            <a href="" class="btn btn-info" ng-class="{'notAllowed' : !spc.traversed}" ng-click="wizard.go(5)">Next<span>&rarr;</span></a>
+                        </li>
+                    </ul>-->
+                </div>
+                <!-- END Wizard Step inputs-->
+                <!-- START Wizard Step inputs-->
+                <div id="step5" ng-show="wizard.active(5)">
+                    <fieldset ng-form="formStep5">
+                        <div class="row mt-lg customPager">
+                            <div class="col-md-12" ng-include="'../../app/views/Student/StudentAllergy(Optional).html'"></div>
+                        </div>
+                    </fieldset>
+                    <hr class="divider" />
+                    <ul class="pager">
+                        <li class="previous">
+                            <a href="" ng-click="wizard.go(4)">
+                                <span>&larr; Previous</span>
+                            </a>
+                        </li>
+                        <li class="next">
+                            <a href="" class="btn btn-info" ng-click="wizard.go(6)">Done<span>&rarr;</span></a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- END Wizard Step inputs-->
+                <!-- START Wizard Step inputs-->
+                <div id="step6" ng-show="wizard.active(6)">
+                    <div class="jumbotron">
+                        <h1>Done!</h1>
+                        <p>You are done with creating student profile.</p>
+                        <p>
+                            <button type="button" ng-click="spc.save(wizard)" class="btn btn-success btn-lg">
+                                <i class="fa fa-save"></i>&nbsp;
+                                Save Profile
+                            </button>
+                        </p>
+                    </div>
+                    <ul class="pager">
+                        <li class="previous">
+                            <a href="" ng-click="wizard.go(5)">
+                                <span>&larr; Previous</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Wizard Step inputs-->
+            </div>
+        </form>
+    </div>
+</div>
+
+

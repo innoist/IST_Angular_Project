@@ -1,0 +1,12 @@
+﻿.sugar-logo {
+	position: fixed;
+	top: 30%;
+	right: 0;
+	width: 147px;
+	height: 200px;
+	z-index: 999;
+}
+.sugar-logo img {
+	margin-bottom: 25px;
+	float: right;
+}

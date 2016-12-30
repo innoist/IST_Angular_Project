@@ -1,0 +1,578 @@
+﻿.margin-right-5 {
+    margin-right: 5px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-right-15 {
+    margin-right: 15px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
+}
+
+.margin-right-40 {
+    margin-right: 40px;
+}
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+@media (max-width: 480px) {
+    .hidden-480 {
+        display: none;
+    }
+}
+
+.requiredLabel:after {
+    content: " *";
+    font-weight: bold;
+    color: red;
+}
+
+.select2 > .select2-choice.ui-select-match {
+    /* Because of the inclusion of Bootstrap */
+    height: 30px;
+    width: 100%;
+}
+
+.preloader-progress-bar {
+    background-size: auto !important;
+    /*width: 128px !important;*/
+    height: 128px !important;
+}
+
+.preloader-progress {
+    height: 128px !important;
+    background-size: auto !important;
+    width: 128px !important;
+}
+
+/*Hide priority number 1 in Grid*/
+.ui-grid-header-cell .ui-grid-sort-priority-number {
+    display: none;
+}
+
+.resetDdl {
+    position: absolute;
+    right: 25px;
+}
+
+/*Indent submenus*/
+nav li ul li {
+    padding-left: 30px !important;
+}
+
+
+
+/* MENU FIXING with scroll bar*/
+.sidebar:not(.show-scrollbar) {
+    margin-right: -3px !important;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 10px;
+    background-color: #3a3f51 !important;
+    height: 10px !important;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #1797be;
+    border-radius: 8px;
+    border: 1px solid #333333;
+}
+
+    .sidebar::-webkit-scrollbar-thumb:hover {
+        background-color: #1797be;
+        border: 1px solid #333333;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:active {
+        background-color: #1797be;
+        border: 1px solid #333333;
+    }
+
+/* End MENU FIXING with scroll bar*/
+
+/*UNCOMMENT BELOW if want to hide filter*/
+/*.ui-grid-filter-container {
+  display: none;
+}*/
+
+/*Hide native search box of datatable*/
+.dataTables_filter {
+    display: none;
+    visibility: hidden;
+}
+
+#dataTables_filter {
+    display: none;
+    visibility: hidden;
+}
+
+
+/*DataTable Inner-table expand colapse*/
+td .details-control {
+    background: url('/vendor/datatables/media/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.details td .details-control {
+    background: url('/vendor/datatables/media/images/details_close.png') no-repeat center center;
+}
+
+/*Colors*/
+.green {
+    color: rgb(57, 173, 57);
+}
+
+.red {
+    color: rgb(235, 36, 36);
+}
+
+.orange {
+    color: orange;
+}
+
+/**/
+.img-datatable {
+    height: 40px !important;
+    width: 40px !important;
+}
+
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+    padding: 8px 10px 8px 19px !important;
+}
+
+table.dataTable tfoot th, table.dataTable tfoot td {
+    padding: 10px 18px 6px 18px;
+    /*to remove black line from footer bottom border*/
+    border-top: 1px solid #eeeeee !important;
+}
+
+/*to remove black line from footer bottom border*/
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: 1px solid #eeeeee !important;
+}
+
+.tablewidth {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.pager .btn-info {
+    color: #ffffff !important;
+    background-color: #23b7e5 !important;
+    border-color: #1eb6e4 !important;
+}
+
+    .pager .btn-info:focus,
+    .pager .btn-info.focus {
+        color: #ffffff !important;
+        background-color: #1aacda !important;
+        border-color: #179ac3 !important;
+    }
+
+    .pager .btn-info:hover {
+        color: #ffffff !important;
+        background-color: #1aacda !important;
+        border-color: #179ac3 !important;
+    }
+
+.pager .btn-inverse {
+    color: #ffffff !important;
+    background-color: #131e26 !important;
+    border-color: #131e26 !important;
+}
+
+    .pager .btn-inverse:focus,
+    .pager .btn-inverse.focus {
+        color: #ffffff !important;
+        background-color: #0c1318 !important;
+        border-color: #05090b !important;
+    }
+
+    .pager .btn-inverse:hover {
+        color: #ffffff !important;
+        background-color: #0c1318 !important;
+        border-color: #05090b !important;
+    }
+
+
+.table .dropdown-menu {
+    left: 0px !important;
+}
+
+.table .btn-group.dropdown .dropdown-menu {
+    left: -60px !important;
+}
+
+.notAllowed {
+    pointer-events: none;
+    -ms-opacity: .75;
+    opacity: .75;
+}
+
+.cursordisable {
+    cursor: not-allowed !important;
+}
+
+.customPager legend {
+    margin-bottom: 5px !important;
+}
+
+.wizardTabFixedHeight {
+    height: 110px;
+}
+
+.rowcolor {
+    background-color: #f8bfbf !important;
+}
+
+.affected_student {
+    border-color: red;
+}
+
+.safe_student {
+    border-color: #44df53;
+}
+
+.affected_student_pulsate {
+    border: 3px solid #f94e4e;
+    /*-webkit-border-radius: 30px;*/
+    -webkit-animation: pulsate 1s ease-in;
+    -webkit-animation-iteration-count: infinite;
+    opacity: 0.0;
+}
+
+@-webkit-keyframes pulsate {
+    0% {
+        -webkit-transform: scale(0.1, 0.1);
+        opacity: 0.0;
+    }
+
+    50% {
+        opacity: 1.0;
+    }
+
+    100% {
+        -webkit-transform: scale(1.2, 1.2);
+        opacity: 0.0;
+    }
+}
+
+
+.animate-enter,
+.animate-leave {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+    .animate-enter.animate-enter-active,
+    .animate-leave {
+        opacity: 1;
+        top: 0;
+        height: 30px;
+    }
+
+        .animate-leave.animate-leave-active,
+        .animate-enter {
+            opacity: 0;
+            top: -50px;
+            height: 0px;
+        }
+
+.ui-select-multiple.ui-select-bootstrap {
+    min-height: 33px !important;
+}
+
+.colwidth {
+    width: 15%;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+.blink {
+    animation: blink 1s step-start 0s infinite;
+    -webkit-animation: blink 1s step-start 0s infinite;
+}
+
+/*print CSS*/
+@media print {
+    #mainSpinner {
+        display: none !important;
+    }
+
+    .dataTables_info {
+        display: none !important;
+    }
+
+    .dataTables_scrollBody {
+        display: none !important;
+    }
+
+    * {
+        font-size: 10px !important;
+        float: none !important;
+    }
+
+    thead {
+        display: table-row-group;
+    }
+
+    table.dataTable tbody td,
+    table.dataTable thead th {
+        padding: 1px 10px 1px 19px !important;
+    }
+
+    table {
+        page-break-after: always;
+    }
+
+    .panel-heading {
+        padding: 1px 15px 1px 15px !important;
+    }
+
+    .panel-body {
+        padding: 1px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .label {
+        display: inline;
+        padding: 0px 1px 0px 1px !important;
+        font-size: !important;
+    }
+
+    .panel.panel-default {
+        border-top-width: 1px !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    .content-wrapper {
+        padding: 2px !important;
+    }
+
+    .wrapper > section {
+        margin-bottom: 0 !important;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    table.dataTable tbody th {
+        padding: 0px 10px 0px 0px !important;
+    }
+
+    table.dataTable tbody td {
+        padding: 0px 0px 0px 15px !important;
+    }
+
+    .content-wrapper > h3, .content-wrapper > .content-heading {
+        font-size: 20px;
+    }
+
+    .btn-label {
+        position: static;
+        padding: 6px 0px 6px 0px;
+    }
+
+    .buttonText {
+        display: none;
+    }
+
+    .jumbotron {
+        padding-left: 30px;
+    }
+
+    .form-control {
+        display: inline-block;
+    }
+
+    #itemtable_wrapper {
+        overflow-x: scroll;
+    }
+
+    .mr-lg {
+        margin-right: 2px !important;
+    }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 768px) {
+    .form-control {
+        display: inline-block;
+    }
+
+    table.dataTable tbody th {
+        padding: 0px 10px 0px 0px !important;
+    }
+
+    table.dataTable tbody td {
+        padding: 0px 0px 0px 15px !important;
+    }
+}
+
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+    background-color: #edf1f2 !important;
+}
+
+.showallbtn {
+    margin-bottom: 10px !important;
+    margin-top: 9px !important;
+    padding: 1px 4px 1px 4px !important;
+    border-radius: 0px;
+    font-size: 12px;
+    -webkit-appearance: none;
+    outline: none !important;
+}
+/*Table cell hover*/
+.td-hover > tbody > tr > td:hover {
+    background-color: #f5f5f5;
+    cursor: cell !important;
+}
+
+.circlediv {
+    width: 180px;
+    height: 180px;
+    background: #ffffff;
+    background: hsl(0, 0%, 100%);
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/*applied on dropdown for meals on dashboard.html*/
+.customDropDown {
+    text-decoration: underline !important;
+    cursor: pointer;
+    color: white !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.afont {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.thumb85 {
+    width: 85px !important;
+    height: 85px !important;
+}
+
+
+/*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .repeated-item
+  class
+*/
+.repeated-item.ng-enter, .repeated-item.ng-move {
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+
+    /*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+    .repeated-item.ng-enter.ng-enter-active,
+    .repeated-item.ng-move.ng-move-active {
+        opacity: 1;
+    }
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .repeated-item class
+*/
+.repeated-item.ng-leave {
+    animation: 0.5s my_animation;
+}
+
+@keyframes my_animation {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+body.ngdialog-open, html.ngdialog-open {
+    overflow: visible !important;
+}
+
+.shadow-emboss {
+    -webkit-box-shadow: #6b6f7c 2px 0px 12px 0px;
+    -webkit-box-shadow: rgba(107, 111, 124, 0.47) 2px 0px 12px 0px;
+    -ms-box-shadow: #6b6f7c 2px 0px 12px 0px;
+    -ms-box-shadow: rgba(107, 111, 124, 0.47) 2px 0px 12px 0px;
+    box-shadow: #6b6f7c 2px 0px 12px 0px;
+    box-shadow: rgba(107, 111, 124, 0.47) 2px 0px 12px 0px;
+}
+
+.font13 {
+    font-size: 13px !important;
+}
+
+/*Multiline tooltip*/
+.tooltip-multiline {
+    width: auto !important;
+    max-width: 350px !important;
+    height: auto !important;
+}
+/*Red tooltip*/
+.tooltip-danger .tooltip-inner{
+    color: white !important;
+    background-color: #f05050 !important;
+}
+
+.tooltip.tooltip-danger .tooltip-arrow {
+    border-top-color:#f05050;
+}

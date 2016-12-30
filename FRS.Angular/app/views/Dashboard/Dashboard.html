@@ -1,0 +1,199 @@
+﻿
+<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+
+    </div>
+    <!-- END Language list    -->
+    Dashboard
+    <small>Welcome {{user.name}}!</small>
+</h3>
+<!-- START widgets box-->
+<div class="row ">
+    <div class="col-lg-3 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-primary">
+            <div class="row row-table" style="height: 100px">
+                <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                    <em class="fa fa-users fa-2x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg text-center">
+                    <div class="text-bold h1 m0">{{dc.TotalStudents}}</div>
+                    <div class="text-uppercase">Total Students</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-success-light" ng-if="dc.IsDayCareOpen">
+            <div class="row row-table" style="height: 100px">
+                <div class="col-xs-4 text-center bg-success pv-lg">
+                    <em class="fa fa-child fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg text-center">
+
+                    <div class="col-md-6 col-xs-6 col-lg-6">
+                        <div class="text-bold h2 m0">{{dc.Absent}}</div>
+                        <div class="text-uppercase">Absent</div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 col-lg-6">
+                        <div class="text-bold h2 m0">{{dc.Present}}</div>
+                        <div class="text-uppercase">Present</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel widget bg-success-light" ng-if="!dc.IsDayCareOpen">
+            <div class="row row-table" style="height: 100px">
+                <div class="col-xs-4 text-center bg-success pv-lg">
+                    <em class="icon-lock fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg text-center">
+
+                    <div class="text-bold h3 m0">Day Care is closed Today</div>
+                    <!--<div class="text-uppercase">Absent</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-danger-light" style="overflow: visible">
+            <div class="row row-table" style="height: 100px">
+                <div class="col-xs-4 text-center bg-danger pv-lg">
+                    <em class="fa fa-cutlery fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg" ng-if="dc.TodayMeals && dc.TodayMeals.length" style="position: relative">
+                    <span class="pull-left" ng-click="dc.PreviousMeal()" uib-tooltip="{{ 'Previous' }}" tooltip-placement="top">
+                        <em class="fa fa-chevron-circle-left"></em>
+                    </span>
+                    <span class="pull-right" ng-click="dc.NextMeal()" uib-tooltip="{{ 'Next' }}" tooltip-placement="top">
+                        <em class="fa fa-chevron-circle-right"></em>
+                    </span>
+                    <div class="text-center text-uppercase">{{dc.Meal.MealName}}</div>
+                    <div class="text-center">
+
+                        <!-- START button group-->
+                        <div uib-dropdown="dropdown" class="btn-group">
+                            <a uib-dropdown-toggle="" class="text-white customDropDown">
+                                <span>{{dc.Meal.Name}}</span>
+                                <span class="text-dark"
+                                      ng-if="dc.TodayMeals[dc.KeyIndex].Meals.length > 1">
+                                    &nbsp;+{{dc.TodayMeals[dc.KeyIndex].Meals.length -1}}&nbsp;more&nbsp;<i class="fa-caret-down fa"></i>
+                                </span>
+                            </a>
+                            <ul role="menu" class="dropdown-menu animated swing">
+                                <li ng-repeat="meal in dc.TodayMeals[dc.KeyIndex].Meals">
+                                    <a href="javascript:;" ng-click="dc.prepareMeal(meal)">{{meal.Name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END button group-->
+
+                    </div>
+                    <div class="text-center">{{dc.Meal.MealTimeString}}</div>
+                </div>
+                <div class="col-xs-8 pv-lg" ng-if="!dc.TodayMeals || !dc.TodayMeals.length">
+                    <div class="h3 m0">
+                        No Meals for Today
+                        <a ui-sref="app.mealScheduler" style="color: black" class="text-lowercase" ng-if="dc.IsDayCareOpen">
+                            <u>
+                                <small> add some</small>
+                            </u>
+                        </a>
+                    </div>
+                    <!--<div class="text-center">
+
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <!-- START date widget-->
+        <div class="panel widget">
+            <div class="row row-table text-center" style="height: 100px;table-layout: inherit">
+                <div class="col-xs-4 text-center bg-pink-light pv-lg">
+                    <!-- See formats: https://docs.angularjs.org/api/ng/filter/date-->
+                    <now format="d" class="h4 mt0"></now>
+                    <br>
+                    <now format="MMMM" class="text-uppercase text-center"></now>
+                </div>
+                <div class="col-xs-8 pv-lg">
+
+                    <now format="h:mm:ss" class="h3 mt0"></now>
+                    <now format="a" class="text-muted text-sm"></now><br>
+                    <now format="EEEE" class="text-uppercase"></now>
+                </div>
+            </div>
+        </div>
+        <!-- END date widget    -->
+    </div>
+</div>
+<!-- END widgets box-->
+<div class="row">
+    <!-- START dashboard main content-->
+    <div class="col-lg-12">
+        <div class="panel widget">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <input class="form-control ng-pristine ng-untouched ng-valid" ng-model="searchRoom" type="text" placeholder="Search Rooms..."><hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-4 col-md-6 col-sm-6" ng-repeat="room in dc.Rooms | filter : {Title:searchRoom} as result">
+                                    <!-- START panel-->
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="container"><span class="pull-left">Students : {{room.StudentsCount}}</span></div>
+                                            <div class="container"><span class="pull-left">Incharge : {{room.InCharge ? room.InCharge : 'N/A'}}</span></div>
+                                            <div class="container"><span class="pull-left">Age group: {{room.AgeClass ? room.AgeClass : 'N/A'}}</span></div>
+                                        </div>
+                                        <span ng-class="{'cursordisable':room.StudentsCount==0}">
+                                            <a class="panel-footer bg-gray-darker bt0 clearfix btn-block"
+                                               ng-click="dc.gotoDetail($index, $event)"
+                                               ng-class="{'notAllowed' : room.StudentsCount == 0 }">
+                                                <span class="pull-left">{{room.Title}}</span>
+                                                <span class="pull-right" style="cursor: pointer" ng-class="{'notAllowed':room.StudentsCount==0}">
+                                                    <em class="fa fa-chevron-circle-right"></em>
+                                                </span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                    <!-- END panel-->
+                                </div>
+                                <p ng-if="!result.length && searchRoom" class="text-center h4">No room(s) match your search.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="col-md-3">
+                        <!-- START loader widget-->
+                        <div class="panel panel-default">
+                            <div class="panel-body text-center">
+                                <!--<a href="#" class="text-muted pull-right">
+                                    <em class="fa fa-arrow-right"></em>
+                                </a>-->
+                                <div class="text-info text-left">Next Meal Time : </div>
+                                <i class="wi fa-5x wi-time-{{t.seconds%12 == 0 ? 12 : t.seconds%12}}"></i>
+                                <h1 class="">{{time}}</h1>
+
+                            </div>
+                            <div class="panel-footer">
+                                <p class="text-muted">
+                                    <em class="fa fa-clock-o fa-fw"></em>
+                                    <span class="text-dark">{{ !t.total || t.total <= 0 ? 'No Meal Next' : dc.DailyMealTime}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        <!-- END widget-->
+    </div>
+    <!-- END dashboard main content-->
+</div>

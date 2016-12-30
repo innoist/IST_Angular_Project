@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-ng-app="angle">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="{{app.description}}">
+    <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
+    <link rel="shortcut icon" type="image/png" href="app/img/preloader/preloader.empty.png">
+    <title data-ng-bind="pageTitle()">Aversion</title>
+    <!-- Bootstrap styles-->
+    <link rel="stylesheet" href="app/css/bootstrap.css" data-ng-if="!app.layout.isRTL">
+    <link rel="stylesheet" href="app/css/bootstrap-rtl.css" data-ng-if="app.layout.isRTL">
+    <!-- Application styles-->
+    <link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
+    <link rel="stylesheet" href="app/css/app-rtl.css" data-ng-if="app.layout.isRTL">
+    <!-- Themes-->
+    <link rel="stylesheet" href="app/css/theme-e.css">
+    <link href="app/css/select2.css" rel="stylesheet" />
+    <!--<script src="Scripts/jquery-2.1.0.min.js"></script>-->
+    <link href="app/css/main-site.css" rel="stylesheet" />
+</head>
+
+<body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'layout-fs': app.useFullLayout, 'hidden-footer': app.hiddenFooter, 'layout-h': app.layout.horizontal, 'aside-float': app.layout.isFloat, 'offsidebar-open': app.offsidebarOpen, 'aside-toggled': app.asideToggled}">
+    <div data-preloader></div>
+    <div data-ui-view="" data-autoscroll="false" class="wrapper"></div>
+    <div id="mainSpinner" style="display: none; text-align: center; position: fixed; top: 50%; left: 50%; z-index: 10051">
+        <div class="whirl traditional"></div>
+    </div>
+    <script src="app/js/base.js"></script>
+    <!--<script src="app/js/base.min.js"></script>-->
+    <script src="app/js/Modules.js"></script>
+    <script src="app/js/app.js"></script>
+    <script src="app/js/lazymodules.js"></script>
+    <script src="app/js/Config.js"></script>
+    <!--<script src="app/js/system.min.js"></script>-->
+    <script src="vendor/underscore-min.js"></script>
+
+    <!-- Get Local Time Zone and Keep in Cache -->
+    <script type="text/javascript">
+        function cookieExists(name) {
+            var nameToFind = name + "=";
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                if (cookies[i].trim().indexOf(nameToFind) === 0) return true;
+            }
+            return false;
+        }
+
+        function getCookie(name) {
+            var nameToFind = name + "=";
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                if ((cookies[i].trim().indexOf(nameToFind) === 0)) return cookies[i].trim().split("=")[1];
+            }
+            return null;
+        }
+
+        function addTimeZoneOffSetCookie() {
+            if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' !== "localhost") {
+                var now = new Date();
+                var timeZoneOffset = -now.getTimezoneOffset(); // in minutes
+                now.setTime(now.getTime() + 10 * 24 * 60 * 60 * 1000); // keep it for 10 days
+                document.cookie = "_timeZoneOffset=" + timeZoneOffset.toString() + ";expires=" + now.toGMTString() + ";path=/;" + document.cookie;
+            }
+        }
+
+        // Get Time Zone OffSet and Keep it in cookie
+        addTimeZoneOffSetCookie();
+    </script>
+</body>
+
+</html>

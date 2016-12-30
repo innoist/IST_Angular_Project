@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c82f04103114739a6a03c5186c1df21" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="angularModel.Allergy" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="angularModel.UserRole" Width="1.5" PointX="11.75" PointY="16.625" />
+        <EntityTypeShape EntityType="angularModel.UserClaim" Width="1.5" PointX="16.25" PointY="19.75" />
+        <EntityTypeShape EntityType="angularModel.UserLogin" Width="1.5" PointX="16.25" PointY="13.25" />
+        <EntityTypeShape EntityType="angularModel.AspNetUser" Width="1.5" PointX="14" PointY="14.75" />
+        <EntityTypeShape EntityType="angularModel.Menu" Width="1.875" PointX="14.375" PointY="22.75" />
+        <EntityTypeShape EntityType="angularModel.MenuRight" Width="1.5" PointX="17" PointY="16.5" />
+        <AssociationConnector Association="angularModel.FK_dbo_MenuRight_dbo_AspNetRoles_Role_Id" />
+        <AssociationConnector Association="angularModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="angularModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="angularModel.FK_dbo_Menu_dbo_Menu_ParentItem_MenuId" />
+        <AssociationConnector Association="angularModel.FK_dbo_MenuRight_dbo_Menu_Menu_MenuId" />
+        <AssociationConnector Association="angularModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="angularModel.Student" Width="1.5" PointX="0.75" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
