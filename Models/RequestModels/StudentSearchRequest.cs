@@ -6,7 +6,6 @@ namespace IST.Models.RequestModels
     public class StudentSearchRequest : GetPagedListRequest
     {
         public int StudentId { get; set; }
-        public int ? RoomId { get; set; }
         public string Name { get; set; }
         public DateTime ? DateOfBirth { get; set; }
         public string GuardianPhone { get; set; }

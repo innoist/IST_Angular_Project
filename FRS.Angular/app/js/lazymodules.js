@@ -218,6 +218,10 @@
                                                 '/app/js/Users/UsersService.js']
               },
               {
+                  name: 'Home.module', files: ['/app/js/Home/HomeController.js',
+                                                '/app/js/shared/ReferenceDataService.js']
+              },
+              {
                   name: 'Allergy.module', files: ['/app/js/Allergy/AllergyController.js',
                                                   '/app/js/Allergy/CreateAllergyController.js',
                                                   '/app/js/shared/ReferenceDataService.js']
@@ -228,11 +232,6 @@
               {
                   name: 'Student.module', files: ['/app/js/Student/StudentController.js',
                                                   '/app/js/shared/ReferenceDataService.js']
-
-              },
-              {
-                  name: 'SignIn.module', files: ['/app/js/SignIn/SignInController.js',
-                                                          '/app/js/shared/ReferenceDataService.js']
 
               },
               {

@@ -77,6 +77,7 @@
     <Content Include="app\img\logo.png" />
     <Content Include="app\img\user\default.png" />
     <Content Include="app\js\Dashboard\AdminDashboardController.js" />
+    <Content Include="app\js\Home\HomeController.js" />
     <Content Include="app\js\lazymodules.js" />
     <Content Include="app\js\partials\SidebarController.js" />
     <Content Include="app\js\partials\UserBlockController.js" />
@@ -162,6 +163,7 @@
     <Content Include="Ecommerce\img\blog\29.jpg" />
     <Content Include="Ecommerce\img\blog\30-thumb.jpg" />
     <Content Include="Ecommerce\img\blog\30.jpg" />
+    <Content Include="Ecommerce\img\blog\project.png" />
     <Content Include="Ecommerce\img\breadcrumbs-img.jpg" />
     <Content Include="Ecommerce\img\clients\01.png" />
     <Content Include="Ecommerce\img\clients\02.png" />

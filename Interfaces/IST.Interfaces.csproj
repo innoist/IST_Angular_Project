@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServices\ILogger.cs" />
+    <Compile Include="IServices\IProjectService.cs" />
     <Compile Include="IServices\IStudentService.cs" />
     <Compile Include="IServices\IClaimsSecurityService.cs" />
     <Compile Include="IServices\IAllergyService.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="IServices\IUsersService.cs" />
     <Compile Include="IServices\IWebApiAuthenticationService.cs" />
     <Compile Include="Repository\ILogRepository.cs" />
+    <Compile Include="Repository\IProjectRepository.cs" />
     <Compile Include="Repository\IStudentRepository.cs" />
     <Compile Include="Repository\IAspNetRoleRepository.cs" />
     <Compile Include="Repository\IAllergyRepository.cs" />

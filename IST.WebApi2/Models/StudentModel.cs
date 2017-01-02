@@ -34,7 +34,6 @@ namespace IST.WebApi2.Models
             data = new List<StudentModel>();
         }
         public IEnumerable<StudentModel> data { get; set; }
-        public IEnumerable<DropDownModel> RoomsDDL { get; set; }
         public int TotalCount { get; set; }
         public int recordsTotal { get; set; }
         public int recordsFiltered { get; set; }

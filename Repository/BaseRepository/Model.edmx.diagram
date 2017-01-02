@@ -19,6 +19,7 @@
         <AssociationConnector Association="angularModel.FK_dbo_MenuRight_dbo_Menu_Menu_MenuId" />
         <AssociationConnector Association="angularModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="angularModel.Student" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="angularModel.Project" Width="1.5" PointX="3.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

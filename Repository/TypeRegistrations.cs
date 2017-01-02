@@ -26,6 +26,7 @@ namespace IST.Repository
             unityContainer.RegisterType<IAspNetRoleRepository, AspNetRoleRepository>();
             unityContainer.RegisterType<IAllergyRepository, AllergyRepository>();
             unityContainer.RegisterType<IStudentRepository, StudentRepository>();
+            unityContainer.RegisterType<IProjectRepository, ProjectRepository>();
         }
     }
 }

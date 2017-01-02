@@ -38,7 +38,7 @@
 <body class="header-fixed">
     <div class="wrapper">
         <!--=== Header v5 ===-->
-    <div ng-include="'../../app/views/EcommerceHeader.html'"></div>
+        <div ng-include="'../../app/views/EcommerceHeader.html'"></div>
         <!--=== End Header v5 ===-->
         <!--=== Breadcrumbs v4 ===-->
         <div class="breadcrumbs-v4">
@@ -284,13 +284,15 @@
                     </div><!--/end panel group-->
                     <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-lg btn-u-sea-shop btn-block">Reset</button>
                 </div>
+
+
                 <div class="col-md-9">
                     <div class="row margin-bottom-5">
                         <div class="col-sm-4 result-category">
-                            <h2>Men</h2>
-                            <small class="shop-bg-red badge-results">45 Results</small>
+                            <h2>Projects</h2>
+                            <small class="shop-bg-red badge-results">{{hc.Projects.length}} Results</small>
                         </div>
-                        <div class="col-sm-8">
+                        <!--<div class="col-sm-8">
                             <ul class="list-inline clear-both">
                                 <li class="grid-list-icons">
                                     <a href="shop-ui-filter-list.html"><i class="fa fa-th-list"></i></a>
@@ -325,320 +327,121 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div>-->
                     </div><!--/end result category-->
-                    <div class="filter-results">
-                        <div class="row illustration-v2 margin-bottom-30">
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/16.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    <div class="shop-rgba-dark-green rgba-banner">New</div>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$60.00</span>
-                                            <span class="title-price line-through">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/17.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$60.00</span>
-                                            <span class="title-price line-through">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/18.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <br>
+                    <div class="col-md-4 illustration-v2" ng-repeat="project in hc.Projects">
+                        <div class="product-img product-img-brd">
+                            <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/project.png" alt=""></a>
+                            <a class="product-review" href="shop-ui-inner.html">Quick review</a>
+                            <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <div class="shop-rgba-dark-green rgba-banner">New</div>
                         </div>
-                        <div class="row illustration-v2 margin-bottom-30">
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/21.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <div class="product-description product-description-brd margin-bottom-30">
+                            <div class="overflow-h margin-bottom-5">
+                                <div class="pull-left">
+                                    <h4 class="title-price"><a href="shop-ui-inner.html">{{project.Name}}</a></h4>
+                                    <span class="gender text-uppercase">Men</span>
+                                    <span class="gender">Suits - Blazers</span>
                                 </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
+                                <div class="product-price">
+                                    <span class="title-price">$60.00</span>
+                                    <span class="title-price line-through">$95.00</span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/22.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$60.00</span>
-                                            <span class="title-price line-through">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/23.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    <div class="shop-rgba-red rgba-banner">Out of stock</div>
-                                </div>
-                                <div class="product-description product-description-brd">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <ul class="list-inline product-ratings">
+                                <li><i class="rating-selected fa fa-star"></i></li>
+                                <li><i class="rating-selected fa fa-star"></i></li>
+                                <li><i class="rating-selected fa fa-star"></i></li>
+                                <li><i class="rating fa fa-star"></i></li>
+                                <li><i class="rating fa fa-star"></i></li>
+                                <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                            </ul>
                         </div>
-                        <div class="row illustration-v2">
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/16.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    <div class="shop-rgba-dark-green rgba-banner">New</div>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$60.00</span>
-                                            <span class="title-price line-through">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/17.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$60.00</span>
-                                            <span class="title-price line-through">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-img product-img-brd">
-                                    <a href="#"><img class="full-width img-responsive" src="/Ecommerce/img/blog/18.jpg" alt=""></a>
-                                    <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                                <div class="product-description product-description-brd margin-bottom-30">
-                                    <div class="overflow-h margin-bottom-5">
-                                        <div class="pull-left">
-                                            <h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4>
-                                            <span class="gender text-uppercase">Men</span>
-                                            <span class="gender">Suits - Blazers</span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span class="title-price">$95.00</span>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline product-ratings">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--/end filter resilts-->
-                    <div class="text-center">
-                        <ul class="pagination pagination-v2">
-                            <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        </ul>
-                    </div><!--/end pagination-->
+                    </div>
+                    <!--/end filter resilts-->
+                    <!--/end pagination-->
                 </div>
-            </div><!--/end row-->
+
+
+                <!--<div class="col-md-9">
+                        <div class="row margin-bottom-5">
+                            <div class="col-sm-4 result-category">
+                                <h2>Men</h2>
+                                <small class="shop-bg-red badge-results">45 Results</small>
+                            </div>
+                            <div class="col-sm-8">
+                                <ul class="list-inline clear-both">
+                                    <li class="grid-list-icons">
+                                        <a href="shop-ui-filter-list.html"><i class="fa fa-th-list"></i></a>
+                                        <a href="shop-ui-filter-grid.html"><i class="fa fa-th"></i></a>
+                                    </li>
+                                    <li class="sort-list-btn">
+                                        <h3>Sort By :</h3>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                Popularity <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">All</a></li>
+                                                <li><a href="#">Best Sales</a></li>
+                                                <li><a href="#">Top Last Week Sales</a></li>
+                                                <li><a href="#">New Arrived</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="sort-list-btn">
+                                        <h3>Show :</h3>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                20 <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">All</a></li>
+                                                <li><a href="#">10</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">3</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!--/end result category-->
+                <!--<div class="text-center">
+                    <ul class="pagination pagination-v2">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                </div>-->
+            </div>
+        </div><!--/end row-->
+    <!--=== End Content Part ===-->
+    <!--=== Shop Suvbscribe ===-->
+    <div class="shop-subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 md-margin-bottom-20">
+                    <h2>subscribe to our weekly <strong>newsletter</strong></h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Email your email...">
+                        <span class="input-group-btn">
+                            <button class="btn" type="button"><i class="fa fa-envelope-o"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div><!--/end container-->
-        <!--=== End Content Part ===-->
-        <!--=== Shop Suvbscribe ===-->
-        <div class="shop-subscribe">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 md-margin-bottom-20">
-                        <h2>subscribe to our weekly <strong>newsletter</strong></h2>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Email your email...">
-                            <span class="input-group-btn">
-                                <button class="btn" type="button"><i class="fa fa-envelope-o"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div><!--/end container-->
-        </div>
-        <!--=== End Shop Suvbscribe ===-->
-        <!--=== Footer v4 ===-->
-        <div ng-include="'../../app/views/EcommerceFooter.html'"></div>
-        <!--=== End Footer v4 ===-->
+    </div>
+    <!--=== End Shop Suvbscribe ===-->
+    <!--=== Footer v4 ===-->
+    <div ng-include="'../../app/views/EcommerceFooter.html'"></div>
+    <!--=== End Footer v4 ===-->
     </div><!--/wrapper-->
-    <!-- Wait Block -->
-    <!--<div class="g-popup-wrapper">
-        <div class="g-popup g-popup--subscribe3">
-            <h3>Subscribe To Our Newsletter</h3>
-            <p>Join our mailing list to receive the latest news &amp;&nbsp;updates from our team.</p>
-            <form action="#" class="sky-form">
-                <label class="input margin-bottom-20">
-                    <input type="email" placeholder="Email" class="form-control">
-                </label>
-                <label class="input">
-                    <button class="btn btn-default" type="button">Subscribe</button>
-                </label>
-            </form>
-            <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe3__close"><span class="icon-close" aria-hidden="true"></span></a>
-        </div>
-    </div>-->
-    <!-- End Wait Block -->
     <!-- JS Global Compulsory -->
     <script src="/Ecommerce/plugins/jquery/jquery.min.js"></script>
     <script src="/Ecommerce/plugins/jquery/jquery-migrate.min.js"></script>
@@ -655,12 +458,12 @@
     <script src="/Ecommerce/js/plugins/mouse-wheel.js"></script>
     <script src="/Ecommerce/js/plugins/style-switcher.js"></script>
     <script>
- 		jQuery(document).ready(function() {
- 			App.init();
- 			App.initScrollBar();
- 			MouseWheel.initMouseWheel();
- 			StyleSwitcher.initStyleSwitcher();
- 		});
+        jQuery(document).ready(function () {
+            App.init();
+            App.initScrollBar();
+            MouseWheel.initMouseWheel();
+            StyleSwitcher.initStyleSwitcher();
+        });
     </script>
     <!--[if lt IE 9]>
         <script src="/Ecommerce/plugins/respond.js"></script>

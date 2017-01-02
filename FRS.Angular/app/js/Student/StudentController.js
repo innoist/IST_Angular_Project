@@ -16,7 +16,6 @@
         var vm = this;
 
         vm.isReset = true;
-        vm.Rooms = [];
         StudentService.url = "/api/Student/";
         
 

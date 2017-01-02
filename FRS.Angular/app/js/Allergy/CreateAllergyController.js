@@ -1,8 +1,8 @@
-﻿Create MetaData
+﻿//Create MetaData
 (function () {
 
     var core = angular.module('app.core');
-     ReSharper disable FunctionsUsedBeforeDeclared
+     //ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.controller('CreateAllergyController', CreateAllergyController);
 
     CreateAllergyController.$inject = ['$state', '$stateParams', '$rootScope', 'ReferenceDataService', 'SweetAlert', 'toaster'];
@@ -14,7 +14,7 @@
         vm.submitted = false;
         vm.Allergy = {};
 
-        Api Url
+        //Api Url
         AllergyService.url = "/api/Allergy/";
         vm.Allergy = {};
         vm.validateInput = function (property, type) {
@@ -23,7 +23,7 @@
             }
             return (property.$dirty || vm.submitted) && property.$error[type];
         };
-        #region Post Data
+        //#region Post Data
         vm.save = function (isNew) {
             vm.submitted = true;
             if (vm.formValidate.$valid) {
@@ -39,7 +39,7 @@
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
                     if (isNew) {
-                        reseting form
+                        //reseting form
                         vm.formValidate.$setPristine();
                         vm.submitted = false;
                         allergyId = 0;
@@ -61,7 +61,7 @@
 
             
         }
-        #endregion
+        //#endregion
 
         vm.cancelBtn = function () {
             if (!vm.formValidate.$dirty) {

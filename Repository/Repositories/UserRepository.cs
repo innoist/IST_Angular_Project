@@ -34,7 +34,6 @@ namespace IST.Repository.Repositories
 
         #endregion
 
-
         #region Constructor
         /// <summary>
         /// Constructor

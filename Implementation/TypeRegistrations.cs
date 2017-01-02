@@ -30,6 +30,7 @@ namespace IST.Implementation
 
             unityContainer.RegisterType<IAllergyService, AllergyService>();
             unityContainer.RegisterType<IStudentService, StudentService>();
+            unityContainer.RegisterType<IProjectService, ProjectService>();
 
             unityContainer.RegisterType<IAllergyService, AllergyService>();
 

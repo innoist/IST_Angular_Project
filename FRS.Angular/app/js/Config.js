@@ -47,7 +47,6 @@
                         $rootScope.app.layout.isBoxed = false;
                         if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
                             $scope.isAuthenticated = true;
-                            $scope.userName = $localStorage['authorizationData'].userName;
                         } else
                             $scope.isAuthenticated = false;
                         $scope.CurrentDate = new Date();
@@ -57,31 +56,10 @@
             .state('home.index', {
                 url: '/index',
                 title: 'Home',
+                controller: 'HomeController',
+                controllerAs: 'hc',
                 templateUrl: helper.basepath('../../../../app/views/Home/home.html'),
-                controller: ['$scope', '$localStorage', '$http', '$rootScope', function ($scope, $localStorage, $http) {
-                    if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
-                        $scope.isAuthenticated = true;
-                        $scope.userName = $localStorage['authorizationData'].userName;
-                    } else
-                        $scope.isAuthenticated = false;
-                    //Logout
-                    $scope.logout = function () {
-                        $http.post(window.frsApiUrl + "/api/Account/Logout")
-                            .success(function () {
-                                delete $localStorage['authorizationData'];
-                                console.log("LoggedOut");
-                                //$.connection.hub.stop();
-                                $scope.isAuthenticated = false;
-                                $http.defaults.headers.common = {
-                                    'Content-Type': 'application/json'
-                                };
-                                //$state.go('home.index');
-                            })
-                            .error(function (err) {
-                                showErrors(err);
-                            });
-                    }
-                }]
+                resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables')
             })
             .state('home.signin', {
                 url: '/SignIn',

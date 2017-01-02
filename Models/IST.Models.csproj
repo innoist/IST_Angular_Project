@@ -132,11 +132,13 @@
     <Compile Include="Common\OrderByItem.cs" />
     <Compile Include="Common\OrderByRecipe.cs" />
     <Compile Include="Common\OrderByAttendance.cs" />
+    <Compile Include="Common\OrderByProject.cs" />
     <Compile Include="Common\OrderByStudent.cs" />
     <Compile Include="Common\OrderByLogs.cs" />
     <Compile Include="Common\OrderByServiceLogs.cs" />
     <Compile Include="Common\OrderByUsers.cs" />
     <Compile Include="Common\SaveStatus.cs" />
+    <Compile Include="DomainModels\Project.cs" />
     <Compile Include="DomainModels\BaseModel.cs" />
     <Compile Include="DomainModels\Allergy.cs" />
     <Compile Include="DomainModels\Student.cs" />
@@ -168,6 +170,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RequestModels\ProjectSearchRequest.cs" />
     <Compile Include="RequestModels\StudentSearchRequest.cs" />
     <Compile Include="RequestModels\UsersSearchRequest.cs" />
     <Compile Include="RequestModels\RightsManagementRequest.cs" />
