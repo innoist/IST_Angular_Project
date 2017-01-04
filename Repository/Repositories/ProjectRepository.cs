@@ -78,7 +78,7 @@ namespace IST.Repository.Repositories
             //        .Skip(fromRow)
             //        .Take(toRow).ToList();
 
-            IEnumerable<Project> data=searchRequest.IsAsc
+            IEnumerable<Project> data = searchRequest.IsAsc
                 ? DbSet
                     .Where(query)
                     .OrderBy(orderClause[searchRequest.OrderByColumn])
@@ -95,8 +95,8 @@ namespace IST.Repository.Repositories
             return new SearchTemplateResponse<Project>
             {
                 Data = data,
-                TotalCount = 4,
-                FilteredCount = 5
+                TotalCount = DbSet.Select(x => x.Id).Count(),
+                FilteredCount = data.Count()
             };
         }
 

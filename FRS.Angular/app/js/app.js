@@ -1182,10 +1182,10 @@
 
     //To limit the data in table columns to 20 characters, and show ...
     function customLimitTo() {
-        return function (tdData) {
+        return function (tdData, limit) {
             if (tdData) {
-                if (tdData.length > 20) {
-                    return tdData.substring(0, 19) + '...';
+                if (tdData.length > limit) {
+                    return tdData.substring(0, limit-1) + '...';
                 }
                 return tdData;
             }

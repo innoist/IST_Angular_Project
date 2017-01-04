@@ -69,9 +69,8 @@
     /**
      * Live API URLs
      */
-    //window.frsApiUrl = "http://innoist-001-site10.gtempurl.com";
-    //window.frsApiUrl = "http://aversiontech.com.au";
-    //window.frsApiUrl = "http://aversionwebapi.azurewebsites.net/";
+
+    //window.frsApiUrl = "http://testprojectapp.azurewebsites.net";
 
      ajaxData = function(params) {
         params.PageNo = Math.ceil(params.start / params.length) + 1;

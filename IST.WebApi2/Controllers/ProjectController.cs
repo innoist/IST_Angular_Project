@@ -8,6 +8,7 @@ using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
+    [AllowAnonymous]
     public class ProjectController : BaseController
     {
         #region Private

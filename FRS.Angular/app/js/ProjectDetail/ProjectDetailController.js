@@ -1,6 +1,6 @@
 ﻿/**=========================================================
- * Module: Home
- * Home view Controller
+ * Module: Detail
+ * Project Detail view Controller
  =========================================================*/
 
 (function () {
@@ -8,15 +8,14 @@
 
     var core = angular.module('app.core');
     // ReSharper disable FunctionsUsedBeforeDeclared
-    core.lazy.controller('HomeController', HomeController);
+    core.lazy.controller('ProjectDetailController', ProjectDetailController);
 
-    HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
+    ProjectDetailController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
 
-    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
+    function ProjectDetailController($localStorage, $rootScope, $scope, $http, $state, HomeService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
         var vm = this;
 
-        vm.isReset = true;
-        HomeService.url = "/api/Project/";
+        HomeService.url = "/api/ProjectDetail/";
 
         vm.ProjectSearchRequest = {
             PageSize: 9,
@@ -84,11 +83,6 @@
                 .error(function (err) {
                     showErrors(err);
                 });
-        }
-
-        vm.fiterData = function (toFilter) {
-            vm.isReset = toFilter;
-            vm.dtInstance.reloadData(function (json) { }, true);
         }
 
         vm.delete = function (id) {

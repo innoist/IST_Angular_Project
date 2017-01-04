@@ -67,6 +67,12 @@
                 templateUrl: helper.basepath('../../../../app/views/SignIn/SignIn.html'),
                 resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module')
             })
+            .state('home.projectDetail', {
+                url: '/projectdetail',
+                title: 'Project Detail',
+                templateUrl: helper.basepath('../../../../app/views/ProjectDetail/ProjectDetail.html'),
+                resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons')
+            })
             .state('app.dashboard', {
                 url: '/dashboard',
                 title: 'Dashboard',

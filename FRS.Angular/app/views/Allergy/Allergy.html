@@ -23,7 +23,7 @@
                 <input type="text"
                        placeholder="Name"
                        ng-change="ac.fiterData(false)"
-                       class="form-control" 
+                       class="form-control"
                        ng-model="ac.Title" />
             </div>
             <button class="btn btn-success" type="submit">Filter</button>
@@ -70,10 +70,8 @@
                             </sup>
                         </td>
                         <td>{{allergy.IngredientCount}}</td>
-                        <td title="{{allergy.Description}}">{{allergy.Description  | customLimitTo}}</td>
-
+                        <td title="{{allergy.Description}}">{{allergy.Description | customLimitTo : 20}}</td>
                         <td class="text-right">
-
                             <div>
                                 <a ui-sref="app.CreateAllergy({Id : allergy.AllergyId})"
                                    class="btn btn-xs btn-info"
@@ -85,7 +83,7 @@
                                 <button ng-click="ac.delete(allergy)"
                                         class="btn btn-xs btn-danger"
                                         uib-tooltip="{{'Remove'}}"
-                                        uib-tooltip-trigger="focus" 
+                                        uib-tooltip-trigger="focus"
                                         tooltip-class="tooltip-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
