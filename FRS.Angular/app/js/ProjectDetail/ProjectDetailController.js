@@ -10,55 +10,30 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.controller('ProjectDetailController', ProjectDetailController);
 
-    ProjectDetailController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
+    ProjectDetailController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$stateParams', '$state', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$location', 'DTColumnDefBuilder', '$anchorScroll'];
 
-    function ProjectDetailController($localStorage, $rootScope, $scope, $http, $state, HomeService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
+    function ProjectDetailController($localStorage, $rootScope, $scope, $http, $stateParams, $state, ProjectDetailService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $location, DTColumnDefBuilder, $anchorScroll) {
         var vm = this;
-
-        HomeService.url = "/api/ProjectDetail/";
-
+        vm.Projects = [];
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
             IsAsc: true,
-            OrderByColumn: 1,
-            ProjectIds: []
+            OrderByColumn: 1
         }
+        ProjectDetailService.url = "/api/Project/";
 
-        HomeService.load(HomeService.url, vm.ProjectSearchRequest, function (response) {
+        ProjectDetailService.load(ProjectDetailService.url, vm.ProjectSearchRequest, function (response) {
             if (response) {
                 vm.Projects = response.Data;
+                console.log(vm.Projects);
                 vm.TotalProjects = response.RecordsTotal;
             }
         });
 
-        var onSuccessLoadProject = function (response) {
-            angular.forEach(response.Data, function (project) {
-                vm.Projects.push(project);
-            });
-            if (response.Data.length < vm.ProjectSearchRequest.PageSize)
-                vm.NoMoreProjects = true;
-            else
-                vm.NoMoreRecipes = false;
-            vm.IsDataLoaded = false;
-        }
-        vm.IsDataLoaded = false;
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > 100) {
-                $(".header-v5.header-static").addClass("header-fixed-shrink");
-            }
-            else {
-                $(".header-v5.header-static").removeClass("header-fixed-shrink");
-            }
-            if (vm.IsDataLoaded)
-                return false;
-            if (!vm.NoMoreProjects) {
-                if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.6) {
-                    vm.IsDataLoaded = true;
-                    vm.ProjectSearchRequest.PageNo += 1;
-                    HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProject);
-                }
-            }
+        var projectId = $stateParams.Id;
+        ProjectDetailService.loadById(projectId, function (response) {
+            vm.Project = response;
         });
         if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
             $scope.isAuthenticated = true;
@@ -66,11 +41,22 @@
         } else
             $scope.isAuthenticated = false;
 
+        vm.showTab = function (id) {
+            if (id === 'mydescription') {
+                $('#myreviews').removeClass('in active');
+                $('#mydescription')[0].className += ' in active';
+            } else if (id === 'myreviews') {
+                $('#mydescription').removeClass('in active');
+                $('#myreviews')[0].className += ' in active';
+            }
+        }
+
+
         //Logout
         $scope.logout = function () {
             $http.post(window.frsApiUrl + "/api/Account/Logout")
                 .success(function () {
-                    window.location.reload();
+                    $state.go('home.index', {}, { reload: true });
                     delete $localStorage['authorizationData'];
                     console.log("LoggedOut");
                     //$.connection.hub.stop();
@@ -78,7 +64,7 @@
                     $http.defaults.headers.common = {
                         'Content-Type': 'application/json'
                     };
-                    
+
                 })
                 .error(function (err) {
                     showErrors(err);
@@ -98,7 +84,7 @@
                 closeOnCancel: true
             }, function (isConfirm) {
                 if (isConfirm) {
-                    HomeService.delete(id, function (response) {
+                    ProjectDetailService.delete(id, function (response) {
                         if (response) {
                             vm.dtInstance.reloadData(function (json) { }, false);
                             toaster.success("", "Deleted successfully.");

@@ -39,7 +39,7 @@
                     <ul class="list-inline right-topbar pull-right">
                         <li><a href="#">Account</a></li>
                         <li><a href="shop-ui-add-to-cart.html">Wishlist (0)</a></li>
-                        <li ng-if="!isAuthenticated"><a ui-sref="home.signin">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
+                        <li ng-if="!isAuthenticated"><a ng-click="$state.go('home.signin', {}, {reload: true})">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
                         <li ng-if="isAuthenticated"><small>Welcome {{userName}}!</small></li>
                         <li ng-if="isAuthenticated"><a ng-click="logout()">Sign out</a></li>
                         <li><i class="search fa fa-search search-button"></i></li>
@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="home.index">
+                <a class="navbar-brand" ng-click="$state.go('home.index', {}, {reload: true})">
                     <img id="logo-header" src="/Ecommerce/img/logo.png" alt="Logo">
                 </a>
             </div>
@@ -122,7 +122,7 @@
                             Pages
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a ui-sref="home.index">Shop UI</a></li>
+                            <li><a  ng-click="$state.go('home.index', {}, {reload: true})">Shop UI</a></li>
                             <li><a href="shop-ui-inner.html">Product Page</a></li>
                             <li class="active"><a href="shop-ui-filter-grid.html">Filter Grid Page</a></li>
                             <li><a href="shop-ui-filter-list.html">Filter List Page</a></li>

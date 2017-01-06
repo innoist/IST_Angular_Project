@@ -43,6 +43,7 @@
                 vm.NoMoreRecipes = false;
             vm.IsDataLoaded = false;
         }
+
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
             if ($(window).scrollTop() > 100) {
@@ -61,17 +62,28 @@
                 }
             }
         });
+
         if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
             $scope.isAuthenticated = true;
             $scope.userName = $localStorage['authorizationData'].userName;
         } else
             $scope.isAuthenticated = false;
 
+        vm.OpenGPopUp = function() {
+      	    $('.g-popup-wrapper').show();
+      	    //if ($('.g-popup-wrapper').is(':visible')) 
+            //    $('div.wrapper').addClass('g-blur');
+	    }
+        $('.g-popup__close').on('click', function(e) {
+          $('.g-popup-wrapper').hide();
+          $('body').removeClass('g-blur');
+        });
+
         //Logout
         $scope.logout = function () {
             $http.post(window.frsApiUrl + "/api/Account/Logout")
                 .success(function () {
-                    window.location.reload();
+                    $state.go('home.index', {}, { reload: true });
                     delete $localStorage['authorizationData'];
                     console.log("LoggedOut");
                     //$.connection.hub.stop();
@@ -84,11 +96,6 @@
                 .error(function (err) {
                     showErrors(err);
                 });
-        }
-
-        vm.fiterData = function (toFilter) {
-            vm.isReset = toFilter;
-            vm.dtInstance.reloadData(function (json) { }, true);
         }
 
         vm.delete = function (id) {

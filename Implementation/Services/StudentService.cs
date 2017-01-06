@@ -37,8 +37,6 @@ namespace IST.Implementation.Services
         #endregion
 
         #region Public
-        
-
         public IEnumerable<Student> SearchByName( string name)
         {
             return repository.SearchByName(name);
@@ -73,7 +71,5 @@ namespace IST.Implementation.Services
         }
 
         #endregion
-
-
     }
 }

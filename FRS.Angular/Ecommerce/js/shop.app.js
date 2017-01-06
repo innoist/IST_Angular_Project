@@ -91,20 +91,20 @@ var App = function () {
     }
 
   // Please Wait
-  function handlePleaseWait() {
-  	var is_box_visible = true;
-		$(document).mouseleave(function(e){
-	    if ((e.clientY < 0)&&(is_box_visible === true)) {
-      	$('.g-popup-wrapper').show();
-      	if ($('.g-popup-wrapper').is(':visible')) $('body').addClass('g-blur');
-	    }
-		});
-    $('.g-popup__close').on('click', function(e) {
-      $('.g-popup-wrapper').hide();
-      $('body').removeClass('g-blur');
-      is_box_visible = false;
-    });
-  }
+  //function handlePleaseWait() {
+  //	var is_box_visible = true;
+  //  	$(document).mouseleave(function(e){
+  //      if ((e.clientY < 0)&&(is_box_visible === true)) {
+  //    	$('.g-popup-wrapper').show();
+  //    	if ($('.g-popup-wrapper').is(':visible')) $('body').addClass('g-blur');
+  //      }
+  //  	});
+  //  $('.g-popup__close').on('click', function(e) {
+  //    $('.g-popup-wrapper').hide();
+  //    $('body').removeClass('g-blur');
+  //    is_box_visible = false;
+  //  });
+  //}
 
     return {
         init: function () {
@@ -114,7 +114,7 @@ var App = function () {
             handleBoxed();
             handleHeader();
             handleMegaMenu();
-            handlePleaseWait();
+            //handlePleaseWait();
         },
 
         initScrollBar: function () {

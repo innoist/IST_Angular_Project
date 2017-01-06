@@ -12,5 +12,6 @@ namespace IST.Interfaces.IServices
     {
         bool Delete(int id);
         SearchTemplateResponse<Project> Search(ProjectSearchRequest searchRequest);
+        Project GetById(int id);
     }
 }

@@ -12,13 +12,13 @@ namespace IST.WebApi2.Controllers
     public class ProjectController : BaseController
     {
         #region Private
-        private readonly IProjectService service;
+        private readonly IProjectService projectService;
         #endregion
 
         #region Constructor
         public ProjectController(IProjectService  service)
         {
-            this.service = service;
+            this.projectService = service;
         }
         #endregion
 
@@ -31,7 +31,7 @@ namespace IST.WebApi2.Controllers
             {
                 return BadRequest("Invalid Bad Request");
             }
-            var response = service.Search(searchRequest);
+            var response = projectService.Search(searchRequest);
             var toReturn = new ProjectListView
             {
                 Data = response.Data.ToList().Select(x => x.MapFromServerToClient()).ToList(),
@@ -40,10 +40,16 @@ namespace IST.WebApi2.Controllers
             };
             return Ok(toReturn);
         }
-        
+
+        public IHttpActionResult Get(int id)
+        {
+            var toReturn = projectService.GetById(id).MapFromServerToClient();
+            return Ok(toReturn);
+        }
+
         public IHttpActionResult Delete(int id)
         {
-            var result = service.Delete(id);
+            var result = projectService.Delete(id);
             return Ok(result);
         }
 

@@ -12,6 +12,6 @@ namespace IST.Interfaces.Repository
     {
         SearchTemplateResponse<Project> Search(ProjectSearchRequest searchRequest);
         //IEnumerable<Student> SearchByName(string name);
-        //Student GetById(int id);
+        Project GetById(int id);
     }
 }

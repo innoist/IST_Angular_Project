@@ -68,10 +68,12 @@
                 resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module')
             })
             .state('home.projectDetail', {
-                url: '/projectdetail',
+                url: '/projectdetail/:Id',
                 title: 'Project Detail',
+                controller: 'ProjectDetailController',
+                controllerAs: 'pdc',
                 templateUrl: helper.basepath('../../../../app/views/ProjectDetail/ProjectDetail.html'),
-                resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons')
+                resolve: helper.resolveFor('flot-chart', 'toaster', 'flot-chart-plugins', 'weather-icons', 'ProjectDetail.module', 'oitozero.ngSweetAlert', 'datatables')
             })
             .state('app.dashboard', {
                 url: '/dashboard',

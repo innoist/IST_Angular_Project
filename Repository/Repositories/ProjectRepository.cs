@@ -53,10 +53,10 @@ namespace IST.Repository.Repositories
         //    return result;
         //}
 
-        //public Student GetById(int id)
-        //{
-        //    return DbSet.SingleOrDefault(x => !x.IsDeleted && x.StudentId == id);
-        //}
+        public Project GetById(int id)
+        {
+            return DbSet.SingleOrDefault(x=>x.Id == id);
+        }
 
         private readonly Dictionary<OrderByProject, Func<Project, object>> orderClause =
 

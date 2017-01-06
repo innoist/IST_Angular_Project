@@ -57,6 +57,11 @@ namespace IST.Implementation.Services
             return projectRepository.Search(searchRequest);
         }
 
+        public Project GetById(int id)
+        {
+            return projectRepository.GetById(id);
+        }
+
         #endregion
     }
 }
