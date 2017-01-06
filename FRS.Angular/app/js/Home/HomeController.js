@@ -22,8 +22,7 @@
             PageSize: 9,
             PageNo: 1,
             IsAsc: true,
-            OrderByColumn: 1,
-            ProjectIds: []
+            OrderByColumn: 1
         }
 
         HomeService.load(HomeService.url, vm.ProjectSearchRequest, function (response) {
@@ -70,7 +69,7 @@
             $scope.isAuthenticated = false;
 
         vm.OpenGPopUp = function() {
-      	    $('.g-popup-wrapper').show();
+      	    $('#sendtofriend').show();
       	    //if ($('.g-popup-wrapper').is(':visible')) 
             //    $('div.wrapper').addClass('g-blur');
 	    }
@@ -79,6 +78,9 @@
           $('body').removeClass('g-blur');
         });
 
+        vm.OpenProjectDetail=function() {
+            $('#projectdetail').show();
+        }
         //Logout
         $scope.logout = function () {
             $http.post(window.frsApiUrl + "/api/Account/Logout")

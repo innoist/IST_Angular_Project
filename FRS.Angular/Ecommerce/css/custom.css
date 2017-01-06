@@ -10,3 +10,13 @@
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
+.padding-leftright30 {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+.border-radius100 {
+    border-radius: 100px !important;
+}
+.margin-bottom110 {
+    margin-bottom: 110px;
+}

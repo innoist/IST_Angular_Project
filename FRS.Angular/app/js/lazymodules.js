@@ -221,10 +221,10 @@
                   name: 'Home.module', files: ['/app/js/Home/HomeController.js',
                                                 '/app/js/shared/ReferenceDataService.js']
               },
-              {
-                  name: 'ProjectDetail.module', files: ['/app/js/ProjectDetail/ProjectDetailController.js',
-                                                '/app/js/shared/ReferenceDataService.js']
-              },
+              //{
+              //    name: 'ProjectDetail.module', files: ['/app/js/ProjectDetail/ProjectDetailController.js',
+              //                                  '/app/js/shared/ReferenceDataService.js']
+              //},
               {
                   name: 'Allergy.module', files: ['/app/js/Allergy/AllergyController.js',
                                                   '/app/js/Allergy/CreateAllergyController.js',

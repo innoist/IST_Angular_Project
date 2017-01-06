@@ -59,7 +59,7 @@
                 controller: 'HomeController',
                 controllerAs: 'hc',
                 templateUrl: helper.basepath('../../../../app/views/Home/home.html'),
-                resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables')
+                resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables', 'slimscroll')
             })
             .state('home.signin', {
                 url: '/SignIn',
@@ -67,14 +67,14 @@
                 templateUrl: helper.basepath('../../../../app/views/SignIn/SignIn.html'),
                 resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module')
             })
-            .state('home.projectDetail', {
-                url: '/projectdetail/:Id',
-                title: 'Project Detail',
-                controller: 'ProjectDetailController',
-                controllerAs: 'pdc',
-                templateUrl: helper.basepath('../../../../app/views/ProjectDetail/ProjectDetail.html'),
-                resolve: helper.resolveFor('flot-chart', 'toaster', 'flot-chart-plugins', 'weather-icons', 'ProjectDetail.module', 'oitozero.ngSweetAlert', 'datatables')
-            })
+            //.state('home.projectDetail', {
+            //    url: '/projectdetail/:Id',
+            //    title: 'Project Detail',
+            //    controller: 'ProjectDetailController',
+            //    controllerAs: 'pdc',
+            //    templateUrl: helper.basepath('../../../../app/views/ProjectDetail/ProjectDetail.html'),
+            //    resolve: helper.resolveFor('flot-chart', 'toaster', 'flot-chart-plugins', 'weather-icons', 'ProjectDetail.module', 'oitozero.ngSweetAlert', 'datatables')
+            //})
             .state('app.dashboard', {
                 url: '/dashboard',
                 title: 'Dashboard',
