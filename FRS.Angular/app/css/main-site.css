@@ -549,12 +549,9 @@ body.ngdialog-open, html.ngdialog-open {
 }
 
 .shadow-emboss {
-    -webkit-box-shadow: #6b6f7c 2px 0px 12px 0px;
-    -webkit-box-shadow: rgba(107, 111, 124, 0.47) 2px 0px 12px 0px;
-    -ms-box-shadow: #6b6f7c 2px 0px 12px 0px;
-    -ms-box-shadow: rgba(107, 111, 124, 0.47) 2px 0px 12px 0px;
-    box-shadow: #6b6f7c 2px 0px 12px 0px;
-    box-shadow: rgba(107, 111, 124, 0.47) 2px 0px 12px 0px;
+    -webkit-box-shadow: rgb(24, 186, 155) 2px 0px 12px 0px;
+    -ms-box-shadow: rgb(24, 186, 155) 2px 0px 12px 0px;
+    box-shadow: rgb(24, 186, 155) 2px 0px 12px 0px;
 }
 
 .font13 {

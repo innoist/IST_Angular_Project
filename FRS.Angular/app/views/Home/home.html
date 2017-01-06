@@ -112,35 +112,36 @@
                 </div><!--/end result category-->
             </div><!--/end result category-->
             <br>
-            <div class="col-md-4 illustration-v2" ng-repeat="project in hc.Projects | filter : {Name : searchProject.Name}">
-                <div class="product-img product-img-brd">
-                    <span><img class="full-width img-responsive" src="/Ecommerce/img/blog/project.png" alt=""></span>
+            <div class="col-md-4 illustration-v2 repeated-item"  ng-repeat="project in hc.Projects | filter : {Name : searchProject.Name}">
+                <div ng-class="{'shadow-emboss' : project.isNew}">
+                    <div class="product-img product-img-brd">
+                        <span><img class="full-width img-responsive" src="/Ecommerce/img/blog/project.png" alt=""></span>
                     <a class="product-review" ng-click="hc.OpenProjectDetail()">{{project.Name}}</a>
-                    <!--<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
-                    <div class="shop-rgba-dark-green rgba-banner">New</div>
-                </div>
-                <div class="product-description product-description-brd margin-bottom-30">
-                    <div class="overflow-h margin-bottom-5">
-                        <div class="pull-left">
-                            <h6 class="title-price"><a uib-tooltip="{{ project.Description.length>70 ? project.Description : ''}}" tooltip-placement="left">{{project.Description | customLimitTo : 70}}</a></h6>
-                            <!--<span class="gender text-uppercase">Men</span>
-                            <span class="gender">Suits - Blazers</span>-->
-                        </div>
-                        <!--<div class="product-price">
-                            <span class="title-price">$60.00</span>
-                            <span class="title-price line-through">$95.00</span>
-                        </div>-->
+                        <!--<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
+                        <div class="shop-rgba-dark-green rgba-banner">New</div>
                     </div>
-                    <ul class="list-inline product-ratings">
-                        <li><i class="rating-selected fa fa-star"></i></li>
-                        <li><i class="rating-selected fa fa-star"></i></li>
-                        <li><i class="rating-selected fa fa-star"></i></li>
-                        <li><i class="rating fa fa-star"></i></li>
-                        <li><i class="rating fa fa-star"></i></li>
+                    <div class="product-description product-description-brd margin-bottom-30">
+                        <div class="overflow-h margin-bottom-5">
+                            <div class="pull-left">
+                            <h6 class="title-price"><a uib-tooltip="{{ project.Description.length>70 ? project.Description : ''}}" tooltip-placement="left">{{project.Description | customLimitTo : 70}}</a></h6>
+                                <!--<span class="gender text-uppercase">Men</span>
+                                <span class="gender">Suits - Blazers</span>-->
+                            </div>
+                            <!--<div class="product-price">
+                                <span class="title-price">$60.00</span>
+                                <span class="title-price line-through">$95.00</span>
+                            </div>-->
+                        </div>
+                        <ul class="list-inline product-ratings">
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating fa fa-star"></i></li>
+                            <li><i class="rating fa fa-star"></i></li>
                         <li class="like-icon"><a uib-tooltip="{{ 'Add to favourite' }}" tooltip-placement="left" href="#"><i class="fa fa-heart padding-right2"></i></a></li>
                         <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenGPopUp()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
-                    </ul>
-                </div>
+                        </ul>
+                    </div></div>
             </div>
             <!--/end filter resilts-->
             <!--/end pagination-->

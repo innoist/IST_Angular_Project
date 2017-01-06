@@ -33,11 +33,20 @@
         });
 
         var onSuccessLoadProject = function (response) {
+            angular.forEach(vm.Projects, function(project) {
+                project.isNew = false;
+            });
             angular.forEach(response.Data, function (project) {
+                project.isNew = true;
                 vm.Projects.push(project);
             });
-            if (response.Data.length < vm.ProjectSearchRequest.PageSize)
+            if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
+                angular.forEach(vm.Projects, function(project) {
+                    project.isNew = false;
+                });
                 vm.NoMoreProjects = true;
+            }
+                
             else
                 vm.NoMoreRecipes = false;
             vm.IsDataLoaded = false;
