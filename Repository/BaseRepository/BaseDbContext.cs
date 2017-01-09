@@ -117,6 +117,16 @@ namespace IST.Repository.BaseRepository
         public DbSet<Student> Students { get; set; }
         public DbSet<Solution> Projects { get; set; }
         public DbSet<Allergy> Allergies { get; set; }
+
+        public DbSet<Filter> Filters { get; set; }
+        public DbSet<FilterCateogry> FilterCategories { get; set; }
+        public DbSet<TagGroup> TagGroups { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<SolutionOwner> SolutionOwners { get; set; }
+        public DbSet<SolutionType> SolutionTypes { get; set; }
+        public DbSet<Solution> Solutions { get; set; }
+
+
         /// <summary>
         /// Execute store procedure for creating d
         /// </summary>
