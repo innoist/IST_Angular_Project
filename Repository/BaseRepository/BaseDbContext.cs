@@ -115,7 +115,7 @@ namespace IST.Repository.BaseRepository
         public DbSet<WebApiUser> WebApiUsers { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Project> Projects { get; set; }
+        public DbSet<Solution> Projects { get; set; }
         public DbSet<Allergy> Allergies { get; set; }
         /// <summary>
         /// Execute store procedure for creating d

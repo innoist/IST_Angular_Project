@@ -8,10 +8,10 @@ namespace IST.Interfaces.Repository
     /// <summary>
     /// IStudentRepository Repository
     /// </summary>
-    public interface IProjectRepository : IBaseRepository<Project, long>
+    public interface IProjectRepository : IBaseRepository<Solution, long>
     {
-        SearchTemplateResponse<Project> Search(ProjectSearchRequest searchRequest);
+        SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest);
         //IEnumerable<Student> SearchByName(string name);
-        Project GetById(int id);
+        Solution GetById(int id);
     }
 }

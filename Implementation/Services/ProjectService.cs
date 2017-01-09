@@ -52,12 +52,12 @@ namespace IST.Implementation.Services
             return true;
         }
 
-        public SearchTemplateResponse<Project> Search(ProjectSearchRequest searchRequest)
+        public SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest)
         {
             return projectRepository.Search(searchRequest);
         }
 
-        public Project GetById(int id)
+        public Solution GetById(int id)
         {
             return projectRepository.GetById(id);
         }

@@ -33,7 +33,7 @@
         });
 
         var onSuccessLoadProject = function (response) {
-            angular.forEach(vm.Projects, function(project) {
+            angular.forEach(vm.Projects, function (project) {
                 project.isNew = false;
             });
             angular.forEach(response.Data, function (project) {
@@ -41,14 +41,14 @@
                 vm.Projects.push(project);
             });
             if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
-                angular.forEach(vm.Projects, function(project) {
+                angular.forEach(vm.Projects, function (project) {
                     project.isNew = false;
                 });
                 vm.NoMoreProjects = true;
             }
-                
+
             else
-                vm.NoMoreRecipes = false;
+                vm.NoMoreProjects = false;
             vm.IsDataLoaded = false;
         }
 
@@ -77,19 +77,27 @@
         } else
             $scope.isAuthenticated = false;
 
-        vm.OpenGPopUp = function() {
-      	    $('#sendtofriend').show();
-      	    //if ($('.g-popup-wrapper').is(':visible')) 
+        vm.OpenGPopUp = function () {
+            $('#sendtofriend').show();
+            //if ($('.g-popup-wrapper').is(':visible')) 
             //    $('div.wrapper').addClass('g-blur');
-	    }
-        $('.g-popup__close').on('click', function(e) {
-          $('.g-popup-wrapper').hide();
-          $('body').removeClass('g-blur');
+        }
+        $('.g-popup__close').on('click', function (e) {
+            $('.g-popup-wrapper').hide();
+            $('body').removeClass('g-blur');
         });
 
-        vm.OpenProjectDetail=function() {
+        vm.OpenProjectDetail = function (id) {
             $('#projectdetail').show();
+            HomeService.loadById(id, function (response) {
+                vm.Project = response;
+            });
         }
+
+        vm.OpenLoginPage = function () {
+            $('#loginpage').show();
+        }
+
         //Logout
         $scope.logout = function () {
             $http.post(window.frsApiUrl + "/api/Account/Logout")
@@ -102,7 +110,7 @@
                     $http.defaults.headers.common = {
                         'Content-Type': 'application/json'
                     };
-                    
+
                 })
                 .error(function (err) {
                     showErrors(err);

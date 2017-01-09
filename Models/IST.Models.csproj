@@ -138,10 +138,16 @@
     <Compile Include="Common\OrderByServiceLogs.cs" />
     <Compile Include="Common\OrderByUsers.cs" />
     <Compile Include="Common\SaveStatus.cs" />
-    <Compile Include="DomainModels\Project.cs" />
+    <Compile Include="DomainModels\SolutionOwner.cs" />
+    <Compile Include="DomainModels\SolutionType.cs" />
+    <Compile Include="DomainModels\Solution.cs" />
     <Compile Include="DomainModels\BaseModel.cs" />
     <Compile Include="DomainModels\Allergy.cs" />
     <Compile Include="DomainModels\Student.cs" />
+    <Compile Include="DomainModels\FilterCategory.cs" />
+    <Compile Include="DomainModels\Filter.cs" />
+    <Compile Include="DomainModels\TagGroup.cs" />
+    <Compile Include="DomainModels\Tag.cs" />
     <Compile Include="DomainModels\UserDetail.cs" />
     <Compile Include="DomainModels\WebApiUser.cs" />
     <Compile Include="Enums\Helper.cs" />

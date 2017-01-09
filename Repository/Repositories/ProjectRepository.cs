@@ -16,7 +16,7 @@ namespace IST.Repository.Repositories
     /// <summary>
     /// Project Repository
     /// </summary>
-    public sealed class ProjectRepository : BaseRepository<Project>, IProjectRepository
+    public sealed class ProjectRepository : BaseRepository<Solution>, IProjectRepository
     {
         #region Constructor
 
@@ -31,7 +31,7 @@ namespace IST.Repository.Repositories
         /// <summary>
         /// Primary database set
         /// </summary>
-        protected override IDbSet<Project> DbSet => db.Projects;
+        protected override IDbSet<Solution> DbSet => db.Projects;
 
         #endregion
 
@@ -53,24 +53,24 @@ namespace IST.Repository.Repositories
         //    return result;
         //}
 
-        public Project GetById(int id)
+        public Solution GetById(int id)
         {
             return DbSet.SingleOrDefault(x=>x.Id == id);
         }
 
-        private readonly Dictionary<OrderByProject, Func<Project, object>> orderClause =
+        private readonly Dictionary<OrderByProject, Func<Solution, object>> orderClause =
 
-            new Dictionary<OrderByProject, Func<Project, object>>
+            new Dictionary<OrderByProject, Func<Solution, object>>
             {
                 {OrderByProject.Name, c => c.Name}
             };
 
-        public SearchTemplateResponse<Project> Search(ProjectSearchRequest searchRequest)
+        public SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest)
         {
             int fromRow = (searchRequest.PageNo - 1) * searchRequest.PageSize;
             int toRow = searchRequest.PageSize;
             bool searchNameSpecified = !string.IsNullOrEmpty(searchRequest.Name);
-            Expression<Func<Project, bool>> query =
+            Expression<Func<Solution, bool>> query =
                 s => (s.Name != null);
 
             //IEnumerable<Project> data = (IEnumerable<Project>)
@@ -78,7 +78,7 @@ namespace IST.Repository.Repositories
             //        .Skip(fromRow)
             //        .Take(toRow).ToList();
 
-            IEnumerable<Project> data = searchRequest.IsAsc
+            IEnumerable<Solution> data = searchRequest.IsAsc
                 ? DbSet
                     .Where(query)
                     .OrderBy(orderClause[searchRequest.OrderByColumn])
@@ -92,18 +92,14 @@ namespace IST.Repository.Repositories
                     .Take(toRow)
                     .ToList();
 
-            return new SearchTemplateResponse<Project>
+            return new SearchTemplateResponse<Solution>
             {
                 Data = data,
                 TotalCount = DbSet.Select(x => x.Id).Count(),
                 FilteredCount = data.Count()
             };
         }
-
-        public int GetStudentCount()
-        {
-            return DbSet.Count(x => !x.IsDeleted);
-        }
+        
         #endregion
     }
 }

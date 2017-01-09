@@ -11,7 +11,7 @@ namespace IST.Interfaces.IServices
     public interface IProjectService
     {
         bool Delete(int id);
-        SearchTemplateResponse<Project> Search(ProjectSearchRequest searchRequest);
-        Project GetById(int id);
+        SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest);
+        Solution GetById(int id);
     }
 }

@@ -30,17 +30,15 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="list-inline right-topbar pull-right">
-                        <li ng-if="!isAuthenticated"><a ng-click="$state.go('home.signin', {}, {reload: true})">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
+                        <li ng-if="!isAuthenticated"><a ng-click="hc.OpenLoginPage()">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
                         <li ng-if="isAuthenticated"><small>Welcome {{userName}}!</small></li>
                         <li ng-if="isAuthenticated"><a ng-click="logout()">Sign out</a></li>
                         <li><a href="#"><span class="fa fa-envelope"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+                        <li><a ng-click="$state.go('app.dashboard', null, { reload: true })"><span class="glyphicon glyphicon-align-justify"></span></a></li>
                     </ul>
                 </div>
             </div>
         </div><!--/container-->
     </div>
     <!-- End Topbar v3 -->
-    <!-- Navbar -->
-    <!-- End Navbar -->
 </div>

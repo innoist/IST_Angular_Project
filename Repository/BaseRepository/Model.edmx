@@ -80,6 +80,21 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="FilterCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Filters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="FilterCategoryId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="MenuId" />
@@ -103,13 +118,50 @@
           <Property Name="Menu_MenuId" Type="int" />
           <Property Name="Role_Id" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <EntityType Name="Projects">
+        <EntityType Name="SolutionFilters">
+          <Key>
+            <PropertyRef Name="SolutionId" />
+            <PropertyRef Name="FilterId" />
+          </Key>
+          <Property Name="SolutionId" Type="int" Nullable="false" />
+          <Property Name="FilterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SolutionOwners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Solutions">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaintentanceHours" Type="int" />
+          <Property Name="SecurityInfo" Type="nvarchar" MaxLength="100" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SolutionTags">
+          <Key>
+            <PropertyRef Name="SolutionId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="SolutionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SolutionTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -135,6 +187,21 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="AddonsDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TagGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayValue" Type="nvarchar(max)" />
+          <Property Name="TagGroupId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -228,6 +295,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Filters_FilterCategories">
+          <End Role="FilterCategories" Type="Self.FilterCategories" Multiplicity="1" />
+          <End Role="Filters" Type="Self.Filters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilterCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filters">
+              <PropertyRef Name="FilterCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionFilters_Filters">
+          <End Role="Filters" Type="Self.Filters" Multiplicity="1" />
+          <End Role="SolutionFilters" Type="Self.SolutionFilters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionFilters">
+              <PropertyRef Name="FilterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionFilters_Solutions">
+          <End Role="Solutions" Type="Self.Solutions" Multiplicity="1" />
+          <End Role="SolutionFilters" Type="Self.SolutionFilters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solutions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionFilters">
+              <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutions_SolutionOwners">
+          <End Role="SolutionOwners" Type="Self.SolutionOwners" Multiplicity="1" />
+          <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolutionOwners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solutions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutions_SolutionTypes">
+          <End Role="SolutionTypes" Type="Self.SolutionTypes" Multiplicity="1" />
+          <End Role="Solutions" Type="Self.Solutions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolutionTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solutions">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionTags_Solutions">
+          <End Role="Solutions" Type="Self.Solutions" Multiplicity="1" />
+          <End Role="SolutionTags" Type="Self.SolutionTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solutions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionTags">
+              <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionTags_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="SolutionTags" Type="Self.SolutionTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_TagGroups">
+          <End Role="TagGroups" Type="Self.TagGroups" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tags">
+              <PropertyRef Name="TagGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="angularModelStoreContainer">
           <EntitySet Name="Allergy" EntityType="Self.Allergy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -235,10 +398,18 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilterCategories" EntityType="Self.FilterCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filters" EntityType="Self.Filters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuRight" EntityType="Self.MenuRight" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionFilters" EntityType="Self.SolutionFilters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionOwners" EntityType="Self.SolutionOwners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solutions" EntityType="Self.Solutions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionTags" EntityType="Self.SolutionTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionTypes" EntityType="Self.SolutionTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagGroups" EntityType="Self.TagGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -266,6 +437,38 @@
           <AssociationSet Name="FK_dbo_MenuRight_dbo_Menu_Menu_MenuId" Association="Self.FK_dbo_MenuRight_dbo_Menu_Menu_MenuId">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="MenuRight" EntitySet="MenuRight" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Filters_FilterCategories" Association="Self.FK_Filters_FilterCategories">
+            <End Role="FilterCategories" EntitySet="FilterCategories" />
+            <End Role="Filters" EntitySet="Filters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionFilters_Filters" Association="Self.FK_SolutionFilters_Filters">
+            <End Role="Filters" EntitySet="Filters" />
+            <End Role="SolutionFilters" EntitySet="SolutionFilters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionFilters_Solutions" Association="Self.FK_SolutionFilters_Solutions">
+            <End Role="Solutions" EntitySet="Solutions" />
+            <End Role="SolutionFilters" EntitySet="SolutionFilters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
+            <End Role="SolutionOwners" EntitySet="SolutionOwners" />
+            <End Role="Solutions" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutions_SolutionTypes" Association="Self.FK_Solutions_SolutionTypes">
+            <End Role="SolutionTypes" EntitySet="SolutionTypes" />
+            <End Role="Solutions" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionTags_Solutions" Association="Self.FK_SolutionTags_Solutions">
+            <End Role="Solutions" EntitySet="Solutions" />
+            <End Role="SolutionTags" EntitySet="SolutionTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionTags_Tags" Association="Self.FK_SolutionTags_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="SolutionTags" EntitySet="SolutionTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_TagGroups" Association="Self.FK_Tags_TagGroups">
+            <End Role="TagGroups" EntitySet="TagGroups" />
+            <End Role="Tags" EntitySet="Tags" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -305,7 +508,37 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Students" EntityType="angularModel.Student" />
-          <EntitySet Name="Projects" EntityType="angularModel.Project" />
+          <EntitySet Name="FilterCategories" EntityType="angularModel.FilterCategory" />
+          <EntitySet Name="Filters" EntityType="angularModel.Filter" />
+          <EntitySet Name="SolutionOwners" EntityType="angularModel.SolutionOwner" />
+          <EntitySet Name="Solutions" EntityType="angularModel.Solution" />
+          <EntitySet Name="SolutionTypes" EntityType="angularModel.SolutionType" />
+          <EntitySet Name="TagGroups" EntityType="angularModel.TagGroup" />
+          <EntitySet Name="Tags" EntityType="angularModel.Tag" />
+          <AssociationSet Name="FK_Filters_FilterCategories" Association="angularModel.FK_Filters_FilterCategories">
+            <End Role="FilterCategory" EntitySet="FilterCategories" />
+            <End Role="Filter" EntitySet="Filters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutions_SolutionOwners" Association="angularModel.FK_Solutions_SolutionOwners">
+            <End Role="SolutionOwner" EntitySet="SolutionOwners" />
+            <End Role="Solution" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutions_SolutionTypes" Association="angularModel.FK_Solutions_SolutionTypes">
+            <End Role="SolutionType" EntitySet="SolutionTypes" />
+            <End Role="Solution" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="SolutionFilters" Association="angularModel.SolutionFilters">
+            <End Role="Filter" EntitySet="Filters" />
+            <End Role="Solution" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="SolutionTags" Association="angularModel.SolutionTags">
+            <End Role="Solution" EntitySet="Solutions" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_TagGroups1" Association="angularModel.FK_Tags_TagGroups1">
+            <End Role="TagGroup" EntitySet="TagGroups" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Allergy">
           <Key>
@@ -501,14 +734,133 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="AddonsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Project">
+        <EntityType Name="FilterCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Filters" Relationship="angularModel.FK_Filters_FilterCategories" FromRole="FilterCategory" ToRole="Filter" />
+        </EntityType>
+        <EntityType Name="Filter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FilterCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FilterCategory" Relationship="angularModel.FK_Filters_FilterCategories" FromRole="Filter" ToRole="FilterCategory" />
+          <NavigationProperty Name="Solutions" Relationship="angularModel.SolutionFilters" FromRole="Filter" ToRole="Solution" />
+        </EntityType>
+        <EntityType Name="SolutionOwner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Solutions" Relationship="angularModel.FK_Solutions_SolutionOwners" FromRole="SolutionOwner" ToRole="Solution" />
+        </EntityType>
+        <EntityType Name="Solution">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaintentanceHours" Type="Int32" />
+          <Property Name="SecurityInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SolutionOwner" Relationship="angularModel.FK_Solutions_SolutionOwners" FromRole="Solution" ToRole="SolutionOwner" />
+          <NavigationProperty Name="SolutionType" Relationship="angularModel.FK_Solutions_SolutionTypes" FromRole="Solution" ToRole="SolutionType" />
+          <NavigationProperty Name="Filters" Relationship="angularModel.SolutionFilters" FromRole="Solution" ToRole="Filter" />
+          <NavigationProperty Name="Tags" Relationship="angularModel.SolutionTags" FromRole="Solution" ToRole="Tag" />
         </EntityType>
+        <EntityType Name="SolutionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Solutions" Relationship="angularModel.FK_Solutions_SolutionTypes" FromRole="SolutionType" ToRole="Solution" />
+        </EntityType>
+        <EntityType Name="TagGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tags" Relationship="angularModel.FK_Tags_TagGroups1" FromRole="TagGroup" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TagGroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Solutions" Relationship="angularModel.SolutionTags" FromRole="Tag" ToRole="Solution" />
+          <NavigationProperty Name="TagGroup" Relationship="angularModel.FK_Tags_TagGroups1" FromRole="Tag" ToRole="TagGroup" />
+        </EntityType>
+        <Association Name="FK_Filters_FilterCategories">
+          <End Type="angularModel.FilterCategory" Role="FilterCategory" Multiplicity="1" />
+          <End Type="angularModel.Filter" Role="Filter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilterCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filter">
+              <PropertyRef Name="FilterCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutions_SolutionOwners">
+          <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="1" />
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolutionOwner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solution">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutions_SolutionTypes">
+          <End Type="angularModel.SolutionType" Role="SolutionType" Multiplicity="1" />
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolutionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solution">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SolutionFilters">
+          <End Type="angularModel.Filter" Role="Filter" Multiplicity="*" />
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+        </Association>
+        <Association Name="SolutionTags">
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+          <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Tags_TagGroups1">
+          <End Type="angularModel.TagGroup" Role="TagGroup" Multiplicity="1" />
+          <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="TagGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -644,15 +996,88 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="angularModel.Project">
-              <MappingFragment StoreEntitySet="Projects">
+          <EntitySetMapping Name="FilterCategories">
+            <EntityTypeMapping TypeName="angularModel.FilterCategory">
+              <MappingFragment StoreEntitySet="FilterCategories">
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Filters">
+            <EntityTypeMapping TypeName="angularModel.Filter">
+              <MappingFragment StoreEntitySet="Filters">
+                <ScalarProperty Name="FilterCategoryId" ColumnName="FilterCategoryId" />
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolutionOwners">
+            <EntityTypeMapping TypeName="angularModel.SolutionOwner">
+              <MappingFragment StoreEntitySet="SolutionOwners">
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solutions">
+            <EntityTypeMapping TypeName="angularModel.Solution">
+              <MappingFragment StoreEntitySet="Solutions">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="SecurityInfo" ColumnName="SecurityInfo" />
+                <ScalarProperty Name="MaintentanceHours" ColumnName="MaintentanceHours" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SolutionTypes">
+            <EntityTypeMapping TypeName="angularModel.SolutionType">
+              <MappingFragment StoreEntitySet="SolutionTypes">
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagGroups">
+            <EntityTypeMapping TypeName="angularModel.TagGroup">
+              <MappingFragment StoreEntitySet="TagGroups">
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="angularModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="TagGroupId" ColumnName="TagGroupId" />
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SolutionFilters" TypeName="angularModel.SolutionFilters" StoreEntitySet="SolutionFilters">
+            <EndProperty Name="Solution">
+              <ScalarProperty Name="Id" ColumnName="SolutionId" />
+            </EndProperty>
+            <EndProperty Name="Filter">
+              <ScalarProperty Name="Id" ColumnName="FilterId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SolutionTags" TypeName="angularModel.SolutionTags" StoreEntitySet="SolutionTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="Solution">
+              <ScalarProperty Name="Id" ColumnName="SolutionId" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

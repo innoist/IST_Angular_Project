@@ -116,7 +116,7 @@
                 <div ng-class="{'shadow-emboss' : project.isNew}">
                     <div class="product-img product-img-brd">
                         <span><img class="full-width img-responsive" src="/Ecommerce/img/blog/project.png" alt=""></span>
-                    <a class="product-review" ng-click="hc.OpenProjectDetail()">{{project.Name}}</a>
+                    <a class="product-review" ng-click="hc.OpenProjectDetail(project.Id)">{{project.Name}}</a>
                         <!--<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
                         <div class="shop-rgba-dark-green rgba-banner">New</div>
                     </div>
@@ -174,7 +174,7 @@
 
 <div class="g-popup-wrapper" id="projectdetail">
     <div class="g-popup g-popup--subscribe" style="width: 75%">
-        <h3>RECENT REVIEWS</h3>
+        <h3>{{hc.Project.Name}} -- RECENT REVIEWS</h3>
         <scrollable height="150">
             <div class="g-popup--subscribe-message margin-bottom110">
                 <div class="col-md-1">
@@ -202,7 +202,7 @@
                     <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
                 </div>
                 <div class="product-comment-dtl col-md-11">
-                    <h4>Mickel <small>22 days ago</small></h4>
+                    <h4>johnson <small>1 days ago</small></h4>
                     <p>I like the green colour, it's very likeable and reminds me of Hollister. A little loose though but I am very skinny</p>
                     <ul class="list-inline product-ratings">
                         <li class="reply"><a href="#">Reply</a></li>
@@ -268,6 +268,31 @@
             </div>
         </div>
         <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe2__close"><span class="icon-close" aria-hidden="true"></span></a>
+    </div>
+</div>
+
+<div class="g-popup-wrapper" id="loginpage">
+    <div class="g-popup g-popup--subscribe text-center">
+        <h2>Get Fresh Content</h2>
+        <form action="#" class="sky-form">
+            <div class="row">
+                <section class="col-sm-9">
+                    <label class="input">
+                        <input type="email" placeholder="Enter email" class="form-control">
+                    </label>
+                </section>
+                <section class="col-sm-3">
+                    <label class="input">
+                        <button class="btn-u btn-u-default" type="button">Get Updates</button>
+                    </label>
+                </section>
+            </div>
+        </form>
+        <div class="no-spam">
+            <span class="icon-lock" aria-hidden="true"></span> We hate SPAM and promise to keep your email address safe.
+        </div>
+
+        <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe__close"><span class="icon-close" aria-hidden="true"></span></a>
     </div>
 </div>
 <!-- End Wait Block -->

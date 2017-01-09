@@ -290,13 +290,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ModelMappers\ProjectMapper.cs" />
+    <Compile Include="ModelMappers\SolutionMapper.cs" />
     <Compile Include="ModelMappers\StudentMapper.cs" />
     <Compile Include="ModelMappers\AllergyMapper.cs" />
     <Compile Include="ModelMappers\UsersMapper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ProjectModel.cs" />
+    <Compile Include="Models\SolutionModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\AllergyModel.cs" />
     <Compile Include="Models\BaseModel.cs" />

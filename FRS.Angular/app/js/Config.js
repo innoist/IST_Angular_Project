@@ -65,7 +65,7 @@
                 url: '/SignIn',
                 title: 'Sign In',
                 templateUrl: helper.basepath('../../../../app/views/SignIn/SignIn.html'),
-                resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module')
+                resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module', 'slimscroll')
             })
             //.state('home.projectDetail', {
             //    url: '/projectdetail/:Id',

@@ -191,6 +191,7 @@
     <Content Include="Ecommerce\img\logo.png" />
     <Content Include="Ecommerce\img\map.png" />
     <Content Include="Ecommerce\img\others\fb.png" />
+    <Content Include="Ecommerce\img\others\GoGreen-Logo.png" />
     <Content Include="Ecommerce\img\sponsors\01.png" />
     <Content Include="Ecommerce\img\sponsors\02.png" />
     <Content Include="Ecommerce\img\sponsors\03.png" />

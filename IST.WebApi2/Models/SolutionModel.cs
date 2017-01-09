@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IST.WebApi2.Models
 {
-    public class ProjectModel : BaseDayCareGroup
+    public class SolutionModel : BaseDayCareGroup
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,9 +14,9 @@ namespace IST.WebApi2.Models
     {
         public ProjectListView()
         {
-            Data = new List<ProjectModel>();
+            Data = new List<SolutionModel>();
         }
-        public IEnumerable<ProjectModel> Data { get; set; }
+        public IEnumerable<SolutionModel> Data { get; set; }
         public int TotalCount { get; set; }
         public int RecordsTotal { get; set; }
         public int RecordsFiltered { get; set; }
