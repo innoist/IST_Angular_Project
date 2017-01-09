@@ -16,14 +16,14 @@ namespace IST.Repository.Repositories
     /// <summary>
     /// Project Repository
     /// </summary>
-    public sealed class ProjectRepository : BaseRepository<Solution>, IProjectRepository
+    public sealed class SolutionRepository : BaseRepository<Solution>, ISolutionRepository
     {
         #region Constructor
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ProjectRepository(IUnityContainer container) : base(container)
+        public SolutionRepository(IUnityContainer container) : base(container)
         {
 
         }
@@ -65,7 +65,7 @@ namespace IST.Repository.Repositories
                 {OrderByProject.Name, c => c.Name}
             };
 
-        public SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest)
+        public SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest)
         {
             int fromRow = (searchRequest.PageNo - 1) * searchRequest.PageSize;
             int toRow = searchRequest.PageSize;

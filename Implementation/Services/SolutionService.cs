@@ -11,11 +11,11 @@ namespace IST.Implementation.Services
     /// <summary>
     /// QuantityScale Service
     /// </summary>
-    public sealed class ProjectService : IProjectService
+    public sealed class SolutionService : ISolutionService
     {
         #region Private
         private readonly IStudentRepository studentRepository;
-        private readonly IProjectRepository projectRepository;
+        private readonly ISolutionRepository projectRepository;
         private readonly IAllergyRepository allergyRepository;
         #endregion
 
@@ -23,8 +23,8 @@ namespace IST.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public ProjectService(IStudentRepository repository,
-            IProjectRepository projectRepository, IAllergyRepository allergyRepository)
+        public SolutionService(IStudentRepository repository,
+            ISolutionRepository projectRepository, IAllergyRepository allergyRepository)
         {
 
             if (repository == null)
@@ -52,7 +52,7 @@ namespace IST.Implementation.Services
             return true;
         }
 
-        public SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest)
+        public SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest)
         {
             return projectRepository.Search(searchRequest);
         }

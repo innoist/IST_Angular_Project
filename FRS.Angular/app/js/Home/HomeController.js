@@ -16,7 +16,7 @@
         var vm = this;
 
         vm.isReset = true;
-        HomeService.url = "/api/Project/";
+        HomeService.url = "/api/Solution/";
 
         vm.ProjectSearchRequest = {
             PageSize: 9,

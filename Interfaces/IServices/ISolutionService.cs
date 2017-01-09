@@ -8,10 +8,10 @@ namespace IST.Interfaces.IServices
     /// <summary>
     /// Interface for Student Service
     /// </summary>
-    public interface IProjectService
+    public interface ISolutionService
     {
         bool Delete(int id);
-        SearchTemplateResponse<Solution> Search(ProjectSearchRequest searchRequest);
+        SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest);
         Solution GetById(int id);
     }
 }

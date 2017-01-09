@@ -19,19 +19,19 @@
         <AssociationConnector Association="angularModel.FK_dbo_MenuRight_dbo_Menu_Menu_MenuId" />
         <AssociationConnector Association="angularModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="angularModel.Student" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="angularModel.FilterCategory" Width="1.5" PointX="0.75" PointY="14.125" />
         <EntityTypeShape EntityType="angularModel.Filter" Width="1.5" PointX="3" PointY="13.875" />
-        <EntityTypeShape EntityType="angularModel.SolutionOwner" Width="1.5" PointX="0.625" PointY="17" />
-        <EntityTypeShape EntityType="angularModel.Solution" Width="1.5" PointX="4.125" PointY="16.75" />
-        <EntityTypeShape EntityType="angularModel.SolutionType" Width="1.5" PointX="0.625" PointY="19" />
-        <EntityTypeShape EntityType="angularModel.TagGroup" Width="1.5" PointX="8.125" PointY="14" />
-        <EntityTypeShape EntityType="angularModel.Tag" Width="1.5" PointX="5.75" PointY="13.875" />
+        <EntityTypeShape EntityType="angularModel.FilterCategory" Width="1.5" PointX="0.75" PointY="14.125" />
+        <EntityTypeShape EntityType="angularModel.Solution" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="angularModel.SolutionOwner" Width="1.5" PointX="0.5" PointY="18.875" />
+        <EntityTypeShape EntityType="angularModel.SolutionType" Width="1.5" PointX="0.625" PointY="16.5" />
+        <EntityTypeShape EntityType="angularModel.Tag" Width="1.5" PointX="7.5" PointY="13.875" />
+        <EntityTypeShape EntityType="angularModel.TagGroup" Width="1.5" PointX="5.25" PointY="14" />
         <AssociationConnector Association="angularModel.FK_Filters_FilterCategories" />
         <AssociationConnector Association="angularModel.FK_Solutions_SolutionOwners" />
         <AssociationConnector Association="angularModel.FK_Solutions_SolutionTypes" />
-        <AssociationConnector Association="angularModel.SolutionFilters" />
-        <AssociationConnector Association="angularModel.SolutionTags" />
-        <AssociationConnector Association="angularModel.FK_Tags_TagGroups1" />
+        <AssociationConnector Association="angularModel.FK_Tags_TagGroups" />
+        <AssociationConnector Association="angularModel.SolutionFilter" />
+        <AssociationConnector Association="angularModel.SolutionTag" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

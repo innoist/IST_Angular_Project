@@ -279,7 +279,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentBaseDataController.cs" />
-    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\SolutionController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RightsManagementController.cs" />

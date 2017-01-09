@@ -158,7 +158,7 @@
   <ItemGroup>
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\IdentityOperation.cs" />
-    <Compile Include="Services\ProjectService.cs" />
+    <Compile Include="Services\SolutionService.cs" />
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\ClaimsSecurityService.cs" />
     <Compile Include="Services\AllergyService.cs" />

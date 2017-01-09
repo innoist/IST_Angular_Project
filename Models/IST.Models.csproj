@@ -176,7 +176,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestModels\ProjectSearchRequest.cs" />
+    <Compile Include="RequestModels\SolutionSearchRequest.cs" />
     <Compile Include="RequestModels\StudentSearchRequest.cs" />
     <Compile Include="RequestModels\UsersSearchRequest.cs" />
     <Compile Include="RequestModels\RightsManagementRequest.cs" />

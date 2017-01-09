@@ -3,7 +3,7 @@ using IST.Models.Common;
 
 namespace IST.Models.RequestModels
 {
-    public class ProjectSearchRequest : GetPagedListRequest
+    public class SolutionSearchRequest : GetPagedListRequest
     {
         public int ProjectId { get; set; }
         public string Name { get; set; }
