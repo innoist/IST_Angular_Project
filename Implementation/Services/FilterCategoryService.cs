@@ -24,24 +24,24 @@ namespace IST.Implementation.Services
 
         #region Public
 
-        public IEnumerable<FilterCateogry> GetAll()
+        public IEnumerable<FilterCategory> GetAll()
         {
             return filterCategoryRepository.GetAll();
         }
 
-        public FilterCateogry FindFilterCategoryById(int filterCategoryId)
+        public FilterCategory FindFilterCategoryById(int filterCategoryId)
         {
             return filterCategoryRepository.Find(filterCategoryId);
         }
 
-        public bool SaveFilterCategory(FilterCateogry filterCategory)
+        public bool SaveFilterCategory(FilterCategory filterCategory)
         {
             filterCategoryRepository.Add(filterCategory);
             filterCategoryRepository.SaveChanges();
             return true;
         }
 
-        public bool UpdateFilterCategory(FilterCateogry filterCategory)
+        public bool UpdateFilterCategory(FilterCategory filterCategory)
         {
             filterCategoryRepository.Update(filterCategory);
             filterCategoryRepository.SaveChanges();

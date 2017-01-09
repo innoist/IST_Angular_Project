@@ -5,10 +5,10 @@ namespace IST.Interfaces.IServices
 {
     public interface IFilterCategoryService
     {
-        IEnumerable<FilterCateogry> GetAll();
-        FilterCateogry FindFilterCategoryById(int filterCategoryId);
-        bool SaveFilterCategory(FilterCateogry filterCategory);
-        bool UpdateFilterCategory(FilterCateogry filterCategory);
+        IEnumerable<FilterCategory> GetAll();
+        FilterCategory FindFilterCategoryById(int filterCategoryId);
+        bool SaveFilterCategory(FilterCategory filterCategory);
+        bool UpdateFilterCategory(FilterCategory filterCategory);
         bool DeleteFilterCategory(int filterCategoryId);
     }
 }

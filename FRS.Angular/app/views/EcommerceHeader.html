@@ -30,11 +30,11 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="list-inline right-topbar pull-right">
-                        <li ng-if="!isAuthenticated"><a ng-click="hc.OpenLoginPage()">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
+                        <li ng-if="!isAuthenticated"><a ui-sref="home.signin">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
                         <li ng-if="isAuthenticated"><small>Welcome {{userName}}!</small></li>
                         <li ng-if="isAuthenticated"><a ng-click="logout()">Sign out</a></li>
                         <li><a href="#"><span class="fa fa-envelope"></span></a></li>
-                        <li><a ng-click="$state.go('app.dashboard', null, { reload: true })"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+                        <li><a ui-sref="app.dashboard"><span class="glyphicon glyphicon-align-justify"></span></a></li>
                     </ul>
                 </div>
             </div>

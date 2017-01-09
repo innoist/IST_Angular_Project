@@ -119,7 +119,7 @@ namespace IST.Repository.BaseRepository
         public DbSet<Allergy> Allergies { get; set; }
 
         public DbSet<Filter> Filters { get; set; }
-        public DbSet<FilterCateogry> FilterCategories { get; set; }
+        public DbSet<FilterCategory> FilterCategories { get; set; }
         public DbSet<TagGroup> TagGroups { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<SolutionOwner> SolutionOwners { get; set; }

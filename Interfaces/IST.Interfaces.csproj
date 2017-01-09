@@ -72,7 +72,6 @@
     <Compile Include="IServices\IFilterCategoryService.cs" />
     <Compile Include="IServices\IFilterService.cs" />
     <Compile Include="IServices\ILogger.cs" />
-    <Compile Include="IServices\IProjectService.cs" />
     <Compile Include="IServices\ISolutionOwnerService.cs" />
     <Compile Include="IServices\ISolutionService.cs" />
     <Compile Include="IServices\ISolutionTypeService.cs" />
@@ -87,7 +86,6 @@
     <Compile Include="Repository\IFilterCategoryRepository.cs" />
     <Compile Include="Repository\IFilterRepository.cs" />
     <Compile Include="Repository\ILogRepository.cs" />
-    <Compile Include="Repository\IProjectRepository.cs" />
     <Compile Include="Repository\ISolutionOwnerRepository.cs" />
     <Compile Include="Repository\ISolutionRepository.cs" />
     <Compile Include="Repository\ISolutionTypeRepository.cs" />

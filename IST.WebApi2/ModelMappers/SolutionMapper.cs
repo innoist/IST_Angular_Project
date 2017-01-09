@@ -12,6 +12,13 @@ namespace IST.WebApi2.ModelMappers
                 Id = source.Id,
                 Description = source.Description,
                 Name = source.Name,
+                Location = source.Location,
+                MaintentanceHours=source.MaintentanceHours,
+                OwnerId=source.OwnerId,
+                TypeId=source.TypeId,
+                SecurityInfo = source.SecurityInfo,
+                Image = source.Image,
+                Active = source.Active
             };
         }
         public static Solution MapFromClientToServer(this SolutionModel source)
@@ -21,6 +28,13 @@ namespace IST.WebApi2.ModelMappers
                 Id = source.Id,
                 Description = source.Description,
                 Name = source.Name,
+                Location = source.Location,
+                MaintentanceHours = source.MaintentanceHours,
+                OwnerId = source.OwnerId,
+                TypeId = source.TypeId,
+                SecurityInfo=source.SecurityInfo,
+                Image=source.Image,
+                Active=source.Active
             };
         }
     }

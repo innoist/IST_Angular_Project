@@ -6,12 +6,12 @@ using Microsoft.Practices.Unity;
 
 namespace IST.Repository.Repositories
 {
-    public class FilterCategoryRepository : BaseRepository<FilterCateogry> , IFilterCategoryRepository
+    public class FilterCategoryRepository : BaseRepository<FilterCategory> , IFilterCategoryRepository
     {
         public FilterCategoryRepository(IUnityContainer container) : base(container)
         {
         }
 
-        protected override IDbSet<FilterCateogry> DbSet => db.FilterCategories;
+        protected override IDbSet<FilterCategory> DbSet => db.FilterCategories;
     }
 }

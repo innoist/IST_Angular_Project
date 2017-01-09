@@ -2,7 +2,7 @@
 
 namespace IST.Interfaces.Repository
 {
-    public interface IFilterCategoryRepository : IBaseRepository<FilterCateogry, long>
+    public interface IFilterCategoryRepository : IBaseRepository<FilterCategory, long>
     {
     }
 }

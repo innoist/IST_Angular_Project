@@ -9,14 +9,14 @@ using IST.WebBase.Mvc;
 namespace IST.WebApi2.Controllers
 {
     [AllowAnonymous]
-    public class ProjectController : BaseController
+    public class SolutionController : BaseController
     {
         #region Private
-        private readonly IProjectService projectService;
+        private readonly ISolutionService projectService;
         #endregion
 
         #region Constructor
-        public ProjectController(IProjectService  service)
+        public SolutionController(ISolutionService  service)
         {
             this.projectService = service;
         }
@@ -25,7 +25,7 @@ namespace IST.WebApi2.Controllers
         #region Public
 
         [ValidateFilter]
-        public IHttpActionResult Get([FromUri]ProjectSearchRequest searchRequest)
+        public IHttpActionResult Get([FromUri]SolutionSearchRequest searchRequest)
         {
             if (searchRequest == null || !ModelState.IsValid)
             {

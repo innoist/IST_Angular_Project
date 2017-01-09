@@ -6,9 +6,9 @@ using Microsoft.Practices.Unity;
 
 namespace IST.Repository.Repositories
 {
-    public class FilterCategory : BaseRepository<Filter>, IFilterRepository
+    public class FilterRepository : BaseRepository<Filter>, IFilterRepository
     {
-        public FilterCategory(IUnityContainer container) : base(container)
+        public FilterRepository(IUnityContainer container) : base(container)
         {
         }
 
