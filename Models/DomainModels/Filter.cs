@@ -12,6 +12,6 @@ namespace IST.Models.DomainModels
         public int FilterCategoryId { get; set; }
         public string DisplayValue { get; set; }
         public virtual ICollection<Solution> Solutions { get; set; }
-        public virtual FilterCateogry FilterCateogry { get; set; }
+        public virtual FilterCategory FilterCategory { get; set; }
     }
 }
