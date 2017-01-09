@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace IST.Models.DomainModels
 {
+    /// <summary>
+    /// Tag Class
+    /// </summary>
     public class Tag
     {
         public int Id { get; set; }
