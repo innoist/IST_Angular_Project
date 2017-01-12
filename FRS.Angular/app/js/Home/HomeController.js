@@ -19,6 +19,7 @@
         HomeService.url = "/api/Project/";
         vm.CategoryId = 0;
         vm.Projects = [];
+        vm.selectCategories = false;
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
@@ -26,9 +27,9 @@
             OrderByColumn: 1
         }
         var onSuccessLoadProjects = function (response) {
-            if (vm.clicked ||vm.searchString) {
+            if (vm.clicked || vm.searchString) {
                 vm.Projects = [];
-                angular.forEach(response.Data, function(project) {
+                angular.forEach(response.Data, function (project) {
                     project.isNew = true;
                     vm.Projects.push(project);
                 });
