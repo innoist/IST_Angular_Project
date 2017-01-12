@@ -21,6 +21,9 @@
     margin-bottom: 110px;
 }
 
+.padding-left16 {
+    padding-left: 16px;
+}
 /*
   We're using CSS transitions for when
   the enter and move events are triggered

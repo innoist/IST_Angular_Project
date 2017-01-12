@@ -37,32 +37,16 @@ namespace IST.Repository.Repositories
 
         #region Public
 
-        /// <summary>
-        /// Search
-        /// </summary>
-        //public IEnumerable<Student> SearchByName(string name)
-        //{
-        //    var searchNameSpecified = !string.IsNullOrEmpty(name);
-
-        //    var result = from s in DbSet
-        //                 where
-        //                       (string.Concat(s.FirstName, " ", s.MiddleName, string.IsNullOrEmpty(s.MiddleName) ? "" : " ",
-        //                           s.LastName).ToLower().Contains(name.ToLower()) || !searchNameSpecified)
-        //                 select s;
-
-        //    return result;
-        //}
-
         public Solution GetById(int id)
         {
-            return DbSet.SingleOrDefault(x=>x.Id == id);
+            return DbSet.SingleOrDefault(x => x.Id == id);
         }
 
-        private readonly Dictionary<OrderByProject, Func<Solution, object>> orderClause =
+        private readonly Dictionary<OrderBySolution, Func<Solution, object>> orderClause =
 
-            new Dictionary<OrderByProject, Func<Solution, object>>
+            new Dictionary<OrderBySolution, Func<Solution, object>>
             {
-                {OrderByProject.Name, c => c.Name}
+                {OrderBySolution.Name, c => c.Name}
             };
 
         public SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest)
@@ -71,13 +55,17 @@ namespace IST.Repository.Repositories
             int toRow = searchRequest.PageSize;
             bool searchNameSpecified = !string.IsNullOrEmpty(searchRequest.Name);
             Expression<Func<Solution, bool>> query =
-                s => (s.Name != null);
+                s => ((searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId)) &&
+                      (!searchRequest.CategoryIds.Any() || s.Filters.Any(x => searchRequest.CategoryIds.Any(y => y.Equals(x.FilterCategoryId)))) &&
+                      (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId)) &&
+                      (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
+                      || s.Tags.Any(x=>x.DisplayValue.Contains(searchRequest.Name.ToLower()))
+                      || s.Tags.Any(x => x.TagGroup.DisplayValue.Contains(searchRequest.Name.ToLower()))));
 
-            //IEnumerable<Project> data = (IEnumerable<Project>)
-            //    DbSet.Where(query)
-            //        .Skip(fromRow)
-            //        .Take(toRow).ToList();
-
+            var aa = DbSet.Where(s => s.Filters.Any(x => searchRequest.CategoryIds.Any(y => y.Equals(x.FilterCategoryId))) && searchRequest.CategoryIds.Any()).ToList();
+            var aaa = DbSet.Where(s => s.Tags.Any(x => x.DisplayValue.Contains(searchRequest.Name.ToLower()))
+                      || s.Tags.Any(x => x.TagGroup.DisplayValue.Contains(searchRequest.Name.ToLower())));
+            var b = DbSet.Where(s => s.Name.ToLower().Contains(searchRequest.Name.ToLower()));
             IEnumerable<Solution> data = searchRequest.IsAsc
                 ? DbSet
                     .Where(query)
@@ -96,10 +84,10 @@ namespace IST.Repository.Repositories
             {
                 Data = data,
                 TotalCount = DbSet.Select(x => x.Id).Count(),
-                FilteredCount = data.Count()
+                FilteredCount = DbSet.Count(query)
             };
         }
-        
+
         #endregion
     }
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using IST.Models.DomainModels;
+using Filter = System.Web.Mvc.Filter;
 
 namespace IST.Models.IdentityModels
 {
@@ -37,6 +39,20 @@ namespace IST.Models.IdentityModels
         public virtual ICollection<UserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<UserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<UserRole> AspNetRoles { get; set; }
+        public virtual ICollection<DomainModels.Filter> CreatedFilters { get; set; }
+        public virtual ICollection<DomainModels.Filter> UpdatedFilters { get; set; }
+        public virtual ICollection<FilterCategory> CreatedFilterCategories { get; set; }
+        public virtual ICollection<FilterCategory> UpdatedFilterCategories { get; set; }
+        public virtual ICollection<Solution> CreatedSolutions { get; set; }
+        public virtual ICollection<Solution> UpdatedSolutions { get; set; }
+        public virtual ICollection<SolutionOwner> CreatedSolutionOwners { get; set; }
+        public virtual ICollection<SolutionOwner> UpdatedSolutionOwners { get; set; }
+        public virtual ICollection<SolutionType> CreatedSolutionTypes { get; set; }
+        public virtual ICollection<SolutionType> UpdatedSolutionTypes { get; set; }
+        public virtual ICollection<Tag> CreatedTags { get; set; }
+        public virtual ICollection<Tag> UpdatedTags { get; set; }
+        public virtual ICollection<TagGroup> CreatedTagGroups { get; set; }
+        public virtual ICollection<TagGroup> UpdatedTagGroups { get; set; }
 
     }
 }

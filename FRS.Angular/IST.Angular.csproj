@@ -84,6 +84,8 @@
     <Content Include="app\js\ProjectDetail\ProjectDetailController.js" />
     <Content Include="app\js\shared\UtilityService.js" />
     <Content Include="app\js\Dashboard\DashboardController.js" />
+    <Content Include="app\js\Solution\SolutionController.js" />
+    <Content Include="app\js\Solution\CreateSolutionController.js" />
     <Content Include="app\js\Student\StudentController.js" />
     <Content Include="app\js\Allergy\CreateAllergyController.js" />
     <Content Include="app\js\angular-local-storage.min.js" />
@@ -99,6 +101,8 @@
     <Content Include="app\views\ProjectDetail\ProjectDetail.html" />
     <Content Include="app\views\SignIn\SignIn.html" />
     <Content Include="app\views\EcommerceFooter.html" />
+    <Content Include="app\views\Solution\Solution.html" />
+    <Content Include="app\views\Solution\CreateSolution.html" />
     <Content Include="Ecommerce\css\app.css" />
     <Content Include="Ecommerce\css\blocks.css" />
     <Content Include="Ecommerce\css\css-rtl\app-rtl.css" />
@@ -211,6 +215,7 @@
     <Content Include="Ecommerce\img\thumb\License2.txt" />
     <Content Include="Ecommerce\img\thumb\License3.txt" />
     <Content Include="Ecommerce\img\twitter-bg.jpg" />
+    <Content Include="Ecommerce\img\backgroundimage.png" />
     <Content Include="Ecommerce\js\custom.js" />
     <Content Include="Ecommerce\js\forms\page_contact_form.js" />
     <Content Include="Ecommerce\js\forms\page_login.js" />

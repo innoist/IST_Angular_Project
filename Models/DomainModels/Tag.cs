@@ -9,7 +9,7 @@ namespace IST.Models.DomainModels
     /// <summary>
     /// Tag Class
     /// </summary>
-    public class Tag
+    public class Tag : BaseModel
     {
         public int Id { get; set; }
         public string DisplayValue { get; set; }

@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
-using Antlr.Runtime.Misc;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
+using IST.Models.Common.DropDown;
 using IST.Models.RequestModels;
 using IST.Models.ResponseModels;
 using IST.WebApi2.ModelMappers;
@@ -15,18 +15,23 @@ using static IST.Commons.Utility.Utility;
 using static System.String;
 namespace IST.WebApi2.Controllers
 {
-    public class SolutionController : BaseController
+    [AllowAnonymous]
+    public class ProjectController : BaseController
     {
         #region Private
         private readonly ISolutionService solutionService;
+        private readonly IFilterCategoryService filterCategoryService;
+        private readonly IFilterService filterService;
         private readonly ISolutionTypeRepository solutionTypeRepository;
         #endregion
 
         #region Constructor
-        public SolutionController(ISolutionService service, ISolutionTypeRepository solutionTypeRepository)
+        public ProjectController(IFilterService filterService, ISolutionService solutionService, ISolutionTypeRepository solutionTypeRepository, IFilterCategoryService filterCategoryService)
         {
-            this.solutionService = service;
+            this.filterService = filterService;
+            this.solutionService = solutionService;
             this.solutionTypeRepository = solutionTypeRepository;
+            this.filterCategoryService = filterCategoryService;
         }
         #endregion
 
@@ -39,18 +44,22 @@ namespace IST.WebApi2.Controllers
             {
                 return BadRequest("Invalid Bad Request");
             }
-            
+            //var filtersIds = filterService.FindFilterIdsByCategoryId(searchRequest.CategoryId);
+            if (searchRequest.CategoryIds == null || !searchRequest.CategoryIds.Any())
+            {
+                searchRequest.CategoryIds = new List<int>();
+            }
             var response = solutionService.Search(searchRequest);
             var toReturn = new ProjectListView
             {
                 Data = response.Data.ToList().Select(x => x.MapFromServerToClient()).ToList(),
                 SolutionTypes = solutionTypeRepository.GetAll().Select(x => x.MapFromServerToClient()).ToList(),
+                FilterCategories = filterCategoryService.GetAll().Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }).ToList(),
                 recordsFiltered = response.FilteredCount,
                 recordsTotal = response.TotalCount
             };
             return Ok(toReturn);
         }
-
         public IHttpActionResult Get(int id)
         {
             var baseData = solutionService.GetBaseData(id);
@@ -64,41 +73,6 @@ namespace IST.WebApi2.Controllers
             };
             return Ok(viewModel);
         }
-
-        [HttpPost]
-        [ValidateFilter]
-        public IHttpActionResult Post(SolutionModel model)
-        {
-            if (model.Id == 0)
-                SetAllValues(model);
-            else
-                SetUpdatedValues(model);
-
-
-            //Scale Image to Aspect Ratio i.e 256*256
-            if (!string.IsNullOrEmpty(model.Image))
-            {
-                var metaData = model.Image.Split(',')[0];
-                var imageBase64 = ScaleImage(model.Image.Split(',')[1], new Size(128, 128));
-                model.Image = Concat(metaData, ",", imageBase64);
-            }
-            SolutionCreateResponseModel response = new SolutionCreateResponseModel
-            {
-                Solution = model.MapFromClientToServer(),
-                TagIds = model.TagIds,
-                FilterIds = model.FilterIds
-            };
-
-            var status = solutionService.SaveOrUpdate(response);
-            return Ok(status);
-        }
-
-        //public IHttpActionResult Delete(int id)
-        //{
-        //    var result = solutionService.Delete(id);
-        //    return Ok(result);
-        //}
-
         #endregion
     }
 }

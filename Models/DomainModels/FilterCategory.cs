@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace IST.Models.DomainModels
 {
-    public class FilterCategory
+    public class FilterCategory : BaseModel
     {
         public int Id { get; set; }
         public string DisplayValue { get; set; }

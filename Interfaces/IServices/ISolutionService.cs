@@ -10,8 +10,11 @@ namespace IST.Interfaces.IServices
     /// </summary>
     public interface ISolutionService
     {
-        bool Delete(int id);
         SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest);
         Solution GetById(int id);
+        SolutionBaseData GetBaseData(int id);
+        SolutionBaseData GetFilterData();
+        bool SaveOrUpdate(SolutionCreateResponseModel response);
+
     }
 }

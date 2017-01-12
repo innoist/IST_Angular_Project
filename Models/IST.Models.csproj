@@ -132,7 +132,7 @@
     <Compile Include="Common\OrderByItem.cs" />
     <Compile Include="Common\OrderByRecipe.cs" />
     <Compile Include="Common\OrderByAttendance.cs" />
-    <Compile Include="Common\OrderByProject.cs" />
+    <Compile Include="Common\OrderBySolution.cs" />
     <Compile Include="Common\OrderByStudent.cs" />
     <Compile Include="Common\OrderByLogs.cs" />
     <Compile Include="Common\OrderByServiceLogs.cs" />
@@ -142,8 +142,6 @@
     <Compile Include="DomainModels\SolutionType.cs" />
     <Compile Include="DomainModels\Solution.cs" />
     <Compile Include="DomainModels\BaseModel.cs" />
-    <Compile Include="DomainModels\Allergy.cs" />
-    <Compile Include="DomainModels\Student.cs" />
     <Compile Include="DomainModels\FilterCategory.cs" />
     <Compile Include="DomainModels\Filter.cs" />
     <Compile Include="DomainModels\TagGroup.cs" />
@@ -169,7 +167,6 @@
     <Compile Include="MenuModels\Menu.cs" />
     <Compile Include="MenuModels\MenuRight.cs" />
     <Compile Include="MenuModels\UserMenuResponse.cs" />
-    <Compile Include="ModelCopier\StudentCopier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -181,6 +178,8 @@
     <Compile Include="RequestModels\UsersSearchRequest.cs" />
     <Compile Include="RequestModels\RightsManagementRequest.cs" />
     <Compile Include="ResponseModels\SearchTemplateResponse.cs" />
+    <Compile Include="ResponseModels\SolutionBaseData.cs" />
+    <Compile Include="ResponseModels\SolutionCreateResponseModel.cs" />
     <Compile Include="ResponseModels\UsersSearchResponse.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +195,9 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ModelCopier\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

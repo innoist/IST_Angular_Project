@@ -28,11 +28,12 @@ namespace IST.Implementation
 
             unityContainer.RegisterType<IUsersService, UsersService>();
 
-            unityContainer.RegisterType<IAllergyService, AllergyService>();
-            unityContainer.RegisterType<IStudentService, StudentService>();
             unityContainer.RegisterType<ISolutionService, SolutionService>();
-
-            unityContainer.RegisterType<IAllergyService, AllergyService>();
+            unityContainer.RegisterType<ISolutionOwnerService, SolutionOwnerService>();
+            unityContainer.RegisterType<ISolutionTypeService, SolutionTypeService>();
+            unityContainer.RegisterType<ITagService, TagService>();
+            unityContainer.RegisterType<IFilterService, FilterService>();
+            unityContainer.RegisterType<IFilterCategoryService, FilterCategoryService>();
 
         }
     }

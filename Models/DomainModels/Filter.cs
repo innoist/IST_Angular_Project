@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IST.Models.DomainModels
 {
-    public class Filter
+    public class Filter : BaseModel
     {
         public int Id { get; set; }
         public int FilterCategoryId { get; set; }

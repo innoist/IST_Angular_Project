@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace IST.Models.DomainModels
 {
-    public class SolutionType
+    public class SolutionType : BaseModel
     {
         public int Id { get; set; }
         public string DisplayValue { get; set; }

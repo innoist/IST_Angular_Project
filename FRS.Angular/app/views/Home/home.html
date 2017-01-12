@@ -19,44 +19,12 @@
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
-                                <li>
+                                <li ng-repeat="category in hc.FilterCategories">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" checked />
+                                        <input type="checkbox" name="checkbox" id="{{category.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" ng-change="hc.filterProjects(category.Id)" />
                                         <i></i>
-                                        Calvin Klein
-                                        <small><a href="#">(23)</a></small>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" checked />
-                                        <i></i>
-                                        Gucci
-                                        <small><a href="#">(4)</a></small>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" />
-                                        <i></i>
-                                        Adidas
-                                        <small><a href="#">(11)</a></small>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" />
-                                        <i></i>
-                                        Puma
-                                        <small><a href="#">(3)</a></small>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" />
-                                        <i></i>
-                                        Zara
-                                        <small><a href="#">(87)</a></small>
+                                        {{category.DisplayName}}
+                                        <!--<small><a>{{hc.clicked?'':hc.Projects.length}}</a></small>-->
                                     </label>
                                 </li>
                             </ul>
@@ -104,26 +72,33 @@
                 </div>-->
                 <div class="col-md-12 padding-leftright30">
                     <div class="input-group">
-                        <input type="text" class="form-control" ng-model="searchProject.Name" placeholder="Search">
+                        <input type="text" class="form-control" ng-model="hc.searchString" placeholder="Search">
                         <span class="input-group-btn">
-                            <button class="btn" type="button"><i class="fa fa-search"></i></button>
+                            <button class="btn" type="button" ng-click="hc.getDataFromSever()"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div><!--/end result category-->
             </div><!--/end result category-->
             <br>
-            <div class="col-md-4 illustration-v2 repeated-item"  ng-repeat="project in hc.Projects | filter : {Name : searchProject.Name}">
+
+            <div class="filter-by-block col-md-8" ng-if="!hc.Projects.length">
+                <h1>No solution matches your search!</h1>
+            </div>
+
+            <div class="col-md-4 illustration-v2 repeated-item" ng-repeat="project in hc.Projects">
                 <div ng-class="{'shadow-emboss' : project.isNew}">
                     <div class="product-img product-img-brd">
-                        <span><img class="full-width img-responsive" src="/Ecommerce/img/blog/project.png" alt=""></span>
-                    <a class="product-review" ng-click="hc.OpenProjectDetail(project.Id)">{{project.Name}}</a>
+                        <a target="_blank" href="{{project.Location}}"><img class="full-width img-responsive" style="height: 252px" ng-src="{{project.Image ? project.Image: '/Ecommerce/img/blog/project.png' }}" alt=""></a>
+                        <a class="product-review" ng-click="hc.OpenProjectDetail(project.Id)">{{project.Name}}</a>
                         <!--<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
                         <div class="shop-rgba-dark-green rgba-banner">New</div>
                     </div>
                     <div class="product-description product-description-brd margin-bottom-30">
                         <div class="overflow-h margin-bottom-5">
                             <div class="pull-left">
-                            <h6 class="title-price"><a uib-tooltip="{{ project.Description.length>70 ? project.Description : ''}}" tooltip-placement="left">{{project.Description | customLimitTo : 70}}</a></h6>
+                                <h6 class="title-price">
+                                    <span uib-tooltip="{{project.Description}}" tooltip-placement="left" tooltip-class="tooltip-multiline">{{project.Description | customLimitTo : 55}}</span>
+                                </h6>
                                 <!--<span class="gender text-uppercase">Men</span>
                                 <span class="gender">Suits - Blazers</span>-->
                             </div>
@@ -138,10 +113,11 @@
                             <li><i class="rating-selected fa fa-star"></i></li>
                             <li><i class="rating fa fa-star"></i></li>
                             <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a uib-tooltip="{{ 'Add to favourite' }}" tooltip-placement="left" href="#"><i class="fa fa-heart padding-right2"></i></a></li>
-                        <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenGPopUp()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
+                            <li class="like-icon"><a uib-tooltip="{{ 'Add to favourite' }}" tooltip-placement="left" href="#"><i class="fa fa-heart padding-right2"></i></a></li>
+                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenGPopUp()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
                         </ul>
-                    </div></div>
+                    </div>
+                </div>
             </div>
             <!--/end filter resilts-->
             <!--/end pagination-->
@@ -149,9 +125,6 @@
     </div>
 </div><!--/end row-->
 <!--=== End Content Part ===-->
-<!--=== Shop Suvbscribe ===-->
-
-<!--=== End Shop Suvbscribe ===-->
 <!--=== Footer v4 ===-->
 <!--<div ng-include="'../../app/views/EcommerceFooter.html'"></div>-->
 <!--=== End Footer v4 ===-->

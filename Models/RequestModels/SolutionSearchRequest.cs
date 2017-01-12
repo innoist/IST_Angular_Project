@@ -1,17 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using IST.Models.Common;
 
 namespace IST.Models.RequestModels
 {
     public class SolutionSearchRequest : GetPagedListRequest
     {
-        public int ProjectId { get; set; }
+        public int SolutionId { get; set; }
         public string Name { get; set; }
-        public OrderByProject OrderByColumn
+        public int? TypeId { get; set; }
+        public int? OwnerId { get; set; }
+        public List<int> CategoryIds { get; set; }
+        public OrderBySolution OrderByColumn
         {
             get
             {
-                return (OrderByProject)SortBy;
+                return (OrderBySolution)SortBy;
             }
             set
             {

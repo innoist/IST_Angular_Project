@@ -5,23 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="angularModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Allergy">
-          <Key>
-            <PropertyRef Name="AllergyId" />
-          </Key>
-          <Property Name="AllergyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RecCreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RecLastUpdatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
-          <Property Name="IsImportant" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -87,6 +70,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
           <Property Name="FilterCategoryId" Type="int" Nullable="false" />
+          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FilterCategory">
           <Key>
@@ -94,6 +81,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -131,7 +122,11 @@
           <Property Name="TypeId" Type="int" Nullable="false" />
           <Property Name="OwnerId" Type="int" Nullable="false" />
           <Property Name="Image" Type="nvarchar(max)" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SolutionFilter">
           <Key>
@@ -147,13 +142,17 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SolutionTag">
           <Key>
             <PropertyRef Name="SolutionId" />
             <PropertyRef Name="TagId" />
           </Key>
-          <Property Name="SolutionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SolutionId" Type="int" Nullable="false" />
           <Property Name="TagId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SolutionType">
@@ -162,31 +161,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayValue" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" />
-          <Property Name="Image" Type="nvarchar(max)" />
-          <Property Name="GuardianFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GuardianLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GuardianPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GuardianEmail" Type="nvarchar" MaxLength="50" />
-          <Property Name="HilalOnly" Type="bit" Nullable="false" />
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RecCreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RecLastUpdatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="AddonsDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -195,6 +173,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayValue" Type="nvarchar(max)" />
           <Property Name="TagGroupId" Type="int" Nullable="false" />
+          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TagGroup">
           <Key>
@@ -202,6 +184,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayValue" Type="nvarchar(max)" />
+          <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -295,6 +281,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Filter_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Filter" Type="Self.Filter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filter">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Filter_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Filter" Type="Self.Filter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filter">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilterCategory_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="FilterCategory" Type="Self.FilterCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilterCategory">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilterCategory_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="FilterCategory" Type="Self.FilterCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilterCategory">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Filters_FilterCategories">
           <End Role="FilterCategory" Type="Self.FilterCategory" Multiplicity="1" />
           <End Role="Filter" Type="Self.Filter" Multiplicity="*" />
@@ -307,7 +341,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SolutionFilters_Filters">
+        <Association Name="FK_Solution_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Solution" Type="Self.Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solution">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solution_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Solution" Type="Self.Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solution">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionFilter_Filter">
           <End Role="Filter" Type="Self.Filter" Multiplicity="1" />
           <End Role="SolutionFilter" Type="Self.SolutionFilter" Multiplicity="*" />
           <ReferentialConstraint>
@@ -319,7 +377,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SolutionFilters_Solutions">
+        <Association Name="FK_SolutionFilter_Solution">
           <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
           <End Role="SolutionFilter" Type="Self.SolutionFilter" Multiplicity="*" />
           <ReferentialConstraint>
@@ -328,6 +386,30 @@
             </Principal>
             <Dependent Role="SolutionFilter">
               <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionOwner_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionOwner" Type="Self.SolutionOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionOwner">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionOwner_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionOwner" Type="Self.SolutionOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionOwner">
+              <PropertyRef Name="RecLastUpdatedById" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,7 +437,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SolutionTags_Solutions">
+        <Association Name="FK_SolutionTag_Solution">
           <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
           <End Role="SolutionTag" Type="Self.SolutionTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -367,7 +449,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SolutionTags_Tags">
+        <Association Name="FK_SolutionTag_Tag">
           <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
           <End Role="SolutionTag" Type="Self.SolutionTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -376,6 +458,78 @@
             </Principal>
             <Dependent Role="SolutionTag">
               <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionType_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionType" Type="Self.SolutionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionType">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionType_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionType" Type="Self.SolutionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionType">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tag_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tag_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagGroup_AspNetUsers_CreatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="TagGroup" Type="Self.TagGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagGroup">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagGroup_AspNetUsers_UpdatedById">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="TagGroup" Type="Self.TagGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagGroup">
+              <PropertyRef Name="RecLastUpdatedById" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -392,7 +546,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="angularModelStoreContainer">
-          <EntitySet Name="Allergy" EntityType="Self.Allergy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -407,7 +560,6 @@
           <EntitySet Name="SolutionOwner" EntityType="Self.SolutionOwner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionTag" EntityType="Self.SolutionTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionType" EntityType="Self.SolutionType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TagGroup" EntityType="Self.TagGroup" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -438,17 +590,49 @@
             <End Role="Menu" EntitySet="Menu" />
             <End Role="MenuRight" EntitySet="MenuRight" />
           </AssociationSet>
+          <AssociationSet Name="FK_Filter_AspNetUsers_CreatedById" Association="Self.FK_Filter_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Filter" EntitySet="Filter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Filter_AspNetUsers_UpdatedById" Association="Self.FK_Filter_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Filter" EntitySet="Filter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilterCategory_AspNetUsers_CreatedById" Association="Self.FK_FilterCategory_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FilterCategory" EntitySet="FilterCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilterCategory_AspNetUsers_UpdatedById" Association="Self.FK_FilterCategory_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FilterCategory" EntitySet="FilterCategory" />
+          </AssociationSet>
           <AssociationSet Name="FK_Filters_FilterCategories" Association="Self.FK_Filters_FilterCategories">
             <End Role="FilterCategory" EntitySet="FilterCategory" />
             <End Role="Filter" EntitySet="Filter" />
           </AssociationSet>
-          <AssociationSet Name="FK_SolutionFilters_Filters" Association="Self.FK_SolutionFilters_Filters">
+          <AssociationSet Name="FK_Solution_AspNetUsers_CreatedById" Association="Self.FK_Solution_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Solution" EntitySet="Solution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solution_AspNetUsers_UpdatedById" Association="Self.FK_Solution_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Solution" EntitySet="Solution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionFilter_Filter" Association="Self.FK_SolutionFilter_Filter">
             <End Role="Filter" EntitySet="Filter" />
             <End Role="SolutionFilter" EntitySet="SolutionFilter" />
           </AssociationSet>
-          <AssociationSet Name="FK_SolutionFilters_Solutions" Association="Self.FK_SolutionFilters_Solutions">
+          <AssociationSet Name="FK_SolutionFilter_Solution" Association="Self.FK_SolutionFilter_Solution">
             <End Role="Solution" EntitySet="Solution" />
             <End Role="SolutionFilter" EntitySet="SolutionFilter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionOwner_AspNetUsers_CreatedById" Association="Self.FK_SolutionOwner_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionOwner" EntitySet="SolutionOwner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionOwner_AspNetUsers_UpdatedById" Association="Self.FK_SolutionOwner_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionOwner" EntitySet="SolutionOwner" />
           </AssociationSet>
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
@@ -458,13 +642,37 @@
             <End Role="SolutionType" EntitySet="SolutionType" />
             <End Role="Solution" EntitySet="Solution" />
           </AssociationSet>
-          <AssociationSet Name="FK_SolutionTags_Solutions" Association="Self.FK_SolutionTags_Solutions">
+          <AssociationSet Name="FK_SolutionTag_Solution" Association="Self.FK_SolutionTag_Solution">
             <End Role="Solution" EntitySet="Solution" />
             <End Role="SolutionTag" EntitySet="SolutionTag" />
           </AssociationSet>
-          <AssociationSet Name="FK_SolutionTags_Tags" Association="Self.FK_SolutionTags_Tags">
+          <AssociationSet Name="FK_SolutionTag_Tag" Association="Self.FK_SolutionTag_Tag">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="SolutionTag" EntitySet="SolutionTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionType_AspNetUsers_CreatedById" Association="Self.FK_SolutionType_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionType" EntitySet="SolutionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionType_AspNetUsers_UpdatedById" Association="Self.FK_SolutionType_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionType" EntitySet="SolutionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tag_AspNetUsers_CreatedById" Association="Self.FK_Tag_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Tag" EntitySet="Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tag_AspNetUsers_UpdatedById" Association="Self.FK_Tag_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Tag" EntitySet="Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagGroup_AspNetUsers_CreatedById" Association="Self.FK_TagGroup_AspNetUsers_CreatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TagGroup" EntitySet="TagGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagGroup_AspNetUsers_UpdatedById" Association="Self.FK_TagGroup_AspNetUsers_UpdatedById">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TagGroup" EntitySet="TagGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_Tags_TagGroups" Association="Self.FK_Tags_TagGroups">
             <End Role="TagGroup" EntitySet="TagGroup" />
@@ -476,7 +684,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="angularModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Allergies" EntityType="angularModel.Allergy" />
           <EntitySet Name="UserRoles" EntityType="angularModel.UserRole" />
           <EntitySet Name="UserClaims" EntityType="angularModel.UserClaim" />
           <EntitySet Name="UserLogins" EntityType="angularModel.UserLogin" />
@@ -507,10 +714,8 @@
             <End Role="AspNetRole" EntitySet="UserRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Students" EntityType="angularModel.Student" />
           <EntitySet Name="Filters" EntityType="angularModel.Filter" />
           <EntitySet Name="FilterCategories" EntityType="angularModel.FilterCategory" />
-          <EntitySet Name="Solutions" EntityType="angularModel.Solution" />
           <EntitySet Name="SolutionOwners" EntityType="angularModel.SolutionOwner" />
           <EntitySet Name="SolutionTypes" EntityType="angularModel.SolutionType" />
           <EntitySet Name="Tags" EntityType="angularModel.Tag" />
@@ -519,6 +724,11 @@
             <End Role="FilterCategory" EntitySet="FilterCategories" />
             <End Role="Filter" EntitySet="Filters" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tags_TagGroups" Association="angularModel.FK_Tags_TagGroups">
+            <End Role="TagGroup" EntitySet="TagGroups" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <EntitySet Name="Solutions" EntityType="angularModel.Solution" />
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="angularModel.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwners" />
             <End Role="Solution" EntitySet="Solutions" />
@@ -526,10 +736,6 @@
           <AssociationSet Name="FK_Solutions_SolutionTypes" Association="angularModel.FK_Solutions_SolutionTypes">
             <End Role="SolutionType" EntitySet="SolutionTypes" />
             <End Role="Solution" EntitySet="Solutions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tags_TagGroups" Association="angularModel.FK_Tags_TagGroups">
-            <End Role="TagGroup" EntitySet="TagGroups" />
-            <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
           <AssociationSet Name="SolutionFilter" Association="angularModel.SolutionFilter">
             <End Role="Filter" EntitySet="Filters" />
@@ -539,24 +745,63 @@
             <End Role="Solution" EntitySet="Solutions" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
+          <AssociationSet Name="FK_Filter_AspNetUsers_CreatedById" Association="angularModel.FK_Filter_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Filter" EntitySet="Filters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Filter_AspNetUsers_UpdatedById" Association="angularModel.FK_Filter_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Filter" EntitySet="Filters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilterCategory_AspNetUsers_CreatedById" Association="angularModel.FK_FilterCategory_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="FilterCategory" EntitySet="FilterCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilterCategory_AspNetUsers_UpdatedById" Association="angularModel.FK_FilterCategory_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="FilterCategory" EntitySet="FilterCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solution_AspNetUsers_CreatedById" Association="angularModel.FK_Solution_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Solution" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solution_AspNetUsers_UpdatedById" Association="angularModel.FK_Solution_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Solution" EntitySet="Solutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionOwner_AspNetUsers_CreatedById" Association="angularModel.FK_SolutionOwner_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="SolutionOwner" EntitySet="SolutionOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionOwner_AspNetUsers_UpdatedById" Association="angularModel.FK_SolutionOwner_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="SolutionOwner" EntitySet="SolutionOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionType_AspNetUsers_CreatedById" Association="angularModel.FK_SolutionType_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="SolutionType" EntitySet="SolutionTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionType_AspNetUsers_UpdatedById" Association="angularModel.FK_SolutionType_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="SolutionType" EntitySet="SolutionTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tag_AspNetUsers_CreatedById" Association="angularModel.FK_Tag_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tag_AspNetUsers_UpdatedById" Association="angularModel.FK_Tag_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagGroup_AspNetUsers_CreatedById" Association="angularModel.FK_TagGroup_AspNetUsers_CreatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="TagGroup" EntitySet="TagGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagGroup_AspNetUsers_UpdatedById" Association="angularModel.FK_TagGroup_AspNetUsers_UpdatedById">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="TagGroup" EntitySet="TagGroups" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Allergy">
-          <Key>
-            <PropertyRef Name="AllergyId" />
-          </Key>
-          <Property Name="AllergyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RecCreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RecLastUpdatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsImportant" Type="Boolean" DefaultValue="False" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -613,6 +858,20 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="angularModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="angularModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="angularModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="CreatedFilters" Relationship="angularModel.FK_Filter_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="Filter" />
+          <NavigationProperty Name="UpdatedFilters" Relationship="angularModel.FK_Filter_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="Filter" />
+          <NavigationProperty Name="CreatedFilterCategories" Relationship="angularModel.FK_FilterCategory_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="FilterCategory" />
+          <NavigationProperty Name="UpdatedFilterCategories" Relationship="angularModel.FK_FilterCategory_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="FilterCategory" />
+          <NavigationProperty Name="CreatedSolutions" Relationship="angularModel.FK_Solution_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="Solution" />
+          <NavigationProperty Name="UpdatedSolutions" Relationship="angularModel.FK_Solution_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="Solution" />
+          <NavigationProperty Name="CreatedSolutionOwners" Relationship="angularModel.FK_SolutionOwner_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="SolutionOwner" />
+          <NavigationProperty Name="UpdatedSolutionOwners" Relationship="angularModel.FK_SolutionOwner_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="SolutionOwner" />
+          <NavigationProperty Name="CreatedSolutionTypes" Relationship="angularModel.FK_SolutionType_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="SolutionType" />
+          <NavigationProperty Name="UpdatedSolutionTypes" Relationship="angularModel.FK_SolutionType_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="SolutionType" />
+          <NavigationProperty Name="CreatedTags" Relationship="angularModel.FK_Tag_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="Tag" />
+          <NavigationProperty Name="UpdatedTags" Relationship="angularModel.FK_Tag_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="Tag" />
+          <NavigationProperty Name="CreatedTagGroups" Relationship="angularModel.FK_TagGroup_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="TagGroup" />
+          <NavigationProperty Name="UpdatedTagGroups" Relationship="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="TagGroup" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -709,31 +968,6 @@
           <End Type="angularModel.UserRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HilalOnly" Type="Boolean" Nullable="false" />
-          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RecCreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RecLastUpdatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="AddonsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Filter">
           <Key>
             <PropertyRef Name="Id" />
@@ -743,6 +977,12 @@
           <Property Name="FilterCategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FilterCategory" Relationship="angularModel.FK_Filters_FilterCategories" FromRole="Filter" ToRole="FilterCategory" />
           <NavigationProperty Name="Solutions" Relationship="angularModel.SolutionFilter" FromRole="Filter" ToRole="Solution" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Filter_AspNetUsers_CreatedById" FromRole="Filter" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Filter_AspNetUsers_UpdatedById" FromRole="Filter" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="FilterCategory">
           <Key>
@@ -751,25 +991,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Filters" Relationship="angularModel.FK_Filters_FilterCategories" FromRole="FilterCategory" ToRole="Filter" />
-        </EntityType>
-        <EntityType Name="Solution">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MaintentanceHours" Type="Int32" />
-          <Property Name="SecurityInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TypeId" Type="Int32" Nullable="false" />
-          <Property Name="OwnerId" Type="Int32" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="SolutionOwner" Relationship="angularModel.FK_Solutions_SolutionOwners" FromRole="Solution" ToRole="SolutionOwner" />
-          <NavigationProperty Name="SolutionType" Relationship="angularModel.FK_Solutions_SolutionTypes" FromRole="Solution" ToRole="SolutionType" />
-          <NavigationProperty Name="Filters" Relationship="angularModel.SolutionFilter" FromRole="Solution" ToRole="Filter" />
-          <NavigationProperty Name="Tags" Relationship="angularModel.SolutionTag" FromRole="Solution" ToRole="Tag" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_FilterCategory_AspNetUsers_CreatedById" FromRole="FilterCategory" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_FilterCategory_AspNetUsers_UpdatedById" FromRole="FilterCategory" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="SolutionOwner">
           <Key>
@@ -778,6 +1005,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Solutions" Relationship="angularModel.FK_Solutions_SolutionOwners" FromRole="SolutionOwner" ToRole="Solution" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_SolutionOwner_AspNetUsers_CreatedById" FromRole="SolutionOwner" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_SolutionOwner_AspNetUsers_UpdatedById" FromRole="SolutionOwner" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="SolutionType">
           <Key>
@@ -786,6 +1019,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Solutions" Relationship="angularModel.FK_Solutions_SolutionTypes" FromRole="SolutionType" ToRole="Solution" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_SolutionType_AspNetUsers_CreatedById" FromRole="SolutionType" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_SolutionType_AspNetUsers_UpdatedById" FromRole="SolutionType" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -796,6 +1035,12 @@
           <Property Name="TagGroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TagGroup" Relationship="angularModel.FK_Tags_TagGroups" FromRole="Tag" ToRole="TagGroup" />
           <NavigationProperty Name="Solutions" Relationship="angularModel.SolutionTag" FromRole="Tag" ToRole="Solution" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Tag_AspNetUsers_CreatedById" FromRole="Tag" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Tag_AspNetUsers_UpdatedById" FromRole="Tag" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="TagGroup">
           <Key>
@@ -804,6 +1049,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tags" Relationship="angularModel.FK_Tags_TagGroups" FromRole="TagGroup" ToRole="Tag" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_TagGroup_AspNetUsers_CreatedById" FromRole="TagGroup" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" FromRole="TagGroup" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_Filters_FilterCategories">
           <End Type="angularModel.FilterCategory" Role="FilterCategory" Multiplicity="1" />
@@ -817,6 +1068,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tags_TagGroups">
+          <End Type="angularModel.TagGroup" Role="TagGroup" Multiplicity="1" />
+          <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="TagGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Solution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaintentanceHours" Type="Int32" />
+          <Property Name="SecurityInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="SolutionOwner" Relationship="angularModel.FK_Solutions_SolutionOwners" FromRole="Solution" ToRole="SolutionOwner" />
+          <NavigationProperty Name="SolutionType" Relationship="angularModel.FK_Solutions_SolutionTypes" FromRole="Solution" ToRole="SolutionType" />
+          <NavigationProperty Name="Filters" Relationship="angularModel.SolutionFilter" FromRole="Solution" ToRole="Filter" />
+          <NavigationProperty Name="Tags" Relationship="angularModel.SolutionTag" FromRole="Solution" ToRole="Tag" />
+          <Property Name="RecCreatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecLastUpdatedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Solution_AspNetUsers_CreatedById" FromRole="Solution" ToRole="AspNetUser" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Solution_AspNetUsers_UpdatedById" FromRole="Solution" ToRole="AspNetUser" />
+        </EntityType>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="1" />
           <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
@@ -841,18 +1129,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tags_TagGroups">
-          <End Type="angularModel.TagGroup" Role="TagGroup" Multiplicity="1" />
-          <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TagGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tag">
-              <PropertyRef Name="TagGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="SolutionFilter">
           <End Type="angularModel.Filter" Role="Filter" Multiplicity="*" />
           <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
@@ -861,30 +1137,180 @@
           <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
           <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
+        <Association Name="FK_Filter_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.Filter" Role="Filter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filter">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Filter_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.Filter" Role="Filter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filter">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilterCategory_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.FilterCategory" Role="FilterCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilterCategory">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilterCategory_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.FilterCategory" Role="FilterCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilterCategory">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solution_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solution">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solution_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solution">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionOwner_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionOwner">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionOwner_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionOwner">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionType_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.SolutionType" Role="SolutionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionType">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionType_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.SolutionType" Role="SolutionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionType">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tag_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tag_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagGroup_AspNetUsers_CreatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.TagGroup" Role="TagGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagGroup">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagGroup_AspNetUsers_UpdatedById">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.TagGroup" Role="TagGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagGroup">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="angularModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Allergies">
-            <EntityTypeMapping TypeName="angularModel.Allergy">
-              <MappingFragment StoreEntitySet="Allergy">
-                <ScalarProperty Name="IsImportant" ColumnName="IsImportant" />
-                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
-                <ScalarProperty Name="RecLastUpdatedBy" ColumnName="RecLastUpdatedBy" />
-                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
-                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
-                <ScalarProperty Name="RecCreatedBy" ColumnName="RecCreatedBy" />
-                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="AllergyId" ColumnName="AllergyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
             <EntityTypeMapping TypeName="angularModel.UserRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -970,35 +1396,13 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="angularModel.Student">
-              <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="AddonsDescription" ColumnName="AddonsDescription" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
-                <ScalarProperty Name="RecLastUpdatedBy" ColumnName="RecLastUpdatedBy" />
-                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
-                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
-                <ScalarProperty Name="RecCreatedBy" ColumnName="RecCreatedBy" />
-                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
-                <ScalarProperty Name="HilalOnly" ColumnName="HilalOnly" />
-                <ScalarProperty Name="GuardianEmail" ColumnName="GuardianEmail" />
-                <ScalarProperty Name="GuardianPhone" ColumnName="GuardianPhone" />
-                <ScalarProperty Name="GuardianLastName" ColumnName="GuardianLastName" />
-                <ScalarProperty Name="GuardianFirstName" ColumnName="GuardianFirstName" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Filters">
             <EntityTypeMapping TypeName="angularModel.Filter">
               <MappingFragment StoreEntitySet="Filter">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
                 <ScalarProperty Name="FilterCategoryId" ColumnName="FilterCategoryId" />
                 <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1008,23 +1412,11 @@
           <EntitySetMapping Name="FilterCategories">
             <EntityTypeMapping TypeName="angularModel.FilterCategory">
               <MappingFragment StoreEntitySet="FilterCategory">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
                 <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Solutions">
-            <EntityTypeMapping TypeName="angularModel.Solution">
-              <MappingFragment StoreEntitySet="Solution">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="SecurityInfo" ColumnName="SecurityInfo" />
-                <ScalarProperty Name="MaintentanceHours" ColumnName="MaintentanceHours" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1032,6 +1424,10 @@
           <EntitySetMapping Name="SolutionOwners">
             <EntityTypeMapping TypeName="angularModel.SolutionOwner">
               <MappingFragment StoreEntitySet="SolutionOwner">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
                 <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1040,6 +1436,10 @@
           <EntitySetMapping Name="SolutionTypes">
             <EntityTypeMapping TypeName="angularModel.SolutionType">
               <MappingFragment StoreEntitySet="SolutionType">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
                 <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1048,6 +1448,10 @@
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="angularModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
                 <ScalarProperty Name="TagGroupId" ColumnName="TagGroupId" />
                 <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1057,7 +1461,31 @@
           <EntitySetMapping Name="TagGroups">
             <EntityTypeMapping TypeName="angularModel.TagGroup">
               <MappingFragment StoreEntitySet="TagGroup">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
                 <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solutions">
+            <EntityTypeMapping TypeName="angularModel.Solution">
+              <MappingFragment StoreEntitySet="Solution">
+                <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
+                <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
+                <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
+                <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="SecurityInfo" ColumnName="SecurityInfo" />
+                <ScalarProperty Name="MaintentanceHours" ColumnName="MaintentanceHours" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

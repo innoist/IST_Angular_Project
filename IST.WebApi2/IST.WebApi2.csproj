@@ -278,12 +278,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StudentBaseDataController.cs" />
+    <Compile Include="Controllers\SolutionBaseDataController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\SolutionController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RightsManagementController.cs" />
-    <Compile Include="Controllers\AllergyController.cs" />
     <Compile Include="Controllers\UserBaseDataController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
@@ -291,22 +290,23 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelMappers\SolutionMapper.cs" />
-    <Compile Include="ModelMappers\StudentMapper.cs" />
-    <Compile Include="ModelMappers\AllergyMapper.cs" />
+    <Compile Include="ModelMappers\FilterMapper.cs" />
+    <Compile Include="ModelMappers\SolutionTypeMapper.cs" />
+    <Compile Include="ModelMappers\TagMapper.cs" />
     <Compile Include="ModelMappers\UsersMapper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\SolutionModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
-    <Compile Include="Models\AllergyModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\HilalCategoryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MenuRight.cs" />
     <Compile Include="Models\SchoolGroupModel.cs" />
-    <Compile Include="Models\StudentModel.cs" />
+    <Compile Include="Models\SolutionTypeModel.cs" />
     <Compile Include="Models\DomainKeyModel.cs" />
     <Compile Include="Models\RightsManagementViewModel.cs" />
+    <Compile Include="Models\TagModel.cs" />
     <Compile Include="Models\UsersListViewModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SolutionBaseData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

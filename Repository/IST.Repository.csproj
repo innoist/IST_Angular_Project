@@ -191,9 +191,7 @@
     <Compile Include="Repositories\SolutionOwnerRepository.cs" />
     <Compile Include="Repositories\SolutionRepository.cs" />
     <Compile Include="Repositories\SolutionTypeRepository.cs" />
-    <Compile Include="Repositories\StudentRepository.cs" />
     <Compile Include="Repositories\AspNetRoleRepository.cs" />
-    <Compile Include="Repositories\AllergyRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />

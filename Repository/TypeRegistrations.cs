@@ -24,9 +24,12 @@ namespace IST.Repository
             unityContainer.RegisterType<ILogRepository, LogRepository>();
            
             unityContainer.RegisterType<IAspNetRoleRepository, AspNetRoleRepository>();
-            unityContainer.RegisterType<IAllergyRepository, AllergyRepository>();
-            unityContainer.RegisterType<IStudentRepository, StudentRepository>();
             unityContainer.RegisterType<ISolutionRepository, SolutionRepository>();
+            unityContainer.RegisterType<ISolutionOwnerRepository, SolutionOwnerRepository>();
+            unityContainer.RegisterType<ISolutionTypeRepository, SolutionTypeRepository>();
+            unityContainer.RegisterType<IFilterRepository, FilterRepository>();
+            unityContainer.RegisterType<IFilterCategoryRepository, FilterCategoryRepository>();
+            unityContainer.RegisterType<ITagRepository, TagRepository>();
         }
     }
 }

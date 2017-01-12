@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
 using IST.Repository.BaseRepository;
@@ -13,5 +15,10 @@ namespace IST.Repository.Repositories
         }
 
         protected override IDbSet<Tag> DbSet => db.Tags;
+
+        public IEnumerable<Tag> GetByTagIds(int[] ids)
+        {
+            return DbSet.Where(x=>ids.Contains(x.Id));
+        }
     }
 }

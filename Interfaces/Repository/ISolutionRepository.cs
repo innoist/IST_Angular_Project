@@ -11,7 +11,6 @@ namespace IST.Interfaces.Repository
     public interface ISolutionRepository : IBaseRepository<Solution, long>
     {
         SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest);
-        //IEnumerable<Student> SearchByName(string name);
         Solution GetById(int id);
     }
 }

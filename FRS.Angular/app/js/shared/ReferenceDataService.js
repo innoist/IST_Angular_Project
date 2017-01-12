@@ -31,10 +31,13 @@
                 url = this.url;
 
             onError = onError || function (response) {
-                if (response.ExceptionMessage) {
-                    toaster.error(response.ExceptionMessage);
-                }if (response.Message) {
-                    toaster.error(response.Message);
+                if (response) {
+                    if (response.ExceptionMessage) {
+                        toaster.error(response.ExceptionMessage);
+                    }
+                    if (response.Message) {
+                        toaster.error(response.Message);
+                    }
                 }
             };
             $http

@@ -114,9 +114,7 @@ namespace IST.Repository.BaseRepository
         /// </summary>
         public DbSet<WebApiUser> WebApiUsers { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
-        public DbSet<Student> Students { get; set; }
         public DbSet<Solution> Projects { get; set; }
-        public DbSet<Allergy> Allergies { get; set; }
 
         public DbSet<Filter> Filters { get; set; }
         public DbSet<FilterCategory> FilterCategories { get; set; }

@@ -1,0 +1,57 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a ui-sref="app.CreateSolution" class="btn btn-info btn-labeled">
+            <span class="btn-label">
+                <i class="fa fa-plus"></i>
+            </span><span class="hidden-480">New</span>
+        </a>
+        <button class="btn btn-warning btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
+            <span class="btn-label">
+                <i class="fa fa-filter"></i>
+            </span><span class="hidden-480">Filter</span>
+        </button>
+    </div>
+    <!-- END Language list    -->
+    Solutions
+    <small>Details</small>
+</h3>
+<div class="container-fluid" ng-hide="isFilterOpen">
+    <div class="panel panel-default">
+        <form class="panel-body" ng-submit="sc.filterData(false)">
+            <div class="col-md-3">
+                <input type="text" placeholder="Name" class="form-control" ng-model="sc.SolutionName"/>
+            </div>
+            <div class="col-md-3">
+                <ui-select ng-model="sc.SolutionTypes.selected" theme="bootstrap">
+                    <ui-select-match placeholder="Select a Solution Type">{{$select.selected.DisplayName}}</ui-select-match>
+                    <ui-select-choices repeat="obj in sc.SolutionTypes | propsFilter: {DisplayName: $select.search}" class="animated flipInX">
+                        <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <button class="btn btn-success" type="submit">Filter</button>
+            <button class="btn btn-default" ng-click="sc.filterData(true)">Reset</button>
+            <a class="pull-right"
+               uib-tooltip="{{'Hide filter'}}"
+               uib-tooltip-trigger="focus"
+               ng-click="isFilterOpen = !isFilterOpen">
+                <i class="fa fa-compress"></i>
+            </a>
+        </form>
+    </div>
+</div>
+<div class="">
+    <!-- Grid view to show listview with searching, sorting and pagination-->
+    <!--<div ui-grid="ic.gridOptions" ui-grid-pagination class="table-uigrid"></div>-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <!-- If serverside paging -->
+            <div class="table-responsive">
+                <table id="SolutionTable" datatable="" dt-options="sc.dtOptions" dt-columns="sc.dtColumns" dt-instance="sc.dtInstance" class="table row-border hover"></table>
+            </div>
+        </div>
+    </div>
+</div>

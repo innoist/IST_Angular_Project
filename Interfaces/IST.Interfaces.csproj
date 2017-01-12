@@ -75,9 +75,7 @@
     <Compile Include="IServices\ISolutionOwnerService.cs" />
     <Compile Include="IServices\ISolutionService.cs" />
     <Compile Include="IServices\ISolutionTypeService.cs" />
-    <Compile Include="IServices\IStudentService.cs" />
     <Compile Include="IServices\IClaimsSecurityService.cs" />
-    <Compile Include="IServices\IAllergyService.cs" />
     <Compile Include="IServices\IRegisterUserService.cs" />
     <Compile Include="IServices\ITagGroupService.cs" />
     <Compile Include="IServices\ITagService.cs" />
@@ -89,9 +87,7 @@
     <Compile Include="Repository\ISolutionOwnerRepository.cs" />
     <Compile Include="Repository\ISolutionRepository.cs" />
     <Compile Include="Repository\ISolutionTypeRepository.cs" />
-    <Compile Include="Repository\IStudentRepository.cs" />
     <Compile Include="Repository\IAspNetRoleRepository.cs" />
-    <Compile Include="Repository\IAllergyRepository.cs" />
     <Compile Include="Repository\IMenuRepository.cs" />
     <Compile Include="IServices\IMenuRightService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

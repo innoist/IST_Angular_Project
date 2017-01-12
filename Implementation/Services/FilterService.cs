@@ -33,7 +33,7 @@ namespace IST.Implementation.Services
         {
             return filterRepository.Find(filterId);
         }
-
+        
         public bool SaveFilter(Filter filter)
         {
             filterRepository.Add(filter);

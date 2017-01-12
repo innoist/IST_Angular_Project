@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IST.Models.DomainModels
 {
-    public class TagGroup
+    public class TagGroup : BaseModel
     {
         public int Id { get; set; }
         public string DisplayValue { get; set; }

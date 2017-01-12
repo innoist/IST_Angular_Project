@@ -16,41 +16,65 @@
         var vm = this;
 
         vm.isReset = true;
-        HomeService.url = "/api/Solution/";
-
+        HomeService.url = "/api/Project/";
+        vm.CategoryId = 0;
+        vm.Projects = [];
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
             IsAsc: true,
             OrderByColumn: 1
         }
-
-        HomeService.load(HomeService.url, vm.ProjectSearchRequest, function (response) {
-            if (response) {
-                vm.Projects = response.Data;
-                vm.TotalProjects = response.RecordsTotal;
-            }
-        });
-
-        var onSuccessLoadProject = function (response) {
-            angular.forEach(vm.Projects, function (project) {
-                project.isNew = false;
-            });
-            angular.forEach(response.Data, function (project) {
-                project.isNew = true;
-                vm.Projects.push(project);
-            });
-            if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
+        var onSuccessLoadProjects = function (response) {
+            if (vm.clicked ||vm.searchString) {
+                vm.Projects = [];
+                angular.forEach(response.Data, function(project) {
+                    project.isNew = true;
+                    vm.Projects.push(project);
+                });
+                vm.clicked = false;
+                vm.NoMoreProjects = false;
+            } else {
+                vm.FilterCategories = response.FilterCategories;
                 angular.forEach(vm.Projects, function (project) {
                     project.isNew = false;
                 });
-                vm.NoMoreProjects = true;
+                //To Factorize
+                angular.forEach(response.Data, function (project) {
+                    project.isNew = true;
+                    vm.Projects.push(project);
+                });
+                if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
+                    angular.forEach(vm.Projects, function (project) {
+                        project.isNew = false;
+                    });
+                    vm.NoMoreProjects = true;
+                }
+                else
+                    vm.NoMoreProjects = false;
+                vm.IsDataLoaded = false;
             }
-
-            else
-                vm.NoMoreProjects = false;
-            vm.IsDataLoaded = false;
         }
+
+        vm.getDataFromSever = function () {
+            vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString : null;
+            HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
+        }
+
+        vm.ProjectSearchRequest.CategoryIds = [];
+
+        vm.filterProjects = function (id) {
+            if ($('#' + id)[0].checked) {
+                vm.ProjectSearchRequest.CategoryIds.push(id);
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            } else {
+                vm.ProjectSearchRequest.CategoryIds.splice(vm.ProjectSearchRequest.CategoryIds.indexOf(id), 1);
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            }
+        }
+        vm.getDataFromSever();
 
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
@@ -63,10 +87,10 @@
             if (vm.IsDataLoaded)
                 return false;
             if (!vm.NoMoreProjects) {
-                if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.6) {
+                if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.6) || !vm.clicked) {
                     vm.IsDataLoaded = true;
                     vm.ProjectSearchRequest.PageNo += 1;
-                    HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProject);
+                    vm.getDataFromSever();
                 }
             }
         });
@@ -82,6 +106,7 @@
             //if ($('.g-popup-wrapper').is(':visible')) 
             //    $('div.wrapper').addClass('g-blur');
         }
+
         $('.g-popup__close').on('click', function (e) {
             $('.g-popup-wrapper').hide();
             $('body').removeClass('g-blur');
@@ -90,7 +115,7 @@
         vm.OpenProjectDetail = function (id) {
             $('#projectdetail').show();
             HomeService.loadById(id, function (response) {
-                vm.Project = response;
+                vm.Project = response.SolutionModel;
             });
         }
 

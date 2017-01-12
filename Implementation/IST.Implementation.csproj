@@ -163,9 +163,7 @@
     <Compile Include="Services\SolutionOwnerService.cs" />
     <Compile Include="Services\SolutionService.cs" />
     <Compile Include="Services\SolutionTypeService.cs" />
-    <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\ClaimsSecurityService.cs" />
-    <Compile Include="Services\AllergyService.cs" />
     <Compile Include="Services\RegisterUserService.cs" />
     <Compile Include="Services\MenuRightsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

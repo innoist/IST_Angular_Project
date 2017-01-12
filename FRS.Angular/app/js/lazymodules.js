@@ -231,6 +231,11 @@
                                                   '/app/js/shared/ReferenceDataService.js']
               },
               {
+                  name: 'Solution.module', files: ['/app/js/Solution/SolutionController.js',
+                                                  '/app/js/Solution/CreateSolutionController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
                   name: 'Utility.module', files: ['/app/js/shared/UtilityService.js']
               },
               {

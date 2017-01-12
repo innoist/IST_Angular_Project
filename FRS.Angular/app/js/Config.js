@@ -99,16 +99,32 @@
                 controllerAs: 'uc',
                 resolve: helper.resolveFor('ui.select', 'users.module', 'oitozero.ngSweetAlert', 'datatables')
             })
-
-            //Reference data- Allergy
-            .state('app.Allergy', {
-                url: '/Allergy',
-                title: 'Allergy',
-                templateUrl: helper.basepath('../../../../app/views/Allergy/Allergy.html'),
-                controller: 'AllergyController',
-                controllerAs: 'ac',
-                resolve: helper.resolveFor('Allergy.module', 'oitozero.ngSweetAlert', 'datatables')
+            //Solutions
+            .state('app.Solution', {
+                url: '/Solutions',
+                title: 'Solutions',
+                templateUrl: helper.basepath('../../../../app/views/Solution/Solution.html'),
+                controller: 'SolutionController',
+                controllerAs: 'sc',
+                resolve: helper.resolveFor('ui.select', 'Solution.module', 'oitozero.ngSweetAlert', 'datatables')
             })
+             .state('app.CreateSolution', {
+                 url: '/CreateSolution/:Id',
+                 title: 'Solution - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/Solution/CreateSolution.html'),
+                 controller: 'CreateSolutionController',
+                 controllerAs: 'csc',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Solution.module','filestyle','ui.select')
+             })
+            ////Allergy
+            //.state('app.Allergy', {
+            //    url: '/Allergy',
+            //    title: 'Allergy',
+            //    templateUrl: helper.basepath('../../../../app/views/Allergy/Allergy.html'),
+            //    controller: 'AllergyController',
+            //    controllerAs: 'ac',
+            //    resolve: helper.resolveFor('Allergy.module', 'oitozero.ngSweetAlert', 'datatables')
+            //})
             .state('app.CreateAllergy', {
                 url: '/CreateAllergy/:Id',
                 title: 'Allergy - Add/Edit',
@@ -118,15 +134,15 @@
                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Allergy.module')
             })
 
-            //Student
-            .state('app.students', {
-                url: '/Students',
-                title: 'Students',
-                templateUrl: helper.basepath('../../../../app/views/Student/Student.html'),
-                controller: 'StudentController',
-                controllerAs: 'sc',
-                resolve: helper.resolveFor('Student.module', 'oitozero.ngSweetAlert', 'datatables', 'ui.select')
-            })
+            ////Student
+            //.state('app.students', {
+            //    url: '/Students',
+            //    title: 'Students',
+            //    templateUrl: helper.basepath('../../../../app/views/Student/Student.html'),
+            //    controller: 'StudentController',
+            //    controllerAs: 'sc',
+            //    resolve: helper.resolveFor('Student.module', 'oitozero.ngSweetAlert', 'datatables', 'ui.select')
+            //})
 
             //Profile
             .state('app.Profile', {
