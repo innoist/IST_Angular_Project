@@ -34,7 +34,7 @@
                         <li ng-if="isAuthenticated"><small>Welcome {{userName}}!</small></li>
                         <li ng-if="isAuthenticated"><a ng-click="logout()">Sign out</a></li>
                         <li><a href="#"><span class="fa fa-envelope"></span></a></li>
-                        <li><a ui-sref="app.dashboard"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+                        <li ng-if="isAuthenticated"><a ui-sref="app.Solution"><span class="glyphicon glyphicon-align-justify"></span></a></li>
                     </ul>
                 </div>
             </div>

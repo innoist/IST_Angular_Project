@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
-using Antlr.Runtime.Misc;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.RequestModels;
@@ -39,7 +37,10 @@ namespace IST.WebApi2.Controllers
             {
                 return BadRequest("Invalid Bad Request");
             }
-            
+            if (searchRequest.CategoryIds == null || !searchRequest.CategoryIds.Any())
+            {
+                searchRequest.CategoryIds = new List<int>();
+            }
             var response = solutionService.Search(searchRequest);
             var toReturn = new ProjectListView
             {

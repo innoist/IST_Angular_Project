@@ -1210,8 +1210,8 @@
     <None Include="Properties\PublishProfiles\aversion - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\aversion-angular.pubxml" />
     <None Include="Properties\PublishProfiles\Aversion_Angular.pubxml" />
-    <None Include="Properties\PublishProfiles\testprojectappapi - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\testprojectappapi - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\GoCentralize - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\GoCentralize - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

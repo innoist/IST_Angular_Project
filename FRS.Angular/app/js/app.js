@@ -825,14 +825,20 @@
                             $state.go(fromState.name);
                         }
                     }
-                    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
-                    if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
-                        window.location.reload();
+                    if (fromState.name.split(".")[0] === "home" && toState.name.split(".")[0] === "app") {
                         if ($rootScope.isAuthenticated) {
                             event.preventDefault();
-                            $state.go(fromState.name);
+                            $state.go(toState.name);
                         }
                     }
+                    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
+                    //if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
+                    //    window.location.reload();
+                    //    if ($rootScope.isAuthenticated) {
+                    //        event.preventDefault();
+                    //        $state.go(fromState.name);
+                    //    }
+                    //}
                 }
             }
         });

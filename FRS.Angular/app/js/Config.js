@@ -35,7 +35,7 @@
         // -----------------------------------
         $stateProvider
             .state('app', {
-                url: '/Aversion',
+                url: '/GoCentralize',
                 abstract: true,
                 templateUrl: helper.basepath('../../../../app/views/Aversion.html'),
                 resolve: helper.resolveFor('fastclick', 'ng-animate', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 'slimscroll', 'classyloader', 'toaster', 'whirl', 'loaders.css', 'spinkit', 'Utility.module', 'partials.module')

@@ -11,7 +11,7 @@
                     <div class="panel-heading">
                         <h2 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Brands
+                                Categories
                                 <i class="fa fa-angle-down"></i>
                             </a>
                         </h2>
@@ -21,7 +21,7 @@
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" id="{{category.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" ng-change="hc.filterProjects(category.Id)" />
+                                        <input type="checkbox" name="checkbox" id="{{category.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" />
                                         <i></i>
                                         {{category.DisplayName}}
                                         <!--<small><a>{{hc.clicked?'':hc.Projects.length}}</a></small>-->
@@ -69,12 +69,12 @@
                 <!--<div class="col-sm-4 result-category">
                     <h2>Projects</h2>
                     <small class="shop-bg-red badge-results">Total : {{hc.TotalProjects}}</small>
-                </div>-->
+                </div>     ng-model="hc.searchString"    ng-click="hc.getDataFromSever()"    ng-change="hc.filterProjects(category.Id)"-->
                 <div class="col-md-12 padding-leftright30">
                     <div class="input-group">
-                        <input type="text" class="form-control" ng-model="hc.searchString" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search">
                         <span class="input-group-btn">
-                            <button class="btn" type="button" ng-click="hc.getDataFromSever()"><i class="fa fa-search"></i></button>
+                            <button class="btn" type="button"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div><!--/end result category-->
