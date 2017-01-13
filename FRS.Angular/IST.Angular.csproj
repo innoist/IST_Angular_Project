@@ -69,6 +69,7 @@
     <Content Include="app\img\logo-single3.png" />
     <Content Include="app\img\logo-single.png" />
     <Content Include="app\img\logo5.png" />
+    <Content Include="app\img\preloader\preloader.empty.old.png" />
     <Content Include="app\img\preloader\preloader.full.png" />
     <Content Include="app\img\preloader\preloader.empty.png" />
     <Content Include="app\img\preloader\preloader.empty1.png" />
@@ -195,7 +196,6 @@
     <Content Include="Ecommerce\img\logo.png" />
     <Content Include="Ecommerce\img\map.png" />
     <Content Include="Ecommerce\img\others\fb.png" />
-    <Content Include="Ecommerce\img\others\GoGreen-Logo.png" />
     <Content Include="Ecommerce\img\sponsors\01.png" />
     <Content Include="Ecommerce\img\sponsors\02.png" />
     <Content Include="Ecommerce\img\sponsors\03.png" />

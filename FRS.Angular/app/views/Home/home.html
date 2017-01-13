@@ -21,7 +21,7 @@
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" id="{{category.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="hc.selectCategories" ng-change="hc.filterProjects(category.Id)" />
+                                        <input type="checkbox" name="checkbox" id="{{category.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" ng-change="hc.filterProjects(category.Id)" />
                                         <i></i>
                                         {{category.DisplayName}}
                                         <!--<small><a>{{hc.clicked?'':hc.Projects.length}}</a></small>-->
@@ -72,16 +72,16 @@
                 </div>-->
                 <div class="col-md-12 padding-leftright30">
                     <div class="input-group">
-                        <input type="text" class="form-control" ng-model="hc.searchString" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search Name, Tag and Tag group">
                         <span class="input-group-btn" title="Search Name, Tag or Tag group">
-                            <button class="btn" type="button" ng-click="hc.getDataFromSever()"><i class="fa fa-search"></i></button>
+                            <button class="btn" type="button"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div><!--/end result category-->
             </div><!--/end result category-->
             <br>
 
-            <div class="filter-by-block col-md-8" ng-if="!hc.Projects.length">
+            <div class="filter-by-block col-md-12 padding-leftright30" ng-if="!hc.Projects.length">
                 <h1>No solution matches your search!</h1>
             </div>
 
@@ -147,7 +147,7 @@
 
 <div class="g-popup-wrapper" id="projectdetail">
     <div class="g-popup g-popup--subscribe" style="width: 75%">
-        <h3>{{hc.Project.Name}} -- RECENT REVIEWS</h3>
+        <h3>RECENT REVIEWS ({{hc.Project.Name}})</h3>
         <scrollable height="150">
             <div class="g-popup--subscribe-message margin-bottom110">
                 <div class="col-md-1">

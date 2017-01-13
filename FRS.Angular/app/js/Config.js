@@ -44,13 +44,13 @@
                 url: '/home',
                 templateUrl: helper.basepath('../../../../app/views/static.html'),
                 controller: ['$rootScope', '$localStorage', '$scope', function ($rootScope, $localStorage, $scope) {
-                        $rootScope.app.layout.isBoxed = false;
-                        if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
-                            $scope.isAuthenticated = true;
-                        } else
-                            $scope.isAuthenticated = false;
-                        $scope.CurrentDate = new Date();
-                    }
+                    $rootScope.app.layout.isBoxed = false;
+                    if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
+                        $scope.isAuthenticated = true;
+                    } else
+                        $scope.isAuthenticated = false;
+                    $scope.CurrentDate = new Date();
+                }
                 ]
             })
             .state('home.index', {
@@ -62,7 +62,7 @@
                 resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables', 'slimscroll')
             })
             .state('home.signin', {
-                url: '/SignIn',
+                url: '/SignIn?:returnUrl',
                 title: 'Sign In',
                 templateUrl: helper.basepath('../../../../app/views/SignIn/SignIn.html'),
                 resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module', 'slimscroll')
@@ -114,7 +114,7 @@
                  templateUrl: helper.basepath('../../../../app/views/Solution/CreateSolution.html'),
                  controller: 'CreateSolutionController',
                  controllerAs: 'csc',
-                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Solution.module','filestyle','ui.select')
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Solution.module', 'filestyle', 'ui.select')
              })
             ////Allergy
             //.state('app.Allergy', {
@@ -186,7 +186,7 @@
                 title: 'Login',
                 //templateUrl: 'app/pages/login.html'
                 templateUrl: 'app/Views/Users/login.html',
-                resolve: helper.resolveFor('login.module','oitozero.ngSweetAlert')
+                resolve: helper.resolveFor('login.module', 'oitozero.ngSweetAlert')
             })
             .state('account.register', {
                 url: '/register',

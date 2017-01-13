@@ -19,7 +19,7 @@
         HomeService.url = "/api/Project/";
         vm.CategoryId = 0;
         vm.Projects = [];
-        vm.selectCategories = false;
+        vm.firstCall = true;
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
@@ -36,7 +36,9 @@
                 vm.clicked = false;
                 vm.NoMoreProjects = false;
             } else {
-                vm.FilterCategories = response.FilterCategories;
+                if (vm.firstCall) {
+                    vm.FilterCategories = response.FilterCategories;
+                }
                 angular.forEach(vm.Projects, function (project) {
                     project.isNew = false;
                 });
@@ -58,13 +60,13 @@
         }
 
         vm.getDataFromSever = function () {
-            vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString : null;
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
         vm.ProjectSearchRequest.CategoryIds = [];
 
         vm.filterProjects = function (id) {
+            vm.firstCall = false;
             if ($('#' + id)[0].checked) {
                 vm.ProjectSearchRequest.CategoryIds.push(id);
                 vm.ProjectSearchRequest.PageNo = 1;

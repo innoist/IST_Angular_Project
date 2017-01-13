@@ -788,58 +788,56 @@
 
                 //if token expires, only redirect to login with returnUrl
                 var loginData = $localStorage["authorizationData"];
-                if (loginData) {
-                    var nowGMT = (new Date()).toUTCString();
-                    if (new Date(nowGMT) >= new Date(loginData.expires)) {
-                        $rootScope.isAuthenticated = false;
-                        $http.defaults.headers.common = {
-                            'Content-Type': 'application/json'
-                        };
-                        delete $localStorage["authorizationData"];
+
+                if (!loginData) {
+                    if ((fromState.name.split(".")[0] === "home" || fromState.name === "") && toState.name.split(".")[0] === "app") {
                         event.preventDefault();
-                        //toaster.pop('error', 'Session Expired', 'Your session has expires, Please login again to continue.');
-                        $state.go("account.login", { returnUrl: toState.name });
+                        $state.go("home.signin", { returnUrl: toState.name });
                     }
                 }
 
-                //If user is not logged in do not open any other url of application i.e redirect to login page
-                if (!$localStorage["authorizationData"]) {
-                    
-                    if (toState.name.split(".")[0] === "app") {
-                        //if logged in
-                        if (!$rootScope.isAuthenticated) {
-                            event.preventDefault();
-                            //return url setting
-                            $state.go("account.login", { returnUrl: toState.name });
-                        }
+                //if (loginData) {
+                //    var nowGMT = (new Date()).toUTCString();
+                //    if (new Date(nowGMT) >= new Date(loginData.expires)) {
+                //        $rootScope.isAuthenticated = false;
+                //        $http.defaults.headers.common = {
+                //            'Content-Type': 'application/json'
+                //        };
+                //        delete $localStorage["authorizationData"];
+                //        event.preventDefault();
+                //        //toaster.pop('error', 'Session Expired', 'Your session has expires, Please login again to continue.');
+                //        $state.go("account.login", { returnUrl: toState.name });
+                //    }
+                //} if (!$localStorage["authorizationData"]) {
 
-                    }
-                    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
-                    if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
-                        window.location.reload();
-                    }
-                } else {
-                    if (fromState.name.split(".")[0] === "app" && toState.name.split(".")[1] === "login") {
-                        if ($rootScope.isAuthenticated) {
-                            event.preventDefault();
-                            $state.go(fromState.name);
-                        }
-                    }
-                    if (fromState.name.split(".")[0] === "home" && toState.name.split(".")[0] === "app") {
-                        if ($rootScope.isAuthenticated) {
-                            event.preventDefault();
-                            $state.go(toState.name);
-                        }
-                    }
-                    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
-                    //if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
-                    //    window.location.reload();
-                    //    if ($rootScope.isAuthenticated) {
-                    //        event.preventDefault();
-                    //        $state.go(fromState.name);
-                    //    }
-                    //}
-                }
+                //    if (toState.name.split(".")[0] === "app") {
+                //        //if logged in
+                //        if (!$rootScope.isAuthenticated) {
+                //            event.preventDefault();
+                //            //return url setting
+                //            $state.go("account.login", { returnUrl: toState.name });
+                //        }
+
+                //    }
+                //    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
+                //    if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
+                //        window.location.reload();
+                //    }
+                //} else {
+                //    if (fromState.name.split(".")[0] === "app" && toState.name.split(".")[1] === "login") {
+                //        if ($rootScope.isAuthenticated) {
+                //            event.preventDefault();
+                //            $state.go(fromState.name);
+                //        }
+                //    }
+                //    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
+                //    if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
+                //        if ($rootScope.isAuthenticated) {
+                //            event.preventDefault();
+                //            $state.go(toState.name);
+                //        }
+                //    }
+                //}
             }
         });
 
@@ -1191,7 +1189,7 @@
         return function (tdData, limit) {
             if (tdData) {
                 if (tdData.length > limit) {
-                    return tdData.substring(0, limit-1) + '...';
+                    return tdData.substring(0, limit - 1) + '...';
                 }
                 return tdData;
             }
