@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using IST.Commons;
 using IST.Interfaces.IServices;
 using IST.WebBase.Mvc;
 using Microsoft.AspNet.Identity.Owin;
@@ -51,7 +49,7 @@ namespace IST.WebApi2.Controllers
             var menu = menuRightsService.GetForRole().ToList();
 
             //if user is admin, then replace users menu text with chefs
-            menu.ForEach(x => x.text = User.IsInRole(ISTApplicationRoles.Admin) && x.text.ToLower().Contains("user") ? x.text = "Chefs" : x.text);
+            //menu.ForEach(x => x.text = User.IsInRole(ISTApplicationRoles.Admin) && x.text.ToLower().Contains("user") ? x.text = "Chefs" : x.text);
 
             return Ok(menu);
         }

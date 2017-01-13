@@ -65,18 +65,6 @@
 
         vm.ProjectSearchRequest.CategoryIds = [];
 
-        vm.filterProjects = function (id) {
-            vm.firstCall = false;
-            if ($('#' + id)[0].checked) {
-                vm.ProjectSearchRequest.CategoryIds.push(id);
-                vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
-            } else {
-                vm.ProjectSearchRequest.CategoryIds.splice(vm.ProjectSearchRequest.CategoryIds.indexOf(id), 1);
-                vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
-            }
-        }
         vm.getDataFromSever();
 
         vm.IsDataLoaded = false;

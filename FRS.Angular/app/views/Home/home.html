@@ -21,7 +21,7 @@
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="checkbox" id="{{category.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" ng-change="hc.filterProjects(category.Id)" />
+                                        <input type="checkbox" name="checkbox"/>
                                         <i></i>
                                         {{category.DisplayName}}
                                         <!--<small><a>{{hc.clicked?'':hc.Projects.length}}</a></small>-->

@@ -19,13 +19,13 @@
             };
 
             $rootScope.selectDashboard = function () {
-                if ($rootScope.user.role === "SystemAdministrator") {
-                    $state.go("app.adminDashboard");
-                } else if ($rootScope.user.role === "Admin") {
-                    $state.go("app.dashboard");
-                } else if ($rootScope.user.role === "Client") {
-                    $state.go("app.dashboard");
-                }
+                //if ($rootScope.user.role === "SystemAdministrator") {
+                //    $state.go("app.adminDashboard");
+                //} else if ($rootScope.user.role === "Admin") {
+                //    $state.go("app.dashboard");
+                //} else if ($rootScope.user.role === "Client") {
+                //    $state.go("app.dashboard");
+                //}
             }
 
             // Hides/show user avatar on sidebar
