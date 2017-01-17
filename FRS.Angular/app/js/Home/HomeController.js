@@ -15,11 +15,19 @@
     function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
         var vm = this;
 
-        vm.isReset = true;
         HomeService.url = "/api/Project/";
         vm.CategoryId = 0;
         vm.Projects = [];
+        //For first call to server
         vm.firstCall = true;
+        //For no no more solutions
+        vm.NoMoreProjects = false;
+        //to show end of solutions
+        vm.endOfSolutions = false;
+        //to show spinner on scroll
+        vm.clientSpinnerOnScroll = false;
+        //to show spinner on data load
+        vm.clientMainSpinner = true;
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
@@ -27,18 +35,33 @@
             OrderByColumn: 1
         }
         var onSuccessLoadProjects = function (response) {
+            vm.clientMainSpinner = true;
             if (vm.clicked || vm.searchString) {
-                vm.Projects = [];
-                angular.forEach(response.Data, function (project) {
-                    project.isNew = true;
-                    vm.Projects.push(project);
-                });
-                vm.clicked = false;
-                vm.NoMoreProjects = false;
+                    vm.Projects = [];
+                    angular.forEach(response.Data, function(project) {
+                        project.isNew = true;
+                        vm.Projects.push(project);
+                        $.unblockUI();
+                    });
+                    vm.clicked = false;
+                if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
+                    angular.forEach(vm.Projects, function(project) {
+                        project.isNew = false;
+                    });
+                    vm.clientSpinnerOnScroll = false;
+                    vm.NoMoreProjects = true;
+                    vm.endOfSolutions = true;
+                    $.unblockUI();
+                } else {
+                    vm.NoMoreProjects = false;
+                    vm.endOfSolutions = false;
+                    $.unblockUI();
+                }
             } else {
                 if (vm.firstCall) {
                     vm.FilterCategories = response.FilterCategories;
                 }
+                //vm.FilterCategories = response.FilterCategories;
                 angular.forEach(vm.Projects, function (project) {
                     project.isNew = false;
                 });
@@ -46,40 +69,61 @@
                 angular.forEach(response.Data, function (project) {
                     project.isNew = true;
                     vm.Projects.push(project);
+                    $.unblockUI();
                 });
+                vm.clientSpinnerOnScroll = false;
                 if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
-                    angular.forEach(vm.Projects, function (project) {
+                    angular.forEach(vm.Projects, function(project) {
                         project.isNew = false;
                     });
+                    vm.clientSpinnerOnScroll = false;
+                    $.unblockUI();
                     vm.NoMoreProjects = true;
-                }
-                else
+                    vm.endOfSolutions = true;
+                } else {
+                    $.unblockUI();
                     vm.NoMoreProjects = false;
+                    vm.endOfSolutions = false;
+                }
                 vm.IsDataLoaded = false;
             }
         }
 
         vm.getDataFromSever = function () {
+            if (vm.clientMainSpinner) {
+                $.blockUI({ message: '<img src="/Ecommerce/img/Spinner/balls.gif" />' });
+            }
+            vm.clientMainSpinner = true;
+            vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString : null;
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
-        vm.ProjectSearchRequest.CategoryIds = [];
+        vm.ProjectSearchRequest.FilterIds = [];
+        vm.filterProjects = function (id) {
+            vm.clientMainSpinner = true;
+            vm.firstCall = false;
+            if ($('#' + id)[0].checked) {
+                vm.ProjectSearchRequest.FilterIds.push(id);
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            } else {
+                vm.ProjectSearchRequest.FilterIds.splice(vm.ProjectSearchRequest.FilterIds.indexOf(id), 1);
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            }
+        }
 
         vm.getDataFromSever();
 
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
-            if ($(window).scrollTop() > 100) {
-                $(".header-v5.header-static").addClass("header-fixed-shrink");
-            }
-            else {
-                $(".header-v5.header-static").removeClass("header-fixed-shrink");
-            }
+            vm.clientMainSpinner = false;
             if (vm.IsDataLoaded)
                 return false;
             if (!vm.NoMoreProjects) {
-                if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.6) || !vm.clicked) {
+                if ($(window).scrollTop() + $(window).height() === $(document).height()) {
                     vm.IsDataLoaded = true;
+                    vm.clientSpinnerOnScroll = true;
                     vm.ProjectSearchRequest.PageNo += 1;
                     vm.getDataFromSever();
                 }

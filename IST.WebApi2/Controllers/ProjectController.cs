@@ -45,16 +45,15 @@ namespace IST.WebApi2.Controllers
                 return BadRequest("Invalid Bad Request");
             }
             //var filtersIds = filterService.FindFilterIdsByCategoryId(searchRequest.CategoryId);
-            if (searchRequest.CategoryIds == null || !searchRequest.CategoryIds.Any())
+            if (searchRequest.FilterIds == null || !searchRequest.FilterIds.Any())
             {
-                searchRequest.CategoryIds = new List<int>();
+                searchRequest.FilterIds = new List<int>();
             }
             var response = solutionService.Search(searchRequest);
             var toReturn = new ProjectListView
             {
                 Data = response.Data.ToList().Select(x => x.MapFromServerToClient()).ToList(),
-                SolutionTypes = solutionTypeRepository.GetAll().Select(x => x.MapFromServerToClient()).ToList(),
-                FilterCategories = filterCategoryService.GetAll().Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }).ToList(),
+                FilterCategories = filterCategoryService.GetAll().Select(x => x.MapFromServerToClient()).ToList(),
                 recordsFiltered = response.FilteredCount,
                 recordsTotal = response.TotalCount
             };

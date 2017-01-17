@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IST.WebApi2", "IST.WebApi2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IST.Angular", "FRS.Angular\IST.Angular.csproj", "{482C986A-67EA-48D8-9F26-2D4BC93F4AED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,14 +103,6 @@ Global
 		{482C986A-67EA-48D8-9F26-2D4BC93F4AED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{482C986A-67EA-48D8-9F26-2D4BC93F4AED}.Release|x64.ActiveCfg = Release|x64
 		{482C986A-67EA-48D8-9F26-2D4BC93F4AED}.Release|x64.Build.0 = Release|x64
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Debug|x64.Build.0 = Debug|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Release|x64.ActiveCfg = Release|Any CPU
-		{3891103C-661F-4CAC-BAA3-EAF06B8C2E21}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

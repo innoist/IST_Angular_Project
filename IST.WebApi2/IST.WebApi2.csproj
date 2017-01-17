@@ -291,11 +291,13 @@
     </Compile>
     <Compile Include="ModelMappers\SolutionMapper.cs" />
     <Compile Include="ModelMappers\FilterMapper.cs" />
+    <Compile Include="ModelMappers\FilterCategoryMapper.cs" />
     <Compile Include="ModelMappers\SolutionTypeMapper.cs" />
     <Compile Include="ModelMappers\TagMapper.cs" />
     <Compile Include="ModelMappers\UsersMapper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FilterCategoryModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\SolutionModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />

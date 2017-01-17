@@ -15,7 +15,8 @@ namespace IST.WebApi2.ModelMappers
             {
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
-                FilterCategoryId = source.FilterCategoryId
+                FilterCategoryId = source.FilterCategoryId,
+                SolutionCount = source.Solutions.Count.ToString()
             };
         }
         public static Filter MapFromClientToServer(this FilterModel source)

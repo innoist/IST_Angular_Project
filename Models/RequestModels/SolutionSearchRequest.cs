@@ -10,7 +10,7 @@ namespace IST.Models.RequestModels
         public string Name { get; set; }
         public int? TypeId { get; set; }
         public int? OwnerId { get; set; }
-        public List<int> CategoryIds { get; set; }
+        public List<int> FilterIds { get; set; }
         public OrderBySolution OrderByColumn
         {
             get

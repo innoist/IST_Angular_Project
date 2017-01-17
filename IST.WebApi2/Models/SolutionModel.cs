@@ -35,8 +35,20 @@ namespace IST.WebApi2.Models
         }
 
         public IEnumerable<SolutionModel> Data { get; set; }
+        public IEnumerable<FilterCategoryModel> FilterCategories { get; set; }
+        public int TotalCount { get; set; }
+        public int recordsTotal { get; set; }
+        public int recordsFiltered { get; set; }
+    }
+    public class SolutionListView
+    {
+        public SolutionListView()
+        {
+            Data = new List<SolutionModel>();
+        }
+
+        public IEnumerable<SolutionModel> Data { get; set; }
         public IEnumerable<SolutionTypeModel> SolutionTypes { get; set; }
-        public IEnumerable<DropDownModel> FilterCategories { get; set; }
         public int TotalCount { get; set; }
         public int recordsTotal { get; set; }
         public int recordsFiltered { get; set; }

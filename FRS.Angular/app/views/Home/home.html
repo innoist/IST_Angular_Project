@@ -20,12 +20,17 @@
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="checkbox"/>
-                                        <i></i>
-                                        {{category.DisplayName}}
-                                        <!--<small><a>{{hc.clicked?'':hc.Projects.length}}</a></small>-->
-                                    </label>
+                                    <dl>
+                                        <dt><strong>{{category.DisplayValue}}</strong></dt>
+                                        <label class="checkbox" ng-repeat="filter in category.Filters">
+                                            <dd class="margin-top4" style="display: inline">
+                                                <input type="checkbox" name="checkbox" id="{{filter.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" ng-change="hc.filterProjects(filter.Id)"/>
+                                                <i></i>
+                                                {{filter.DisplayValue}}
+                                            </dd>
+                                            <small><a>{{filter.SolutionCount}}</a></small>
+                                        </label>
+                                    </dl>
                                 </li>
                             </ul>
                         </div>
@@ -72,9 +77,9 @@
                 </div>-->
                 <div class="col-md-12 padding-leftright30">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Name, Tag and Tag group">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString">
                         <span class="input-group-btn" title="Search Name, Tag or Tag group">
-                            <button class="btn" type="button"><i class="fa fa-search"></i></button>
+                            <button class="btn" type="button" ng-click="hc.getDataFromSever()"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </div><!--/end result category-->
@@ -113,7 +118,7 @@
                             <li><i class="rating-selected fa fa-star"></i></li>
                             <li><i class="rating fa fa-star"></i></li>
                             <li><i class="rating fa fa-star"></i></li>
-                            <li class="like-icon"><a uib-tooltip="{{ 'Add to favourite' }}" tooltip-placement="left" href="#"><i class="fa fa-heart padding-right2"></i></a></li>
+                            <li class="like-icon"><a uib-tooltip="{{ 'Add to favourite' }}" tooltip-placement="left" ng-click="hc.OpenLoginPage()"><i class="fa fa-heart padding-right2"></i></a></li>
                             <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenGPopUp()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
                         </ul>
                     </div>
@@ -121,13 +126,17 @@
             </div>
             <!--/end filter resilts-->
             <!--/end pagination-->
+            <div ng-if="!hc.clientSpinnerOnScroll && hc.endOfSolutions && hc.Projects.length" class="filter-by-block col-md-12 padding-leftright30" style="text-align: center">
+                <h4>No More solutions!</h4>
+            </div>
         </div>
+        <div ng-if="hc.clientSpinnerOnScroll && !hc.NoMoreProjects" style="text-align: center; position: fixed; top: 80%; left: 57%; z-index: 10051">
+            <img src="/Ecommerce/img/Spinner/balls.gif"/>
+        </div>
+        
     </div>
 </div><!--/end row-->
 <!--=== End Content Part ===-->
-<!--=== Footer v4 ===-->
-<!--<div ng-include="'../../app/views/EcommerceFooter.html'"></div>-->
-<!--=== End Footer v4 ===-->
 <!-- Wait Block -->
 <div class="g-popup-wrapper" id="sendtofriend">
     <div class="g-popup g-popup--subscribe3">
@@ -245,27 +254,25 @@
 </div>
 
 <div class="g-popup-wrapper" id="loginpage">
-    <div class="g-popup g-popup--subscribe text-center">
-        <h2>Get Fresh Content</h2>
-        <form action="#" class="sky-form">
-            <div class="row">
-                <section class="col-sm-9">
-                    <label class="input">
-                        <input type="email" placeholder="Enter email" class="form-control">
-                    </label>
-                </section>
-                <section class="col-sm-3">
-                    <label class="input">
-                        <button class="btn-u btn-u-default" type="button">Get Updates</button>
-                    </label>
-                </section>
-            </div>
-        </form>
-        <div class="no-spam">
-            <span class="icon-lock" aria-hidden="true"></span> We hate SPAM and promise to keep your email address safe.
+    <div class="g-popup g-popup--discount2">
+        <div class="g-popup--discount2-message">
+            <h3>Welcome here</h3>
+            <h4>You Are Fabulous!</h4>
+            <p>Please login to continue!</p>
+            <form ng-submit="lfc.login()" name="lfc.loginForm" novalidate="" class="sky-form" style="border: none !important">
+                <label class="input">
+                    <input type="email" placeholder="Email" class="form-control"  name="account_email" autocomplete="off" ng-model="lfc.account.email" required="">
+                </label>
+                <label class="input">
+                    <input type="password" placeholder="Password" class="form-control" autocomplete="off" name="account_password" ng-model="lfc.account.password" required="">
+                </label>
+                <label class="input pull-right">
+                    <button class="btn btn-default" type="submit" ng-disabled="lfc.submitButton">Sign In</button>
+                </label>
+            </form>
         </div>
-
-        <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe__close"><span class="icon-close" aria-hidden="true"></span></a>
+        <img src="/Ecommerce/img/blog/26.jpg" alt="ALT" width="270">
+        <a href="javascript:void(0);" class="g-popup__close g-popup--discount2__close"><span class="icon-close" aria-hidden="true"></span></a>
     </div>
 </div>
 <!-- End Wait Block -->

@@ -37,12 +37,12 @@ namespace IST.WebApi2.Controllers
             {
                 return BadRequest("Invalid Bad Request");
             }
-            if (searchRequest.CategoryIds == null || !searchRequest.CategoryIds.Any())
+            if (searchRequest.FilterIds == null || !searchRequest.FilterIds.Any())
             {
-                searchRequest.CategoryIds = new List<int>();
+                searchRequest.FilterIds = new List<int>();
             }
             var response = solutionService.Search(searchRequest);
-            var toReturn = new ProjectListView
+            var toReturn = new SolutionListView
             {
                 Data = response.Data.ToList().Select(x => x.MapFromServerToClient()).ToList(),
                 SolutionTypes = solutionTypeRepository.GetAll().Select(x => x.MapFromServerToClient()).ToList(),
