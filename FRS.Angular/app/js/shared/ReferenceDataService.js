@@ -115,6 +115,27 @@
                 }
               ).then(onReady, onError);
         }
+        
+        this.uploadFile = function (data, onReady, onError, url) {
+            if (!url)
+                url = this.url;
+            //var urlMetaData = window.frsApiUrl + '/api/LoadMetaData';
+
+            onError = onError || function (response) {
+                if (response.ExceptionMessage) {
+                    toaster.error('Error', response.ExceptionMessage);
+                } else {
+                    toaster.error('Error', response.data.ExceptionMessage);
+                }
+            };
+
+            $http.post(frsApiUrl + url, data,
+                {
+                    transformRequest: angular.identity,
+                    headers : {'Content-Type' : undefined }
+                }
+              ).then(onReady, onError);
+        }
 
         this.retrieveItems = function (url, val) {
             return $http.get(frsApiUrl + url, {

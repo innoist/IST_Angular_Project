@@ -311,6 +311,7 @@
     <Compile Include="Models\TagModel.cs" />
     <Compile Include="Models\UsersListViewModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
+    <Compile Include="MultipartMediaTypeFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -329,6 +330,11 @@
     </Content>
     <None Include="Connections.config" />
     <Content Include="index.html" />
+    <Content Include="ProjectImage\190117150113thumb-1920-699236.png" />
+    <Content Include="ProjectImage\190117150114balls %281%29.gif" />
+    <Content Include="ProjectImage\190117150136thumb-1920-279085 %281%29.jpg" />
+    <Content Include="ProjectImage\190117150138logo-1361459-e1386730842619.png" />
+    <Content Include="ProjectImage\190117150156thumb-1920-271800.jpg" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />

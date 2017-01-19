@@ -13,6 +13,7 @@
         vm.update = false;
         vm.submitted = false;
         vm.Solution = {};
+        vm.formdata = new FormData();
 
         //Api Url
         SolutionService.url = "/api/Solution/";
@@ -35,21 +36,23 @@
 
             if (input.files && input.files[0]) {
                 //calculate size of image in MB's
-                //var sizeOfImageInMB = parseFloat(input.files[0].size) / parseFloat((1024 * 1024));
-                ////Check if greater than 1MB
-                //if (sizeOfImageInMB > parseFloat(1)) {
-                //    toaster.pop("error", "Too large", "Select an image less than 1 MB");
-                //    return;
-                //}
-                vm.Solution.Image = '/app/img/loading.gif';
-                $('.SolutionImage').attr('src', vm.Solution.Image);
+                var sizeOfImageInMB = parseFloat(input.files[0].size) / parseFloat((1024 * 1024));
+                //Check if greater than 1MB
+                if (sizeOfImageInMB > parseFloat(1)) {
+                    toaster.pop("error", "Too large", "Select an image less than 1 MB");
+                    return;
+                }
+                vm.Image = '/app/img/loading.gif';
+                $('.SolutionImage').attr('src', vm.Image);
                 vm.FileExtension = input.files[0].name.split('.')[1];
                 vm.FileName = input.files[0].name.split('.')[0];
 
+                vm.formdata.append(0, input.files[0]);
+
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    vm.Solution.Image = reader.result;
-                    $('.SolutionImage').attr('src', vm.Solution.Image);
+                    vm.Image = reader.result;
+                    $('.SolutionImage').attr('src', vm.Image);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
@@ -70,7 +73,6 @@
                 toaster.pop("error", showValidationErrors(vm.formValidate));
                 return false;
             }
-
             vm.Solution.TagIds = vm.multiple.Tags.map(x=>x.Id);
             vm.Solution.FilterIds = [];
             if (vm.multiple.Filters && vm.multiple.Filters.length > 0)
@@ -78,7 +80,8 @@
 
             vm.Solution.OwnerId = vm.SolutionOwners.selected.Id;
             vm.Solution.TypeId = vm.SolutionTypes.selected.Id;
-            SolutionService.save(vm.Solution, onSuccess, onError);
+            vm.formdata.append(1, JSON.stringify(vm.Solution));
+            SolutionService.uploadFile(vm.formdata, onSuccess, onError);
             function onSuccess(response) {
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
@@ -128,6 +131,8 @@
             if (response) {
                 if (response.SolutionModel) {
                     vm.Solution = response.SolutionModel;
+                    vm.Image = frsApiUrl + vm.Solution.Image;
+                    $('.SolutionImage').attr('src', vm.Image);
                 }
                 vm.Tags = response.Tags;
                 vm.Filters = response.Filters;

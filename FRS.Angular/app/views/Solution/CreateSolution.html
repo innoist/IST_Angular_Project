@@ -29,18 +29,18 @@
 </h3>
 <div class="panel panel-default">
     <div class="panel-body">
-        <form class="form-horizontal form-validate" name="csc.formValidate" novalidate="">
+        <form class="form-horizontal form-validate" name="csc.formValidate" novalidate="" id="solutionForm">
             <div class="form-group">
                 <fieldset ng-disabled="!csc.edit">
                     <div class="row">
                         <div class="col-md-12">
                             <aside class="col-md-3 col-xs-4">
-                                <img class="img-responsive img-thumbnail SolutionImage" src="/app/img/image-default.png" />
+                                <img class="img-responsive img-thumbnail SolutionImage" ng-src="{{csc.Image?csc.Image:'/app/img/image-default.png'}}" />
                             </aside>
                             <label class="control-label col-md-9" style="text-align: left">Solution Image</label>
                             <div class="col-md-4 col-xs-8">
                                 <input filestyle="" type="file" data-button-text="Select Image" data-class-button="btn btn-success"
-                                       file-model="csc.Solution.Image"
+                                       file-model="csc.Image"
                                        data-classinput="form-control inline" nv-file-select=""
                                        class="form-control"
                                        id="loadFile"

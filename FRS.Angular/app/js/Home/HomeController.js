@@ -16,6 +16,7 @@
         var vm = this;
 
         HomeService.url = "/api/Project/";
+        vm.apiUrl = frsApiUrl;
         vm.CategoryId = 0;
         vm.Favorites = false;
         vm.Projects = [];

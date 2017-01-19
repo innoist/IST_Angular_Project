@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using IST.Models.Common.DropDown;
 using IST.Models.DomainModels;
 
@@ -20,7 +21,6 @@ namespace IST.WebApi2.Models
         public string Image { get; set; }
         public bool? Active { get; set; }
         public bool SaveFavorite { get; set; }
-        
         public List<int> TagIds { get; set; }
         public List<int> FilterIds { get; set; }
         public bool IsFavorite { get; set; }

@@ -23,6 +23,7 @@
                                     <input id="IsImportant" type="checkbox" ng-model="hc.Favorites" ng-click="hc.seeFavorites()" name="IsImportant" class="needsclick checkbox checkbox-inline"><span class="fa fa-heart" style="border-color: #18ba9b"></span> 
                                 </label><strong>Favorites</strong>
                             </div>
+                            <hr/>
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <dl>
@@ -110,7 +111,7 @@
             <div class="col-md-4 illustration-v2 repeated-item" ng-repeat="project in hc.Projects">
                 <div ng-class="{'shadow-emboss' : project.isNew}">
                     <div class="product-img product-img-brd">
-                        <a target="_blank" href="{{project.Location}}"><img class="full-width img-responsive" style="height: 252px" ng-src="{{project.Image ? project.Image: '/Ecommerce/img/blog/project.png' }}" alt=""></a>
+                        <a target="_blank" href="{{project.Location}}"><img class="full-width img-responsive" style="height: 252px" ng-src="{{project.Image ? hc.apiUrl + project.Image: '/Ecommerce/img/blog/project.png' }}" alt=""></a>
                         <a class="product-review" ng-click="hc.OpenProjectDetail(project.Id)">{{project.Name}}</a>
                         <!--<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
                         <!--<div class="shop-rgba-dark-green rgba-banner">New</div>-->

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
@@ -9,6 +11,7 @@ using IST.Models.ResponseModels;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using IST.WebBase.Mvc;
+using Newtonsoft.Json;
 using static System.String;
 using static IST.Commons.Utility.Utility;
 namespace IST.WebApi2.Controllers
@@ -68,19 +71,26 @@ namespace IST.WebApi2.Controllers
 
         [HttpPost]
         [ValidateFilter]
-        public IHttpActionResult Post(SolutionModel model)
+        public IHttpActionResult Post()
         {
+            HttpPostedFile file = HttpContext.Current.Request.Files[0];
+            var model = JsonConvert.DeserializeObject<SolutionModel>(HttpContext.Current.Request["1"]);
+            var fileName = DateTime.UtcNow.ToString("ddMMyyHHMMss") + file.FileName;
+            file.SaveAs(HttpContext.Current.Server.MapPath(@"~\ProjectImage\" + fileName));
+            model.Image = "/ProjectImage/" + fileName;
+
             if (model.Id == 0)
                 SetAllValues(model);
             else
                 SetUpdatedValues(model);
-            //Scale Image to Aspect Ratio i.e 256*256
-            if (!IsNullOrEmpty(model.Image))
-            {
-                var metaData = model.Image.Split(',')[0];
-                var imageBase64 = ScaleImage(model.Image.Split(',')[1], new Size(300, 300));
-                model.Image = Concat(metaData, ",", imageBase64);
-            }
+
+            //Scale Image to Aspect Ratio i.e 256 * 256
+            //if (!IsNullOrEmpty(model.Image))
+            //{
+            //    var metaData = model.Image.Split(',')[0];
+            //    var imageBase64 = ScaleImage(model.Image.Split(',')[1], new Size(300, 300));
+            //    model.Image = Concat(metaData, ",", imageBase64);
+            //}
             SolutionCreateResponseModel response = new SolutionCreateResponseModel
             {
                 Solution = model.MapFromClientToServer(),

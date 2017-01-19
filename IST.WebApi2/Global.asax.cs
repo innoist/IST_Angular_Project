@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.SessionState;
+using FullTextSearchProvider.WebBase.WebApi;
 
 namespace IST.WebApi2
 {
@@ -20,6 +21,7 @@ namespace IST.WebApi2
 
             GlobalConfiguration.Configuration.Formatters.Clear();
             GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
+            GlobalConfiguration.Configuration.Formatters.Add(new MultipartMediaTypeFormatter());
         }
 
         protected void Application_PostAuthorizeRequest()

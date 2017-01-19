@@ -45,7 +45,6 @@ namespace IST.WebApi2.Controllers
             var toReturn = new ProjectListView
             {
                 Data = response.Data.ToList().Select(x => x.ClientCreateFrom()).ToList(),
-                //Favorites = response.Data.ToList().Select(x => x.ClientCreateFrom()).Select().ToList(),
                 FilterCategories = filterCategoryService.GetAll().Select(x => x.MapFromServerToClient()).ToList(),
                 recordsFiltered = response.FilteredCount,
                 recordsTotal = response.TotalCount
