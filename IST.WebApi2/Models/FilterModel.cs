@@ -10,6 +10,7 @@ namespace IST.WebApi2.Models
         public int Id { get; set; }
         public int FilterCategoryId { get; set; }
         public string DisplayValue { get; set; }
-        public string SolutionCount { get; set; }
+        public int SolutionCount { get; set; }
+        public string FilterCategoryName { get; set; }
     }
 }

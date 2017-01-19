@@ -10,5 +10,6 @@ namespace IST.WebApi2.Models
         public int Id { get; set; }
         public string DisplayValue { get; set; }
         public int TagGroupId { get; set; }
+        public string TagGroupName { get; set; }
     }
 }

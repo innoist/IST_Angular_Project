@@ -18,25 +18,33 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
+                            <div class="col-md-12 checkbox c-checkbox needsclick" style="padding-left: 0">
+                                <label for="IsImportant" class="control-label needsclick">
+                                    <input id="IsImportant" type="checkbox" ng-model="hc.Favorites" ng-click="hc.seeFavorites()" name="IsImportant" class="needsclick checkbox checkbox-inline"><span class="fa fa-heart" style="border-color: #18ba9b"></span> 
+                                </label><strong>Favorites</strong>
+                            </div>
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <dl>
-                                        <dt><strong>{{category.DisplayValue}}</strong></dt>
-                                        <label class="checkbox" ng-repeat="filter in category.Filters">
-                                            <dd class="margin-top4" style="display: inline">
-                                                <input type="checkbox" name="checkbox" id="{{filter.Id}}" ng-click="hc.clicked=!hc.clicked" ng-model="category$index" ng-change="hc.filterProjects(filter.Id)"/>
-                                                <i></i>
-                                                {{filter.DisplayValue}}
-                                            </dd>
-                                            <small><a>{{filter.SolutionCount}}</a></small>
-                                        </label>
+                                        <dt><strong><a data-toggle="collapse" data-parent="#collapseOne" href="#collapseTwo{{$index}}" ng-click="arrow = !arrow"><i ng-class="{'fa fa-angle-down':!arrow,'fa fa-angle-right':arrow}"></i> {{category.DisplayValue}}</a></strong></dt>
+                                        <div id="collapseTwo{{$index}}" class="collapse in">
+                                            <label class="checkbox" ng-repeat="filter in category.Filters">
+                                                <dd class="margin-top4" style="display: inline">
+                                                    <input type="checkbox" name="checkbox" id="{{filter.Id}}" ng-click="hc.clicked=!hc.clicked; hc.filterProjects(filter.Id)" ng-model="category$index" ng-change=""/>
+                                                    <i></i>
+                                                    {{filter.DisplayValue}}
+                                                </dd>
+                                                <small><a>{{filter.SolutionCount}}</a></small>
+                                            </label>
+                                        </div>
                                     </dl>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div><!--/end panel group-->
+            </div>
+            <!--/end panel group-->
             <!--/end panel group-->
             <div class="panel-group margin-bottom-30" id="accordion-v6">
                 <div class="panel panel-default">
@@ -65,8 +73,9 @@
                         </div>
                     </div>
                 </div>
-            </div><!--/end panel group-->
-            <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-lg btn-u-sea-shop btn-block">Reset</button>
+            </div>
+            <!--/end panel group-->
+            <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-lg btn-u-sea-shop btn-block" ng-click="hc.resetCategories()">Reset</button>
         </div>
 
         <div class="col-md-9">
@@ -77,9 +86,17 @@
                 </div>-->
                 <div class="col-md-12 padding-leftright30">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString">
-                        <span class="input-group-btn" title="Search Name, Tag or Tag group">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString"
+                               uib-typeahead="solution as solution.DisplayName for solution in hc.getSolutions($viewValue)"
+                               typeahead-loading="loadingSolutions"
+                               typeahead-on-select="hc.getDataFromSever()"
+                               typeahead-template-url="customTemplate.html"
+                               autocomplete="off">
+                        <span class="input-group-btn" title="Search">
                             <button class="btn" type="button" ng-click="hc.getDataFromSever()"><i class="fa fa-search"></i></button>
+                        </span>
+                        <span class="input-group-btn" title="Reset">
+                            <button class="btn" type="button" ng-click="hc.resetdata()"><i class="fa fa-remove"></i></button>
                         </span>
                     </div>
                 </div><!--/end result category-->
@@ -96,13 +113,13 @@
                         <a target="_blank" href="{{project.Location}}"><img class="full-width img-responsive" style="height: 252px" ng-src="{{project.Image ? project.Image: '/Ecommerce/img/blog/project.png' }}" alt=""></a>
                         <a class="product-review" ng-click="hc.OpenProjectDetail(project.Id)">{{project.Name}}</a>
                         <!--<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
-                        <div class="shop-rgba-dark-green rgba-banner">New</div>
+                        <!--<div class="shop-rgba-dark-green rgba-banner">New</div>-->
                     </div>
                     <div class="product-description product-description-brd margin-bottom-30">
                         <div class="overflow-h margin-bottom-5">
-                            <div class="pull-left">
+                            <div class="pull-left projectDivHeight">
                                 <h6 class="title-price">
-                                    <span uib-tooltip="{{project.Description}}" tooltip-placement="left" tooltip-class="tooltip-multiline">{{project.Description | customLimitTo : 55}}</span>
+                                    <span uib-tooltip="{{project.Description.length > 50 ? project.Description:''}}" tooltip-placement="left">{{project.Description | customLimitTo : 50}}</span>
                                 </h6>
                                 <!--<span class="gender text-uppercase">Men</span>
                                 <span class="gender">Suits - Blazers</span>-->
@@ -118,7 +135,12 @@
                             <li><i class="rating-selected fa fa-star"></i></li>
                             <li><i class="rating fa fa-star"></i></li>
                             <li><i class="rating fa fa-star"></i></li>
-                            <li class="like-icon"><a uib-tooltip="{{ 'Add to favourite' }}" tooltip-placement="left" ng-click="hc.OpenLoginPage()"><i class="fa fa-heart padding-right2"></i></a></li>
+                            <li class="like-icon" ng-if="isAuthenticated">
+                                <div ng-class="{'rating':!project.IsFavorite,'rating-selected':project.IsFavorite}" id="{{project.Id}}"
+                                     ng-click="hc.saved =!hc.saved; hc.save(project.Id)">
+                                    <i class="fa padding-right2" ng-class="{'fa-heart-o':!project.IsFavorite,'fa-heart':project.IsFavorite}"></i>
+                                </div>
+                            </li>
                             <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenGPopUp()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
                         </ul>
                     </div>
@@ -127,13 +149,13 @@
             <!--/end filter resilts-->
             <!--/end pagination-->
             <div ng-if="!hc.clientSpinnerOnScroll && hc.endOfSolutions && hc.Projects.length" class="filter-by-block col-md-12 padding-leftright30" style="text-align: center">
-                <h4>No More solutions!</h4>
+                <h4>End of results!</h4>
             </div>
         </div>
         <div ng-if="hc.clientSpinnerOnScroll && !hc.NoMoreProjects" style="text-align: center; position: fixed; top: 80%; left: 57%; z-index: 10051">
-            <img src="/Ecommerce/img/Spinner/balls.gif"/>
+            <img src="/Ecommerce/img/Spinner/balls.gif" />
         </div>
-        
+
     </div>
 </div><!--/end row-->
 <!--=== End Content Part ===-->
@@ -255,19 +277,19 @@
 
 <div class="g-popup-wrapper" id="loginpage">
     <div class="g-popup g-popup--discount2">
-        <div class="g-popup--discount2-message">
+        <div class="g-popup--discount2-message" ng-controller="LoginFormController as login">
             <h3>Welcome here</h3>
             <h4>You Are Fabulous!</h4>
             <p>Please login to continue!</p>
-            <form ng-submit="lfc.login()" name="lfc.loginForm" novalidate="" class="sky-form" style="border: none !important">
+            <form ng-submit="login.login()" name="login.loginForm" novalidate="" class="sky-form" style="border: none !important">
                 <label class="input">
-                    <input type="email" placeholder="Email" class="form-control"  name="account_email" autocomplete="off" ng-model="lfc.account.email" required="">
+                    <input type="email" placeholder="Email" class="form-control" name="account_email" autocomplete="off" ng-model="login.account.email" required="">
                 </label>
                 <label class="input">
-                    <input type="password" placeholder="Password" class="form-control" autocomplete="off" name="account_password" ng-model="lfc.account.password" required="">
+                    <input type="password" placeholder="Password" class="form-control" autocomplete="off" name="account_password" ng-model="login.account.password" required="">
                 </label>
                 <label class="input pull-right">
-                    <button class="btn btn-default" type="submit" ng-disabled="lfc.submitButton">Sign In</button>
+                    <button class="btn btn-default" type="submit" ng-disabled="login.submitButton">Sign In</button>
                 </label>
             </form>
         </div>
@@ -276,3 +298,12 @@
     </div>
 </div>
 <!-- End Wait Block -->
+<!-- -->
+<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <!--<img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">-->
+        <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+        <br />
+        <small ng-bind-html="match.model.Subtitle | uibTypeaheadHighlight:query"></small>
+    </a>
+</script>

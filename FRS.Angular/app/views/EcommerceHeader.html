@@ -13,7 +13,7 @@
                     <!-- Topbar Navigation -->
                     <ul class="left-topbar">
                         <li>
-                            <a><img src="/app/img/preloader/preloader.empty.png" style="height: 20px" /></a>
+                            <a><img src="/app/img/gocentralized-logo.png" style="height: 20px" /></a>
                         </li>
                         <!--<li>
                             <a>Language (EN)</a>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="list-inline right-topbar pull-right">
-                        <li ng-if="!isAuthenticated"><a ui-sref="home.signin">Log in</a> | <a href="shop-ui-register.html">Register</a></li>
+                        <li ng-if="!isAuthenticated"><a ng-click="hc.OpenLoginPage()">Log in</a> <!--| <a href="shop-ui-register.html">Register</a>--></li>
                         <li ng-if="isAuthenticated"><small>Welcome {{userName}}!</small></li>
                         <li ng-if="isAuthenticated"><a ng-click="logout()">Sign out</a></li>
                         <li><a href="#"><span class="fa fa-envelope"></span></a></li>

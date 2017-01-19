@@ -44,6 +44,7 @@
         <AssociationConnector Association="angularModel.FK_Tag_AspNetUsers_UpdatedById" />
         <AssociationConnector Association="angularModel.FK_TagGroup_AspNetUsers_CreatedById" />
         <AssociationConnector Association="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" />
+        <AssociationConnector Association="angularModel.SolutionFavourite" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,6 +11,7 @@ namespace IST.Models.RequestModels
         public int? TypeId { get; set; }
         public int? OwnerId { get; set; }
         public List<int> FilterIds { get; set; }
+        public string ClientRequest { get; set; }
         public OrderBySolution OrderByColumn
         {
             get

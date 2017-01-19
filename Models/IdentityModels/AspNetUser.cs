@@ -42,6 +42,7 @@ namespace IST.Models.IdentityModels
         public virtual ICollection<DomainModels.Filter> CreatedFilters { get; set; }
         public virtual ICollection<DomainModels.Filter> UpdatedFilters { get; set; }
         public virtual ICollection<FilterCategory> CreatedFilterCategories { get; set; }
+        public virtual ICollection<Solution> Solutions { get; set; }
         public virtual ICollection<FilterCategory> UpdatedFilterCategories { get; set; }
         public virtual ICollection<Solution> CreatedSolutions { get; set; }
         public virtual ICollection<Solution> UpdatedSolutions { get; set; }

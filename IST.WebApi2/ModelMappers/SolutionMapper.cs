@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using IST.Models.DomainModels;
 using IST.WebApi2.Models;
 
@@ -26,6 +27,19 @@ namespace IST.WebApi2.ModelMappers
                 FilterIds = source.Filters?.Select(x => x.Id).ToList(),
                 Tags = source.Tags?.Select(x => x.MapFromServerToClient()).ToList(),
                 Filters = source.Filters?.Select(x => x.MapFromServerToClient()).ToList()
+            };
+        }
+        public static SolutionModel ClientCreateFrom(this Solution source)
+        {
+            return new SolutionModel
+            {
+                Id = source.Id,
+                Description = source.Description,
+                Name = source.Name,
+                Location = source.Location,
+                Image = source.Image,
+                Active = source.Active.HasValue ? source.Active : true,
+                IsFavorite = source.AspNetUsers.FirstOrDefault() != null
             };
         }
         public static Solution MapFromClientToServer(this SolutionModel source)

@@ -59,7 +59,7 @@
                 controller: 'HomeController',
                 controllerAs: 'hc',
                 templateUrl: helper.basepath('../../../../app/views/Home/home.html'),
-                resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables', 'slimscroll')
+                resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables', 'slimscroll', 'login.module')
             })
             .state('home.signin', {
                 url: '/SignIn?:returnUrl',
@@ -106,7 +106,7 @@
                 templateUrl: helper.basepath('../../../../app/views/Solution/Solution.html'),
                 controller: 'SolutionController',
                 controllerAs: 'sc',
-                resolve: helper.resolveFor('ui.select', 'Solution.module', 'oitozero.ngSweetAlert', 'datatables')
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'Solution.module')
             })
              .state('app.CreateSolution', {
                  url: '/CreateSolution/:Id',

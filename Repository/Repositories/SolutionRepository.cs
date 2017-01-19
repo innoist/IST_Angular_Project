@@ -51,25 +51,43 @@ namespace IST.Repository.Repositories
 
         public SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest)
         {
+            Expression<Func<Solution, bool>> query;
             int fromRow = (searchRequest.PageNo - 1) * searchRequest.PageSize;
             int toRow = searchRequest.PageSize;
-            Expression<Func<Solution, bool>> query =
-                s => ((searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
-                      && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id))) 
-                      && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId)) 
-                      && (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
-                      || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
-                      || s.Location.ToLower().Contains(searchRequest.Name.ToLower())
-                      || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
-                      || s.Tags.Any(x=>x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))
-                      || s.Filters.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))));
-
+            if (searchRequest.ClientRequest == null)
+            {
+                query =
+                    s => ((searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
+                          && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id)))
+                          && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId))
+                          && (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
+                          || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
+                          || s.Location.ToLower().Contains(searchRequest.Name.ToLower())
+                          || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
+                          || s.Tags.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))
+                          || s.Filters.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))));
+            }
+            else
+            {
+                query =
+                 s => ((s.Active.Value)
+                       && (searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
+                       && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id)))
+                       && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId))
+                       && (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
+                       || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
+                       || s.Location.ToLower().Contains(searchRequest.Name.ToLower())
+                       || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
+                       || s.Tags.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))
+                       || s.Filters.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))));
+            }
             //var aa = DbSet.Where(s => s.Filters.Any(x => searchRequest.FilterIds.Any(y => y.Equals(x.Id))) && searchRequest.FilterIds.Any()).ToList();
             //var bb = DbSet.Where(x => x.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id))).ToList();
             //var aaa = DbSet.Where(s => s.Tags.Any(x => x.DisplayValue.Contains(searchRequest.Name.ToLower()))
             //          || s.Tags.Any(x => x.TagGroup.DisplayValue.Contains(searchRequest.Name.ToLower()))).ToList();
             //var b = DbSet.Where(s => s.Name.ToLower().Contains(searchRequest.Name.ToLower())).ToList();
             var name = DbSet.Where(s => s.Name.ToLower().Contains(searchRequest.Name.ToLower())).ToList();
+            
             IEnumerable<Solution> data = searchRequest.IsAsc
                 ? DbSet
                     .Where(query)
@@ -90,6 +108,15 @@ namespace IST.Repository.Repositories
                 TotalCount = DbSet.Select(x => x.Id).Count(),
                 FilteredCount = DbSet.Count(query)
             };
+        }
+
+        public IEnumerable<Solution> SearchByName(string name)
+        {
+            var result = DbSet.Where(s => (name == null || s.Name.ToLower().Contains(name.ToLower()))
+                                       || (name == null || s.Description.ToLower().Contains(name.ToLower()))
+                                       && (!s.Active.HasValue || s.Active.Value));
+            var aa = DbSet.Where(s => s.Description.ToLower().Contains(name.ToLower())).ToList();
+            return result;
         }
 
         #endregion

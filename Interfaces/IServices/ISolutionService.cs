@@ -15,6 +15,7 @@ namespace IST.Interfaces.IServices
         SolutionBaseData GetBaseData(int id);
         SolutionBaseData GetFilterData();
         bool SaveOrUpdate(SolutionCreateResponseModel response);
-
+        IEnumerable<Solution> SearchByName(string name);
+        bool SaveFavorite(int solutionId, bool saveOrDelete);
     }
 }

@@ -128,6 +128,14 @@
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="SolutionFavourite">
+          <Key>
+            <PropertyRef Name="SolutionId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="SolutionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="SolutionFilter">
           <Key>
             <PropertyRef Name="SolutionId" />
@@ -278,6 +286,30 @@
             </Principal>
             <Dependent Role="MenuRight">
               <PropertyRef Name="Menu_MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavouriteSolution_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionFavourite" Type="Self.SolutionFavourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionFavourite">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavouriteSolution_Solution">
+          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+          <End Role="SolutionFavourite" Type="Self.SolutionFavourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionFavourite">
+              <PropertyRef Name="SolutionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -556,6 +588,7 @@
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuRight" EntityType="Self.MenuRight" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solution" EntityType="Self.Solution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionFavourite" EntityType="Self.SolutionFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionFilter" EntityType="Self.SolutionFilter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionOwner" EntityType="Self.SolutionOwner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionTag" EntityType="Self.SolutionTag" Schema="dbo" store:Type="Tables" />
@@ -589,6 +622,14 @@
           <AssociationSet Name="FK_dbo_MenuRight_dbo_Menu_Menu_MenuId" Association="Self.FK_dbo_MenuRight_dbo_Menu_Menu_MenuId">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="MenuRight" EntitySet="MenuRight" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavouriteSolution_AspNetUsers" Association="Self.FK_FavouriteSolution_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionFavourite" EntitySet="SolutionFavourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavouriteSolution_Solution" Association="Self.FK_FavouriteSolution_Solution">
+            <End Role="Solution" EntitySet="Solution" />
+            <End Role="SolutionFavourite" EntitySet="SolutionFavourite" />
           </AssociationSet>
           <AssociationSet Name="FK_Filter_AspNetUsers_CreatedById" Association="Self.FK_Filter_AspNetUsers_CreatedById">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -801,6 +842,10 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="TagGroup" EntitySet="TagGroups" />
           </AssociationSet>
+          <AssociationSet Name="SolutionFavourite" Association="angularModel.SolutionFavourite">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Solution" EntitySet="Solutions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserRole">
           <Key>
@@ -872,6 +917,7 @@
           <NavigationProperty Name="UpdatedTags" Relationship="angularModel.FK_Tag_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="Tag" />
           <NavigationProperty Name="CreatedTagGroups" Relationship="angularModel.FK_TagGroup_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="TagGroup" />
           <NavigationProperty Name="UpdatedTagGroups" Relationship="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="TagGroup" />
+          <NavigationProperty Name="Solutions" Relationship="angularModel.SolutionFavourite" FromRole="AspNetUser" ToRole="Solution" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1104,6 +1150,7 @@
           <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Solution_AspNetUsers_CreatedById" FromRole="Solution" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Solution_AspNetUsers_UpdatedById" FromRole="Solution" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="angularModel.SolutionFavourite" FromRole="Solution" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="1" />
@@ -1305,6 +1352,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="SolutionFavourite">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1504,6 +1555,14 @@
             </EndProperty>
             <EndProperty Name="Solution">
               <ScalarProperty Name="Id" ColumnName="SolutionId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SolutionFavourite" TypeName="angularModel.SolutionFavourite" StoreEntitySet="SolutionFavourite">
+            <EndProperty Name="Solution">
+              <ScalarProperty Name="Id" ColumnName="SolutionId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
           </EntityContainerMapping>

@@ -3,20 +3,25 @@
 .padding-right2 {
     padding-right: 2px !important;
 }
+
 .padding-right3 {
     padding-right: 3px !important;
 }
+
 .padding-leftright20 {
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
+
 .padding-leftright30 {
     padding-left: 30px !important;
     padding-right: 30px !important;
 }
+
 .border-radius100 {
     border-radius: 100px !important;
 }
+
 .margin-bottom110 {
     margin-bottom: 110px;
 }
@@ -67,4 +72,29 @@
 
 .margin-top4 {
     margin-top: 4px;
+}
+
+.input-group .dropdown-menu {
+    max-height: 270px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.font-size24 {
+    font-size: 24px;
+}
+
+.padding-left24 {
+    padding-left: 24px;
+}
+
+.projectDivHeight {
+    min-height: 50px;
+    line-height: 40px;
+    height: 50px;
+}
+
+.c-checkbox input[type=checkbox]:checked + span, .c-radio input[type=checkbox]:checked + span, .c-checkbox input[type=radio]:checked + span, .c-radio input[type=radio]:checked + span {
+    border-color: #18ba9b;
+    background-color: #18ba9b;
 }

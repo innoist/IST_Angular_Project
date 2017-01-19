@@ -12,9 +12,9 @@ namespace IST.Models.ResponseModels
     {
 
         public Solution Solution { get; set; }
-        public IEnumerable<DropDownModel> Tags { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
         public IEnumerable<DropDownModel> SolutionOwners { get; set; }
         public IEnumerable<DropDownModel> SolutionTypes { get; set; }
-        public IEnumerable<DropDownModel> Filters { get; set; }
+        public IEnumerable<Filter> Filters { get; set; }
     }
 }

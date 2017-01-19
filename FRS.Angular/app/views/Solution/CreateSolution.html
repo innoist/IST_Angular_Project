@@ -45,7 +45,7 @@
                                        class="form-control"
                                        id="loadFile"
                                        accept="image/*"
-                                       onchange="angular.element(this).scope().readFile(this)" />
+                                       onchange="angular.element(this).scope().readFile(this)"/>
                                 <button style="margin-top: 4px" class="btn btn-labeled btn-danger" ng-click="csc.ResetImage()">
                                     <span class="btn-label">
                                         <i class="icon-trash"></i>
@@ -160,10 +160,10 @@
                                            uib-tooltip="{{ csc.validateInput(csc.formValidate.Tags, 'required') ? 'Tags are required.' : '' }}"
                                            uib-tooltip-trigger="focus"
                                            tooltip-class="tooltip-danger">
-                                    <ui-select-match placeholder="Select Tag(s)">{{$item.DisplayName}}</ui-select-match>
-                                    <ui-select-choices repeat="obj in csc.Tags | propsFilter: {DisplayName: $select.search}"
+                                    <ui-select-match placeholder="Select Tag(s)">{{$item.DisplayValue}}</ui-select-match>
+                                    <ui-select-choices group-by="'TagGroupName'" repeat="obj in csc.Tags | propsFilter: {DisplayValue: $select.search}"
                                                        class="animated fadeInDown">
-                                        <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
+                                        <div ng-bind-html="obj.DisplayValue | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
@@ -180,11 +180,11 @@
                                            uib-tooltip-trigger="focus"
                                            tooltip-class="tooltip-danger">
                                     <ui-select-match placeholder="Select Filter(s)">
-                                        {{$item.DisplayName}}
+                                        {{$item.DisplayValue}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="obj in csc.Filters | propsFilter: {DisplayName: $select.search}" 
+                                    <ui-select-choices group-by="'FilterCategoryName'" repeat="obj in csc.Filters | propsFilter: {DisplayValue: $select.search}" 
                                                        class="animated fadeInDown">
-                                        <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
+                                        <div ng-bind-html="obj.DisplayValue | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
@@ -209,7 +209,7 @@
                                     <input id="Active" type="checkbox"
                                            ng-model="csc.Solution.Active" name="Active"
                                            class="needsclick checkbox checkbox-inline"
-                                           ng-disabled="!csc.edit"><span class="fa fa-star"></span><strong>Active?</strong>
+                                           ng-disabled="!csc.edit"><span class="fa fa-check"></span><strong>Active?</strong>
                                 </label>
                             </div>
                         </div>

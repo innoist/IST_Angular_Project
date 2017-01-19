@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using IST.Models.IdentityModels;
 
 namespace IST.Models.DomainModels
 {
@@ -17,6 +18,7 @@ namespace IST.Models.DomainModels
         public bool? Active { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Filter> Filters { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual SolutionOwner SolutionOwner { get; set; }
         public virtual SolutionType SolutionType { get; set; }
     }

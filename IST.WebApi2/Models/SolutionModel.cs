@@ -19,9 +19,11 @@ namespace IST.WebApi2.Models
         public string SecurityInfo { get; set; }
         public string Image { get; set; }
         public bool? Active { get; set; }
+        public bool SaveFavorite { get; set; }
         
         public List<int> TagIds { get; set; }
         public List<int> FilterIds { get; set; }
+        public bool IsFavorite { get; set; }
 
         public List<TagModel> Tags { get; set; }
         public List<FilterModel> Filters { get; set; }
@@ -57,8 +59,8 @@ namespace IST.WebApi2.Models
     public class SolutionViewModel
     {
         public SolutionModel SolutionModel { get; set; }
-        public IEnumerable<DropDownModel> Tags { get; set; }
-        public IEnumerable<DropDownModel> Filters { get; set; }
+        public IEnumerable<TagModel> Tags { get; set; }
+        public IEnumerable<FilterModel> Filters { get; set; }
         public IEnumerable<DropDownModel> SolutionTypes { get; set; }
         public IEnumerable<DropDownModel> SolutionOwners { get; set; }
     }

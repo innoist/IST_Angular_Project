@@ -30,16 +30,17 @@
             $('.bootstrap-filestyle.input-group input').css("display", "none");
         });
 
+        //Upload File
         $scope.readFile = function (input) {
 
             if (input.files && input.files[0]) {
                 //calculate size of image in MB's
-                var sizeOfImageInMb = parseFloat(input.files[0].size) / parseFloat((1024 * 1024));
-                //Check if greater than 1MB
-                if (sizeOfImageInMb > parseFloat(1)) {
-                    toaster.pop("error", "Too large", "Select an image less than 1 MB");
-                    return;
-                }
+                //var sizeOfImageInMB = parseFloat(input.files[0].size) / parseFloat((1024 * 1024));
+                ////Check if greater than 1MB
+                //if (sizeOfImageInMB > parseFloat(1)) {
+                //    toaster.pop("error", "Too large", "Select an image less than 1 MB");
+                //    return;
+                //}
                 vm.Solution.Image = '/app/img/loading.gif';
                 $('.SolutionImage').attr('src', vm.Solution.Image);
                 vm.FileExtension = input.files[0].name.split('.')[1];
@@ -125,7 +126,9 @@
 
         SolutionService.loadById(solutionId, function (response) {
             if (response) {
-                vm.Solution = response.SolutionModel;
+                if (response.SolutionModel) {
+                    vm.Solution = response.SolutionModel;
+                }
                 vm.Tags = response.Tags;
                 vm.Filters = response.Filters;
                 vm.SolutionTypes = response.SolutionTypes;

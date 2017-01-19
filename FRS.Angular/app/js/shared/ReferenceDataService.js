@@ -116,11 +116,10 @@
               ).then(onReady, onError);
         }
 
-        this.retrieveItems = function (url, val, id) {
+        this.retrieveItems = function (url, val) {
             return $http.get(frsApiUrl + url, {
                 params: {
-                    name: val,
-                    studentId : id
+                    name: val
                 }
             });
         }

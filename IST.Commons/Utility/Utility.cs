@@ -135,7 +135,7 @@ namespace IST.Commons.Utility
             var imageBytes = Convert.FromBase64String(imageBase64);
             Image image;
 
-            //Create a Image from the byte[]
+            //Create an Image from the byte[]
             using (MemoryStream ms = new MemoryStream(imageBytes))
             {
                 image = Image.FromStream(ms);

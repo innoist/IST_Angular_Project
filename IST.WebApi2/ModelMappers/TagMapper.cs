@@ -15,7 +15,8 @@ namespace IST.WebApi2.ModelMappers
             {
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
-                TagGroupId=source.TagGroupId
+                TagGroupId=source.TagGroupId,
+                TagGroupName=source.TagGroup.DisplayValue
             };
         }
         public static Tag MapFromClientToServer(this TagModel source)

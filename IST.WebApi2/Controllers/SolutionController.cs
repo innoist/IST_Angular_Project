@@ -9,8 +9,8 @@ using IST.Models.ResponseModels;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using IST.WebBase.Mvc;
-using static IST.Commons.Utility.Utility;
 using static System.String;
+using static IST.Commons.Utility.Utility;
 namespace IST.WebApi2.Controllers
 {
     public class SolutionController : BaseController
@@ -23,7 +23,7 @@ namespace IST.WebApi2.Controllers
         #region Constructor
         public SolutionController(ISolutionService service, ISolutionTypeRepository solutionTypeRepository)
         {
-            this.solutionService = service;
+            solutionService = service;
             this.solutionTypeRepository = solutionTypeRepository;
         }
         #endregion
@@ -58,8 +58,8 @@ namespace IST.WebApi2.Controllers
             var viewModel = new SolutionViewModel
             {
                 SolutionModel = baseData.Solution?.MapFromServerToClient(),
-                Tags = baseData.Tags.ToList(),
-                Filters = baseData.Filters.ToList(),
+                Tags = baseData.Tags.Select(x => x.MapFromServerToClient()).ToList(),
+                Filters = baseData.Filters.Select(x => x.MapFromServerToClient()).ToList(),
                 SolutionTypes = baseData.SolutionTypes.ToList(),
                 SolutionOwners = baseData.SolutionOwners.ToList()
             };
@@ -74,13 +74,11 @@ namespace IST.WebApi2.Controllers
                 SetAllValues(model);
             else
                 SetUpdatedValues(model);
-
-
             //Scale Image to Aspect Ratio i.e 256*256
-            if (!string.IsNullOrEmpty(model.Image))
+            if (!IsNullOrEmpty(model.Image))
             {
                 var metaData = model.Image.Split(',')[0];
-                var imageBase64 = ScaleImage(model.Image.Split(',')[1], new Size(128, 128));
+                var imageBase64 = ScaleImage(model.Image.Split(',')[1], new Size(300, 300));
                 model.Image = Concat(metaData, ",", imageBase64);
             }
             SolutionCreateResponseModel response = new SolutionCreateResponseModel
@@ -93,12 +91,6 @@ namespace IST.WebApi2.Controllers
             var status = solutionService.SaveOrUpdate(response);
             return Ok(status);
         }
-
-        //public IHttpActionResult Delete(int id)
-        //{
-        //    var result = solutionService.Delete(id);
-        //    return Ok(result);
-        //}
 
         #endregion
     }

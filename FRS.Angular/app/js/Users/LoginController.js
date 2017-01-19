@@ -12,10 +12,10 @@
 
     LoginFormController.$inject = ['$http', '$state', '$stateParams', '$localStorage', '$rootScope'];
     function LoginFormController($http, $state, $stateParams, $localStorage, $rootScope) {
-        if ($localStorage['authorizationData']) {
-            $rootScope.isAuthenticated = true;
-            $state.go('account.login');
-        }
+        //if ($localStorage['authorizationData']) {
+        //    $rootScope.isAuthenticated = true;
+        //    $state.go('home.signin');
+        //}
 
         var vm = this;
 
@@ -63,7 +63,7 @@
                                         $state.go($stateParams.returnUrl);
                                     else
                                         //$state.go('app.dashboard');
-                                        $state.go('home.index');
+                                        $state.go('home.index', {}, { reload: true });
                                     break;
                                 case 'Client':
                                     if ($stateParams.returnUrl)
@@ -100,7 +100,7 @@
                     vm.loginForm.account_password.$dirty = true;
                 }
             };
-            
+
         }
     }
 })();

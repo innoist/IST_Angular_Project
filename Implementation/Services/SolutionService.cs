@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.Common.DropDown;
 using IST.Models.DomainModels;
 using IST.Models.RequestModels;
 using IST.Models.ResponseModels;
+using Microsoft.AspNet.Identity;
 
 namespace IST.Implementation.Services
 {
@@ -16,25 +18,31 @@ namespace IST.Implementation.Services
     public sealed class SolutionService : ISolutionService
     {
         #region Private
+
         private readonly ISolutionRepository solutionRepository;
         private readonly ITagRepository tagRepository;
         private readonly IFilterRepository filterRepository;
         private readonly ISolutionTypeRepository solutionTypeRepository;
         private readonly ISolutionOwnerRepository solutionOwnerRepository;
+        private readonly IUserRepository userRepository;
+
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Constructor
         /// </summary>
         public SolutionService(ITagRepository tagRepository, IFilterRepository filterRepository,
-            ISolutionRepository solutionRepository, ISolutionTypeRepository solutionTypeRepository, ISolutionOwnerRepository solutionOwnerRepository)
+            ISolutionRepository solutionRepository, ISolutionTypeRepository solutionTypeRepository,
+            ISolutionOwnerRepository solutionOwnerRepository, IUserRepository userRepository)
         {
-            
+
             this.tagRepository = tagRepository;
             this.filterRepository = filterRepository;
             this.solutionRepository = solutionRepository;
             this.solutionOwnerRepository = solutionOwnerRepository;
+            this.userRepository = userRepository;
             this.solutionTypeRepository = solutionTypeRepository;
         }
 
@@ -57,10 +65,14 @@ namespace IST.Implementation.Services
             var basedata = new SolutionBaseData
             {
                 Solution = id > 0 ? solutionRepository.GetById(id) : null,
-                SolutionOwners = solutionOwnerRepository.GetAll().Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
-                SolutionTypes = solutionTypeRepository.GetAll().Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
-                Tags = tagRepository.GetAll().Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
-                Filters = filterRepository.GetAll().Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
+                SolutionOwners =
+                    solutionOwnerRepository.GetAll()
+                        .Select(x => new DropDownModel {Id = x.Id, DisplayName = x.DisplayValue}),
+                SolutionTypes =
+                    solutionTypeRepository.GetAll()
+                        .Select(x => new DropDownModel {Id = x.Id, DisplayName = x.DisplayValue}),
+                Tags = tagRepository.GetAll().ToList(),
+                Filters = filterRepository.GetAll().ToList()
             };
             return basedata;
         }
@@ -75,9 +87,11 @@ namespace IST.Implementation.Services
             };
             return filterdata;
         }
+
         public bool SaveOrUpdate(SolutionCreateResponseModel response)
         {
             #region Update Case
+
             if (response.Solution.Id > 0)
             {
                 var solutionToUpdate = solutionRepository.Find(response.Solution.Id);
@@ -94,15 +108,18 @@ namespace IST.Implementation.Services
                 UpdateFilters(solutionToUpdate, response.FilterIds);
                 solutionRepository.Update(solutionToUpdate);
             }
-            #endregion
+                #endregion
 
-            #region Add Case
+                #region Add Case
+
             else
             {
                 response.Solution.Tags = response.TagIds?.Select(tagId => tagRepository.Find(tagId)).ToList();
-                response.Solution.Filters = response.FilterIds?.Select(filterId => filterRepository.Find(filterId)).ToList();
+                response.Solution.Filters =
+                    response.FilterIds?.Select(filterId => filterRepository.Find(filterId)).ToList();
                 solutionRepository.Add(response.Solution);
             }
+
             #endregion
 
             solutionRepository.SaveChanges();
@@ -207,6 +224,29 @@ namespace IST.Implementation.Services
                 //Remove All Items from Database if Clientlist is Empty
                 solutionToUpdate.Tags.Clear();
             }
+        }
+
+        public IEnumerable<Solution> SearchByName(string name)
+        {
+            return solutionRepository.SearchByName(name);
+        }
+
+        public bool SaveFavorite(int solutionId, bool saveOrDelete)
+        {
+            
+            var solutionToUpdate = solutionRepository.Find(solutionId);
+            var userToSave = userRepository.FindUserById(ClaimsPrincipal.Current.Identity.GetUserId());
+            if (saveOrDelete)
+            {
+                solutionToUpdate.AspNetUsers.Add(userToSave);
+                solutionRepository.Update(solutionToUpdate);
+                solutionRepository.SaveChanges();
+                return true;
+            }
+            solutionToUpdate.AspNetUsers.Remove(userToSave);
+            solutionRepository.Update(solutionToUpdate);
+            solutionRepository.SaveChanges();
+            return false;
         }
 
         #endregion

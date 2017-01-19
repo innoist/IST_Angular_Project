@@ -16,7 +16,8 @@ namespace IST.WebApi2.ModelMappers
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
                 FilterCategoryId = source.FilterCategoryId,
-                SolutionCount = source.Solutions.Count.ToString()
+                SolutionCount = source.Solutions.Where(x => x.Active == true).ToList().Count,
+                FilterCategoryName = source.FilterCategory.DisplayValue
             };
         }
         public static Filter MapFromClientToServer(this FilterModel source)

@@ -10,13 +10,14 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
+    HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', '$window', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
 
-    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
+    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, $window, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
         var vm = this;
 
         HomeService.url = "/api/Project/";
         vm.CategoryId = 0;
+        vm.Favorites = false;
         vm.Projects = [];
         //For first call to server
         vm.firstCall = true;
@@ -32,20 +33,25 @@
             PageSize: 9,
             PageNo: 1,
             IsAsc: true,
-            OrderByColumn: 1
+            OrderByColumn: 1,
+            ClientRequest: HomeService.url
         }
+
         var onSuccessLoadProjects = function (response) {
             vm.clientMainSpinner = true;
-            if (vm.clicked || vm.searchString) {
-                    vm.Projects = [];
-                    angular.forEach(response.Data, function(project) {
-                        project.isNew = true;
-                        vm.Projects.push(project);
-                        $.unblockUI();
-                    });
-                    vm.clicked = false;
+            if (vm.clicked || vm.searchString || !vm.Favorites) {
+                if (vm.firstCall) {
+                    vm.FilterCategories = response.FilterCategories;
+                }
+                vm.Projects = [];
+                angular.forEach(response.Data, function (project) {
+                    project.isNew = true;
+                    vm.Projects.push(project);
+                    $.unblockUI();
+                });
+                vm.clicked = false;
                 if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
-                    angular.forEach(vm.Projects, function(project) {
+                    angular.forEach(vm.Projects, function (project) {
                         project.isNew = false;
                     });
                     vm.clientSpinnerOnScroll = false;
@@ -73,7 +79,7 @@
                 });
                 vm.clientSpinnerOnScroll = false;
                 if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
-                    angular.forEach(vm.Projects, function(project) {
+                    angular.forEach(vm.Projects, function (project) {
                         project.isNew = false;
                     });
                     vm.clientSpinnerOnScroll = false;
@@ -94,7 +100,7 @@
                 $.blockUI({ message: '<img src="/Ecommerce/img/Spinner/balls.gif" />' });
             }
             vm.clientMainSpinner = true;
-            vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString : null;
+            vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString.DisplayName : null;
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
@@ -158,6 +164,68 @@
             $('#loginpage').show();
         }
 
+        //#region Post Data
+        vm.Solution = {};
+        vm.save = function (solutionId) {
+            vm.submitted = true;
+            var solution = {};
+            vm.Solution.Id = solutionId;
+            angular.forEach(vm.Projects, function (project) {
+                if (project.Id === solutionId) {
+                    solution = project;
+                }
+            });
+            vm.Solution.IsFavorite = solution.IsFavorite;
+            HomeService.save(vm.Solution, onSuccess, onError);
+            function onSuccess(response) {
+                if (response.data === true) {
+                    vm.tooltip = 'Added';
+                    $('#' + solutionId).addClass("rating-selected");
+                    $('#' + solutionId).removeClass("rating");
+                    angular.forEach(vm.Projects, function (project) {
+                        if (project.Id === solutionId) {
+                            project.IsFavorite = true;
+                        }
+                    });
+                    vm.saved = true;
+                } else {
+
+                    $('#' + solutionId).addClass("rating");
+                    $('#' + solutionId).removeClass("rating-selected");
+                    vm.saved = false;
+                    angular.forEach(vm.Projects, function (project) {
+                        if (project.Id === solutionId) {
+                            project.IsFavorite = false;
+                        }
+                    });
+                }
+            }
+            function onError(err) {
+                toaster.error(err.statusText, err.data.Message);
+                showErrors(err);
+            }
+        }
+        //#endregion
+
+
+        /************************************/
+        /************* Typeahead ************/
+        /************************************/
+        vm.getSolutions = function (val) {
+            var url = "/api/ProjectBaseData";
+            //Check if input is more that 1 char and less than 10
+            if (val.length >= 3 && val.length < 15)
+                return HomeService.retrieveItems(url, val)
+                    .then(function (res) {
+                        //local array to store items from server response
+                        var items = [];
+                        angular.forEach(res.data, function (item) {
+                            items.push(item);
+                        });
+                        return items;
+                    });
+        }
+
         //Logout
         $scope.logout = function () {
             $http.post(window.frsApiUrl + "/api/Account/Logout")
@@ -177,27 +245,31 @@
                 });
         }
 
-        vm.delete = function (id) {
-            SweetAlert.swal({
-                title: 'Are you sure?',
-                text: 'It cannot be undone!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ee3d3d',
-                confirmButtonText: 'Yes, Delete!',
-                cancelButtonText: 'No!',
-                closeOnConfirm: true,
-                closeOnCancel: true
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    HomeService.delete(id, function (response) {
-                        if (response) {
-                            vm.dtInstance.reloadData(function (json) { }, false);
-                            toaster.success("", "Deleted successfully.");
-                        }
-                    });
-                }
-            });
+        vm.resetdata = function () {
+            vm.searchString = '';
+            vm.getDataFromSever();
         }
+
+        vm.resetCategories = function () {
+            var filtersarr = vm.ProjectSearchRequest.FilterIds;
+            angular.forEach(filtersarr, function (id) {
+                $('#' + id)[0].checked = $('#' + id)[0].checked ? false : true;
+            });
+            vm.ProjectSearchRequest.FilterIds = [];
+            vm.getDataFromSever();
+        }
+
+        //to unbind the scroll event when scope destroy
+        $scope.$on("$destroy", function () {
+            $(window).unbind('scroll');
+        });
+
+        vm.seeFavorites = function () {
+            if (vm.Favorites) {
+                vm.Projects = vm.Projects.filter(x => x.IsFavorite === true);
+            } else {
+                vm.getDataFromSever();
+            }
+        };
     }
 })();
