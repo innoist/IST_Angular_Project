@@ -22,6 +22,7 @@
         vm.Projects = [];
         //For first call to server
         vm.firstCall = true;
+        vm.isScrolled = false;
         //For no no more solutions
         vm.NoMoreProjects = false;
         //to show end of solutions
@@ -40,7 +41,7 @@
 
         var onSuccessLoadProjects = function (response) {
             vm.clientMainSpinner = true;
-            if (vm.clicked || vm.searchString || !vm.Favorites) {
+            if (!vm.isScrolled) {
                 if (vm.firstCall) {
                     vm.FilterCategories = response.FilterCategories;
                 }
@@ -93,6 +94,7 @@
                     vm.endOfSolutions = false;
                 }
                 vm.IsDataLoaded = false;
+                vm.isScrolled = false;
             }
         }
 
@@ -133,6 +135,7 @@
                     vm.clientSpinnerOnScroll = true;
                     vm.ProjectSearchRequest.PageNo += 1;
                     vm.getDataFromSever();
+                    vm.isScrolled = true;
                 }
             }
         });
@@ -267,8 +270,10 @@
 
         vm.seeFavorites = function () {
             if (vm.Favorites) {
-                vm.Projects = vm.Projects.filter(x => x.IsFavorite === true);
+                vm.ProjectSearchRequest.IsFavorite = true;
+                vm.getDataFromSever();
             } else {
+                vm.ProjectSearchRequest.IsFavorite = false;
                 vm.getDataFromSever();
             }
         };

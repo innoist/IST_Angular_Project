@@ -142,6 +142,7 @@
     <Content Include="Ecommerce\img\3.jpg" />
     <Content Include="Ecommerce\img\4.jpg" />
     <Content Include="Ecommerce\img\5.jpg" />
+    <Content Include="Ecommerce\img\backgroundimage.jpg" />
     <Content Include="Ecommerce\img\blank.gif" />
     <Content Include="Ecommerce\img\blog\01.jpg" />
     <Content Include="Ecommerce\img\blog\02.jpg" />
@@ -197,7 +198,6 @@
     <Content Include="Ecommerce\img\colors\07.jpg" />
     <Content Include="Ecommerce\img\logo-2.png" />
     <Content Include="Ecommerce\img\logo.png" />
-    <Content Include="Ecommerce\img\map.png" />
     <Content Include="Ecommerce\img\others\fb.png" />
     <Content Include="Ecommerce\img\Spinner\balls.gif" />
     <Content Include="Ecommerce\img\sponsors\01.png" />

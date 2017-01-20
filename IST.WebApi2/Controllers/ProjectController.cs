@@ -4,7 +4,6 @@ using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.Common.DropDown;
 using IST.Models.RequestModels;
-using IST.Models.ResponseModels;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using IST.WebBase.Mvc;
@@ -36,7 +35,6 @@ namespace IST.WebApi2.Controllers
             {
                 return BadRequest("Invalid Bad Request");
             }
-            //var filtersIds = filterService.FindFilterIdsByCategoryId(searchRequest.CategoryId);
             if (searchRequest.FilterIds == null || !searchRequest.FilterIds.Any())
             {
                 searchRequest.FilterIds = new List<int>();

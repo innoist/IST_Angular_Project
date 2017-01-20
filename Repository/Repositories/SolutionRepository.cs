@@ -74,6 +74,7 @@ namespace IST.Repository.Repositories
                        && (searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
                        && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id)))
                        && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId))
+                       && (searchRequest.IsFavorite == false || s.AspNetUsers.FirstOrDefault() != null)
                        && (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
                        || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
                        || s.Location.ToLower().Contains(searchRequest.Name.ToLower())

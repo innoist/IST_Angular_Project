@@ -12,6 +12,7 @@ namespace IST.Models.RequestModels
         public int? OwnerId { get; set; }
         public List<int> FilterIds { get; set; }
         public string ClientRequest { get; set; }
+        public bool IsFavorite { get; set; }
         public OrderBySolution OrderByColumn
         {
             get
