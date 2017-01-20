@@ -16,7 +16,7 @@
     <div class="nav-wrapper">
         <!-- START Left navbar-->
         <ul class="nav navbar-nav">
-            <li uib-tooltip="{{ 'Show / Hide Menu' }}" tooltip-placement="bottom">
+            <li uib-tooltip="{{app.layout.isCollapsed? 'Show Menu':'Hide Menu' }}" tooltip-placement="bottom">
                 <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
                 <a href="" trigger-resize="" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" class="hidden-xs">
                     <em ng-class="{'icon-login':app.layout.isCollapsed,'icon-logout':!app.layout.isCollapsed}"></em>

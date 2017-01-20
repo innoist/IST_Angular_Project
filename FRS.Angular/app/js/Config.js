@@ -50,6 +50,7 @@
                     } else
                         $scope.isAuthenticated = false;
                     $scope.CurrentDate = new Date();
+                    
                 }
                 ]
             })

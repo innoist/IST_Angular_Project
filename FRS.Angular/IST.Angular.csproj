@@ -107,6 +107,12 @@
     <Content Include="app\views\EcommerceFooter.html" />
     <Content Include="app\views\Solution\Solution.html" />
     <Content Include="app\views\Solution\CreateSolution.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ekko-lightbox.css" />
+    <Content Include="Content\ekko-lightbox.min.css" />
     <Content Include="Ecommerce\css\app.css" />
     <Content Include="Ecommerce\css\blocks.css" />
     <Content Include="Ecommerce\css\css-rtl\app-rtl.css" />
@@ -543,6 +549,18 @@
     <Content Include="Ecommerce\plugins\sky-forms-pro\skyforms\js\jquery.validate.min.js" />
     <Content Include="Ecommerce\plugins\sky-forms-pro\skyforms\js\sky-forms-ie8.js" />
     <Content Include="Ecommerce\plugins\smoothScroll.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ekko-lightbox.js" />
+    <Content Include="Scripts\ekko-lightbox.min.js" />
+    <Content Include="Scripts\jquery-1.9.0.js" />
+    <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="vendor\underscore-min.js" />
     <Content Include="app\js\Users\changePassword.service.js" />
     <Content Include="app\js\Users\ForgetPasswordController.js" />
@@ -1217,6 +1235,7 @@
     <None Include="Properties\PublishProfiles\Aversion_Angular.pubxml" />
     <None Include="Properties\PublishProfiles\GoCentralize - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\GoCentralize - Web Deploy.pubxml" />
+    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

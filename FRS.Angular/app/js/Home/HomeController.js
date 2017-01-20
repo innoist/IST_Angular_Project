@@ -268,14 +268,32 @@
             $(window).unbind('scroll');
         });
 
+
         vm.seeFavorites = function () {
             if (vm.Favorites) {
+                vm.clientMainSpinner = true;
                 vm.ProjectSearchRequest.IsFavorite = true;
+                vm.ProjectSearchRequest.PageNo = 1;
                 vm.getDataFromSever();
             } else {
                 vm.ProjectSearchRequest.IsFavorite = false;
                 vm.getDataFromSever();
             }
         };
+
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+
+        vm.zoomImage = function (image) {
+            var img = image ? frsApiUrl + image : "/Ecommerce/img/blog/project.png";
+            SweetAlert.swal({
+                title: "",
+                text: '<img src="' + img + '">',
+                //imageUrl: frsApiUrl + image,
+                html: true
+            });
+        }
     }
 })();

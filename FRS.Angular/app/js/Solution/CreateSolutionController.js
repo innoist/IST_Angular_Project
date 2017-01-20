@@ -29,7 +29,7 @@
         $timeout(function () {
             //to remove input field that contains name of image.
             $('.bootstrap-filestyle.input-group input').css("display", "none");
-        });
+        }, 2000);
 
         //Upload File
         $scope.readFile = function (input) {
