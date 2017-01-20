@@ -131,7 +131,7 @@
             if (response) {
                 if (response.SolutionModel) {
                     vm.Solution = response.SolutionModel;
-                    vm.Image = frsApiUrl + vm.Solution.Image;
+                    vm.Image = (vm.Solution.Image ? frsApiUrl + vm.Solution.Image : '/app/img/image-default.png');
                     $('.SolutionImage').attr('src', vm.Image);
                 }
                 vm.Tags = response.Tags;
@@ -163,22 +163,12 @@
 
                     //Tags multiselect
                     if (vm.Solution.TagIds) {
-                        vm.multiple.Tags = vm.Solution.Tags.map(function (tag) {
-                            return {
-                                DisplayName: tag.DisplayValue,
-                                Id: tag.Id
-                            }
-                        });
+                        vm.multiple.Tags = vm.Solution.Tags.slice();
                     }
 
                     //Filter multiselect
                     if (vm.Solution.FilterIds) {
-                        vm.multiple.Filters = vm.Solution.Filters.map(function (filter) {
-                            return {
-                                DisplayName: filter.DisplayValue,
-                                Id: filter.Id
-                            }
-                        });
+                        vm.multiple.Filters = vm.Solution.Filters.slice();
                     }
 
                     if (vm.Solution.Image)

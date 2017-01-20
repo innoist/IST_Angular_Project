@@ -73,11 +73,14 @@ namespace IST.WebApi2.Controllers
         [ValidateFilter]
         public IHttpActionResult Post()
         {
-            HttpPostedFile file = HttpContext.Current.Request.Files[0];
             var model = JsonConvert.DeserializeObject<SolutionModel>(HttpContext.Current.Request["1"]);
-            var fileName = DateTime.UtcNow.ToString("ddMMyyHHMMss") + file.FileName;
-            file.SaveAs(HttpContext.Current.Server.MapPath(@"~\ProjectImage\" + fileName));
-            model.Image = "/ProjectImage/" + fileName;
+            if (HttpContext.Current.Request.Files.Count != 0)
+            {
+                HttpPostedFile file = HttpContext.Current.Request.Files[0];
+                var fileName = DateTime.UtcNow.ToString("ddMMyyHHMMss") + file.FileName;
+                file.SaveAs(HttpContext.Current.Server.MapPath(@"~\ProjectImage\" + fileName));
+                model.Image = "/ProjectImage/" + fileName;
+            }
 
             if (model.Id == 0)
                 SetAllValues(model);
