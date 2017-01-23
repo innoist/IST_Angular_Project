@@ -18,12 +18,13 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            <div class="col-md-12 checkbox c-checkbox needsclick" style="padding-left: 0">
+                            <div class="col-md-12 checkbox c-checkbox needsclick" style="padding-left: 0" ng-if="isAuthenticated">
                                 <label class="control-label needsclick">
                                     <input type="checkbox" ng-model="hc.Favorites" ng-click="hc.seeFavorites()" name="IsImportant" class="needsclick checkbox checkbox-inline"><span class="fa fa-heart" style="border-color: #18ba9b"></span>
                                 </label><strong>Favorites</strong>
+                                <hr style="margin-bottom: 0"/>
                             </div>
-                            <hr/>
+                            
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <dl>
@@ -81,10 +82,6 @@
 
         <div class="col-md-9">
             <div class="row margin-bottom-5">
-                <!--<div class="col-sm-4 result-category">
-                    <h2>Projects</h2>
-                    <small class="shop-bg-red badge-results">Total : {{hc.TotalProjects}}</small>
-                </div>-->
                 <div class="col-md-12 padding-leftright30">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString"
@@ -111,13 +108,11 @@
             <div class="col-md-4 illustration-v2 repeated-item" ng-repeat="project in hc.Projects" style="height: 385px">
                 <div ng-class="{'shadow-emboss' : project.isNew}">
                     <div class="product-img product-img-brd">
-
-                        <a ng-href="{{project.Image? hc.apiUrl + project.Image : '/Ecommerce/img/blog/project.png'}}" data-title="{{project.Name}}" data-toggle="lightbox">
+                        <a ng-href="{{project.Image? hc.apiUrl + project.Image : '/Ecommerce/img/blog/project.png'}}" data-title="{{project.Name}}" data-toggle="lightbox" data-type="image">
                             <div style="vertical-align: middle; display: table-cell; height: 249px;">
                                 <img class="full-width img-responsive" ng-src="{{project.Image ? hc.apiUrl + project.Image: '/Ecommerce/img/blog/project.png' }}" alt="" style="height: auto; max-height: 244px; width: 100%">
                             </div>
                         </a>
-
 
                         <a class="product-review" target="_blank" ng-href="{{project.Location}}">{{project.Name}}</a>
                         <!--<a class="add-to-cart" target="_blank" ng-href="{{project.Location}}"><i class="fa fa-shopping-cart"></i></a>-->
@@ -145,7 +140,7 @@
                                     <i class="fa padding-right2" ng-class="{'fa-heart-o':!project.IsFavorite,'fa-heart':project.IsFavorite}"></i>
                                 </div>
                             </li>
-                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenGPopUp()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
+                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenSendToFriend()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -155,8 +150,18 @@
                 <h4>End of results!</h4>
             </div>
         </div>
-        <div ng-if="hc.clientSpinnerOnScroll && !hc.NoMoreProjects" style="text-align: center; position: fixed; top: 80%; left: 57%; z-index: 10051">
-            <img src="/app/img/preloader/spinner.gif"/>
+        <div ng-if="hc.clientSpinnerOnScroll && !hc.NoMoreProjects" style="text-align: center; position: fixed; top: 80%; left: 55%; z-index: 10051">
+            <!-- Spinner -->
+            <div class="line-spin-fade-loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
 
     </div>

@@ -18,10 +18,13 @@
         HomeService.url = "/api/Project/";
         vm.apiUrl = frsApiUrl;
         vm.CategoryId = 0;
+        //To show hide favorite solutions
         vm.Favorites = false;
+
         vm.Projects = [];
         //For first call to server
         vm.firstCall = true;
+        //to check if user scroll or not
         vm.isScrolled = false;
         //For no no more solutions
         vm.NoMoreProjects = false;
@@ -69,7 +72,6 @@
                 if (vm.firstCall) {
                     vm.FilterCategories = response.FilterCategories;
                 }
-                //vm.FilterCategories = response.FilterCategories;
                 angular.forEach(vm.Projects, function (project) {
                     project.isNew = false;
                 });
@@ -100,7 +102,7 @@
 
         vm.getDataFromSever = function () {
             if (vm.clientMainSpinner) {
-                $.blockUI({ message: '<img src="/app/img/preloader/spinner.gif" />' });
+                $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             }
             vm.clientMainSpinner = true;
             vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString.DisplayName : null;
@@ -146,16 +148,11 @@
         } else
             $scope.isAuthenticated = false;
 
-        vm.OpenGPopUp = function () {
+        vm.OpenSendToFriend = function () {
             $('#sendtofriend').show();
             //if ($('.g-popup-wrapper').is(':visible')) 
             //    $('div.wrapper').addClass('g-blur');
         }
-
-        $('.g-popup__close').on('click', function (e) {
-            $('.g-popup-wrapper').hide();
-            $('body').removeClass('g-blur');
-        });
 
         vm.OpenProjectDetail = function (id) {
             $('#projectdetail').show();
@@ -168,9 +165,15 @@
             $('#loginpage').show();
         }
 
+        $('.g-popup__close').on('click', function (e) {
+            $('.g-popup-wrapper').hide();
+            $('body').removeClass('g-blur');
+        });
+
         //#region Post Data
         vm.Solution = {};
         vm.save = function (solutionId) {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             vm.submitted = true;
             var solution = {};
             vm.Solution.Id = solutionId;
@@ -182,6 +185,7 @@
             vm.Solution.IsFavorite = solution.IsFavorite;
             HomeService.save(vm.Solution, onSuccess, onError);
             function onSuccess(response) {
+                $.unblockUI();
                 if (response.data === true) {
                     $('#' + solutionId).addClass("rating-selected");
                     $('#' + solutionId).removeClass("rating");
@@ -190,7 +194,7 @@
                             project.IsFavorite = true;
                         }
                     });
-                    toaster.success("Notification", "Solution has been added successfully.");
+                    //toaster.success("Notification", "Solution has been added successfully.");
                     vm.saved = true;
                 } else {
 
@@ -202,7 +206,7 @@
                             project.IsFavorite = false;
                         }
                     });
-                    toaster.error("Notification", "Solution has been removed successfully.");
+                    //toaster.error("Notification", "Solution has been removed successfully.");
                     vm.saved = false;
                 }
             }
@@ -232,24 +236,6 @@
                     });
         }
 
-        //Logout
-        $scope.logout = function () {
-            $http.post(window.frsApiUrl + "/api/Account/Logout")
-                .success(function () {
-                    $state.go('home.index', {}, { reload: true });
-                    delete $localStorage['authorizationData'];
-                    console.log("LoggedOut");
-                    //$.connection.hub.stop();
-                    $scope.isAuthenticated = false;
-                    $http.defaults.headers.common = {
-                        'Content-Type': 'application/json'
-                    };
-
-                })
-                .error(function (err) {
-                    showErrors(err);
-                });
-        }
 
         vm.resetdata = function () {
             vm.searchString = '';
@@ -270,7 +256,6 @@
         $scope.$on("$destroy", function () {
             $(window).unbind('scroll');
         });
-
 
         vm.seeFavorites = function () {
             if (vm.Favorites) {
@@ -293,6 +278,13 @@
         vm.searchSolutions = function () {
             vm.ProjectSearchRequest.PageNo = 1;
             vm.getDataFromSever();
+        }
+
+        vm.signOut=function() {
+            HomeService.logout().then(function(response) {
+                console.log(response);
+                $scope.isAuthenticated = false;
+            });
         }
     }
 })();

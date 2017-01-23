@@ -795,49 +795,6 @@
                         $state.go("home.signin", { returnUrl: toState.name });
                     }
                 }
-
-                //if (loginData) {
-                //    var nowGMT = (new Date()).toUTCString();
-                //    if (new Date(nowGMT) >= new Date(loginData.expires)) {
-                //        $rootScope.isAuthenticated = false;
-                //        $http.defaults.headers.common = {
-                //            'Content-Type': 'application/json'
-                //        };
-                //        delete $localStorage["authorizationData"];
-                //        event.preventDefault();
-                //        //toaster.pop('error', 'Session Expired', 'Your session has expires, Please login again to continue.');
-                //        $state.go("account.login", { returnUrl: toState.name });
-                //    }
-                //} if (!$localStorage["authorizationData"]) {
-
-                //    if (toState.name.split(".")[0] === "app") {
-                //        //if logged in
-                //        if (!$rootScope.isAuthenticated) {
-                //            event.preventDefault();
-                //            //return url setting
-                //            $state.go("account.login", { returnUrl: toState.name });
-                //        }
-
-                //    }
-                //    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
-                //    if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
-                //        window.location.reload();
-                //    }
-                //} else {
-                //    if (fromState.name.split(".")[0] === "app" && toState.name.split(".")[1] === "login") {
-                //        if ($rootScope.isAuthenticated) {
-                //            event.preventDefault();
-                //            $state.go(fromState.name);
-                //        }
-                //    }
-                //    //clear cache(script files) when changing state from home to login or app, to avoid signalR connection undefined error
-                //    if ((fromState.name.split(".")[0] === "home") && (toState.name.split(".")[1] === "login" || toState.name.split(".")[0] === "app")) {
-                //        if ($rootScope.isAuthenticated) {
-                //            event.preventDefault();
-                //            $state.go(toState.name);
-                //        }
-                //    }
-                //}
             }
         });
 
@@ -2080,10 +2037,7 @@
         var directive = {
             restrict: 'EAC',
             template:
-              '<div class="preloader-progress">' +
-                  '<div class="preloader-progress-bar" ' +
-                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
-              '</div>'
+              '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
             ,
             link: link
         };

@@ -50,9 +50,7 @@
                     } else
                         $scope.isAuthenticated = false;
                     $scope.CurrentDate = new Date();
-                    
-                }
-                ]
+                }]
             })
             .state('home.index', {
                 url: '/index',
@@ -68,14 +66,6 @@
                 templateUrl: helper.basepath('../../../../app/views/SignIn/SignIn.html'),
                 resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module', 'slimscroll')
             })
-            //.state('home.projectDetail', {
-            //    url: '/projectdetail/:Id',
-            //    title: 'Project Detail',
-            //    controller: 'ProjectDetailController',
-            //    controllerAs: 'pdc',
-            //    templateUrl: helper.basepath('../../../../app/views/ProjectDetail/ProjectDetail.html'),
-            //    resolve: helper.resolveFor('flot-chart', 'toaster', 'flot-chart-plugins', 'weather-icons', 'ProjectDetail.module', 'oitozero.ngSweetAlert', 'datatables')
-            //})
             .state('app.dashboard', {
                 url: '/dashboard',
                 title: 'Dashboard',

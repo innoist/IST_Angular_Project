@@ -10,13 +10,13 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.service('ReferenceDataService', ReferenceDataService);
 
-    ReferenceDataService.$inject = ['$http', 'toaster'];
+    ReferenceDataService.$inject = ['$http', 'toaster', '$localStorage', '$state','$q'];
 
-    function ReferenceDataService($http, toaster) {
+    function ReferenceDataService($http, toaster, $localStorage, $state, $q) {
 
         var sharedData = {};
 
-        this.setSharedData = function(value) {
+        this.setSharedData = function (value) {
             sharedData = value;
         }
 
@@ -84,7 +84,7 @@
                 if (response.ExceptionMessage) {
                     toaster.error(response.ExceptionMessage);
                 };
-                if(response.Message)
+                if (response.Message)
                     toaster.error(response.Message);
             };
 
@@ -115,7 +115,7 @@
                 }
               ).then(onReady, onError);
         }
-        
+
         this.uploadFile = function (data, onReady, onError, url) {
             if (!url)
                 url = this.url;
@@ -132,7 +132,7 @@
             $http.post(frsApiUrl + url, data,
                 {
                     transformRequest: angular.identity,
-                    headers : {'Content-Type' : undefined }
+                    headers: { 'Content-Type': undefined }
                 }
               ).then(onReady, onError);
         }
@@ -143,6 +143,26 @@
                     name: val
                 }
             });
+        }
+
+        this.logout = function () {
+            var defered = $q.defer();
+            $http.post(window.frsApiUrl + "/api/Account/Logout")
+                .success(function (response) {
+                    $state.go('home.index', {}, { reload: true });
+                    delete $localStorage['authorizationData'];
+                    console.log("LoggedOut");
+                    
+                    $http.defaults.headers.common = {
+                        'Content-Type': 'application/json'
+                    };
+                    defered.resolve(response);
+                })
+                .error(function (err) {
+                    showErrors(err);
+                });
+
+            return defered.promise;
         }
     }
 })();

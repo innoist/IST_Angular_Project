@@ -76,7 +76,6 @@
     <Content Include="app\img\preloader\preloader.full1.png" />
     <Content Include="app\img\logo4.png" />
     <Content Include="app\img\logo.png" />
-    <Content Include="app\img\preloader\spinner.gif" />
     <Content Include="app\img\user\default.png" />
     <Content Include="app\js\Dashboard\AdminDashboardController.js" />
     <Content Include="app\js\Home\HomeController.js" />

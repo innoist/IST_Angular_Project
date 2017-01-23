@@ -32,7 +32,7 @@
                     <ul class="list-inline right-topbar pull-right">
                         <li ng-if="!isAuthenticated"><a ng-click="hc.OpenLoginPage()">Log in</a> <!--| <a href="shop-ui-register.html">Register</a>--></li>
                         <li ng-if="isAuthenticated"><small>Welcome {{userName}}!</small></li>
-                        <li ng-if="isAuthenticated"><a ng-click="logout()">Sign out</a></li>
+                        <li ng-if="isAuthenticated"><a ng-click="hc.signOut()">Sign out</a></li>
                         <li><a href="#"><span class="fa fa-envelope"></span></a></li>
                         <li ng-if="isAuthenticated"><a ui-sref="app.Solution"><span class="glyphicon glyphicon-align-justify"></span></a></li>
                     </ul>
