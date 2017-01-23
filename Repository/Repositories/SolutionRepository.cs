@@ -82,13 +82,6 @@ namespace IST.Repository.Repositories
                        || s.Tags.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))
                        || s.Filters.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))));
             }
-            //var aa = DbSet.Where(s => s.Filters.Any(x => searchRequest.FilterIds.Any(y => y.Equals(x.Id))) && searchRequest.FilterIds.Any()).ToList();
-            //var bb = DbSet.Where(x => x.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id))).ToList();
-            //var aaa = DbSet.Where(s => s.Tags.Any(x => x.DisplayValue.Contains(searchRequest.Name.ToLower()))
-            //          || s.Tags.Any(x => x.TagGroup.DisplayValue.Contains(searchRequest.Name.ToLower()))).ToList();
-            //var b = DbSet.Where(s => s.Name.ToLower().Contains(searchRequest.Name.ToLower())).ToList();
-            var name = DbSet.Where(s => s.Name.ToLower().Contains(searchRequest.Name.ToLower())).ToList();
-            
             IEnumerable<Solution> data = searchRequest.IsAsc
                 ? DbSet
                     .Where(query)

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
-using IST.Models.Common.DropDown;
 using IST.WebApi2.Models;
 
 namespace IST.WebApi2.Controllers

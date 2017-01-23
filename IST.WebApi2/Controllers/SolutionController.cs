@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -12,8 +11,7 @@ using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using IST.WebBase.Mvc;
 using Newtonsoft.Json;
-using static System.String;
-using static IST.Commons.Utility.Utility;
+
 namespace IST.WebApi2.Controllers
 {
     public class SolutionController : BaseController

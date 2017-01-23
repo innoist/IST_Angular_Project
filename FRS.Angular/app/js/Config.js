@@ -117,34 +117,6 @@
                  controllerAs: 'csc',
                  resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Solution.module', 'filestyle', 'ui.select')
              })
-            ////Allergy
-            //.state('app.Allergy', {
-            //    url: '/Allergy',
-            //    title: 'Allergy',
-            //    templateUrl: helper.basepath('../../../../app/views/Allergy/Allergy.html'),
-            //    controller: 'AllergyController',
-            //    controllerAs: 'ac',
-            //    resolve: helper.resolveFor('Allergy.module', 'oitozero.ngSweetAlert', 'datatables')
-            //})
-            .state('app.CreateAllergy', {
-                url: '/CreateAllergy/:Id',
-                title: 'Allergy - Add/Edit',
-                templateUrl: helper.basepath('../../../../app/views/Allergy/CreateAllergy.html'),
-                controller: 'CreateAllergyController',
-                controllerAs: 'clc',
-                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Allergy.module')
-            })
-
-            ////Student
-            //.state('app.students', {
-            //    url: '/Students',
-            //    title: 'Students',
-            //    templateUrl: helper.basepath('../../../../app/views/Student/Student.html'),
-            //    controller: 'StudentController',
-            //    controllerAs: 'sc',
-            //    resolve: helper.resolveFor('Student.module', 'oitozero.ngSweetAlert', 'datatables', 'ui.select')
-            //})
-
             //Profile
             .state('app.Profile', {
                 url: '/Profile/:userName',

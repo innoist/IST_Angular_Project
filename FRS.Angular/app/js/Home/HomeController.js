@@ -100,7 +100,7 @@
 
         vm.getDataFromSever = function () {
             if (vm.clientMainSpinner) {
-                $.blockUI({ message: '<img src="/Ecommerce/img/Spinner/balls.gif" />' });
+                $.blockUI({ message: '<img src="/app/img/preloader/spinner.gif" />' });
             }
             vm.clientMainSpinner = true;
             vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString.DisplayName : null;
@@ -183,7 +183,6 @@
             HomeService.save(vm.Solution, onSuccess, onError);
             function onSuccess(response) {
                 if (response.data === true) {
-                    vm.tooltip = 'Added';
                     $('#' + solutionId).addClass("rating-selected");
                     $('#' + solutionId).removeClass("rating");
                     angular.forEach(vm.Projects, function (project) {
@@ -191,17 +190,20 @@
                             project.IsFavorite = true;
                         }
                     });
+                    toaster.success("Notification", "Solution has been added successfully.");
                     vm.saved = true;
                 } else {
 
                     $('#' + solutionId).addClass("rating");
                     $('#' + solutionId).removeClass("rating-selected");
-                    vm.saved = false;
+                    
                     angular.forEach(vm.Projects, function (project) {
                         if (project.Id === solutionId) {
                             project.IsFavorite = false;
                         }
                     });
+                    toaster.error("Notification", "Solution has been removed successfully.");
+                    vm.saved = false;
                 }
             }
             function onError(err) {
@@ -251,6 +253,7 @@
 
         vm.resetdata = function () {
             vm.searchString = '';
+            vm.ProjectSearchRequest.PageNo = 1;
             vm.getDataFromSever();
         }
 
@@ -277,6 +280,7 @@
                 vm.getDataFromSever();
             } else {
                 vm.ProjectSearchRequest.IsFavorite = false;
+                vm.ProjectSearchRequest.PageNo = 1;
                 vm.getDataFromSever();
             }
         };
@@ -286,14 +290,9 @@
             $(this).ekkoLightbox();
         });
 
-        vm.zoomImage = function (image) {
-            var img = image ? frsApiUrl + image : "/Ecommerce/img/blog/project.png";
-            SweetAlert.swal({
-                title: "",
-                text: '<img src="' + img + '">',
-                //imageUrl: frsApiUrl + image,
-                html: true
-            });
+        vm.searchSolutions = function () {
+            vm.ProjectSearchRequest.PageNo = 1;
+            vm.getDataFromSever();
         }
     }
 })();

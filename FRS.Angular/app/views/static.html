@@ -46,10 +46,7 @@
 <body class="header-fixed">
     <div data-preloader></div>
     <div ui-view="" class="wrapper"></div>
-    <!--<div id="mainSpinner" style="display: none; text-align: center; position: fixed; top: 50%; left: 50%; z-index: 10051">
-        <div class="whirl standard"></div>
-    </div>-->
-
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
 
     <script src="/Ecommerce/plugins/jquery/jquery.min.js"></script>
     <script src="/Ecommerce/plugins/jquery/jquery-migrate.min.js"></script>

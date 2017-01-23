@@ -1540,7 +1540,7 @@ _:-ms-lang(x),
   height: 30px;
   margin: auto;
   overflow: auto;
-  background-image: url(../img/preloader/balls.gif);
+  background-image: url(../img/preloader/spinner.gif);
   background-size: 100px 30px;
 }
 /*@noflip*/
@@ -1550,7 +1550,7 @@ _:-ms-lang(x),
   left: 0;
   bottom: 0;
   min-width: 10px;
-  background-image: url(../img/preloader/balls.gif);
+  background-image: url(../img/preloader/spinner.gif);
   background-size: 100px 30px;
 }
 .preloader-hidden {
