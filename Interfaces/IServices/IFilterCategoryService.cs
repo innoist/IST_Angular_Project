@@ -7,8 +7,7 @@ namespace IST.Interfaces.IServices
     {
         IEnumerable<FilterCategory> GetAll();
         FilterCategory FindFilterCategoryById(int filterCategoryId);
-        bool SaveFilterCategory(FilterCategory filterCategory);
-        bool UpdateFilterCategory(FilterCategory filterCategory);
+        bool SaveOrUpdateFilterCategory(FilterCategory filterCategory);
         bool DeleteFilterCategory(int filterCategoryId);
     }
 }

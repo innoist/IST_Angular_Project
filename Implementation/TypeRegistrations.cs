@@ -32,6 +32,7 @@ namespace IST.Implementation
             unityContainer.RegisterType<ISolutionOwnerService, SolutionOwnerService>();
             unityContainer.RegisterType<ISolutionTypeService, SolutionTypeService>();
             unityContainer.RegisterType<ITagService, TagService>();
+            unityContainer.RegisterType<ITagGroupService, TagGroupService>();
             unityContainer.RegisterType<IFilterService, FilterService>();
             unityContainer.RegisterType<IFilterCategoryService, FilterCategoryService>();
 

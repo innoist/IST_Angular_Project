@@ -78,6 +78,10 @@
     <Content Include="app\img\logo.png" />
     <Content Include="app\img\user\default.png" />
     <Content Include="app\js\Dashboard\AdminDashboardController.js" />
+    <Content Include="app\js\TagGroup\CreateTagGroupController.js" />
+    <Content Include="app\js\TagGroup\TagGroupController.js" />
+    <Content Include="app\js\FilterCategory\CreateFilterCategoryController.js" />
+    <Content Include="app\js\FilterCategory\FilterCategoryController.js" />
     <Content Include="app\js\Home\HomeController.js" />
     <Content Include="app\js\lazymodules.js" />
     <Content Include="app\js\partials\SidebarController.js" />
@@ -95,12 +99,16 @@
     <Content Include="app\js\Modules.js" />
     <Content Include="app\js\shared\ReferenceDataService.js" />
     <Content Include="app\views\EcommerceHeader.html" />
+    <Content Include="app\views\FilterCategory\CreateFilterCategory.html" />
+    <Content Include="app\views\FilterCategory\FilterCategory.html" />
     <Content Include="app\views\IST\innostark.html" />
     <Content Include="app\views\ProjectDetail\ProjectDetail.html" />
     <Content Include="app\views\SignIn\SignIn.html" />
     <Content Include="app\views\EcommerceFooter.html" />
     <Content Include="app\views\Solution\Solution.html" />
     <Content Include="app\views\Solution\CreateSolution.html" />
+    <Content Include="app\views\TagGroup\CreateTagGroup.html" />
+    <Content Include="app\views\TagGroup\TagGroup.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

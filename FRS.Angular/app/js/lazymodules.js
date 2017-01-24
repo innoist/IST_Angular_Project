@@ -227,6 +227,16 @@
                                                   '/app/js/shared/ReferenceDataService.js']
               },
               {
+                  name: 'FilterCategory.module', files: ['/app/js/FilterCategory/FilterCategoryController.js',
+                                                  '/app/js/FilterCategory/CreateFilterCategoryController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
+                  name: 'TagGroup.module', files: ['/app/js/TagGroup/TagGroupController.js',
+                                                  '/app/js/TagGroup/CreateTagGroupController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
                   name: 'Utility.module', files: ['/app/js/shared/UtilityService.js']
               },
               {

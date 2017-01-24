@@ -790,11 +790,17 @@
                 var loginData = $localStorage["authorizationData"];
 
                 if (!loginData) {
-                    if ((fromState.name.split(".")[0] === "home" || fromState.name === "") && (toState.name.split(".")[0] === "app" || toState.name==="home.index")) {
+                    if ((fromState.name.split(".")[0] === "home" || fromState.name === "") && (toState.name.split(".")[0] === "app" || toState.name === "home.index")) {
                         event.preventDefault();
                         $state.go("account.login", { returnUrl: toState.name });
                     }
-                }
+                } 
+                    //else {
+                //    if ((fromState.name.split(".")[0] === "home" || fromState.name === "") && (toState.name.split(".")[0] === "app" || toState.name === "home")) {
+                //        event.preventDefault();
+                //        $state.go(toState.name);
+                //    }
+                //}
             }
         });
 

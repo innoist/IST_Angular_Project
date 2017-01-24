@@ -30,20 +30,24 @@ namespace IST.Implementation.Services
             return tagGroupRepository.Find(tagGroupId);
         }
 
-        public bool SaveTagGroup(TagGroup tagGroup)
+        public bool SaveOrUpdateTagGroup(TagGroup tagGroup)
         {
-            tagGroupRepository.Add(tagGroup);
+            if (tagGroup.Id > 0)
+            {
+                var categoryToUpdate = tagGroupRepository.Find(tagGroup.Id);
+                categoryToUpdate.DisplayValue = tagGroup.DisplayValue;
+                categoryToUpdate.RecLastUpdatedById = tagGroup.RecLastUpdatedById;
+                categoryToUpdate.RecLastUpdatedOn = tagGroup.RecLastUpdatedOn;
+                tagGroupRepository.Update(categoryToUpdate);
+            }
+            else
+            {
+                tagGroupRepository.Add(tagGroup);
+            }
             tagGroupRepository.SaveChanges();
             return true;
         }
-
-        public bool UpdateTagGroup(TagGroup tagGroup)
-        {
-            tagGroupRepository.Update(tagGroup);
-            tagGroupRepository.SaveChanges();
-            return true;
-        }
-
+        
         public bool DeleteTagGroup(int tagGroupId)
         {
             var tagGroupToDelete = tagGroupRepository.Find(tagGroupId);

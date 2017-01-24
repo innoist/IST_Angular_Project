@@ -107,6 +107,40 @@
                  controllerAs: 'csc',
                  resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Solution.module', 'filestyle', 'ui.select')
              })
+            //FilterCategory
+            .state('app.FilterCategory', {
+                url: '/FilterCategories',
+                title: 'Filter Categories',
+                templateUrl: helper.basepath('../../../../app/views/FilterCategory/FilterCategory.html'),
+                controller: 'FilterCategoryController',
+                controllerAs: 'fcc',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'FilterCategory.module')
+            })
+             .state('app.CreateFilterCategory', {
+                 url: '/CreateFilterCategory/:Id',
+                 title: 'Filter Category - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/FilterCategory/CreateFilterCategory.html'),
+                 controller: 'CreateFilterCategoryController',
+                 controllerAs: 'cfcc',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'FilterCategory.module', 'filestyle', 'ui.select')
+             })
+             //Tag Group
+            .state('app.TagGroup', {
+                url: '/TagGroups',
+                title: 'Tag Groups',
+                templateUrl: helper.basepath('../../../../app/views/TagGroup/TagGroup.html'),
+                controller: 'TagGroupController',
+                controllerAs: 'tgc',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'TagGroup.module')
+            })
+             .state('app.CreateTagGroup', {
+                 url: '/CreateTagGroup/:Id',
+                 title: 'Tag Group - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/TagGroup/CreateTagGroup.html'),
+                 controller: 'CreateTagGroupController',
+                 controllerAs: 'ctgc',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'TagGroup.module', 'filestyle', 'ui.select')
+             })
             //Profile
             .state('app.Profile', {
                 url: '/Profile/:userName',

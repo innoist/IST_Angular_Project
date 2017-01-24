@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
@@ -34,16 +36,20 @@ namespace IST.Implementation.Services
             return filterCategoryRepository.Find(filterCategoryId);
         }
 
-        public bool SaveFilterCategory(FilterCategory filterCategory)
+        public bool SaveOrUpdateFilterCategory(FilterCategory filterCategory)
         {
-            filterCategoryRepository.Add(filterCategory);
-            filterCategoryRepository.SaveChanges();
-            return true;
-        }
-
-        public bool UpdateFilterCategory(FilterCategory filterCategory)
-        {
-            filterCategoryRepository.Update(filterCategory);
+            if (filterCategory.Id > 0)
+            {
+                var categoryToUpdate = filterCategoryRepository.Find(filterCategory.Id);
+                categoryToUpdate.DisplayValue = filterCategory.DisplayValue;
+                categoryToUpdate.RecLastUpdatedById = filterCategory.RecLastUpdatedById;
+                categoryToUpdate.RecLastUpdatedOn = filterCategory.RecLastUpdatedOn;
+                filterCategoryRepository.Update(categoryToUpdate);
+            }
+            else
+            {
+                filterCategoryRepository.Add(filterCategory);
+            }
             filterCategoryRepository.SaveChanges();
             return true;
         }
@@ -51,6 +57,8 @@ namespace IST.Implementation.Services
         public bool DeleteFilterCategory(int filterCategoryId)
         {
             var toDelete = filterCategoryRepository.Find(filterCategoryId);
+            if (toDelete.Filters.Any())
+                return false;
             filterCategoryRepository.Delete(toDelete);
             filterCategoryRepository.SaveChanges();
             return true;

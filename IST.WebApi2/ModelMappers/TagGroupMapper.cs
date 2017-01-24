@@ -1,23 +1,21 @@
-﻿using System.Linq;
-using IST.Models.DomainModels;
+﻿using IST.Models.DomainModels;
 using IST.WebApi2.Models;
 
 namespace IST.WebApi2.ModelMappers
 {
-    public static class FilterCategoryMapper
+    public static class TagGroupMapper
     {
-        public static FilterCategoryModel MapFromServerToClient(this FilterCategory source)
+        public static TagGroupModel MapFromServerToClient(this TagGroup source)
         {
-            return new FilterCategoryModel
+            return new TagGroupModel
             {
                 Id = source.Id,
-                DisplayValue = source.DisplayValue,
-                Filters = source.Filters.Select(x => x.MapFromServerToClient()).ToList()
+                DisplayValue = source.DisplayValue
             };
         }
-        public static FilterCategory MapFromClientToServer(this FilterCategoryModel source)
+        public static TagGroup MapFromClientToServer(this TagGroupModel source)
         {
-            return new FilterCategory
+            return new TagGroup
             {
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
