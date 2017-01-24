@@ -52,7 +52,7 @@
                         $http.defaults.headers.common = {
                             'Content-Type': 'application/json'
                         };
-                        $state.go('home.signin');
+                        $state.go('account.login');
                     })
                     .error(function (err) {
                         showErrors(err);

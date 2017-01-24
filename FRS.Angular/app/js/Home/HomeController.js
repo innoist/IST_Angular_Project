@@ -13,6 +13,13 @@
     HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', '$window', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
 
     function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, $window, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
+
+        if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
+            $scope.isAuthenticated = true;
+            $scope.userName = $localStorage['authorizationData'].userName;
+        } else
+            $scope.isAuthenticated = false;
+
         var vm = this;
 
         HomeService.url = "/api/Project/";
@@ -30,8 +37,6 @@
         vm.NoMoreProjects = false;
         //to show end of solutions
         vm.endOfSolutions = false;
-        //to show spinner on scroll
-        vm.clientSpinnerOnScroll = false;
         //to show spinner on data load
         vm.clientMainSpinner = true;
         vm.ProjectSearchRequest = {
@@ -59,7 +64,6 @@
                     angular.forEach(vm.Projects, function (project) {
                         project.isNew = false;
                     });
-                    vm.clientSpinnerOnScroll = false;
                     vm.NoMoreProjects = true;
                     vm.endOfSolutions = true;
                     $.unblockUI();
@@ -81,12 +85,10 @@
                     vm.Projects.push(project);
                     $.unblockUI();
                 });
-                vm.clientSpinnerOnScroll = false;
                 if (response.Data.length < vm.ProjectSearchRequest.PageSize) {
                     angular.forEach(vm.Projects, function (project) {
                         project.isNew = false;
                     });
-                    vm.clientSpinnerOnScroll = false;
                     $.unblockUI();
                     vm.NoMoreProjects = true;
                     vm.endOfSolutions = true;
@@ -109,6 +111,8 @@
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
+        vm.getDataFromSever();
+
         vm.ProjectSearchRequest.FilterIds = [];
         vm.filterProjects = function (id) {
             vm.clientMainSpinner = true;
@@ -124,29 +128,57 @@
             }
         }
 
-        vm.getDataFromSever();
+        vm.seeFavorites = function () {
+            if (vm.Favorites) {
+                vm.clientMainSpinner = true;
+                vm.ProjectSearchRequest.IsFavorite = true;
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            } else {
+                vm.ProjectSearchRequest.IsFavorite = false;
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            }
+        };
+
+        vm.searchSolutions = function () {
+            vm.ProjectSearchRequest.PageNo = 1;
+            vm.getDataFromSever();
+        }
+
+        /************************************/
+        /************* Typeahead ************/
+        /************************************/
+        vm.getSolutions = function (val) {
+            var url = "/api/ProjectBaseData";
+            
+            //Check if input is more that 1 char and less than 10
+            if (val.length >= 3 && val.length < 15)
+                return HomeService.retrieveItems(url, val, vm.ProjectSearchRequest.FilterIds)
+                    .then(function (res) {
+                        //local array to store items from server response
+                        var items = [];
+                        angular.forEach(res.data, function (item) {
+                            items.push(item);
+                        });
+                        return items;
+                    });
+        }
 
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
-            vm.clientMainSpinner = false;
+            vm.clientMainSpinner = true;
             if (vm.IsDataLoaded)
                 return false;
             if (!vm.NoMoreProjects) {
                 if ($(window).scrollTop() + $(window).height() === $(document).height()) {
                     vm.IsDataLoaded = true;
-                    vm.clientSpinnerOnScroll = true;
                     vm.ProjectSearchRequest.PageNo += 1;
                     vm.getDataFromSever();
                     vm.isScrolled = true;
                 }
             }
         });
-
-        if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
-            $scope.isAuthenticated = true;
-            $scope.userName = $localStorage['authorizationData'].userName;
-        } else
-            $scope.isAuthenticated = false;
 
         vm.OpenSendToFriend = function () {
             $('#sendtofriend').show();
@@ -200,7 +232,7 @@
 
                     $('#' + solutionId).addClass("rating");
                     $('#' + solutionId).removeClass("rating-selected");
-                    
+
                     angular.forEach(vm.Projects, function (project) {
                         if (project.Id === solutionId) {
                             project.IsFavorite = false;
@@ -217,25 +249,10 @@
         }
         //#endregion
 
-
-        /************************************/
-        /************* Typeahead ************/
-        /************************************/
-        vm.getSolutions = function (val) {
-            var url = "/api/ProjectBaseData";
-            //Check if input is more that 1 char and less than 10
-            if (val.length >= 3 && val.length < 15)
-                return HomeService.retrieveItems(url, val)
-                    .then(function (res) {
-                        //local array to store items from server response
-                        var items = [];
-                        angular.forEach(res.data, function (item) {
-                            items.push(item);
-                        });
-                        return items;
-                    });
-        }
-
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
 
         vm.resetdata = function () {
             vm.searchString = '';
@@ -252,39 +269,16 @@
             vm.getDataFromSever();
         }
 
-        //to unbind the scroll event when scope destroy
-        $scope.$on("$destroy", function () {
-            $(window).unbind('scroll');
-        });
-
-        vm.seeFavorites = function () {
-            if (vm.Favorites) {
-                vm.clientMainSpinner = true;
-                vm.ProjectSearchRequest.IsFavorite = true;
-                vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
-            } else {
-                vm.ProjectSearchRequest.IsFavorite = false;
-                vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
-            }
-        };
-
-        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-
-        vm.searchSolutions = function () {
-            vm.ProjectSearchRequest.PageNo = 1;
-            vm.getDataFromSever();
-        }
-
-        vm.signOut=function() {
-            HomeService.logout().then(function(response) {
+        vm.signOut = function () {
+            HomeService.logout().then(function (response) {
                 console.log(response);
                 $scope.isAuthenticated = false;
             });
         }
+
+        //to unbind the scroll event when scope destroy
+        $scope.$on("$destroy", function () {
+            $(window).unbind('scroll');
+        });
     }
 })();

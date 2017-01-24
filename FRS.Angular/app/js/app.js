@@ -790,9 +790,9 @@
                 var loginData = $localStorage["authorizationData"];
 
                 if (!loginData) {
-                    if ((fromState.name.split(".")[0] === "home" || fromState.name === "") && toState.name.split(".")[0] === "app") {
+                    if ((fromState.name.split(".")[0] === "home" || fromState.name === "") && (toState.name.split(".")[0] === "app" || toState.name==="home.index")) {
                         event.preventDefault();
-                        $state.go("home.signin", { returnUrl: toState.name });
+                        $state.go("account.login", { returnUrl: toState.name });
                     }
                 }
             }
@@ -2213,8 +2213,8 @@
         // Global Settings
         // -----------------------------------
         $rootScope.app = {
-            name: 'Aversion',
-            description: 'Aversion - Meal Planner',
+            name: 'Go Centralize',
+            description: '',
             year: ((new Date()).getFullYear()),
             layout: {
                 isFixed: true,

@@ -147,7 +147,6 @@
             .state('account.login', {
                 url: '/login?:returnUrl',
                 title: 'Login',
-                //templateUrl: 'app/pages/login.html'
                 templateUrl: 'app/Views/Users/login.html',
                 resolve: helper.resolveFor('login.module', 'oitozero.ngSweetAlert')
             })

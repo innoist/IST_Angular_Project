@@ -103,13 +103,13 @@ namespace IST.Repository.Repositories
                 FilteredCount = DbSet.Count(query)
             };
         }
-
-        public IEnumerable<Solution> SearchByName(string name)
+        
+        public IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds)
         {
-            var result = DbSet.Where(s => (name == null || s.Name.ToLower().Contains(name.ToLower()))
-                                       || (name == null || s.Description.ToLower().Contains(name.ToLower()))
-                                       && (!s.Active.HasValue || s.Active.Value));
-            var aa = DbSet.Where(s => s.Description.ToLower().Contains(name.ToLower())).ToList();
+            var result = DbSet.Where(s => ((name == null || s.Name.ToLower().Contains(name.ToLower()))
+                                       || (name == null || s.Description.ToLower().Contains(name.ToLower()))) 
+                                       && (!s.Active.HasValue || s.Active.Value)
+                                       && (!filterIds.Any() || s.Filters.Any(f => filterIds.Contains(f.Id))));
             return result;
         }
 

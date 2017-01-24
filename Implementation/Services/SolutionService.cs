@@ -66,10 +66,10 @@ namespace IST.Implementation.Services
                 Solution = id > 0 ? solutionRepository.GetById(id) : null,
                 SolutionOwners =
                     solutionOwnerRepository.GetAll()
-                        .Select(x => new DropDownModel {Id = x.Id, DisplayName = x.DisplayValue}),
+                        .Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
                 SolutionTypes =
                     solutionTypeRepository.GetAll()
-                        .Select(x => new DropDownModel {Id = x.Id, DisplayName = x.DisplayValue}),
+                        .Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
                 Tags = tagRepository.GetAll().ToList(),
                 Filters = filterRepository.GetAll().ToList()
             };
@@ -82,7 +82,7 @@ namespace IST.Implementation.Services
             {
                 SolutionTypes =
                     solutionTypeRepository.GetAll()
-                        .Select(x => new DropDownModel {Id = x.Id, DisplayName = x.DisplayValue})
+                        .Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue })
             };
             return filterdata;
         }
@@ -107,9 +107,9 @@ namespace IST.Implementation.Services
                 UpdateFilters(solutionToUpdate, response.FilterIds);
                 solutionRepository.Update(solutionToUpdate);
             }
-                #endregion
+            #endregion
 
-                #region Add Case
+            #region Add Case
 
             else
             {
@@ -224,15 +224,15 @@ namespace IST.Implementation.Services
                 solutionToUpdate.Tags.Clear();
             }
         }
-
-        public IEnumerable<Solution> SearchByName(string name)
+        
+        public IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds)
         {
-            return solutionRepository.SearchByName(name);
+            return solutionRepository.SearchForTypeAhead(name, filterIds);
         }
 
         public bool SaveFavorite(int solutionId, bool saveOrDelete)
         {
-            
+
             var solutionToUpdate = solutionRepository.Find(solutionId);
             var userToSave = userRepository.FindUserById(ClaimsPrincipal.Current.Identity.GetUserId());
             if (saveOrDelete)

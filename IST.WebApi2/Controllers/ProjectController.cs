@@ -10,7 +10,6 @@ using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
-    [AllowAnonymous]
     public class ProjectController : BaseController
     {
         #region Private
@@ -63,9 +62,9 @@ namespace IST.WebApi2.Controllers
             return Ok(viewModel);
         }
         [Route("api/ProjectBaseData")]
-        public IHttpActionResult Get(string name)
+        public IHttpActionResult Get(string name, [FromUri]List<int> filterIds)
         {
-            var response = solutionService.SearchByName(name).ToList().Select(s => new DropDownModel
+            var response = solutionService.SearchForTypeAhead(name, filterIds).ToList().Select(s => new DropDownModel
             {
                 DisplayName = s.Name,
                 Id = s.Id,

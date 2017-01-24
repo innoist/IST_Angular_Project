@@ -10,7 +10,7 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.service('ReferenceDataService', ReferenceDataService);
 
-    ReferenceDataService.$inject = ['$http', 'toaster', '$localStorage', '$state','$q'];
+    ReferenceDataService.$inject = ['$http', 'toaster', '$localStorage', '$state', '$q'];
 
     function ReferenceDataService($http, toaster, $localStorage, $state, $q) {
 
@@ -137,10 +137,11 @@
               ).then(onReady, onError);
         }
 
-        this.retrieveItems = function (url, val) {
+        this.retrieveItems = function (url, val, ids) {
             return $http.get(frsApiUrl + url, {
                 params: {
-                    name: val
+                    name: val,
+                    filterIds: ids
                 }
             });
         }
@@ -149,10 +150,10 @@
             var defered = $q.defer();
             $http.post(window.frsApiUrl + "/api/Account/Logout")
                 .success(function (response) {
-                    $state.go('home.index', {}, { reload: true });
+                    $state.go('account.login', {}, { reload: true });
                     delete $localStorage['authorizationData'];
                     console.log("LoggedOut");
-                    
+
                     $http.defaults.headers.common = {
                         'Content-Type': 'application/json'
                     };

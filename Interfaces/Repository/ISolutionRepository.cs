@@ -12,6 +12,7 @@ namespace IST.Interfaces.Repository
     {
         SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest);
         Solution GetById(int id);
-        IEnumerable<Solution> SearchByName(string name);
+        IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds);
+
     }
 }

@@ -83,20 +83,22 @@
         <div class="col-md-9">
             <div class="row margin-bottom-5">
                 <div class="col-md-12 padding-leftright30">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString"
-                               uib-typeahead="solution as solution.DisplayName for solution in hc.getSolutions($viewValue)"
-                               typeahead-loading="loadingSolutions"
-                               typeahead-on-select="hc.searchSolutions()"
-                               typeahead-template-url="customTemplate.html"
-                               autocomplete="off">
-                        <span class="input-group-btn" title="Search">
-                            <button class="btn" type="button" ng-click="hc.getDataFromSever()"><i class="fa fa-search"></i></button>
-                        </span>
-                        <span class="input-group-btn" title="Reset">
-                            <button class="btn" type="button" ng-click="hc.resetdata()"><i class="fa fa-remove"></i></button>
-                        </span>
-                    </div>
+                    <form ng-submit="hc.getDataFromSever()">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString"
+                                   uib-typeahead="solution as solution.DisplayName for solution in hc.getSolutions($viewValue)"
+                                   typeahead-loading="loadingSolutions"
+                                   typeahead-on-select="hc.searchSolutions()"
+                                   typeahead-template-url="customTemplate.html"
+                                   autocomplete="off">
+                            <span class="input-group-btn" title="Search">
+                                <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                            </span>
+                            <span class="input-group-btn" title="Reset">
+                                <button class="btn" type="button" ng-click="hc.resetdata()"><i class="fa fa-remove"></i></button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div><!--/end result category-->
             <br>
@@ -108,7 +110,7 @@
             <div class="col-md-4 illustration-v2 repeated-item" ng-repeat="project in hc.Projects" style="height: 385px">
                 <div ng-class="{'shadow-emboss' : project.isNew}">
                     <div class="product-img product-img-brd">
-                        <a ng-href="{{project.Image? hc.apiUrl + project.Image : '/Ecommerce/img/blog/project.png'}}" data-title="{{project.Name}}" data-toggle="lightbox" data-type="image">
+                        <a ng-href="{{project.Image? hc.apiUrl + project.Image : '/Ecommerce/img/blog/project.png'}}" data-title="{{project.Name}}" id="lightbox{{project.Id}}" data-toggle="lightbox" data-type="image">
                             <div style="vertical-align: middle; display: table-cell; height: 249px;">
                                 <img class="full-width img-responsive" ng-src="{{project.Image ? hc.apiUrl + project.Image: '/Ecommerce/img/blog/project.png' }}" alt="" style="height: auto; max-height: 244px; width: 100%">
                             </div>
@@ -150,20 +152,6 @@
                 <h4>End of results!</h4>
             </div>
         </div>
-        <div ng-if="hc.clientSpinnerOnScroll && !hc.NoMoreProjects" style="text-align: center; position: fixed; top: 80%; left: 55%; z-index: 10051">
-            <!-- Spinner -->
-            <div class="line-spin-fade-loader">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-
     </div>
 </div>
 <!--=== End Content Part ===-->
