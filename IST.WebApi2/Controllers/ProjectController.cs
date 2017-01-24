@@ -61,6 +61,8 @@ namespace IST.WebApi2.Controllers
             };
             return Ok(viewModel);
         }
+
+        #region TypeAhead
         [Route("api/ProjectBaseData")]
         public IHttpActionResult Get(string name, [FromUri]List<int> filterIds)
         {
@@ -72,6 +74,7 @@ namespace IST.WebApi2.Controllers
             });
             return Ok(response);
         }
+        #endregion
 
         [HttpPost]
         public IHttpActionResult Post(SolutionModel model)
