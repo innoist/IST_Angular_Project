@@ -45,8 +45,9 @@
         <AssociationConnector Association="angularModel.FK_TagGroup_AspNetUsers_CreatedById" />
         <AssociationConnector Association="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" />
         <AssociationConnector Association="angularModel.SolutionFavourite" />
-        <EntityTypeShape EntityType="angularModel.SolutionRating" Width="1.5" PointX="11.875" PointY="9.625" />
+        <EntityTypeShape EntityType="angularModel.SolutionRating" Width="1.5" PointX="11.875" PointY="9" />
         <AssociationConnector Association="angularModel.FK_SolutionRating_AspNetUsers" />
+        <AssociationConnector Association="angularModel.FK_SolutionRating_AspNetUsersUpdated" />
         <AssociationConnector Association="angularModel.FK_SolutionRating_Solution" />
         </Diagram>
     </edmx:Diagrams>

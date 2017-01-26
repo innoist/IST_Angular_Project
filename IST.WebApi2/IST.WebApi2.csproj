@@ -293,6 +293,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelMappers\SolutionRatingMapper.cs" />
     <Compile Include="ModelMappers\TagGroupMapper.cs" />
     <Compile Include="ModelMappers\SolutionMapper.cs" />
     <Compile Include="ModelMappers\FilterMapper.cs" />
@@ -310,7 +311,6 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MenuRight.cs" />
-    <Compile Include="Models\SchoolGroupModel.cs" />
     <Compile Include="Models\SolutionTypeModel.cs" />
     <Compile Include="Models\SolutionRatingModel.cs" />
     <Compile Include="Models\RightsManagementViewModel.cs" />

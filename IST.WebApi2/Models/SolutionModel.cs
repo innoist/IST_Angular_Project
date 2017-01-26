@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web;
 using IST.Models.Common.DropDown;
-using IST.Models.DomainModels;
 
 namespace IST.WebApi2.Models
 {
@@ -42,6 +39,7 @@ namespace IST.WebApi2.Models
         public int recordsTotal { get; set; }
         public int recordsFiltered { get; set; }
     }
+
     public class SolutionListView
     {
         public SolutionListView()
@@ -63,5 +61,10 @@ namespace IST.WebApi2.Models
         public IEnumerable<FilterModel> Filters { get; set; }
         public IEnumerable<DropDownModel> SolutionTypes { get; set; }
         public IEnumerable<DropDownModel> SolutionOwners { get; set; }
+    }
+    public class ProjectViewModel
+    {
+        public SolutionModel SolutionModel { get; set; }
+        public IEnumerable<SolutionRatingModel> SolutionRatings { get; set; }
     }
 }

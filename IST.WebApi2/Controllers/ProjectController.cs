@@ -16,13 +16,15 @@ namespace IST.WebApi2.Controllers
         #region Private
         private readonly ISolutionService solutionService;
         private readonly IFilterCategoryService filterCategoryService;
+        private readonly ISolutionRatingService solutionRatingService;
         #endregion
 
         #region Constructor
-        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService)
+        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService)
         {
             this.solutionService = solutionService;
             this.filterCategoryService = filterCategoryService;
+            this.solutionRatingService = solutionRatingService;
         }
         #endregion
 
@@ -51,14 +53,11 @@ namespace IST.WebApi2.Controllers
         }
         public IHttpActionResult Get(int id)
         {
-            var baseData = solutionService.GetBaseData(id);
-            var viewModel = new SolutionViewModel
+            var baseData = solutionService.GetProjectBaseData(id);
+            var viewModel = new ProjectViewModel
             {
                 SolutionModel = baseData.Solution?.MapFromServerToClient(),
-                Tags = baseData.Tags.Select(x => x.MapFromServerToClient()),
-                Filters = baseData.Filters.Select(x => x.MapFromServerToClient()),
-                SolutionTypes = baseData.SolutionTypes.ToList(),
-                SolutionOwners = baseData.SolutionOwners.ToList()
+                SolutionRatings=baseData.SolutionRatings.Select(x=>x.MapFromServerToClient()).ToList()
             };
             return Ok(viewModel);
         }
@@ -94,12 +93,19 @@ namespace IST.WebApi2.Controllers
             }
         }
 
-        //[Route("api/ProjectBaseData")]
-        //[HttpPost]
-        //public IHttpActionResult Post(int id)
-        //{
-        //    var userid = User.Identity.GetUserId();
-        //}
+        [Route("api/ProjectBaseData")]
+        [HttpPost]
+        public IHttpActionResult Post(SolutionRatingModel model)
+        {
+
+            if (model.RatingId == 0)
+                SetAllValues(model);
+            else
+                SetUpdatedValues(model);
+
+            var result = solutionRatingService.SaveOrUpdate(model.MapFromClientToServer());
+            return Ok(result);
+        }
         #endregion
     }
 }

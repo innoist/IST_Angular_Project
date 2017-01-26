@@ -25,6 +25,7 @@ namespace IST.Implementation.Services
         private readonly ISolutionTypeRepository solutionTypeRepository;
         private readonly ISolutionOwnerRepository solutionOwnerRepository;
         private readonly IUserRepository userRepository;
+        private readonly ISolutionRatingRepository solutionRatingRepository;
 
         #endregion
 
@@ -35,7 +36,7 @@ namespace IST.Implementation.Services
         /// </summary>
         public SolutionService(ITagRepository tagRepository, IFilterRepository filterRepository,
             ISolutionRepository solutionRepository, ISolutionTypeRepository solutionTypeRepository,
-            ISolutionOwnerRepository solutionOwnerRepository, IUserRepository userRepository)
+            ISolutionOwnerRepository solutionOwnerRepository, IUserRepository userRepository, ISolutionRatingRepository solutionRatingRepository)
         {
 
             this.tagRepository = tagRepository;
@@ -44,6 +45,7 @@ namespace IST.Implementation.Services
             this.solutionOwnerRepository = solutionOwnerRepository;
             this.userRepository = userRepository;
             this.solutionTypeRepository = solutionTypeRepository;
+            this.solutionRatingRepository = solutionRatingRepository;
         }
 
         #endregion
@@ -73,6 +75,16 @@ namespace IST.Implementation.Services
                         .Select(x => new DropDownModel { Id = x.Id, DisplayName = x.DisplayValue }),
                 Tags = tagRepository.GetAll().ToList(),
                 Filters = filterRepository.GetAll().ToList()
+            };
+            return basedata;
+        }
+
+        public ProjectBaseData GetProjectBaseData(int id)
+        {
+            var basedata = new ProjectBaseData
+            {
+                Solution = id > 0 ? solutionRepository.GetById(id) : null,
+                SolutionRatings = solutionRatingRepository.GetRatingBySolutionId(id)
             };
             return basedata;
         }
@@ -125,27 +137,7 @@ namespace IST.Implementation.Services
             solutionRepository.SaveChanges();
             return true;
         }
-
-        private void AddFilters(Solution solution)
-        {
-            var result = filterRepository.GetByFilterIds(solution.Filters.Select(x => x.Id).ToArray());
-            solution.Filters = new List<Filter>();
-            foreach (var newfilter in result)
-            {
-                solution.Filters.Add(newfilter);
-            }
-        }
-
-        private void AddTags(Solution solution)
-        {
-            var result = tagRepository.GetByTagIds(solution.Tags.Select(x => x.Id).ToArray());
-            solution.Tags = new List<Tag>();
-            foreach (var newtag in result)
-            {
-                solution.Tags.Add(newtag);
-            }
-        }
-
+        
         #endregion
 
         #region Private Methods

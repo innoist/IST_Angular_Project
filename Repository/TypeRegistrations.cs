@@ -31,6 +31,7 @@ namespace IST.Repository
             unityContainer.RegisterType<IFilterCategoryRepository, FilterCategoryRepository>();
             unityContainer.RegisterType<ITagRepository, TagRepository>();
             unityContainer.RegisterType<ITagGroupRepository, TagGroupRepository>();
+            unityContainer.RegisterType<ISolutionRatingRepository, SolutionRatingRepository>();
         }
     }
 }

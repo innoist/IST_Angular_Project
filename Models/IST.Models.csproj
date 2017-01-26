@@ -150,6 +150,7 @@
     <Compile Include="DomainModels\UserDetail.cs" />
     <Compile Include="DomainModels\WebApiUser.cs" />
     <Compile Include="Enums\Helper.cs" />
+    <Compile Include="Enums\SolutionUsageTypeEnum.cs" />
     <Compile Include="IdentityModels\ApplicationRights.cs" />
     <Compile Include="IdentityModels\ApplicationUser.cs" />
     <Compile Include="IdentityModels\AspNetUser.cs" />

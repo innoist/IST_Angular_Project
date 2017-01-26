@@ -13,6 +13,7 @@ namespace IST.Interfaces.IServices
         SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest);
         Solution GetById(int id);
         SolutionBaseData GetBaseData(int id);
+        ProjectBaseData GetProjectBaseData(int id);
         SolutionBaseData GetFilterData();
         bool SaveOrUpdate(SolutionCreateResponseModel response);
         IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds);

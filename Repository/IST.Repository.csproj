@@ -186,6 +186,7 @@
     <Compile Include="BaseRepository\PropertyReference.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\SolutionRatingRepository.cs" />
     <Compile Include="Repositories\FilterRepository.cs" />
     <Compile Include="Repositories\FilterCategoryRepository.cs" />
     <Compile Include="Repositories\SolutionOwnerRepository.cs" />

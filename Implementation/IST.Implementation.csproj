@@ -161,6 +161,7 @@
     <Compile Include="Services\FilterCategoryService.cs" />
     <Compile Include="Services\FilterService.cs" />
     <Compile Include="Services\SolutionOwnerService.cs" />
+    <Compile Include="Services\SolutionRatingService.cs" />
     <Compile Include="Services\SolutionService.cs" />
     <Compile Include="Services\SolutionTypeService.cs" />
     <Compile Include="Services\ClaimsSecurityService.cs" />

@@ -54,6 +54,7 @@ namespace IST.Models.IdentityModels
         public virtual ICollection<Tag> UpdatedTags { get; set; }
         public virtual ICollection<TagGroup> CreatedTagGroups { get; set; }
         public virtual ICollection<TagGroup> UpdatedTagGroups { get; set; }
-
+        public virtual ICollection<SolutionRating> CreatedSolutionRatings { get; set; }
+        public virtual ICollection<SolutionRating> UpdatedSolutionRatings { get; set; }
     }
 }

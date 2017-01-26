@@ -123,6 +123,7 @@ namespace IST.Repository.BaseRepository
         public DbSet<SolutionOwner> SolutionOwners { get; set; }
         public DbSet<SolutionType> SolutionTypes { get; set; }
         public DbSet<Solution> Solutions { get; set; }
+        public DbSet<SolutionRating> SolutionRatings { get; set; }
 
 
         /// <summary>

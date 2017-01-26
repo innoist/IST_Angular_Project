@@ -10,9 +10,9 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', '$window', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'DTColumnDefBuilder'];
+    HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', '$window', 'SweetAlert', 'toaster', '$timeout'];
 
-    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, $window, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, $compile, DTColumnDefBuilder) {
+    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, $window, SweetAlert, toaster,$timeout) {
 
         if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
             $scope.isAuthenticated = true;
@@ -39,6 +39,7 @@
         vm.endOfSolutions = false;
         //to show spinner on data load
         vm.clientMainSpinner = true;
+        vm.SolutionRatingModel = {};
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
@@ -151,7 +152,7 @@
         /************************************/
         vm.getSolutions = function (val) {
             var url = "/api/ProjectBaseData";
-            
+
             //Check if input is more that 1 char and less than 10
             if (val.length >= 3 && val.length < 15)
                 return HomeService.retrieveItems(url, val, vm.ProjectSearchRequest.FilterIds)
@@ -190,6 +191,18 @@
             $('#projectdetail').show();
             HomeService.loadById(id, function (response) {
                 vm.Project = response.SolutionModel;
+                vm.SolutionRatings = response.SolutionRatings;
+
+                $timeout(function() {
+                    angular.forEach(vm.SolutionRatings, function (obj) {
+                        obj.disable = true;
+                        $('#rated-' + obj.RatingId.toString() + "-" + obj.Rating.toString())[0].checked = true;
+                    });
+                });
+
+                vm.username = $localStorage.authorizationData.userName;
+                vm.email = $localStorage.authorizationData.email;
+                vm.disableprojectdetail = true;
             });
         }
 
@@ -249,17 +262,32 @@
         }
         //#endregion
 
-        vm.usageHistory=function(projectid) {
-            
+        vm.SolutionRating = function (projectid) {
+            vm.SolutionRatingModel.SolutionId = projectid;
+            vm.SolutionRatingModel.Comments = vm.Comments;
+            for (var i = 1; i < 6; i++) {
+                if ($('#stars-rating-' + i).is(':checked')) {
+                    vm.SolutionRatingModel.Rating = i;
+                }
+            }
+            HomeService.save(vm.SolutionRatingModel, onSuccess, null, '/api/ProjectBaseData');
+            function onSuccess(response) {
+                $('.g-popup-wrapper').hide();
+                vm.Comments = '';
+                for (var i = 1; i < 6; i++) {
+                    if ($('#stars-rating-' + i).is(':checked')) {
+                        $('#stars-rating-' + i)[0].checked = false;
+                    }
+                }
+            }
         }
-
 
         $(document).on('click', '[data-toggle="lightbox"]', function (event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
 
-        vm.resetdata = function() {
+        vm.resetdata = function () {
             if (vm.searchString) {
                 vm.searchString = '';
                 vm.ProjectSearchRequest.PageNo = 1;
