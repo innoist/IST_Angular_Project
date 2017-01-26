@@ -138,6 +138,7 @@
     <Compile Include="Common\OrderByServiceLogs.cs" />
     <Compile Include="Common\OrderByUsers.cs" />
     <Compile Include="Common\SaveStatus.cs" />
+    <Compile Include="DomainModels\SolutionRating.cs" />
     <Compile Include="DomainModels\SolutionOwner.cs" />
     <Compile Include="DomainModels\SolutionType.cs" />
     <Compile Include="DomainModels\Solution.cs" />

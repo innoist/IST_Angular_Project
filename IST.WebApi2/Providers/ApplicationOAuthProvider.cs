@@ -60,6 +60,9 @@ namespace IST.WebApi2.Providers
                         "userName", user.UserName
                     },
                     {
+                        "email", user.Email
+                    },
+                    {
                         "UserRole", user.AspNetRoles.FirstOrDefault()?.Name
                     }
                 });

@@ -155,6 +155,16 @@
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="SolutionRating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SolutionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="SolutionTag">
           <Key>
             <PropertyRef Name="SolutionId" />
@@ -445,6 +455,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SolutionRating_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionRating_Solution">
+          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Role="SolutionOwner" Type="Self.SolutionOwner" Multiplicity="1" />
           <End Role="Solution" Type="Self.Solution" Multiplicity="*" />
@@ -591,6 +625,7 @@
           <EntitySet Name="SolutionFavourite" EntityType="Self.SolutionFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionFilter" EntityType="Self.SolutionFilter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionOwner" EntityType="Self.SolutionOwner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionRating" EntityType="Self.SolutionRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionTag" EntityType="Self.SolutionTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionType" EntityType="Self.SolutionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
@@ -674,6 +709,14 @@
           <AssociationSet Name="FK_SolutionOwner_AspNetUsers_UpdatedById" Association="Self.FK_SolutionOwner_AspNetUsers_UpdatedById">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_AspNetUsers" Association="Self.FK_SolutionRating_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_Solution" Association="Self.FK_SolutionRating_Solution">
+            <End Role="Solution" EntitySet="Solution" />
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
           </AssociationSet>
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
@@ -846,6 +889,15 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Solution" EntitySet="Solutions" />
           </AssociationSet>
+          <EntitySet Name="SolutionRatings" EntityType="angularModel.SolutionRating" />
+          <AssociationSet Name="FK_SolutionRating_AspNetUsers" Association="angularModel.FK_SolutionRating_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="SolutionRating" EntitySet="SolutionRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_Solution" Association="angularModel.FK_SolutionRating_Solution">
+            <End Role="Solution" EntitySet="Solutions" />
+            <End Role="SolutionRating" EntitySet="SolutionRatings" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserRole">
           <Key>
@@ -918,6 +970,7 @@
           <NavigationProperty Name="CreatedTagGroups" Relationship="angularModel.FK_TagGroup_AspNetUsers_CreatedById" FromRole="AspNetUser" ToRole="TagGroup" />
           <NavigationProperty Name="UpdatedTagGroups" Relationship="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" FromRole="AspNetUser" ToRole="TagGroup" />
           <NavigationProperty Name="Solutions" Relationship="angularModel.SolutionFavourite" FromRole="AspNetUser" ToRole="Solution" />
+          <NavigationProperty Name="SolutionRatings" Relationship="angularModel.FK_SolutionRating_AspNetUsers" FromRole="AspNetUser" ToRole="SolutionRating" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1151,6 +1204,7 @@
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Solution_AspNetUsers_CreatedById" FromRole="Solution" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Solution_AspNetUsers_UpdatedById" FromRole="Solution" ToRole="AspNetUser" />
           <NavigationProperty Name="AspNetUsers" Relationship="angularModel.SolutionFavourite" FromRole="Solution" ToRole="AspNetUser" />
+          <NavigationProperty Name="SolutionRatings" Relationship="angularModel.FK_SolutionRating_Solution" FromRole="Solution" ToRole="SolutionRating" />
         </EntityType>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="1" />
@@ -1355,6 +1409,42 @@
         <Association Name="SolutionFavourite">
           <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
           <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SolutionRating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SolutionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="angularModel.FK_SolutionRating_AspNetUsers" FromRole="SolutionRating" ToRole="AspNetUser" />
+          <NavigationProperty Name="Solution" Relationship="angularModel.FK_SolutionRating_Solution" FromRole="SolutionRating" ToRole="Solution" />
+        </EntityType>
+        <Association Name="FK_SolutionRating_AspNetUsers">
+          <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="angularModel.SolutionRating" Role="SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionRating_Solution">
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="1" />
+          <End Type="angularModel.SolutionRating" Role="SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1565,6 +1655,17 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="SolutionRatings">
+            <EntityTypeMapping TypeName="angularModel.SolutionRating">
+              <MappingFragment StoreEntitySet="SolutionRating">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SolutionId" ColumnName="SolutionId" />
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

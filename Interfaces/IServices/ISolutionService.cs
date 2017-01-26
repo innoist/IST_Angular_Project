@@ -17,5 +17,6 @@ namespace IST.Interfaces.IServices
         bool SaveOrUpdate(SolutionCreateResponseModel response);
         IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds);
         bool SaveFavorite(int solutionId, bool saveOrDelete);
+        bool DeleteSolution(int solutionId);
     }
 }

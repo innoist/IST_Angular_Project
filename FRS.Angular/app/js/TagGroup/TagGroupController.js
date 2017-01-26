@@ -76,8 +76,6 @@
                                 var index = vm.TagGroups.indexOf(tagGroup);
                                 vm.TagGroups.splice(index, 1);
                                 toaster.success("", "Deleted successfully.");
-                            } else {
-                                toaster.error("Notification", "You cannot delete " + tagGroup.DisplayValue + " as it is being used in Filter.");
                             }
                         });
                     } 

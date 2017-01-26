@@ -232,6 +232,16 @@
                                                   '/app/js/shared/ReferenceDataService.js']
               },
               {
+                  name: 'Filter.module', files: ['/app/js/Filter/FilterController.js',
+                                                  '/app/js/Filter/CreateFilterController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
+                  name: 'Tag.module', files: ['/app/js/Tag/TagController.js',
+                                                  '/app/js/Tag/CreateTagController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
                   name: 'TagGroup.module', files: ['/app/js/TagGroup/TagGroupController.js',
                                                   '/app/js/TagGroup/CreateTagGroupController.js',
                                                   '/app/js/shared/ReferenceDataService.js']

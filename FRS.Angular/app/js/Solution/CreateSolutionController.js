@@ -29,7 +29,7 @@
         $timeout(function () {
             //to remove input field that contains name of image.
             $('.bootstrap-filestyle.input-group input').css("display", "none");
-        }, 2000);
+        }, 1000);
 
         //Upload File
         $scope.readFile = function (input) {
@@ -92,7 +92,10 @@
                         solutionId = 0;
                         $('.SolutionImage').attr('src', '/app/img/image-default.png');
                         vm.Solution = {};
-                        vm.SolutionItemsTableData = [];
+                        vm.SolutionOwners.selected = null;
+                        vm.SolutionTypes.selected = null;
+                        vm.multiple.Tags = [];
+                        vm.multiple.Filters = [];
                         $state.go('app.CreateSolution');
                     }
                     if (!isNew) {
@@ -133,6 +136,7 @@
                     vm.Solution = response.SolutionModel;
                     vm.Image = (vm.Solution.Image ? frsApiUrl + vm.Solution.Image : '/app/img/image-default.png');
                     $('.SolutionImage').attr('src', vm.Image);
+                    vm.update = true;
                 }
                 vm.Tags = response.Tags;
                 vm.Filters = response.Filters;
@@ -141,7 +145,6 @@
 
                 if (vm.Solution) {
                     solutionId = vm.Solution.Id;
-                    vm.update = true;
 
                     //Solution Type DropDown
                     if (vm.Solution.TypeId && vm.Solution.TypeId > 0) {

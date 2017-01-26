@@ -45,6 +45,7 @@
                             $localStorage['authorizationData'] = {
                                 token: response.access_token,
                                 userName: response.userName,
+                                email: response.email,
                                 UserRole: response.UserRole,
                                 isAuthenticated: true,
                                 issued: response['.issued'],
@@ -56,14 +57,16 @@
                             $http.defaults.headers.common = {
                                 'Authorization': 'Bearer ' + $localStorage['authorizationData'].token
                             };
-
+                            $("div#mainSpinner").hide();
                             switch (response.UserRole) {
                                 case 'Admin':
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
-                                    else
+                                    else {
                                         //$state.go('app.dashboard');
-                                        $state.go('home.index', {}, { reload: true });
+                                        $state.go('home.index');
+                                        window.location.reload();
+                                    }
                                     break;
                                 case 'Client':
                                     if ($stateParams.returnUrl)
@@ -94,7 +97,7 @@
                         });
                 }
                 else {
-                    // set as dirty if the user click directly to login so we show the validation messages
+                    // set as dirty if the user click directly to login so we can show the validation messages
                     /*jshint -W106*/
                     vm.loginForm.account_email.$dirty = true;
                     vm.loginForm.account_password.$dirty = true;

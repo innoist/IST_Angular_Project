@@ -1,6 +1,6 @@
 ﻿/**=========================================================
- * Module: FilterCategory
- * FilterCategory view Controller
+ * Module: Filter
+ * Filter view Controller
  =========================================================*/
 
 (function () {
@@ -8,15 +8,15 @@
 
     var core = angular.module('app.core');
     // ReSharper disable FunctionsUsedBeforeDeclared
-    core.lazy.controller('FilterCategoryController', FilterCategoryController);
+    core.lazy.controller('FilterController', FilterController);
 
-    FilterCategoryController.$inject = ['$state', '$rootScope', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder'];
+    FilterController.$inject = ['$state', '$rootScope', 'ReferenceDataService', 'SweetAlert', 'toaster', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder'];
 
-    function FilterCategoryController($state, $rootScope, FilterCategoryService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+    function FilterController($state, $rootScope, FilterService, SweetAlert, toaster, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
         var vm = this;
         vm.Name = '';
         vm.IsDataLoaded = false;
-        FilterCategoryService.url = "/api/FilterCategory/";
+        FilterService.url = "/api/Filter/";
 
         activate();
 
@@ -37,9 +37,9 @@
                 }
             );
 
-            FilterCategoryService.getAll(function (response) {
+            FilterService.getAll(function (response) {
                 if (response) {
-                    vm.FilterCategories = response;
+                    vm.Filters = response;
                     vm.IsDataLoaded = true;
                 }
             });
@@ -53,12 +53,13 @@
             vm.dtColumns = [
                 //DTColumnDefBuilder.newColumnDef(0).notVisible(),
                 DTColumnDefBuilder.newColumnDef(1),
-                DTColumnDefBuilder.newColumnDef(2).notSortable()
+                DTColumnDefBuilder.newColumnDef(2).notSortable(),
+                DTColumnDefBuilder.newColumnDef(3).notSortable()
             ];
 
             vm.dtInstance = {};
 
-            vm.delete = function (filtercategory) {
+            vm.delete = function (filter) {
                 SweetAlert.swal({
                     title: 'Are you sure, you want to delete this?',
                     text: 'It cannot be undone!',
@@ -71,11 +72,13 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        FilterCategoryService.delete(filtercategory.Id, function(response) {
+                        FilterService.delete(filter.Id, function(response) {
                             if (response) {
-                                var index = vm.FilterCategories.indexOf(filtercategory);
-                                vm.FilterCategories.splice(index, 1);
+                                var index = vm.Filters.indexOf(filter);
+                                vm.Filters.splice(index, 1);
                                 toaster.success("", "Deleted successfully.");
+                            } else {
+                                toaster.error("Notification", "You cannot delete " + filter.DisplayValue + " as it is being used in Filter.");
                             }
                         });
                     } 

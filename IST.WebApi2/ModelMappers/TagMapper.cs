@@ -25,7 +25,11 @@ namespace IST.WebApi2.ModelMappers
             {
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
-                TagGroupId = source.TagGroupId
+                TagGroupId = source.TagGroupId,
+                RecCreatedById = source.RecCreatedById,
+                RecCreatedOn = source.RecCreatedOn,
+                RecLastUpdatedById = source.RecLastUpdatedById,
+                RecLastUpdatedOn = source.RecLastUpdatedOn
             };
         }
     }

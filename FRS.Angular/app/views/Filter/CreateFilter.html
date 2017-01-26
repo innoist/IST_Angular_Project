@@ -1,0 +1,77 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <button ng-click="cfc.save(false)" ng-disabled="!cfc.formValidate.$valid" type="button" class="btn btn-labeled btn-success" ng-if="cfc.edit">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span><span class="hidden-480" ng-if="!cfc.update">Save</span>
+            <span class="hidden-480" ng-if="cfc.update">Update</span>
+        </button>
+        <button class="btn btn-labeled bg-info-light" ng-if="cfc.update" ng-click="cfc.edit = !cfc.edit" ng-hide="cfc.edit">
+            <span class="btn-label">
+                <i class="fa fa-pencil"></i>
+            </span><span class="hidden-480">Edit</span>
+        </button>
+        <button ng-click="cfc.save(true)" ng-disabled="!cfc.formValidate.$valid" ng-if="!cfc.update" type="button" class="btn btn-labeled btn-info">
+            <span class="btn-label">
+                <i class="fa fa-plus"></i>
+            </span><span class="hidden-480">Save and New</span>
+        </button>
+        <button class="btn btn-labeled btn-danger" ng-click="cfc.cancelBtn()">
+            <span class="btn-label">
+                <i class="fa fa-times"></i>
+            </span><span class="hidden-480">Cancel</span>
+        </button>
+    </div>
+    <!-- END Language list    -->
+    Filter
+    <small>Add/Edit</small>
+</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal form-validate" name="cfc.formValidate" novalidate="">
+            <div class="form-group">
+                <fieldset ng-disabled="!cfc.edit">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-md-12" ng-class="{ 'has-error': cfc.validateInput(cfc.formValidate.DisplayValue, 'required') }">
+                                <label for="Name" class="control-label requiredLabel">Name</label>
+                                <input id="Name" type="text" placeholder="Enter Name Here"
+                                       ng-model="cfc.Filter.DisplayValue" name="Name"
+                                       uib-tooltip="{{ cfc.validateInput(cfc.formValidate.DisplayValue, 'required') ? 'Name field is required.' : '' }}"
+                                       uib-tooltip-trigger="focus"
+                                       tooltip-class="tooltip-danger"
+                                       required class="form-control"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 controls" ng-class="{ 'has-error': cfc.validateInput(cfc.formValidate.FilterCategories, 'required') }">
+                                <label for="FilterCategories" class="control-label requiredLabel">Filter Category</label>
+                                <ui-select required="" name="FilterCategories" id="FilterCategories" ng-model="cfc.FilterCategories.selected"
+                                           theme="bootstrap"
+                                           uib-tooltip="{{ cfc.validateInput(cfc.formValidate.FilterCategories, 'required') ? 'Filter Category is required.' : '' }}"
+                                           uib-tooltip-trigger="focus"
+                                           tooltip-class="tooltip-danger">
+                                    <ui-select-match placeholder="Select a Filter Category">
+                                        {{$select.selected.DisplayName}}
+                                        <span class="resetDdl" ng-click="cfc.clearFilterCategories($event)" ng-if="cfc.edit">
+                                            <i class="fa fa-times"></i>
+                                        </span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="obj in cfc.FilterCategories | propsFilter: {DisplayName: $select.search}" class="animated fadeInDown">
+                                        <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+        </form>
+    </div>
+</div>

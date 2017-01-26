@@ -278,6 +278,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FilterCategoryController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SolutionBaseDataController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -310,7 +312,7 @@
     <Compile Include="Models\MenuRight.cs" />
     <Compile Include="Models\SchoolGroupModel.cs" />
     <Compile Include="Models\SolutionTypeModel.cs" />
-    <Compile Include="Models\DomainKeyModel.cs" />
+    <Compile Include="Models\SolutionRatingModel.cs" />
     <Compile Include="Models\RightsManagementViewModel.cs" />
     <Compile Include="Models\TagModel.cs" />
     <Compile Include="Models\UsersListViewModel.cs" />

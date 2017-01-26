@@ -249,15 +249,22 @@
         }
         //#endregion
 
+        vm.usageHistory=function(projectid) {
+            
+        }
+
+
         $(document).on('click', '[data-toggle="lightbox"]', function (event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
 
-        vm.resetdata = function () {
-            vm.searchString = '';
-            vm.ProjectSearchRequest.PageNo = 1;
-            vm.getDataFromSever();
+        vm.resetdata = function() {
+            if (vm.searchString) {
+                vm.searchString = '';
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromSever();
+            }
         }
 
         vm.resetCategories = function () {

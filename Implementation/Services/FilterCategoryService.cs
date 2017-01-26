@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using IST.Interfaces.IServices;
@@ -58,7 +59,9 @@ namespace IST.Implementation.Services
         {
             var toDelete = filterCategoryRepository.Find(filterCategoryId);
             if (toDelete.Filters.Any())
-                return false;
+            {
+                throw new Exception("You cannot delete " + toDelete.DisplayValue + " as it is being used in Filter.");
+            }
             filterCategoryRepository.Delete(toDelete);
             filterCategoryRepository.SaveChanges();
             return true;

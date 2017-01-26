@@ -84,14 +84,7 @@ namespace IST.WebApi2.Controllers
                 SetAllValues(model);
             else
                 SetUpdatedValues(model);
-
-            //Scale Image to Aspect Ratio i.e 256 * 256
-            //if (!IsNullOrEmpty(model.Image))
-            //{
-            //    var metaData = model.Image.Split(',')[0];
-            //    var imageBase64 = ScaleImage(model.Image.Split(',')[1], new Size(300, 300));
-            //    model.Image = Concat(metaData, ",", imageBase64);
-            //}
+            
             SolutionCreateResponseModel response = new SolutionCreateResponseModel
             {
                 Solution = model.MapFromClientToServer(),
@@ -102,7 +95,11 @@ namespace IST.WebApi2.Controllers
             var status = solutionService.SaveOrUpdate(response);
             return Ok(status);
         }
-
+        public IHttpActionResult Delete(int id)
+        {
+            var result = solutionService.DeleteSolution(id);
+            return Ok(result);
+        }
         #endregion
     }
 }

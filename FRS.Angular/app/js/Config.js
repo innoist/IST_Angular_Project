@@ -107,7 +107,7 @@
                  controllerAs: 'csc',
                  resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Solution.module', 'filestyle', 'ui.select')
              })
-            //FilterCategory
+            //Filter Category
             .state('app.FilterCategory', {
                 url: '/FilterCategories',
                 title: 'Filter Categories',
@@ -123,6 +123,40 @@
                  controller: 'CreateFilterCategoryController',
                  controllerAs: 'cfcc',
                  resolve: helper.resolveFor('oitozero.ngSweetAlert', 'FilterCategory.module', 'filestyle', 'ui.select')
+             })
+             //Filter
+            .state('app.Filter', {
+                url: '/Filters',
+                title: 'Filters',
+                templateUrl: helper.basepath('../../../../app/views/Filter/Filter.html'),
+                controller: 'FilterController',
+                controllerAs: 'fc',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'Filter.module')
+            })
+             .state('app.CreateFilter', {
+                 url: '/CreateFilter/:Id',
+                 title: 'Filter - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/Filter/CreateFilter.html'),
+                 controller: 'CreateFilterController',
+                 controllerAs: 'cfc',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Filter.module', 'filestyle', 'ui.select')
+             })
+             //Tag
+            .state('app.Tag', {
+                url: '/Tags',
+                title: 'Tags',
+                templateUrl: helper.basepath('../../../../app/views/Tag/Tag.html'),
+                controller: 'TagController',
+                controllerAs: 'tc',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'Tag.module')
+            })
+             .state('app.CreateTag', {
+                 url: '/CreateTag/:Id',
+                 title: 'Tag - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/Tag/CreateTag.html'),
+                 controller: 'CreateTagController',
+                 controllerAs: 'ctc',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'Tag.module', 'filestyle', 'ui.select')
              })
              //Tag Group
             .state('app.TagGroup', {

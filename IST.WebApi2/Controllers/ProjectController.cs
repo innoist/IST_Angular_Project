@@ -7,6 +7,7 @@ using IST.Models.RequestModels;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using IST.WebBase.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace IST.WebApi2.Controllers
 {
@@ -93,7 +94,12 @@ namespace IST.WebApi2.Controllers
             }
         }
 
-
+        //[Route("api/ProjectBaseData")]
+        //[HttpPost]
+        //public IHttpActionResult Post(int id)
+        //{
+        //    var userid = User.Identity.GetUserId();
+        //}
         #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <a ui-sref="app.CreateFilterCategory" class="btn btn-info btn-labeled">
+        <a ui-sref="app.CreateTag" class="btn btn-info btn-labeled">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">New</span>
@@ -13,22 +13,22 @@
         </button>
     </div>
     <!-- END Language list    -->
-    Filter Categories
+    Tags
     <small>Detail</small>
 </h3>
 
 <div class="container-fluid" ng-hide="isFilterOpen">
     <div class="panel panel-default">
-        <form class="panel-body" ng-submit="fcc.filterData(false)">
+        <form class="panel-body" ng-submit="tc.filterData(false)">
             <div class="col-md-6 col-xs-5 col-sm-7">
                 <input type="text"
                        placeholder="Name"
-                       ng-change="fcc.filterData(false)"
+                       ng-change="tc.filterData(false)"
                        class="form-control"
-                       ng-model="fcc.Name" />
+                       ng-model="tc.Name" />
             </div>
             <button class="btn btn-success" type="submit">Search</button>
-            <button class="btn btn-default" ng-click="fcc.filterData(true)">Reset</button>
+            <button class="btn btn-default" ng-click="tc.filterData(true)">Reset</button>
             <a class="pull-right"
                uib-tooltip="{{'Hide filter'}}"
                uib-tooltip-trigger="focus"
@@ -40,41 +40,43 @@
 </div>
 <div class="">
     <!-- Grid view to show listview with searching, sorting and pagination-->
-    <!--<div ui-grid="fcc.gridOptions" ui-grid-pagination class="table-uigrid"></div>-->
+    <!--<div ui-grid="tc.gridOptions" ui-grid-pagination class="table-uigrid"></div>-->
     <div class="panel panel-default">
         <div class="panel-heading">
         </div>
         <div class="panel-body">
             <!-- If serverside paging -->
-            <!--<table datatable="" dt-options="fcc.dtOptions" dt-columns="fcc.dtColumns" dt-instance="fcc.dtInstance" class="row-border hover"></table>-->
+            <!--<table datatable="" dt-options="tc.dtOptions" dt-columns="tc.dtColumns" dt-instance="tc.dtInstance" class="row-border hover"></table>-->
             <!-- If no serverSide paging -->
             <table datatable="ng"
-                   dt-options="fcc.dtOptions"
-                   ng-if="fcc.IsDataLoaded"
-                   dt-columns="fcc.dtColumns"
-                   dt-instanse="fcc.dtInstance"
+                   dt-options="tc.dtOptions"
+                   ng-if="tc.IsDataLoaded"
+                   dt-columns="tc.dtColumns"
+                   dt-instanse="tc.dtInstance"
                    class="row-border hover" id="dataTable">
                 <thead>
                     <tr>
                         <!--<th>Id</th>-->
                         <th>Name</th>
+                        <th>Tag Group</th>
                         <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="filterCategory in fcc.FilterCategories">
+                    <tr ng-repeat="tag in tc.Tags">
 
-                        <td>{{filterCategory.DisplayValue}}</td>
+                        <td>{{tag.DisplayValue}}</td>
+                        <td>{{tag.TagGroupName}}</td>
                         <td class="text-right">
                             <div>
-                                <a ui-sref="app.CreateFilterCategory({Id : filterCategory.Id})"
+                                <a ui-sref="app.CreateTag({Id : tag.Id})"
                                    class="btn btn-xs btn-info"
                                    uib-tooltip="{{'View'}}"
                                    uib-tooltip-trigger="focus">
                                     <i class="fa fa-search"></i>
                                 </a>
                                 &nbsp;
-                                <button ng-click="fcc.delete(filterCategory)"
+                                <button ng-click="tc.delete(tag)"
                                         class="btn btn-xs btn-danger"
                                         uib-tooltip="{{'Remove'}}"
                                         uib-tooltip-trigger="focus"

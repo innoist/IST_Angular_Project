@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
@@ -34,16 +36,21 @@ namespace IST.Implementation.Services
             return tagRepository.Find(tagId);
         }
 
-        public bool SaveTag(Tag tag)
+        public bool SaveOrUpdateTag(Tag tag)
         {
-            tagRepository.Add(tag);
-            tagRepository.SaveChanges();
-            return true;
-        }
-
-        public bool UpdateTag(Tag tag)
-        {
-            tagRepository.Update(tag);
+            if (tag.Id > 0)
+            {
+                var tagToUpdate = tagRepository.Find(tag.Id);
+                tagToUpdate.DisplayValue = tag.DisplayValue;
+                tagToUpdate.TagGroupId = tag.TagGroupId;
+                tagToUpdate.RecLastUpdatedById = tag.RecLastUpdatedById;
+                tagToUpdate.RecLastUpdatedOn = tag.RecLastUpdatedOn;
+                tagRepository.Update(tagToUpdate);
+            }
+            else
+            {
+                tagRepository.Add(tag);
+            }
             tagRepository.SaveChanges();
             return true;
         }
@@ -51,6 +58,10 @@ namespace IST.Implementation.Services
         public bool DeleteTag(int tagId)
         {
             var tagToDelete = tagRepository.Find(tagId);
+            if (tagToDelete.Solutions.Any())
+            {
+                throw new Exception("You cannot delete " + tagToDelete.DisplayValue + " as it is being used in Solutions.");
+            }
             tagRepository.Delete(tagToDelete);
             tagRepository.SaveChanges();
             return true;

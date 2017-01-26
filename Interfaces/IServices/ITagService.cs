@@ -7,8 +7,7 @@ namespace IST.Interfaces.IServices
     {
         IEnumerable<Tag> GetAll();
         Tag FindTagById(int tagId);
-        bool SaveTag(Tag tag);
-        bool UpdateTag(Tag tag);
+        bool SaveOrUpdateTag(Tag tag);
         bool DeleteTag(int tagId);
     }
 }

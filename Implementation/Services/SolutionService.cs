@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using IST.Interfaces.IServices;
@@ -246,6 +247,22 @@ namespace IST.Implementation.Services
             solutionRepository.Update(solutionToUpdate);
             solutionRepository.SaveChanges();
             return false;
+        }
+
+        public bool DeleteSolution(int solutionId)
+        {
+            var toDelete = solutionRepository.Find(solutionId);
+            if (toDelete.Tags.Any())
+            {
+                throw new Exception("You cannot delete " + toDelete.Name + " as it is being used in Tags.");
+            }
+            if (toDelete.Filters.Any())
+            {
+                throw new Exception("You cannot delete " + toDelete.Name + " as it is being used in Filters.");
+            }
+            solutionRepository.Delete(toDelete);
+            solutionRepository.SaveChanges();
+            return true;
         }
 
         #endregion

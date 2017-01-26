@@ -8,13 +8,13 @@
         </a>
         <button class="btn btn-warning btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
             <span class="btn-label">
-                <i class="fa fa-filter"></i>
-            </span>Filter
+                <i class="fa fa-search"></i>
+            </span>Search
         </button>
     </div>
     <!-- END Language list    -->
-    Filter Category
-    <small>Details</small>
+    Tag Groups
+    <small>Detail</small>
 </h3>
 
 <div class="container-fluid" ng-hide="isFilterOpen">
@@ -27,7 +27,7 @@
                        class="form-control"
                        ng-model="tgc.Name" />
             </div>
-            <button class="btn btn-success" type="submit">Filter</button>
+            <button class="btn btn-success" type="submit">Search</button>
             <button class="btn btn-default" ng-click="tgc.filterData(true)">Reset</button>
             <a class="pull-right"
                uib-tooltip="{{'Hide filter'}}"
