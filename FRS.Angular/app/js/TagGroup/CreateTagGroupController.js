@@ -70,7 +70,6 @@
         }
 
         if ($stateParams.Id === "") {
-            vm.TagGroup.IsActive = true;
             vm.edit = true;
             return;
         }

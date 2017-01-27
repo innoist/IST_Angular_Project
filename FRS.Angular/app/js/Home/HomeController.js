@@ -12,7 +12,7 @@
 
     HomeController.$inject = ['$localStorage', '$rootScope', '$scope', '$http', '$state', 'ReferenceDataService', '$window', 'SweetAlert', 'toaster', '$timeout'];
 
-    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, $window, SweetAlert, toaster,$timeout) {
+    function HomeController($localStorage, $rootScope, $scope, $http, $state, HomeService, $window, SweetAlert, toaster, $timeout) {
 
         if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
             $scope.isAuthenticated = true;
@@ -48,6 +48,21 @@
             ClientRequest: HomeService.url
         }
 
+        var selectedStars = function (project) {
+            project.RoundRating = Math.round(project.AverageRating);
+            var j = 1;
+            var rating = project.AverageRating;
+            while (j <= project.RoundRating) {
+                if (rating < 1 && rating % 1 !== 0) {
+                    $('#avg-rating-' + j + '-' + project.Id).removeClass("fa-star-o").addClass("fa-star-half-o");
+                } else {
+                    $('#avg-rating-' + j + '-' + project.Id).removeClass("fa-star-o").addClass("fa-star");
+                }
+                rating = rating - 1;
+                j++;
+            }
+        }
+
         var onSuccessLoadProjects = function (response) {
             vm.clientMainSpinner = true;
             if (!vm.isScrolled) {
@@ -57,6 +72,11 @@
                 vm.Projects = [];
                 angular.forEach(response.Data, function (project) {
                     project.isNew = true;
+
+                    $timeout(function () {
+                        selectedStars(project);
+                    });
+
                     vm.Projects.push(project);
                     $.unblockUI();
                 });
@@ -83,6 +103,9 @@
                 //To Factorize
                 angular.forEach(response.Data, function (project) {
                     project.isNew = true;
+                    $timeout(function () {
+                        selectedStars(project);
+                    });
                     vm.Projects.push(project);
                     $.unblockUI();
                 });
@@ -193,10 +216,32 @@
                 vm.Project = response.SolutionModel;
                 vm.SolutionRatings = response.SolutionRatings;
 
-                $timeout(function() {
+                $timeout(function () {
                     angular.forEach(vm.SolutionRatings, function (obj) {
-                        obj.disable = true;
-                        $('#rated-' + obj.RatingId.toString() + "-" + obj.Rating.toString())[0].checked = true;
+
+                        for (var j = 1; j <= obj.Rating; j++) {
+                            $('#rated-' + j + '-' + obj.RatingId).removeClass('fa-star-o').addClass('fa-star');
+                        }
+                        var createddate = new Date(obj.RecCreatedOn);
+                        if (!angular.isDate(createddate)) {
+                            obj.RecCreatedOn = null;
+                            return;
+                        }
+                        var today = new Date();
+                        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                        var finaldate = Math.round(Math.abs((createddate.getTime() - today.getTime()) / (oneDay)));
+                        if (finaldate < 31) {
+                            obj.reviewdate = finaldate === 1 ? finaldate.toString() + ' day ago' : finaldate.toString() + ' days ago';
+                        }
+                        else if (finaldate < 365) {
+                            var temp = 0;
+                            for (var i = 30; i < finaldate; i = i + 30) {
+                                temp += 1;
+                            }
+                            obj.reviewdate = temp === 1 ? temp.toString() + ' month ago' : temp.toString() + ' months ago';
+                        } else {
+                            obj.reviewdate = 'more than one year ago';
+                        }
                     });
                 });
 
@@ -212,6 +257,12 @@
 
         $('.g-popup__close').on('click', function (e) {
             $('.g-popup-wrapper').hide();
+            vm.Comments = '';
+            for (var i = 1; i < 6; i++) {
+                if ($('#stars-rating-' + i).is(':checked')) {
+                    $('#stars-rating-' + i)[0].checked = false;
+                }
+            }
             $('body').removeClass('g-blur');
         });
 

@@ -17,7 +17,7 @@ namespace IST.WebApi2.Models
         public string SecurityInfo { get; set; }
         public string Image { get; set; }
         public bool? Active { get; set; }
-        public bool SaveFavorite { get; set; }
+        public double? AverageRating { get; set; }
         public List<int> TagIds { get; set; }
         public List<int> FilterIds { get; set; }
         public bool IsFavorite { get; set; }
@@ -35,7 +35,6 @@ namespace IST.WebApi2.Models
 
         public IEnumerable<SolutionModel> Data { get; set; }
         public IEnumerable<FilterCategoryModel> FilterCategories { get; set; }
-        public int TotalCount { get; set; }
         public int recordsTotal { get; set; }
         public int recordsFiltered { get; set; }
     }

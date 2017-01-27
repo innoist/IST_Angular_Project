@@ -114,7 +114,7 @@
                                            theme="bootstrap"
                                            uib-tooltip="{{ csc.validateInput(csc.formValidate.SolutionOwners, 'required') ? 'Solution Owner is required.' : '' }}"
                                            uib-tooltip-trigger="focus"
-                                           tooltip-class="tooltip-danger">
+                                           tooltip-class="tooltip-danger" ng-disabled="!csc.edit">
                                     <ui-select-match placeholder="Select a Solution Owner">
                                         {{$select.selected.DisplayName}}
                                         <span class="resetDdl" ng-click="csc.clearSolutionOwners($event)" ng-if="csc.edit">
@@ -136,7 +136,7 @@
                                            uib-tooltip="{{ csc.validateInput(csc.formValidate.SolutionTypes, 'required') ? 'Solution Type is required.' : '' }}"
                                            uib-tooltip-trigger="focus"
                                            tooltip-class="tooltip-danger"
-                                           ng-model="csc.SolutionTypes.selected" theme="bootstrap">
+                                           ng-model="csc.SolutionTypes.selected" theme="bootstrap" ng-disabled="!csc.edit">
                                     <ui-select-match placeholder="Select a Solution Type">
                                         {{$select.selected.DisplayName}}
                                         <span class="resetDdl" ng-click="csc.clearSolutionTypes($event)" ng-if="csc.edit">
@@ -159,7 +159,7 @@
                                            name="Tags"
                                            uib-tooltip="{{ csc.validateInput(csc.formValidate.Tags, 'required') ? 'Tags are required.' : '' }}"
                                            uib-tooltip-trigger="focus"
-                                           tooltip-class="tooltip-danger">
+                                           tooltip-class="tooltip-danger" ng-disabled="!csc.edit">
                                     <ui-select-match placeholder="Select Tag(s)">{{$item.DisplayValue}}</ui-select-match>
                                     <ui-select-choices group-by="'TagGroupName'" repeat="obj in csc.Tags | propsFilter: {DisplayValue: $select.search}"
                                                        class="animated fadeInDown">
@@ -178,7 +178,7 @@
                                            name="Filters"
                                            uib-tooltip="{{ csc.validateInput(csc.formValidate.Filters, 'required') ? 'Filters are required.' : '' }}"
                                            uib-tooltip-trigger="focus"
-                                           tooltip-class="tooltip-danger">
+                                           tooltip-class="tooltip-danger" ng-disabled="!csc.edit">
                                     <ui-select-match placeholder="Select Filter(s)">
                                         {{$item.DisplayValue}}
                                     </ui-select-match>

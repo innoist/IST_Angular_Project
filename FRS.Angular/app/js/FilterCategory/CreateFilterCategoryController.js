@@ -74,7 +74,6 @@
             vm.edit = true;
             return;
         }
-            
 
         filterCategoryId = $stateParams.Id;
         FilterCategoryService.loadById(filterCategoryId, function (response) {

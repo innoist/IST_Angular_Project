@@ -55,7 +55,7 @@
                                            theme="bootstrap"
                                            uib-tooltip="{{ ctc.validateInput(ctc.formValidate.TagGroups, 'required') ? 'Tag Group is required.' : '' }}"
                                            uib-tooltip-trigger="focus"
-                                           tooltip-class="tooltip-danger">
+                                           tooltip-class="tooltip-danger" ng-disabled="!ctc.edit">
                                     <ui-select-match placeholder="Select a Tag Group">
                                         {{$select.selected.DisplayName}}
                                         <span class="resetDdl" ng-click="ctc.clearTagGroups($event)" ng-if="ctc.edit">

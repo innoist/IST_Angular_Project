@@ -81,6 +81,7 @@
                 if (response.FilterModel) {
                     vm.Filter = response.FilterModel;
                     vm.update = true;
+                    toaster.success("", "Data has been loaded successfully.");
                 }
                 vm.FilterCategories = response.FilterCategories;
                 filterId = response.Id;
@@ -93,7 +94,6 @@
                         vm.FilterCategories.required = true;
                     }
                 }
-                toaster.success("", "Data has been loaded successfully.");
             } else {
                 filterId = 0;
             }

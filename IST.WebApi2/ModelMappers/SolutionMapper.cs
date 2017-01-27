@@ -30,7 +30,7 @@ namespace IST.WebApi2.ModelMappers
         }
         public static SolutionModel ClientCreateFrom(this Solution source)
         {
-            return new SolutionModel
+            var toReturn = new SolutionModel
             {
                 Id = source.Id,
                 Description = source.Description,
@@ -38,8 +38,10 @@ namespace IST.WebApi2.ModelMappers
                 Location = source.Location,
                 Image = source.Image,
                 Active = source.Active.HasValue ? source.Active : true,
-                IsFavorite = source.AspNetUsers.FirstOrDefault() != null
+                IsFavorite = source.AspNetUsers.FirstOrDefault() != null,
+                AverageRating = source.SolutionRatings.Count > 0 ? source.SolutionRatings.Select(x => x.Rating).Average() : 0
             };
+            return toReturn;
         }
         public static Solution MapFromClientToServer(this SolutionModel source)
         {

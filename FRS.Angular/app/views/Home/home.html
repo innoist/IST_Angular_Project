@@ -116,7 +116,7 @@
                             </div>
                         </a>
 
-                        <a class="product-review" target="_blank" ng-href="{{project.Location}}">{{project.Name}}</a>
+                        <a class="product-review" target="_blank" ng-href="{{project.Location}}" uib-tooltip="{{project.Name.length > 25 ? project.Name:''}}">{{project.Name | customLimitTo : 25}}</a>
                         <!--<a class="add-to-cart" target="_blank" ng-href="{{project.Location}}"><i class="fa fa-shopping-cart"></i></a>-->
                         <!--<a class="shop-rgba-dark-green rgba-banner" target="_blank" ng-href="{{project.Location}}">Live</a>-->
                     </div>
@@ -129,11 +129,11 @@
                             </div>
                         </div>
                         <ul class="list-inline product-ratings">
-                            <li ng-click="hc.OpenProjectDetail(project.Id)"><i class="rating-selected fa fa-star"></i></li>
-                            <li ng-click="hc.OpenProjectDetail(project.Id)"><i class="rating-selected fa fa-star"></i></li>
-                            <li ng-click="hc.OpenProjectDetail(project.Id)"><i class="rating-selected fa fa-star"></i></li>
-                            <li ng-click="hc.OpenProjectDetail(project.Id)"><i class="rating fa fa-star"></i></li>
-                            <li ng-click="hc.OpenProjectDetail(project.Id)"><i class="rating fa fa-star"></i></li>
+                            <li ng-click="hc.OpenProjectDetail(project.Id)" uib-tooltip="Rating : {{project.AverageRating}}"><i class="rating-selected fa fa-star-o" id="avg-rating-1-{{project.Id}}"></i></li>
+                            <li ng-click="hc.OpenProjectDetail(project.Id)" uib-tooltip="Rating : {{project.AverageRating}}"><i class="rating-selected fa fa-star-o" id="avg-rating-2-{{project.Id}}"></i></li>
+                            <li ng-click="hc.OpenProjectDetail(project.Id)" uib-tooltip="Rating : {{project.AverageRating}}"><i class="rating-selected fa fa-star-o" id="avg-rating-3-{{project.Id}}"></i></li>
+                            <li ng-click="hc.OpenProjectDetail(project.Id)" uib-tooltip="Rating : {{project.AverageRating}}"><i class="rating-selected fa fa-star-o" id="avg-rating-4-{{project.Id}}"></i></li>
+                            <li ng-click="hc.OpenProjectDetail(project.Id)" uib-tooltip="Rating : {{project.AverageRating}}"><i class="rating-selected fa fa-star-o" id="avg-rating-5-{{project.Id}}"></i></li>
 
                             <li class="like-icon" ng-if="isAuthenticated">
                                 <div ng-class="{'rating':!project.IsFavorite,'rating-selected':project.IsFavorite}" id="{{project.Id}}"
@@ -174,40 +174,26 @@
 
 <!-- Popup for Project detail -->
 <div class="g-popup-wrapper" id="projectdetail">
-    <div class="g-popup g-popup--subscribe" style="width: 75%">
+    <div class="g-popup g-popup--subscribe padding-bottom30 padding-top35" style="width: 75%">
         <h3>RECENT REVIEWS ({{hc.Project.Name}})</h3>
-        <scrollable height="150">
-            <div class="g-popup--subscribe-message margin-bottom110" ng-repeat="rating in hc.SolutionRatings">
+        <scrollable height="160">
+            <div class="g-popup--subscribe-message margin-bottom110 red" ng-if="!hc.SolutionRatings.length">No Reviews found!</div>
+            <div class="g-popup--subscribe-message margin-bottom110" ng-repeat="rating in hc.SolutionRatings" ng-if="hc.SolutionRatings">
                 <div class="col-md-1">
                     <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
                 </div>
                 <div class="product-comment-dtl col-md-11">
-                    <h4>{{rating.Username}} <small>22 days ago</small></h4>
+                    <h4>{{rating.Username}} <small>{{rating.reviewdate}}</small></h4>
                     <p>{{rating.Comments}}</p>
                     <ul class="list-inline product-ratings">
+                        
                         <li class="reply"><a href="#">Reply</a></li>
-                        <li class="pull-right">
-                            <!--<ul class="list-inline">
-                                <li><i class="rating fa fa-star" id="ratingstar1"></i></li>
-                                <li><i class="rating fa fa-star" id="ratingstar2"></i></li>
-                                <li><i class="rating fa fa-star" id="ratingstar3"></i></li>
-                                <li><i class="rating fa fa-star" id="ratingstar4"></i></li>
-                                <li><i class="rating fa fa-star" id="ratingstar5"></i></li>
-                            </ul>-->
-                            <div class="stars-ratings stars-ratings-label">
-                                <input type="radio" name="stars-rating-{{rating.RatingId}}" ng-disabled="rating.disable" id="rated-{{rating.RatingId}}-5">
-                                <label for="rated-{{rating.RatingId}}-5" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                <input type="radio" name="stars-rating-{{rating.RatingId}}" ng-disabled="rating.disable" id="rated-{{rating.RatingId}}-4">
-                                <label for="rated-{{rating.RatingId}}-4" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                <input type="radio" name="stars-rating-{{rating.RatingId}}" ng-disabled="rating.disable" id="rated-{{rating.RatingId}}-3">
-                                <label for="rated-{{rating.RatingId}}-3" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                <input type="radio" name="stars-rating-{{rating.RatingId}}" ng-disabled="rating.disable" id="rated-{{rating.RatingId}}-2">
-                                <label for="rated-{{rating.RatingId}}-2" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                <input type="radio" name="stars-rating-{{rating.RatingId}}" ng-disabled="rating.disable" id="rated-{{rating.RatingId}}-1">
-                                <label for="rated-{{rating.RatingId}}-1" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                            </div>
+                        <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-5-{{rating.RatingId}}"></i></li>
+                        <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-4-{{rating.RatingId}}"></i></li>
+                        <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-3-{{rating.RatingId}}"></i></li>
+                        <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-2-{{rating.RatingId}}"></i></li>
+                        <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-1-{{rating.RatingId}}"></i></li>
 
-                        </li>
                     </ul>
                 </div>
             </div>

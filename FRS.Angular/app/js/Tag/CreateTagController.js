@@ -71,7 +71,6 @@
         }
 
         if ($stateParams.Id === "") {
-            vm.Tag.IsActive = true;
             vm.edit = true;
         }
 
@@ -81,6 +80,7 @@
                 if (response.TagModel) {
                     vm.Tag = response.TagModel;
                     vm.update = true;
+                    toaster.success("", "Data has been loaded successfully.");
                 }
                 vm.TagGroups = response.TagGroups;
                 tagId = response.Id;
@@ -93,7 +93,7 @@
                         vm.TagGroups.required = true;
                     }
                 }
-                toaster.success("", "Data has been loaded successfully.");
+                
             } else {
                 tagId = 0;
             }

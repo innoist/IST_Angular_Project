@@ -137,6 +137,7 @@
                     vm.Image = (vm.Solution.Image ? frsApiUrl + vm.Solution.Image : '/app/img/image-default.png');
                     $('.SolutionImage').attr('src', vm.Image);
                     vm.update = true;
+                    toaster.success("", "Data has been loaded successfully.");
                 }
                 vm.Tags = response.Tags;
                 vm.Filters = response.Filters;
@@ -176,7 +177,6 @@
 
                     if (vm.Solution.Image)
                         $('.SolutionImage').attr('src', vm.Solution.Image);
-                    toaster.success("", "Data has been loaded successfully.");
                 }
             } else {
                 solutionId = 0;

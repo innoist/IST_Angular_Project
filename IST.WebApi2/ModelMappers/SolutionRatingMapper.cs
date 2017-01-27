@@ -13,7 +13,8 @@ namespace IST.WebApi2.ModelMappers
                 SolutionId = source.SolutionId,
                 Rating = source.Rating,
                 Comments = source.Comments,
-                Username = source.CreatedByUser.FirstName +" "+ source.CreatedByUser.LastName
+                Username = source.CreatedByUser.FirstName +" "+ source.CreatedByUser.LastName,
+                RecCreatedOn = source.RecCreatedOn
             };
         }
         public static SolutionRating MapFromClientToServer(this SolutionRatingModel source)
