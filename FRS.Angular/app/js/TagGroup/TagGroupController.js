@@ -22,7 +22,7 @@
 
         function activate() {
             //to empties previous function in search array 
-            $.fn.dataTable.ext.search = [];
+            //$.fn.dataTable.ext.search = [];
             //Custom filter in Datatable
             $.fn.dataTable.ext.search.push(
                 function (settings, data, dataIndex) {

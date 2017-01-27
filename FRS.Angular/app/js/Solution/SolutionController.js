@@ -87,6 +87,7 @@
         }
 
         SolutionService.getAll(function (response) {
+            $.unblockUI();
             vm.SolutionTypes = response.SolutionTypes;
         }, null, "/api/SolutionBaseData");
 
@@ -104,6 +105,7 @@
             }, function (isConfirm) {
                 if (isConfirm) {
                     SolutionService.delete(id, function (response) {
+                        $.unblockUI();
                         if (response) {
                             vm.dtInstance.reloadData(function (json) { }, false);
                             toaster.success("", "Deleted successfully.");
