@@ -83,6 +83,7 @@
             vm.formdata.append(1, JSON.stringify(vm.Solution));
             SolutionService.uploadFile(vm.formdata, onSuccess, onError);
             function onSuccess(response) {
+                $.unblockUI();
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
                     if (isNew) {
@@ -131,6 +132,7 @@
         solutionId = $stateParams.Id === "" ? 0 : $stateParams.Id;
 
         SolutionService.loadById(solutionId, function (response) {
+            $.unblockUI();
             if (response) {
                 if (response.SolutionModel) {
                     vm.Solution = response.SolutionModel;

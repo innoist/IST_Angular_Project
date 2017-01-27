@@ -127,9 +127,9 @@
         }
 
         vm.getDataFromSever = function () {
-            if (vm.clientMainSpinner) {
-                $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
-            }
+            //if (vm.clientMainSpinner) {
+            //    $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
+            //}
             vm.clientMainSpinner = true;
             vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString.DisplayName : null;
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
@@ -269,7 +269,6 @@
         //#region Post Data
         vm.Solution = {};
         vm.save = function (solutionId) {
-            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             vm.submitted = true;
             var solution = {};
             vm.Solution.Id = solutionId;
@@ -359,6 +358,7 @@
             HomeService.logout().then(function (response) {
                 console.log(response);
                 $scope.isAuthenticated = false;
+                $.unblockUI();
             });
         }
 

@@ -38,6 +38,7 @@
             );
 
             FilterService.getAll(function (response) {
+                $.unblockUI();
                 if (response) {
                     vm.Filters = response;
                     vm.IsDataLoaded = true;
@@ -72,7 +73,8 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        FilterService.delete(filter.Id, function(response) {
+                        FilterService.delete(filter.Id, function (response) {
+                            $.unblockUI();
                             if (response) {
                                 var index = vm.Filters.indexOf(filter);
                                 vm.Filters.splice(index, 1);
@@ -81,7 +83,7 @@
                                 toaster.error("Notification", "You cannot delete " + filter.DisplayValue + " as it is being used in Filter.");
                             }
                         });
-                    } 
+                    }
                 });
             }
 

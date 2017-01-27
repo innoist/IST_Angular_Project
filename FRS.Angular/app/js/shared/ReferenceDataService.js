@@ -27,11 +27,13 @@
         this.url = "";
 
         this.getAll = function (onReady, onError, url) {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             if (!url)
                 url = this.url;
 
             onError = onError || function (response) {
                 if (response) {
+                    $.unblockUI();
                     if (response.ExceptionMessage) {
                         toaster.error(response.ExceptionMessage);
                     }
@@ -47,9 +49,13 @@
         }
 
         this.loadById = function (Id, onReady, onError) {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             var urlMetaData = frsApiUrl + this.url + Id;
 
-            onError = onError || function () { alert('Failure loading Data'); };
+            onError = onError || function() {
+                alert('Failure loading Data');
+                $.unblockUI();
+            };
 
             $http
               .get(urlMetaData)
@@ -58,10 +64,12 @@
         };
 
         this.load = function (url, data, onReady, onError) {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             if (!url)
                 url = this.url;
 
             onError = onError || function (response) {
+                $.unblockUI();
                 if (response.ExceptionMessage) {
                     toaster.error(response.ExceptionMessage);
                 } if (response.Message) {
@@ -78,9 +86,11 @@
         };
 
         this.delete = function (Id, onReady, onError) {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             var urlMetaData = frsApiUrl + this.url + Id;
 
             onError = onError || function (response) {
+                $.unblockUI();
                 if (response.ExceptionMessage) {
                     toaster.error(response.ExceptionMessage);
                 };
@@ -95,11 +105,13 @@
         };
 
         this.save = function (data, onReady, onError, url) {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             if (!url)
                 url = this.url;
             //var urlMetaData = window.frsApiUrl + '/api/LoadMetaData';
 
             onError = onError || function (response) {
+                $.unblockUI();
                 if (response.ExceptionMessage) {
                     toaster.error('Error', response.ExceptionMessage);
                 } else {
@@ -122,6 +134,7 @@
             //var urlMetaData = window.frsApiUrl + '/api/LoadMetaData';
 
             onError = onError || function (response) {
+                $.unblockUI();
                 if (response.ExceptionMessage) {
                     toaster.error('Error', response.ExceptionMessage);
                 } else {
@@ -147,6 +160,7 @@
         }
 
         this.logout = function () {
+            $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             var defered = $q.defer();
             $http.post(window.frsApiUrl + "/api/Account/Logout")
                 .success(function (response) {

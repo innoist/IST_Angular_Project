@@ -43,10 +43,12 @@
                     params.UserName = vm.userName = null;
                     params.Email = vm.email = null;
                 }
+                $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             },
             url: frsApiUrl + UsersService.url,
             type: 'GET',
             complete: function (data) {
+                $.unblockUI();
             }
         })
         .withDataProp('Data')
@@ -62,7 +64,7 @@
         .withPaginationType('full_numbers');
 
         vm.dtColumns = [
-            DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data, type, full, meta) {
+            DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function (data, type, full, meta) {
                 return '<span>' + data.FirstName + ' ' + data.LastName + '</span>';
             }),
             DTColumnBuilder.newColumn('Email').withTitle('Email'),
@@ -98,8 +100,9 @@
                 if (isConfirm) {
                     $state.go('app.Allergy');
                     UsersService.delete(item.UserName, function (response) {
+                        $.unblockUI();
                         if (response) {
-                            vm.dtInstance.reloadData(function (json) {  }, false);
+                            vm.dtInstance.reloadData(function (json) { }, false);
                             toaster.success("", "Deleted successfully.");
                         }
                     });
@@ -109,12 +112,12 @@
 
         vm.resetFilter = function () {
             vm.isReset = true;
-            vm.dtInstance.reloadData(function (json) {  }, true);
+            vm.dtInstance.reloadData(function (json) { }, true);
         }
 
         vm.fiterData = function () {
             vm.isReset = false;
-            vm.dtInstance.reloadData(function (json) {  }, true);
+            vm.dtInstance.reloadData(function (json) { }, true);
         }
 
         //Template for action buttons in dropdown template

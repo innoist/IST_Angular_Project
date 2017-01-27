@@ -43,12 +43,12 @@
                     params.TypeId = vm.SolutionTypes.selected ? vm.SolutionTypes.selected.Id : null;
                     params.OwnerId = vm.SolutionOwners.selected ? vm.SolutionOwners.selected.Id : null;
                 }
-                $("div#mainSpinner").show();
+                $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
             },
             url: frsApiUrl + "/api/Solution/",
             type: 'GET',
             complete: function (data) {
-                $("div#mainSpinner").hide();
+                $.unblockUI();
             }
         })
         .withDataProp('Data')

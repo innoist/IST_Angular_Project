@@ -33,6 +33,7 @@
             vm.Filter.FilterCategoryId = vm.FilterCategories.selected ? vm.FilterCategories.selected.Id : null;
             FilterService.save(vm.Filter, onSuccess, onError);
             function onSuccess(response) {
+                $.unblockUI();
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
                     if (isNew) {
@@ -77,6 +78,7 @@
 
         filterId = $stateParams.Id ? $stateParams.Id : 0;
         FilterService.loadById(filterId, function (response) {
+            $.unblockUI();
             if (response) {
                 if (response.FilterModel) {
                     vm.Filter = response.FilterModel;

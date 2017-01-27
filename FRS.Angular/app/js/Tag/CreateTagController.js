@@ -33,6 +33,7 @@
             vm.Tag.TagGroupId = vm.TagGroups.selected ? vm.TagGroups.selected.Id : null;
             TagService.save(vm.Tag, onSuccess, onError);
             function onSuccess(response) {
+                $.unblockUI();
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
                     if (isNew) {
@@ -76,6 +77,7 @@
 
         tagId = $stateParams.Id ? $stateParams.Id : 0;
         TagService.loadById(tagId, function (response) {
+            $.unblockUI();
             if (response) {
                 if (response.TagModel) {
                     vm.Tag = response.TagModel;
@@ -93,7 +95,7 @@
                         vm.TagGroups.required = true;
                     }
                 }
-                
+
             } else {
                 tagId = 0;
             }

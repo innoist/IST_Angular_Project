@@ -38,6 +38,7 @@
             );
 
             TagGroupService.getAll(function (response) {
+                $.unblockUI();
                 if (response) {
                     vm.TagGroups = response;
                     vm.IsDataLoaded = true;
@@ -71,14 +72,15 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        TagGroupService.delete(tagGroup.Id, function(response) {
+                        TagGroupService.delete(tagGroup.Id, function (response) {
+                            $.unblockUI();
                             if (response) {
                                 var index = vm.TagGroups.indexOf(tagGroup);
                                 vm.TagGroups.splice(index, 1);
                                 toaster.success("", "Deleted successfully.");
                             }
                         });
-                    } 
+                    }
                 });
             }
 

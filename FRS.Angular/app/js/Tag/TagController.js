@@ -38,6 +38,7 @@
             );
 
             TagService.getAll(function (response) {
+                $.unblockUI();
                 if (response) {
                     vm.Tags = response;
                     vm.IsDataLoaded = true;
@@ -72,7 +73,8 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        TagService.delete(tag.Id, function(response) {
+                        TagService.delete(tag.Id, function (response) {
+                            $.unblockUI();
                             if (response) {
                                 var index = vm.Tags.indexOf(tag);
                                 vm.Tags.splice(index, 1);
@@ -81,7 +83,7 @@
                                 toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
                             }
                         });
-                    } 
+                    }
                 });
             }
 

@@ -38,6 +38,7 @@
             );
 
             FilterCategoryService.getAll(function (response) {
+                $.unblockUI();
                 if (response) {
                     vm.FilterCategories = response;
                     vm.IsDataLoaded = true;
@@ -71,14 +72,15 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        FilterCategoryService.delete(filtercategory.Id, function(response) {
+                        FilterCategoryService.delete(filtercategory.Id, function (response) {
+                            $.unblockUI();
                             if (response) {
                                 var index = vm.FilterCategories.indexOf(filtercategory);
                                 vm.FilterCategories.splice(index, 1);
                                 toaster.success("", "Deleted successfully.");
                             }
                         });
-                    } 
+                    }
                 });
             }
 

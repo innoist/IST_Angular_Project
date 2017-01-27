@@ -33,6 +33,7 @@
 
             TagGroupService.save(vm.TagGroup, onSuccess, onError);
             function onSuccess(response) {
+                $.unblockUI();
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
                     if (isNew) {
@@ -73,10 +74,11 @@
             vm.edit = true;
             return;
         }
-            
+
 
         tagGroupId = $stateParams.Id;
         TagGroupService.loadById(tagGroupId, function (response) {
+            $.unblockUI();
             if (response) {
                 vm.update = true;
                 vm.TagGroup = response;

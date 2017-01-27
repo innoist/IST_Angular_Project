@@ -33,6 +33,7 @@
 
             FilterCategoryService.save(vm.FilterCategory, onSuccess, onError);
             function onSuccess(response) {
+                $.unblockUI();
                 if (response.data === true) {
                     toaster.pop("success", "Notification", "Data has been saved successfully.");
                     if (isNew) {
@@ -77,6 +78,7 @@
 
         filterCategoryId = $stateParams.Id;
         FilterCategoryService.loadById(filterCategoryId, function (response) {
+            $.unblockUI();
             if (response) {
                 vm.update = true;
                 vm.FilterCategory = response;
