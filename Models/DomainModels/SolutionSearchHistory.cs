@@ -8,6 +8,5 @@ namespace IST.Models.DomainModels
         public int SolutionId { get; set; }
         public DateTime SearchTime { get; set; }
         public string SearchString { get; set; }
-        public virtual Solution Solution { get; set; }
     }
 }
