@@ -13,7 +13,9 @@ namespace IST.WebApi2.ModelMappers
                 SolutionId = source.SolutionId,
                 Rating = source.Rating,
                 Comments = source.Comments,
-                Username = source.CreatedByUser.FirstName +" "+ source.CreatedByUser.LastName,
+                IsReply = source.IsReply,
+                ReplyParentId = source.ReplyParentId,
+                Username = source.CreatedByUser.FirstName + " " + source.CreatedByUser.LastName,
                 RecCreatedOn = source.RecCreatedOn
             };
         }
@@ -25,6 +27,8 @@ namespace IST.WebApi2.ModelMappers
                 SolutionId = source.SolutionId,
                 Rating = source.Rating,
                 Comments = source.Comments,
+                IsReply = source.IsReply,
+                ReplyParentId = source.ReplyParentId,
                 RecCreatedById = source.RecCreatedById,
                 RecCreatedOn = source.RecCreatedOn,
                 RecLastUpdatedById = source.RecLastUpdatedById,

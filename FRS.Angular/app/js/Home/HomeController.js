@@ -353,6 +353,7 @@
                 $('#' + id)[0].checked = $('#' + id)[0].checked ? false : true;
             });
             vm.ProjectSearchRequest.FilterIds = [];
+            vm.ProjectSearchRequest.PageNo = 1;
             vm.getDataFromSever();
         }
 
