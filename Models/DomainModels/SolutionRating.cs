@@ -1,4 +1,5 @@
-﻿using IST.Models.IdentityModels;
+﻿using System.Collections.Generic;
+using IST.Models.IdentityModels;
 
 namespace IST.Models.DomainModels
 {
@@ -11,5 +12,7 @@ namespace IST.Models.DomainModels
         public bool? IsReply { get; set; }
         public string Comments { get; set; }
         public virtual Solution Solution { get; set; }
+        public virtual SolutionRating ParentItem { get; set; } 
+        public virtual ICollection<SolutionRating> SolutionRatings { get; set; } 
     }
 }

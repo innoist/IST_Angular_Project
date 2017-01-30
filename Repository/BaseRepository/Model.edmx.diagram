@@ -56,6 +56,7 @@
         <EntityTypeShape EntityType="angularModel.SolutionSearchHistory" Width="1.5" PointX="11.875" PointY="13.5" />
         <AssociationConnector Association="angularModel.FK_SolutionSearchHistory_AspNetUsersCreated" />
         <AssociationConnector Association="angularModel.FK_SolutionSearchHistory_AspNetUsersUpdated" />
+        <AssociationConnector Association="angularModel.FK_SolutionRating_SolutionRating" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

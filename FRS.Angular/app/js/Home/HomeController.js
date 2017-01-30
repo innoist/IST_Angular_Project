@@ -40,6 +40,7 @@
         //to show spinner on data load
         vm.clientMainSpinner = true;
         vm.SolutionRatingModel = {};
+
         vm.ProjectSearchRequest = {
             PageSize: 9,
             PageNo: 1,
@@ -126,17 +127,14 @@
             }
         }
 
-        vm.getDataFromSever = function () {
-            //if (vm.clientMainSpinner) {
-            //    $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
-            //}
+        vm.getDataFromServer = function () {
             vm.clientMainSpinner = true;
-            vm.ProjectSearchRequest.Name = vm.searchString ? vm.searchString.DisplayName : null;
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
-        vm.getDataFromSever();
+        vm.getDataFromServer();
 
+        //search solutions on the basis of filters
         vm.ProjectSearchRequest.FilterIds = [];
         vm.filterProjects = function (id) {
             vm.clientMainSpinner = true;
@@ -144,11 +142,11 @@
             if ($('#' + id)[0].checked) {
                 vm.ProjectSearchRequest.FilterIds.push(id);
                 vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
+                vm.getDataFromServer();
             } else {
                 vm.ProjectSearchRequest.FilterIds.splice(vm.ProjectSearchRequest.FilterIds.indexOf(id), 1);
                 vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
+                vm.getDataFromServer();
             }
         }
 
@@ -157,17 +155,20 @@
                 vm.clientMainSpinner = true;
                 vm.ProjectSearchRequest.IsFavorite = true;
                 vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
+                vm.getDataFromServer();
             } else {
                 vm.ProjectSearchRequest.IsFavorite = false;
                 vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
+                vm.getDataFromServer();
             }
         };
 
         vm.searchSolutions = function () {
-            vm.ProjectSearchRequest.PageNo = 1;
-            vm.getDataFromSever();
+            if (vm.searchString) {
+                vm.ProjectSearchRequest.Name = typeof vm.searchString === "object" ? vm.searchString.DisplayName : vm.searchString;
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromServer();
+            }
         }
 
         /************************************/
@@ -198,7 +199,7 @@
                 if ($(window).scrollTop() + $(window).height() === $(document).height()) {
                     vm.IsDataLoaded = true;
                     vm.ProjectSearchRequest.PageNo += 1;
-                    vm.getDataFromSever();
+                    vm.getDataFromServer();
                     vm.isScrolled = true;
                 }
             }
@@ -206,12 +207,12 @@
 
         vm.OpenSendToFriend = function () {
             $('#sendtofriend').show();
-            //if ($('.g-popup-wrapper').is(':visible')) 
-            //    $('div.wrapper').addClass('g-blur');
+            angular.element('#client-wrapper').toggleClass('position-fixed');
         }
 
         vm.OpenProjectDetail = function (id) {
             $('#projectdetail').show();
+            angular.element('#client-wrapper').toggleClass('position-fixed');
             HomeService.loadById(id, function (response) {
                 $.unblockUI();
                 vm.Project = response.SolutionModel;
@@ -254,10 +255,12 @@
 
         vm.OpenLoginPage = function () {
             $('#loginpage').show();
+            angular.element('#client-wrapper').toggleClass('position-fixed');
         }
 
         $('.g-popup__close').on('click', function (e) {
             $('.g-popup-wrapper').hide();
+            angular.element('#client-wrapper').toggleClass('position-fixed');
             vm.Comments = '';
             for (var i = 1; i < 6; i++) {
                 if ($('#stars-rating-' + i).is(':checked')) {
@@ -313,7 +316,13 @@
         }
         //#endregion
 
-        vm.SolutionRating = function (projectid) {
+        vm.SaveSolutionRating = function (projectid, isreply) {
+            angular.element('#client-wrapper').toggleClass('position-fixed');
+            if (isreply && vm.RatingId) {
+                vm.SolutionRatingModel.IsReply = isreply;
+                vm.SolutionRatingModel.ReplyParentId = vm.RatingId;
+            }
+
             vm.SolutionRatingModel.SolutionId = projectid;
             vm.SolutionRatingModel.Comments = vm.Comments;
             for (var i = 1; i < 6; i++) {
@@ -342,8 +351,9 @@
         vm.resetdata = function () {
             if (vm.searchString) {
                 vm.searchString = '';
+                vm.ProjectSearchRequest.Name = '';
                 vm.ProjectSearchRequest.PageNo = 1;
-                vm.getDataFromSever();
+                vm.getDataFromServer();
             }
         }
 
@@ -354,7 +364,7 @@
             });
             vm.ProjectSearchRequest.FilterIds = [];
             vm.ProjectSearchRequest.PageNo = 1;
-            vm.getDataFromSever();
+            vm.getDataFromServer();
         }
 
         vm.signOut = function () {

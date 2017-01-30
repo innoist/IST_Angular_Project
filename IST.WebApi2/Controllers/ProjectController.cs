@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.Common.DropDown;
@@ -57,7 +58,7 @@ namespace IST.WebApi2.Controllers
             var viewModel = new ProjectViewModel
             {
                 SolutionModel = baseData.Solution?.ClientCreateFrom(),
-                SolutionRatings=baseData.SolutionRatings.Select(x=>x.MapFromServerToClient()).ToList()
+                SolutionRatings = baseData.SolutionRatings.Select(x => x.MapFromServerToClient()).ToList()
             };
             return Ok(viewModel);
         }

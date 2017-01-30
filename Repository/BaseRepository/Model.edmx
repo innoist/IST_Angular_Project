@@ -521,6 +521,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SolutionRating_SolutionRating">
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="0..1" />
+          <End Role="SolutionRating1" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolutionRating">
+              <PropertyRef Name="RatingId" />
+            </Principal>
+            <Dependent Role="SolutionRating1">
+              <PropertyRef Name="ReplyParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Role="SolutionOwner" Type="Self.SolutionOwner" Multiplicity="1" />
           <End Role="Solution" Type="Self.Solution" Multiplicity="*" />
@@ -826,6 +838,10 @@
             <End Role="Solution" EntitySet="Solution" />
             <End Role="SolutionRating" EntitySet="SolutionRating" />
           </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_SolutionRating" Association="Self.FK_SolutionRating_SolutionRating">
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
+            <End Role="SolutionRating1" EntitySet="SolutionRating" />
+          </AssociationSet>
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
             <End Role="Solution" EntitySet="Solution" />
@@ -1051,6 +1067,10 @@
           <AssociationSet Name="FK_SolutionSearchHistory_AspNetUsersUpdated" Association="angularModel.FK_SolutionSearchHistory_AspNetUsersUpdated">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="SolutionSearchHistory" EntitySet="SolutionSearchHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_SolutionRating" Association="angularModel.FK_SolutionRating_SolutionRating">
+            <End Role="SolutionRating" EntitySet="SolutionRatings" />
+            <End Role="SolutionRating1" EntitySet="SolutionRatings" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserRole">
@@ -1587,6 +1607,8 @@
           <NavigationProperty Name="Solution" Relationship="angularModel.FK_SolutionRating_Solution" FromRole="SolutionRating" ToRole="Solution" />
           <Property Name="IsReply" Type="Boolean" />
           <Property Name="ReplyParentId" Type="Int32" />
+          <NavigationProperty Name="SolutionRatings" Relationship="angularModel.FK_SolutionRating_SolutionRating" FromRole="SolutionRating" ToRole="SolutionRating1" />
+          <NavigationProperty Name="ParentItem" Relationship="angularModel.FK_SolutionRating_SolutionRating" FromRole="SolutionRating1" ToRole="SolutionRating" />
         </EntityType>
         <Association Name="FK_SolutionRating_AspNetUsers">
           <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -1711,6 +1733,18 @@
             </Principal>
             <Dependent Role="SolutionSearchHistory">
               <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionRating_SolutionRating">
+          <End Type="angularModel.SolutionRating" Role="SolutionRating" Multiplicity="0..1" />
+          <End Type="angularModel.SolutionRating" Role="SolutionRating1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolutionRating">
+              <PropertyRef Name="RatingId" />
+            </Principal>
+            <Dependent Role="SolutionRating1">
+              <PropertyRef Name="ReplyParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

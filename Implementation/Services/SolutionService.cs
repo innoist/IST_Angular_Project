@@ -81,11 +81,17 @@ namespace IST.Implementation.Services
 
         public ProjectBaseData GetProjectBaseData(int id)
         {
-            var basedata = new ProjectBaseData
+            var basedata = new ProjectBaseData();
+            try
             {
-                Solution = id > 0 ? solutionRepository.GetById(id) : null,
-                SolutionRatings = solutionRatingRepository.GetRatingBySolutionId(id)
-            };
+                basedata.Solution = id > 0 ? solutionRepository.GetById(id) : null;
+                basedata.SolutionRatings = solutionRatingRepository.GetRatingBySolutionId(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+            
             return basedata;
         }
 

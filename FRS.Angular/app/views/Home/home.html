@@ -22,9 +22,9 @@
                                 <label class="control-label needsclick">
                                     <input type="checkbox" ng-model="hc.Favorites" ng-click="hc.seeFavorites()" name="IsImportant" class="needsclick checkbox checkbox-inline"><span class="fa fa-heart" style="border-color: #18ba9b"></span>
                                 </label><strong>Favorites</strong>
-                                <hr style="margin-bottom: 0"/>
+                                <hr style="margin-bottom: 0" />
                             </div>
-                            
+
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <dl>
@@ -32,7 +32,7 @@
                                         <div id="collapseTwo{{$index}}" class="collapse in">
                                             <label class="checkbox" ng-repeat="filter in category.Filters">
                                                 <dd class="margin-top4" style="display: inline">
-                                                    <input type="checkbox" name="checkbox" id="{{filter.Id}}" ng-click="hc.clicked=!hc.clicked; hc.filterProjects(filter.Id)" ng-model="category$index" ng-change=""/>
+                                                    <input type="checkbox" name="checkbox" id="{{filter.Id}}" ng-click="hc.clicked=!hc.clicked; hc.filterProjects(filter.Id)" ng-model="category$index" ng-change="" />
                                                     <i></i>
                                                     {{filter.DisplayValue}}
                                                 </dd>
@@ -83,7 +83,7 @@
         <div class="col-md-9">
             <div class="row margin-bottom-5">
                 <div class="col-md-12 padding-leftright30">
-                    <form ng-submit="hc.getDataFromSever()">
+                    <form ng-submit="hc.searchSolutions()">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString"
                                    uib-typeahead="solution as solution.DisplayName for solution in hc.getSolutions($viewValue)"
@@ -154,7 +154,6 @@
     </div>
 </div>
 <!--=== End Content Part ===-->
-
 <!-- Popup for send to freind -->
 <div class="g-popup-wrapper" id="sendtofriend">
     <div class="g-popup g-popup--subscribe3">
@@ -176,9 +175,9 @@
 <div class="g-popup-wrapper" id="projectdetail">
     <div class="g-popup g-popup--subscribe padding-bottom30 padding-top35" style="width: 75%">
         <h3>RECENT REVIEWS ({{hc.Project.Name}})</h3>
-        <scrollable height="160">
+        <scrollable height="170">
             <div class="g-popup--subscribe-message margin-bottom110 red" ng-if="!hc.SolutionRatings.length">No Reviews found!</div>
-            <div class="g-popup--subscribe-message margin-bottom110" ng-repeat="rating in hc.SolutionRatings" ng-if="hc.SolutionRatings">
+            <div class="g-popup--subscribe-message margin-bottom110" ng-if="hc.SolutionRatings" ng-repeat="rating in hc.SolutionRatings | filter : {IsReply : false || null}">
                 <div class="col-md-1">
                     <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
                 </div>
@@ -186,8 +185,8 @@
                     <h4>{{rating.Username}} <small>{{rating.reviewdate}}</small></h4>
                     <p>{{rating.Comments}}</p>
                     <ul class="list-inline product-ratings">
-                        
-                        <li class="reply"><a data-toggle="collapse" href="#replyreview" ng-click="reply = !reply">Reply</a></li>
+
+                        <li class="reply"><a data-toggle="collapse" href="#replyreview">Reply</a></li>
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-5-{{rating.RatingId}}"></i></li>
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-4-{{rating.RatingId}}"></i></li>
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-3-{{rating.RatingId}}"></i></li>
@@ -195,9 +194,60 @@
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-1-{{rating.RatingId}}"></i></li>
 
                     </ul>
+                    <div ng-repeat="reply in rating.Replies">
+                        <div class="col-md-1">
+                            <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
+                        </div>
+                        <div class="product-comment-dtl col-md-11">
+                            <h4>{{reply.Username}} <!--<small>{{reply.reviewdate}}</small>--></h4>
+                            <p>{{reply.Comments}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </scrollable>
+
+        <div class="panel-group margin-top-20" id="replyreviewpanel" ng-if="hc.SolutionRatings.length">
+            <div class="panel panel-default-dark">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#replyreviewpanel" href="#replyreview" ng-click="reply = !reply">
+                            Reply
+                            <i ng-class="{'fa fa-angle-down':!reply,'fa fa-angle-up':reply}"></i>
+                        </a>
+                    </h3>
+                </div>
+                <div id="replyreview" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form ng-submit="hc.SaveSolutionRating(hc.Project.Id,true)" class="sky-form sky-changes-4">
+                            <div class="row">
+                                <section class="col-sm-6">
+                                    <label class="input">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="hc.username" ng-disabled="hc.disableprojectdetail">
+                                    </label>
+                                </section>
+                                <section class="col-sm-6">
+                                    <label class="input">
+                                        <input type="email" placeholder="Email" class="form-control" ng-model="hc.email" ng-disabled="hc.disableprojectdetail">
+                                    </label>
+                                </section>
+                                <section class="col-sm-12">
+                                    <label class="textarea">
+                                        <textarea placeholder="Message" rows="2" class="form-control" ng-model="hc.Comments"></textarea>
+                                    </label>
+                                </section>
+                            </div>
+                            <ul class="list-inline product-ratings">
+                                <li class="pull-right">
+                                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="panel-group margin-top-20" id="addreviewpanel" ng-if="!hc.Project.IsRated">
             <div class="panel panel-default-dark">
                 <div class="panel-heading">
@@ -210,7 +260,7 @@
                 </div>
                 <div id="addreview" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <form ng-submit="hc.SolutionRating(hc.Project.Id)" class="sky-form sky-changes-4">
+                        <form ng-submit="hc.SaveSolutionRating(hc.Project.Id)" class="sky-form sky-changes-4">
                             <div class="row">
                                 <section class="col-sm-6">
                                     <label class="input">
@@ -253,48 +303,10 @@
                 </div>
             </div>
         </div>
-        
-        <div class="panel-group margin-top-20" id="replyreviewpanel" ng-if="hc.SolutionRatings.length">
-            <div class="panel panel-default-dark">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#replyreviewpanel" href="#replyreview" ng-click="reply = !reply">
-                            Reply
-                            <i ng-class="{'fa fa-angle-down':!reply,'fa fa-angle-up':reply}"></i>
-                        </a>
-                    </h3>
-                </div>
-                <div id="replyreview" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form ng-submit="hc.SolutionRating(hc.Project.Id)" class="sky-form sky-changes-4">
-                            <div class="row">
-                                <section class="col-sm-6">
-                                    <label class="input">
-                                        <input type="text" placeholder="Name" class="form-control" ng-model="hc.username" ng-disabled="hc.disableprojectdetail">
-                                    </label>
-                                </section>
-                                <section class="col-sm-6">
-                                    <label class="input">
-                                        <input type="email" placeholder="Email" class="form-control" ng-model="hc.email" ng-disabled="hc.disableprojectdetail">
-                                    </label>
-                                </section>
-                                <section class="col-sm-12">
-                                    <label class="textarea">
-                                        <textarea placeholder="Message" rows="2" class="form-control" ng-model="hc.Comments"></textarea>
-                                    </label>
-                                </section>
-                            </div>
-                            <ul class="list-inline product-ratings">
-                                <li class="pull-right">
-                                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe2__close"><span class="icon-close" aria-hidden="true"></span></a>
+
+        <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe2__close">
+            <span class="icon-close" aria-hidden="true"></span>
+        </a>
     </div>
 </div>
 
