@@ -198,17 +198,73 @@
                 </div>
             </div>
         </scrollable>
-        <div class="panel-group margin-top-20" id="myaccordion" ng-if="!hc.Project.IsRated">
+        <div class="panel-group margin-top-20" id="addreviewpanel" ng-if="!hc.Project.IsRated">
             <div class="panel panel-default-dark">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#myaccordion" href="#addreview" ng-click="angle = !angle">
+                        <a data-toggle="collapse" data-parent="#addreviewpanel" href="#addreview" ng-click="angle = !angle">
                             Add a review
                             <i ng-class="{'fa fa-angle-down':!angle,'fa fa-angle-up':angle}"></i>
                         </a>
                     </h3>
                 </div>
                 <div id="addreview" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form ng-submit="hc.SolutionRating(hc.Project.Id)" class="sky-form sky-changes-4">
+                            <div class="row">
+                                <section class="col-sm-6">
+                                    <label class="input">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="hc.username" ng-disabled="hc.disableprojectdetail">
+                                    </label>
+                                </section>
+                                <section class="col-sm-6">
+                                    <label class="input">
+                                        <input type="email" placeholder="Email" class="form-control" ng-model="hc.email" ng-disabled="hc.disableprojectdetail">
+                                    </label>
+                                </section>
+                                <section class="col-sm-12">
+                                    <label class="textarea">
+                                        <textarea placeholder="Message" rows="3" class="form-control" ng-model="hc.Comments"></textarea>
+                                    </label>
+                                </section>
+                            </div>
+                            <ul class="list-inline product-ratings">
+                                <li class="reply">Review</li>
+                                <li>
+                                    <div class="stars-ratings stars-ratings-label">
+                                        <input type="radio" name="stars-rating" id="stars-rating-5">
+                                        <label for="stars-rating-5" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-4">
+                                        <label for="stars-rating-4" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-3">
+                                        <label for="stars-rating-3" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-2">
+                                        <label for="stars-rating-2" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-1">
+                                        <label for="stars-rating-1" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                    </div>
+                                </li>
+                                <li class="pull-right">
+                                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel-group margin-top-20" id="replyreviewpanel" ng-if="false">
+            <div class="panel panel-default-dark">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#replyreviewpanel" href="#replyreview" ng-click="angle = !angle">
+                            Reply
+                            <i ng-class="{'fa fa-angle-down':!angle,'fa fa-angle-up':angle}"></i>
+                        </a>
+                    </h3>
+                </div>
+                <div id="replyreview" class="panel-collapse collapse">
                     <div class="panel-body">
                         <form ng-submit="hc.SolutionRating(hc.Project.Id)" class="sky-form sky-changes-4">
                             <div class="row">

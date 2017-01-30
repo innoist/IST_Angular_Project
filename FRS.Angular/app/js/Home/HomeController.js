@@ -213,6 +213,7 @@
         vm.OpenProjectDetail = function (id) {
             $('#projectdetail').show();
             HomeService.loadById(id, function (response) {
+                $.unblockUI();
                 vm.Project = response.SolutionModel;
                 vm.SolutionRatings = response.SolutionRatings;
 
@@ -322,6 +323,7 @@
             }
             HomeService.save(vm.SolutionRatingModel, onSuccess, null, '/api/ProjectBaseData');
             function onSuccess(response) {
+                $.unblockUI();
                 $('.g-popup-wrapper').hide();
                 vm.Comments = '';
                 for (var i = 1; i < 6; i++) {

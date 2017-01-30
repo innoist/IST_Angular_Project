@@ -22,5 +22,7 @@ namespace IST.Models.DomainModels
         public virtual ICollection<SolutionRating> SolutionRatings { get; set; }
         public virtual SolutionOwner SolutionOwner { get; set; }
         public virtual SolutionType SolutionType { get; set; }
+        public virtual ICollection<SolutionSearchHistory> SolutionSearchHistories { get; set; }
+        public virtual ICollection<SolutionUsageHistory> SolutionUsageHistories { get; set; }
     }
 }
