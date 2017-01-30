@@ -65,7 +65,6 @@
                                     else {
                                         //$state.go('app.dashboard');
                                         $state.go('home.index');
-                                        window.location.reload();
                                     }
                                     break;
                                 case 'Client':

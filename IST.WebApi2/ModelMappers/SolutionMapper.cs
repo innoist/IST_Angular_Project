@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using IST.Models.DomainModels;
 using IST.WebApi2.Models;
+using Microsoft.AspNet.Identity;
 
 namespace IST.WebApi2.ModelMappers
 {
@@ -39,7 +41,8 @@ namespace IST.WebApi2.ModelMappers
                 Image = source.Image,
                 Active = source.Active.HasValue ? source.Active : true,
                 IsFavorite = source.AspNetUsers.FirstOrDefault() != null,
-                AverageRating = source.SolutionRatings.Count > 0 ? source.SolutionRatings.Select(x => x.Rating).Average() : 0
+                AverageRating = source.SolutionRatings.Count > 0 ? source.SolutionRatings.Select(x => x.Rating).Average() : 0,
+                IsRated = source.SolutionRatings.Count > 0 && source.SolutionRatings.All(x => x.RecCreatedById == ClaimsPrincipal.Current.Identity.GetUserId())
             };
             return toReturn;
         }

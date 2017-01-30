@@ -56,7 +56,7 @@ namespace IST.WebApi2.Controllers
             var baseData = solutionService.GetProjectBaseData(id);
             var viewModel = new ProjectViewModel
             {
-                SolutionModel = baseData.Solution?.MapFromServerToClient(),
+                SolutionModel = baseData.Solution?.ClientCreateFrom(),
                 SolutionRatings=baseData.SolutionRatings.Select(x=>x.MapFromServerToClient()).ToList()
             };
             return Ok(viewModel);

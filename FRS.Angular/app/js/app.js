@@ -784,10 +784,6 @@
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             if (typeof (toState) !== 'undefined') {
 
-                if (toState.name.split(".")[0] === "home" || $state.current.name.split(".")[0] === "home") {
-                    $("div#mainSpinner").hide();
-                }
-
                 // Uncomment this to disable template cache
                 //$templateCache.remove(toState.templateUrl);
 

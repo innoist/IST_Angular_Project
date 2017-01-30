@@ -1,3 +1,4 @@
+
 /* Add here all your css styles (customizations) */
 
 .padding-right2 {
@@ -112,4 +113,7 @@
 }
 .margin-left3 {
     margin-left: 3px;
+}
+.position-fixed {
+    position: fixed;
 }
