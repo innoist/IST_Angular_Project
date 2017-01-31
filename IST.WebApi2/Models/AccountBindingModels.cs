@@ -49,7 +49,6 @@ namespace IST.WebApi2.Models
         public string Telephone { get; set; }
         public string Username { get; set; }
         public string RoleId { get; set; }
-        public int DomainKey { get; set; }
         //[Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 

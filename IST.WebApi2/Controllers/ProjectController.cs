@@ -103,7 +103,6 @@ namespace IST.WebApi2.Controllers
                 SetAllValues(model);
             else
                 SetUpdatedValues(model);
-
             var result = solutionRatingService.SaveOrUpdate(model.MapFromClientToServer());
             return Ok(result);
         }

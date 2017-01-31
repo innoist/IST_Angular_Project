@@ -177,7 +177,7 @@
         <h3>RECENT REVIEWS ({{hc.Project.Name}})</h3>
         <scrollable height="170">
             <div class="g-popup--subscribe-message margin-bottom110 red" ng-if="!hc.SolutionRatings.length">No Reviews found!</div>
-            <div class="g-popup--subscribe-message margin-bottom110" ng-if="hc.SolutionRatings" ng-repeat="rating in hc.SolutionRatings | filter : {IsReply : false || null}">
+            <div class="g-popup--subscribe-message margin-bottom110" ng-if="hc.SolutionRatings" ng-repeat="rating in hc.SolutionRatings | filter : {IsReply : false}">
                 <div class="col-md-1">
                     <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
                 </div>
@@ -186,7 +186,7 @@
                     <p>{{rating.Comments}}</p>
                     <ul class="list-inline product-ratings">
 
-                        <li class="reply"><a data-toggle="collapse" href="#replyreview">Reply</a></li>
+                        <li class="reply"><a data-toggle="collapse" href="#replyreview" ng-click="hc.getRatingId(rating.RatingId)">Reply</a></li>
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-5-{{rating.RatingId}}"></i></li>
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-4-{{rating.RatingId}}"></i></li>
                         <li class="pull-right margin-left3"><i class="rating-selected fa fa-star-o" id="rated-3-{{rating.RatingId}}"></i></li>
@@ -207,13 +207,72 @@
             </div>
         </scrollable>
 
+        <div class="panel-group margin-top-20" id="addreviewpanel" ng-if="!hc.Project.IsRated">
+            <div class="panel panel-default-dark">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#addreviewpanel" href="#addreview" ng-click="angle = !angle">
+                            Add a review
+                            <i ng-class="{'fa fa-angle-down':!angle,'fa fa-angle-up':angle}"></i>
+                        </a>
+                    </h3>
+                </div>
+                <div id="addreview" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form ng-submit="hc.SaveSolutionRating(hc.Project.Id)" class="sky-form sky-changes-4" name="hc.formValidate">
+                            <div class="row">
+                                <section class="col-sm-6">
+                                    <label class="input">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="hc.username" ng-disabled="hc.disableprojectdetail">
+                                    </label>
+                                </section>
+                                <section class="col-sm-6">
+                                    <label class="input">
+                                        <input type="email" placeholder="Email" class="form-control" ng-model="hc.email" ng-disabled="hc.disableprojectdetail">
+                                    </label>
+                                </section>
+                                <section class="col-sm-12">
+                                    <label class="textarea">
+                                        <textarea placeholder="Message" rows="2" class="form-control" ng-model="hc.Comments"></textarea>
+                                    </label>
+                                </section>
+                            </div>
+                            <ul class="list-inline product-ratings">
+                                <li class="reply">Review</li>
+                                <li>
+                                    <div class="stars-ratings stars-ratings-label" 
+                                         uib-tooltip="{{'Rating is Required'}}"
+                                         uib-tooltip-trigger="focus"
+                                         tooltip-class="tooltip-danger">
+                                        <input type="radio" name="stars-rating" id="stars-rating-5" required="">
+                                        <label for="stars-rating-5" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-4">
+                                        <label for="stars-rating-4" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-3">
+                                        <label for="stars-rating-3" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-2">
+                                        <label for="stars-rating-2" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                        <input type="radio" name="stars-rating" id="stars-rating-1">
+                                        <label for="stars-rating-1" class="custom-rating-label"><i class="fa fa-star"></i></label>
+                                    </div>
+                                </li>
+                                <li class="pull-right">
+                                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="panel-group margin-top-20" id="replyreviewpanel" ng-if="hc.SolutionRatings.length">
             <div class="panel panel-default-dark">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#replyreviewpanel" href="#replyreview" ng-click="reply = !reply">
+                        <a>
                             Reply
-                            <i ng-class="{'fa fa-angle-down':!reply,'fa fa-angle-up':reply}"></i>
+                            <!--<i ng-class="{'fa fa-angle-down':!reply,'fa fa-angle-up':reply}"></i>-->
                         </a>
                     </h3>
                 </div>
@@ -238,62 +297,6 @@
                                 </section>
                             </div>
                             <ul class="list-inline product-ratings">
-                                <li class="pull-right">
-                                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel-group margin-top-20" id="addreviewpanel" ng-if="!hc.Project.IsRated">
-            <div class="panel panel-default-dark">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#addreviewpanel" href="#addreview" ng-click="angle = !angle">
-                            Add a review
-                            <i ng-class="{'fa fa-angle-down':!angle,'fa fa-angle-up':angle}"></i>
-                        </a>
-                    </h3>
-                </div>
-                <div id="addreview" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form ng-submit="hc.SaveSolutionRating(hc.Project.Id)" class="sky-form sky-changes-4">
-                            <div class="row">
-                                <section class="col-sm-6">
-                                    <label class="input">
-                                        <input type="text" placeholder="Name" class="form-control" ng-model="hc.username" ng-disabled="hc.disableprojectdetail">
-                                    </label>
-                                </section>
-                                <section class="col-sm-6">
-                                    <label class="input">
-                                        <input type="email" placeholder="Email" class="form-control" ng-model="hc.email" ng-disabled="hc.disableprojectdetail">
-                                    </label>
-                                </section>
-                                <section class="col-sm-12">
-                                    <label class="textarea">
-                                        <textarea placeholder="Message" rows="2" class="form-control" ng-model="hc.Comments"></textarea>
-                                    </label>
-                                </section>
-                            </div>
-                            <ul class="list-inline product-ratings">
-                                <li class="reply">Review</li>
-                                <li>
-                                    <div class="stars-ratings stars-ratings-label">
-                                        <input type="radio" name="stars-rating" id="stars-rating-5">
-                                        <label for="stars-rating-5" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                        <input type="radio" name="stars-rating" id="stars-rating-4">
-                                        <label for="stars-rating-4" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                        <input type="radio" name="stars-rating" id="stars-rating-3">
-                                        <label for="stars-rating-3" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                        <input type="radio" name="stars-rating" id="stars-rating-2">
-                                        <label for="stars-rating-2" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                        <input type="radio" name="stars-rating" id="stars-rating-1">
-                                        <label for="stars-rating-1" class="custom-rating-label"><i class="fa fa-star"></i></label>
-                                    </div>
-                                </li>
                                 <li class="pull-right">
                                     <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
                                 </li>

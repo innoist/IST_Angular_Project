@@ -5,8 +5,7 @@ using IST.WebApi2.Models;
 
 namespace IST.WebApi2.Controllers
 {
-    [Authorize]
-    public class UserBaseDataController : ApiController
+    public class UserBaseDataController : BaseController
     {
 
         #region Private

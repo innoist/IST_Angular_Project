@@ -443,8 +443,6 @@ namespace IST.WebApi2.Controllers
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                UserManager.AddToRole(user.Id, User.IsInRole("SystemAdministrator") ? "Admin" : "Client");
-
                 await SendAccountCredentials(model.Email, user.UserName, model.Password);
                 return Ok(true);
             }

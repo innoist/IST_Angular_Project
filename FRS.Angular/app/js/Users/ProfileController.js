@@ -17,15 +17,6 @@
             vm.Admin = false;
         }
 
-        //Get DayCares DDL from server
-
-        ProfileService.getBaseData(function (response) {
-            vm.DayCares = response;
-        },
-        function (err) {
-            toaster.error(showErrors(err));
-        });
-
         vm.validateInput = function (property, type) {
             if (!property || !type) {
                 return false;

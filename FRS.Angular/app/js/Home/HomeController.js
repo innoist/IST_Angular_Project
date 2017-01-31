@@ -24,6 +24,9 @@
 
         HomeService.url = "/api/Project/";
         vm.apiUrl = frsApiUrl;
+
+        vm.RatingId = 0;
+
         vm.CategoryId = 0;
         //To show hide favorite solutions
         vm.Favorites = false;
@@ -316,13 +319,19 @@
         }
         //#endregion
 
+        vm.getRatingId=function(ratingid) {
+            vm.RatingId = ratingid;
+        }
+
         vm.SaveSolutionRating = function (projectid, isreply) {
             angular.element('#client-wrapper').toggleClass('position-fixed');
-            if (isreply && vm.RatingId) {
-                vm.SolutionRatingModel.IsReply = isreply;
+            if (isreply) {
+                vm.SolutionRatingModel.IsReply = true;
                 vm.SolutionRatingModel.ReplyParentId = vm.RatingId;
-            }
 
+            } else {
+                vm.SolutionRatingModel.IsReply = false;
+            }
             vm.SolutionRatingModel.SolutionId = projectid;
             vm.SolutionRatingModel.Comments = vm.Comments;
             for (var i = 1; i < 6; i++) {
