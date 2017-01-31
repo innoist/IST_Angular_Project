@@ -6,7 +6,7 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.controller('UsersController', UsersController);
 
-    UsersController.$inject = ['$scope', '$rootScope', '$localStorage', 'UsersService', 'SweetAlert', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'toaster', '$state'];
+    UsersController.$inject = ['$scope', '$rootScope', '$localStorage', 'ReferenceDataService', 'SweetAlert', 'DTOptionsBuilder', 'DTColumnBuilder', '$compile', 'toaster', '$state'];
 
     function UsersController($scope, $rootScope, $localStorage, UsersService, SweetAlert, DTOptionsBuilder, DTColumnBuilder, $compile, toaster, $state) {
         var vm = this;
@@ -14,13 +14,13 @@
         vm.SystemAdmin = false;
         vm.SysAdmin = true;
 
-        if ($localStorage['authorizationData'].UserRole === "Client") {
-            vm.SysAdmin = false;
-        }
+        //if ($localStorage['authorizationData'].UserRole === "Client") {
+        //    vm.SysAdmin = false;
+        //}
 
-        if ($localStorage['authorizationData'].UserRole === "SystemAdministrator") {
-            vm.SystemAdmin = true;
-        }
+        //if ($localStorage['authorizationData'].UserRole === "SystemAdministrator") {
+        //    vm.SystemAdmin = true;
+        //}
 
         vm.dtOptions = DTOptionsBuilder.newOptions()
         .withOption('ajax', {
