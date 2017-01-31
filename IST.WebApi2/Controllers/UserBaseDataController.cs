@@ -28,10 +28,10 @@ namespace IST.WebApi2.Controllers
         //}
 
         [HttpGet]
-        public UsersModel Get(string userName)
+        public IHttpActionResult Get(string userName)
         {
             var user = usersService.GetUser(userName)?.MapUserFromServerToClient();
-            return user;
+            return Ok(user);
         }
         
     }

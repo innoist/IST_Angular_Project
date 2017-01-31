@@ -182,7 +182,7 @@
                 templateUrl: helper.basepath('../../../../app/views/Users/Profile.html'),
                 controller: 'ProfileController',
                 controllerAs: 'upc',
-                resolve: helper.resolveFor('ui.select', 'profile.module')
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'ui.select', 'profile.module')
             })
             .state('app.changePassword', {
                 url: '/changePassword',

@@ -2038,7 +2038,7 @@
         var directive = {
             restrict: 'EAC',
             template:
-              '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div style="background-color:white"></div><div style="background-color:white"></div><div style="background-color:white"></div><div style="background-color:white"></div><div style="background-color:white"></div><div style="background-color:white"></div><div style="background-color:white"></div><div style="background-color:white"></div></div>'
+              '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
             ,
             link: link
         };

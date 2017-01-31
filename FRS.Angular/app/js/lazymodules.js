@@ -261,7 +261,7 @@
               ,
               {
                   name: 'profile.module', files: ['/app/js/Users/ProfileController.js',
-                                                '/app/js/Users/ProfileService.js']
+                                                '/app/js/shared/ReferenceDataService.js']
               }
               ,
               {
