@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.Common.DropDown;
@@ -8,10 +7,13 @@ using IST.Models.RequestModels;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using IST.WebBase.Mvc;
-using Microsoft.AspNet.Identity;
 
 namespace IST.WebApi2.Controllers
 {
+
+    //**********************************************//
+                    //For Client Side//
+    //**********************************************//
     public class ProjectController : BaseController
     {
         #region Private

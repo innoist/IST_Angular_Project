@@ -117,3 +117,33 @@
 .position-fixed {
     position: fixed;
 }
+
+.height415 {
+    height: 415px;
+}
+
+.g-popup--discount .sky-form .input textarea,
+.g-popup--discount .sky-form .input textarea:active,
+.g-popup--discount .sky-form .input textarea:focus,
+.g-popup--discount .sky-form .input textarea:hover {
+	background: #128772;
+	border-color: #128772;
+	color: #fff;
+	box-shadow: none;
+	font-weight: normal;
+}
+
+.editable-div {
+    background: #128772;
+    border-color: #128772;
+    color: #fff;
+    box-shadow: none;
+    font-weight: normal;
+    height: 70px;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.display-inline {
+    display: inline;
+}

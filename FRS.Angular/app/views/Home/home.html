@@ -141,7 +141,7 @@
                                     <i class="fa padding-right2" ng-class="{'fa-heart-o':!project.IsFavorite,'fa-heart':project.IsFavorite}"></i>
                                 </div>
                             </li>
-                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenSendToFriend()"><i class="fa fa-envelope-o padding-right3"></i></a></li>
+                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenSendToFriend(project.Location)"><i class="fa fa-envelope-o padding-right3"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -155,21 +155,33 @@
 </div>
 <!--=== End Content Part ===-->
 <!-- Popup for send to freind -->
+
 <div class="g-popup-wrapper" id="sendtofriend">
-    <div class="g-popup g-popup--subscribe3">
-        <h3>Send to your friend</h3>
-        <p>Join our mailing list to receive the latest news &amp;&nbsp;updates from our team.</p>
+    <div class="g-popup g-popup--discount height415">
+        <!--<p class="margin-bottom-5">Enter your email</p>-->
+        <!--<h3>20% off </h3>-->
+        <p class="margin-bottom-40">Share with your friend</p>
         <form action="#" class="sky-form">
             <label class="input margin-bottom-20">
-                <input type="email" placeholder="Email" class="form-control">
+                <input type="text" placeholder="Your name" ng-model="hc.username" class="form-control" ng-disabled="true">
             </label>
+            <label class="input margin-bottom-20">
+                <input type="email" placeholder="Your Friend's email" class="form-control">
+            </label>
+            <div contenteditable="true" class="editable-div">
+                <div contenteditable="false" class="display-inline">
+                    <a target="_blank" href="{{hc.ProjectLocation}}">Here</a>
+                </div> is the link of Solution.
+            </div>
             <label class="input">
                 <button class="btn btn-default" type="button">Send</button>
             </label>
         </form>
-        <a href="javascript:void(0);" class="g-popup__close g-popup--subscribe3__close"><span class="icon-close" aria-hidden="true"></span></a>
+
+        <a href="javascript:void(0);" class="g-popup__close g-popup--discount__close"><span class="icon-close" aria-hidden="true"></span></a>
     </div>
 </div>
+
 
 <!-- Popup for Project detail -->
 <div class="g-popup-wrapper" id="projectdetail">
@@ -266,7 +278,7 @@
             </div>
         </div>
 
-        <div class="panel-group margin-top-20" id="replyreviewpanel" ng-if="hc.SolutionRatings.length">
+        <div class="panel-group margin-top-20" id="replyreviewpanel" ng-if="hc.SolutionRatings.length && hc.showReply">
             <div class="panel panel-default-dark">
                 <div class="panel-heading">
                     <h3 class="panel-title">

@@ -27,6 +27,8 @@
 
         vm.RatingId = 0;
 
+        vm.showReply = false;
+
         vm.CategoryId = 0;
         //To show hide favorite solutions
         vm.Favorites = false;
@@ -40,8 +42,8 @@
         vm.NoMoreProjects = false;
         //to show end of solutions
         vm.endOfSolutions = false;
-        //to show spinner on data load
-        vm.clientMainSpinner = true;
+        //To store current project location
+        vm.ProjectLocation = '';
         vm.SolutionRatingModel = {};
 
         vm.ProjectSearchRequest = {
@@ -68,7 +70,7 @@
         }
 
         var onSuccessLoadProjects = function (response) {
-            vm.clientMainSpinner = true;
+            
             if (!vm.isScrolled) {
                 if (vm.firstCall) {
                     vm.FilterCategories = response.FilterCategories;
@@ -131,7 +133,7 @@
         }
 
         vm.getDataFromServer = function () {
-            vm.clientMainSpinner = true;
+            
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
@@ -140,7 +142,7 @@
         //search solutions on the basis of filters
         vm.ProjectSearchRequest.FilterIds = [];
         vm.filterProjects = function (id) {
-            vm.clientMainSpinner = true;
+            
             vm.firstCall = false;
             if ($('#' + id)[0].checked) {
                 vm.ProjectSearchRequest.FilterIds.push(id);
@@ -155,7 +157,7 @@
 
         vm.seeFavorites = function () {
             if (vm.Favorites) {
-                vm.clientMainSpinner = true;
+                
                 vm.ProjectSearchRequest.IsFavorite = true;
                 vm.ProjectSearchRequest.PageNo = 1;
                 vm.getDataFromServer();
@@ -195,7 +197,7 @@
 
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
-            vm.clientMainSpinner = true;
+            
             if (vm.IsDataLoaded)
                 return false;
             if (!vm.NoMoreProjects) {
@@ -208,9 +210,11 @@
             }
         });
 
-        vm.OpenSendToFriend = function () {
+        vm.OpenSendToFriend = function (location) {
             $('#sendtofriend').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
+            vm.username = $localStorage.authorizationData.userName;
+            vm.ProjectLocation = location;
         }
 
         vm.OpenProjectDetail = function (id) {
@@ -321,6 +325,7 @@
 
         vm.getRatingId=function(ratingid) {
             vm.RatingId = ratingid;
+            vm.showReply = true;
         }
 
         vm.SaveSolutionRating = function (projectid, isreply) {
@@ -342,6 +347,7 @@
             HomeService.save(vm.SolutionRatingModel, onSuccess, null, '/api/ProjectBaseData');
             function onSuccess(response) {
                 $.unblockUI();
+                vm.showReply = false;
                 $('.g-popup-wrapper').hide();
                 vm.Comments = '';
                 for (var i = 1; i < 6; i++) {
