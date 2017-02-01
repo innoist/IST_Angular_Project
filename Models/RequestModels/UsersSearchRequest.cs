@@ -9,7 +9,6 @@ namespace IST.Models.RequestModels
         public string Username { get; set; }
         public string Email { get; set; }
         public string UserRole { get; set; }
-        public int DomainKey { get; set; }
         public OrderByUsers OrderByColumn
         {
             get

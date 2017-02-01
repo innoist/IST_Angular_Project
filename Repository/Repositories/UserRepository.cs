@@ -89,16 +89,13 @@ namespace IST.Repository.Repositories
         {
             int fromRow = (searchRequest.PageNo - 1) * searchRequest.PageSize;
             int toRow = searchRequest.PageSize;
-            var key = searchRequest.DomainKey;
             Expression<Func<AspNetUser, bool>> query =
                 s =>
                     (
                     searchRequest.Name == null || s.FirstName.Contains(searchRequest.Name) || s.LastName.Contains(searchRequest.Name)) &&
                     (searchRequest.Username == null || s.UserName.Contains(searchRequest.Username)) &&
-                    (searchRequest.Email == null || s.Email.Contains(searchRequest.Email)) &&
-                    (searchRequest.UserRole == "SystemAdministrator" && s.AspNetRoles.All( x => x.Name == "Admin") || s.AspNetRoles.All(x => x.Name == "Client")
-                    );
-
+                    (searchRequest.Email == null || s.Email.Contains(searchRequest.Email));
+            //(searchRequest.UserRole == "SystemAdministrator" && s.AspNetRoles.All(x => x.Name == "Admin") || s.AspNetRoles.All(x => x.Name == "Client")
             IEnumerable<AspNetUser> users = searchRequest.IsAsc
                 ? DbSet
                     .Where(query)

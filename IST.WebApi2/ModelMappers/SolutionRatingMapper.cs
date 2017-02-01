@@ -1,4 +1,5 @@
-﻿using IST.Models.DomainModels;
+﻿using System.Linq;
+using IST.Models.DomainModels;
 using IST.WebApi2.Models;
 
 namespace IST.WebApi2.ModelMappers
@@ -7,7 +8,7 @@ namespace IST.WebApi2.ModelMappers
     {
         public static SolutionRatingModel MapFromServerToClient(this SolutionRating source)
         {
-            return new SolutionRatingModel
+            var toReturn = new SolutionRatingModel
             {
                 RatingId = source.RatingId,
                 SolutionId = source.SolutionId,
@@ -16,8 +17,10 @@ namespace IST.WebApi2.ModelMappers
                 IsReply = source.IsReply,
                 ReplyParentId = source.ReplyParentId,
                 Username = source.CreatedByUser.FirstName + " " + source.CreatedByUser.LastName,
-                RecCreatedOn = source.RecCreatedOn
+                RecCreatedOn = source.RecCreatedOn,
+                Replies = source.SolutionRatings.Select(x=>x.MapFromServerToClient()).ToList()
             };
+            return toReturn;
         }
         public static SolutionRating MapFromClientToServer(this SolutionRatingModel source)
         {

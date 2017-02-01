@@ -68,7 +68,7 @@ namespace IST.Implementation.Services
             solutionRatingRepository.SaveChanges();
             return true;
         }
-        
+
         #endregion
 
     }

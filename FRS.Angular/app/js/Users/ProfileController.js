@@ -5,26 +5,41 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$scope', '$stateParams', '$state', '$localStorage', 'ProfileService', 'toaster'];
+    ProfileController.$inject = ['$scope', '$stateParams', '$state', '$localStorage', 'ReferenceDataService', 'toaster', 'SweetAlert'];
 
-    function ProfileController($scope, $stateParams, $state, $localStorage, ProfileService, toaster) {
+    function ProfileController($scope, $stateParams, $state, $localStorage, ProfileService, toaster, SweetAlert) {
         var vm = this;
-
+        var userName = "";
         vm.Admin = true;
         $scope.disabled = false;
 
-        if ($localStorage.authorizationData.UserRole === "Admin") {
-            vm.Admin = false;
+        ProfileService.url = '/api/UserBaseData/';
+       
+        vm.save = function (isNew) {
+            if (vm.formValidate.$valid) {
+                ProfileService.save(vm.user, function (response) {
+                    $.unblockUI();
+                    if (response) {
+                        toaster.success("Data has been saved successfully.");
+
+                        if (isNew) {
+                            //reseting form
+                            vm.formValidate.$setPristine();
+                            vm.submitted = false;
+                            userName = '';
+                            vm.user = {};
+                            $state.go('app.Profile');
+                        }
+                        if (!isNew) {
+                            $state.go('app.Users');
+                        }
+                    }
+                }, function (err) {
+                    toaster.pop("error", "Alert", showErrors(err));
+                }, '/api/Account/Register');
+            }
         }
 
-        //Get DayCares DDL from server
-
-        ProfileService.getBaseData(function (response) {
-            vm.DayCares = response;
-        },
-        function (err) {
-            toaster.error(showErrors(err));
-        });
 
         vm.validateInput = function (property, type) {
             if (!property || !type) {
@@ -33,30 +48,30 @@
             return (property.$dirty || vm.submitted) && property.$error[type];
         };
 
-        vm.saveProfile = function () {
-            if (vm.userForm.$valid) {
-                ProfileService.saveProfile(vm.user, function (response) {
-                    if (response) {
-                        toaster.success("Data has been saved successfully.");
+        if ($stateParams.userName === "") {
+            vm.edit = true;
+        }
+
+        userName = $stateParams.userName;
+        ProfileService.load('/api/UserBaseData?userName=' + userName, null, function (response) {
+            $.unblockUI();
+            if (response) {
+                vm.user = response;
+                vm.update = true;
+            }
+
+        });
+
+        vm.cancelBtn = function () {
+            if (!vm.formValidate.$dirty) {
+                $state.go('app.Users');
+            } else {
+                SweetAlert.swal(null, function (isConfirm) {
+                    if (isConfirm) {
                         $state.go('app.Users');
                     }
-                }, function (err) {
-                    toaster.pop("error", "Alert", showErrors(err));
                 });
             }
         }
-        if ($localStorage.authorizationData.UserRole !== "SystemAdministrator")
-            $scope.disabled = true;
-
-        if (!$stateParams.userName || $stateParams.userName === "")
-            return;
-
-        ProfileService.loadProfile($stateParams.userName, function (response) {
-            if (!response)
-                return;
-            vm.user = response;
-            $scope.update = true;
-
-        });
     }
 })();

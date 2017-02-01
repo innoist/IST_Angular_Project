@@ -42,7 +42,7 @@ namespace IST.WebApi2.ModelMappers
                 Active = source.Active.HasValue ? source.Active : true,
                 IsFavorite = source.AspNetUsers.FirstOrDefault() != null,
                 AverageRating = source.SolutionRatings.Count > 0 ? source.SolutionRatings.Select(x => x.Rating).Average() : 0,
-                IsRated = source.SolutionRatings.Count > 0 && source.SolutionRatings.All(x => x.RecCreatedById == ClaimsPrincipal.Current.Identity.GetUserId())
+                IsRated = source.SolutionRatings.Count > 0 && source.SolutionRatings.Any(x => x.RecCreatedById == ClaimsPrincipal.Current.Identity.GetUserId())
             };
             return toReturn;
         }

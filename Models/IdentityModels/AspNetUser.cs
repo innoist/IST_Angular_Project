@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using IST.Models.DomainModels;
-using Filter = System.Web.Mvc.Filter;
 
 namespace IST.Models.IdentityModels
 {
@@ -33,7 +32,6 @@ namespace IST.Models.IdentityModels
         public string LastName { get; set; }
         public string Telephone { get; set; }
         public string UserComments { get; set; }
-        public bool HilalOnly { get; set; }
         public int TimeOffset { get; set; }
 
         public virtual ICollection<UserClaim> AspNetUserClaims { get; set; }

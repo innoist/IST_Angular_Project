@@ -215,7 +215,7 @@
               },
               {
                   name: 'users.module', files: ['/app/js/Users/UsersController.js',
-                                                '/app/js/Users/UsersService.js']
+                                                  '/app/js/shared/ReferenceDataService.js']
               },
               {
                   name: 'Home.module', files: ['/app/js/Home/HomeController.js',
@@ -261,7 +261,7 @@
               ,
               {
                   name: 'profile.module', files: ['/app/js/Users/ProfileController.js',
-                                                '/app/js/Users/ProfileService.js']
+                                                '/app/js/shared/ReferenceDataService.js']
               }
               ,
               {
