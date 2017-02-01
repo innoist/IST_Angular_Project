@@ -108,6 +108,20 @@ namespace IST.WebApi2.Controllers
             var result = solutionRatingService.SaveOrUpdate(model.MapFromClientToServer());
             return Ok(result);
         }
+
+        [Route("api/Project/ClickActivity")]
+        [HttpPost]
+        public IHttpActionResult ClickActivity(int solutionid)
+        {
+            return Ok();
+        }
+
+        [Route("api/Project/ShareActivity")]
+        [HttpPost]
+        public IHttpActionResult ShareActivity(int solutionid)
+        {
+            return Ok();
+        }
         #endregion
     }
 }

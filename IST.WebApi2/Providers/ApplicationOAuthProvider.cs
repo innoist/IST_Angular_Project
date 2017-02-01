@@ -64,6 +64,9 @@ namespace IST.WebApi2.Providers
                     },
                     {
                         "UserRole", user.AspNetRoles.FirstOrDefault()?.Name
+                    },
+                    {
+                        "UserFullName", user.FirstName +" "+ user.LastName
                     }
                 });
 
