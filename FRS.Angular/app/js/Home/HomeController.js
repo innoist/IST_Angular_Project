@@ -70,8 +70,9 @@
         }
 
         var onSuccessLoadProjects = function (response) {
-            
+            //if response is not against scroll then override project list
             if (!vm.isScrolled) {
+                //set categories only if it is first call to server
                 if (vm.firstCall) {
                     vm.FilterCategories = response.FilterCategories;
                 }
@@ -100,6 +101,7 @@
                     $.unblockUI();
                 }
             } else {
+                //set categories only if it is first call to server
                 if (vm.firstCall) {
                     vm.FilterCategories = response.FilterCategories;
                 }
@@ -133,7 +135,6 @@
         }
 
         vm.getDataFromServer = function () {
-            
             HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
@@ -155,9 +156,9 @@
             }
         }
 
+        //to show hide favorite
         vm.seeFavorites = function () {
             if (vm.Favorites) {
-                
                 vm.ProjectSearchRequest.IsFavorite = true;
                 vm.ProjectSearchRequest.PageNo = 1;
                 vm.getDataFromServer();
@@ -168,6 +169,7 @@
             }
         };
 
+        //to search solution on the basis of search string
         vm.searchSolutions = function () {
             if (vm.searchString) {
                 vm.ProjectSearchRequest.Name = typeof vm.searchString === "object" ? vm.searchString.DisplayName : vm.searchString;
@@ -201,6 +203,7 @@
             if (vm.IsDataLoaded)
                 return false;
             if (!vm.NoMoreProjects) {
+                //on page end, load projects
                 if ($(window).scrollTop() + $(window).height() === $(document).height()) {
                     vm.IsDataLoaded = true;
                     vm.ProjectSearchRequest.PageNo += 1;
@@ -210,15 +213,17 @@
             }
         });
 
+        //send to friend popup
         vm.OpenSendToFriend = function (location) {
-            $('#sendtofriend').show();
+            angular.element('#sendtofriend').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
             vm.username = $localStorage.authorizationData.userName;
             vm.ProjectLocation = location;
         }
 
+        //project detail popup
         vm.OpenProjectDetail = function (id) {
-            $('#projectdetail').show();
+            angular.element('#projectdetail').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
             HomeService.loadById(id, function (response) {
                 $.unblockUI();
@@ -260,13 +265,15 @@
             });
         }
 
+        //login page popup
         vm.OpenLoginPage = function () {
-            $('#loginpage').show();
+            angular.element('#loginpage').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
         }
 
+        //close popup
         $('.g-popup__close').on('click', function (e) {
-            $('.g-popup-wrapper').hide();
+            angular.element('.g-popup-wrapper').hide();
             angular.element('#client-wrapper').toggleClass('position-fixed');
             vm.Comments = '';
             for (var i = 1; i < 6; i++) {
@@ -348,7 +355,7 @@
             function onSuccess(response) {
                 $.unblockUI();
                 vm.showReply = false;
-                $('.g-popup-wrapper').hide();
+                angular.element('.g-popup-wrapper').hide();
                 vm.Comments = '';
                 for (var i = 1; i < 6; i++) {
                     if ($('#stars-rating-' + i).is(':checked')) {
