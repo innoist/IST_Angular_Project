@@ -14,6 +14,9 @@ using Newtonsoft.Json;
 
 namespace IST.WebApi2.Controllers
 {
+    //**********************************************//
+                    //For Admin Side//
+    //**********************************************//
     public class SolutionController : BaseController
     {
         #region Private
