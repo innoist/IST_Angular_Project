@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using IST.Models.Common.DropDown;
-using IST.Models.Enums;
 
 namespace IST.Commons.Utility
 {
@@ -174,6 +176,34 @@ namespace IST.Commons.Utility
                 newImage.Save(ms, ImageFormat.Jpeg);
                 return Convert.ToBase64String(ms.ToArray());
             }
+        }
+
+        public static Task SendEmailAsync(string email, string subject, string body)
+        {
+            //Get Configuration from Web Config
+            string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
+            string fromPwd = ConfigurationManager.AppSettings["FromPassword"];
+            string fromDisplayName = ConfigurationManager.AppSettings["FromDisplayNameA"];
+            
+            //Getting the file from config, to send
+            MailMessage oEmail = new MailMessage
+            {
+                From = new MailAddress(fromAddress, fromDisplayName),
+                Subject = subject,
+                IsBodyHtml = true,
+                Body = body,
+                Priority = MailPriority.High
+            };
+            oEmail.To.Add(email);
+            string smtpServer = ConfigurationManager.AppSettings["SMTPServer"];
+            string smtpPort = ConfigurationManager.AppSettings["SMTPPort"];
+            string enableSsl = ConfigurationManager.AppSettings["EnableSSL"];
+            SmtpClient client = new SmtpClient(smtpServer, Convert.ToInt32(smtpPort))
+            {
+                EnableSsl = enableSsl == "1",
+                Credentials = new NetworkCredential(fromAddress, fromPwd)
+            };
+            return client.SendMailAsync(oEmail);
         }
     }
 }

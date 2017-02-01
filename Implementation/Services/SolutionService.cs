@@ -58,19 +58,26 @@ namespace IST.Implementation.Services
 
         public SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest)
         {
-            if (!searchRequest.Name.IsNullOrEmpty() && searchRequest.PageNo == 1 && !searchRequest.ClientRequest.IsNullOrEmpty())
+            try
             {
-                SolutionSearchHistory historyToSave = new SolutionSearchHistory
+                if (!searchRequest.Name.IsNullOrEmpty() && searchRequest.PageNo == 1 && !searchRequest.ClientRequest.IsNullOrEmpty())
                 {
-                    SearchString = searchRequest.Name,
-                    SearchTime = DateTime.Now,
-                    RecCreatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
-                    RecCreatedOn = DateTime.Now,
-                    RecLastUpdatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
-                    RecLastUpdatedOn = DateTime.Now
-                };
-                searchHistoryRepository.Add(historyToSave);
-                searchHistoryRepository.SaveChanges();
+                    SolutionSearchHistory historyToSave = new SolutionSearchHistory
+                    {
+                        SearchString = searchRequest.Name,
+                        SearchTime = DateTime.Now,
+                        RecCreatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
+                        RecCreatedOn = DateTime.Now,
+                        RecLastUpdatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
+                        RecLastUpdatedOn = DateTime.Now
+                    };
+                    searchHistoryRepository.Add(historyToSave);
+                    searchHistoryRepository.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             return solutionRepository.Search(searchRequest);
         }
