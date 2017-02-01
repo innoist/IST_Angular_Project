@@ -143,7 +143,7 @@
         //search solutions on the basis of filters
         vm.ProjectSearchRequest.FilterIds = [];
         vm.filterProjects = function (id) {
-            
+
             vm.firstCall = false;
             if ($('#' + id)[0].checked) {
                 vm.ProjectSearchRequest.FilterIds.push(id);
@@ -199,7 +199,7 @@
 
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
-            
+
             if (vm.IsDataLoaded)
                 return false;
             if (!vm.NoMoreProjects) {
@@ -217,7 +217,7 @@
         vm.OpenSendToFriend = function (location) {
             angular.element('#sendtofriend').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
-            vm.username = $localStorage.authorizationData.userName;
+            vm.username = $localStorage.authorizationData.userFullName;
             vm.ProjectLocation = location;
         }
 
@@ -259,7 +259,7 @@
                     });
                 });
 
-                vm.username = $localStorage.authorizationData.userName;
+                vm.username = $localStorage.authorizationData.userFullName;
                 vm.email = $localStorage.authorizationData.email;
                 vm.disableprojectdetail = true;
             });
@@ -330,7 +330,7 @@
         }
         //#endregion
 
-        vm.getRatingId=function(ratingid) {
+        vm.getRatingId = function (ratingid) {
             vm.RatingId = ratingid;
             vm.showReply = true;
         }
