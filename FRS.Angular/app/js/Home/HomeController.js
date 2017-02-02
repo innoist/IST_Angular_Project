@@ -377,7 +377,7 @@
                 });
             }
         }
-        
+
         vm.SaveShareActivity = function () {
             if (vm.ProjectId) {
                 vm.SolutionModel = {};
