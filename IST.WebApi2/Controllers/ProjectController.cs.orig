@@ -112,7 +112,25 @@ namespace IST.WebApi2.Controllers
             return Ok(result);
         }
 
+<<<<<<< HEAD
+        [Route("api/Project/ClickActivity")]
+        [HttpPost]
+        public IHttpActionResult ClickActivity(int solutionid)
+        {
+            usageService.SaveUsage(solutionid, (int)Commons.UsageType.Clicked);
+            return Ok();
+        }
+
+        [Route("api/Project/ShareActivity")]
+        [HttpPost]
+        public IHttpActionResult ShareActivity(int solutionid)
+        {
+            usageService.SaveUsage(solutionid, (int)Commons.UsageType.Shared);
+            return Ok();
+        }
+=======
         
+>>>>>>> e8f74799593b245484a0801ce7245d60065d21a2
         #endregion
     }
 }

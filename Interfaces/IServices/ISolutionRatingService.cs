@@ -11,6 +11,6 @@ namespace IST.Interfaces.IServices
     {
         SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest);
         Solution GetById(int id);
-        bool SaveOrUpdate(SolutionRating response);
+        double? SaveOrUpdate(SolutionRating response);
     }
 }

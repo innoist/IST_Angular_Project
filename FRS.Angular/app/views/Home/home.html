@@ -141,7 +141,7 @@
                                     <i class="fa padding-right2" ng-class="{'fa-heart-o':!project.IsFavorite,'fa-heart':project.IsFavorite}"></i>
                                 </div>
                             </li>
-                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenSendToFriend(project.Location)"><i class="fa fa-envelope-o padding-right3"></i></a></li>
+                            <li class="like-icon padding-right2"><a uib-tooltip="{{ 'Send to friend' }}" tooltip-placement="left" ng-click="hc.OpenSendToFriend(project.Location,project.Id)"><i class="fa fa-envelope-o padding-right3"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -169,11 +169,11 @@
             </label>
             <div contenteditable="true" class="editable-div">
                 <div contenteditable="false" class="display-inline">
-                    <a target="_blank" href="{{hc.ProjectLocation}}">Here</a>
+                    <a target="_blank" href="{{hc.ProjectLocation}}" ng-click="hc.SaveClickActivity()">Here</a>
                 </div> is the link to Solution.
             </div>
             <label class="input">
-                <button class="btn btn-default" type="button">Send</button>
+                <button class="btn btn-default" type="button" ng-click="hc.SaveShareActivity()">Share</button>
             </label>
         </form>
 
