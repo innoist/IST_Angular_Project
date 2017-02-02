@@ -31,5 +31,25 @@ namespace IST.WebApi2.Controllers
             };
             return Ok(toReturn);
         }
+
+        /// <summary>
+        /// For Click Activity (Client Side)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IHttpActionResult Get(int id)
+        {
+            return Ok();
+        }
+
+        /// <summary>
+        /// For Share Activity (Client Side)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public IHttpActionResult Post(SolutionModel model)
+        {
+            return Ok();
+        }
     }
 }

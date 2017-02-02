@@ -47,8 +47,8 @@ namespace IST.Implementation.Services
         {
             return solutionRepository.GetById(id);
         }
-        
-        public bool SaveOrUpdate(SolutionRating model)
+
+        public double? SaveOrUpdate(SolutionRating model)
         {
             if (model.RatingId > 0)
             {
@@ -59,14 +59,15 @@ namespace IST.Implementation.Services
                 toUpdate.RecLastUpdatedById = model.RecLastUpdatedById;
                 toUpdate.RecLastUpdatedOn = model.RecLastUpdatedOn;
                 solutionRatingRepository.Update(toUpdate);
-
             }
             else
             {
                 solutionRatingRepository.Add(model);
             }
+
             solutionRatingRepository.SaveChanges();
-            return true;
+            var avg = solutionRepository.Find(model.SolutionId).SolutionRatings.Select(x => x.Rating).Average();
+            return avg.HasValue ? avg : 0;
         }
 
         #endregion

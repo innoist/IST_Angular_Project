@@ -27,6 +27,8 @@
 
         vm.RatingId = 0;
 
+        vm.ProjectId = 0;
+
         vm.showReply = false;
 
         vm.CategoryId = 0;
@@ -214,11 +216,12 @@
         });
 
         //send to friend popup
-        vm.OpenSendToFriend = function (location) {
+        vm.OpenSendToFriend = function (location, solutionid) {
             angular.element('#sendtofriend').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
             vm.username = $localStorage.authorizationData.userFullName;
             vm.ProjectLocation = location;
+            vm.ProjectId = solutionid;
         }
 
         //project detail popup
@@ -330,11 +333,6 @@
         }
         //#endregion
 
-        vm.getRatingId = function (ratingid) {
-            vm.RatingId = ratingid;
-            vm.showReply = true;
-        }
-
         vm.SaveSolutionRating = function (projectid, isreply) {
             angular.element('#client-wrapper').toggleClass('position-fixed');
             if (isreply) {
@@ -354,6 +352,12 @@
             HomeService.save(vm.SolutionRatingModel, onSuccess, null, '/api/ProjectBaseData');
             function onSuccess(response) {
                 $.unblockUI();
+                vm.ProejctModel = {};
+                vm.ProejctModel.AverageRating = response.data;
+                vm.ProejctModel.Id = projectid;
+                $timeout(function () {
+                    selectedStars(vm.ProejctModel);
+                });
                 vm.showReply = false;
                 angular.element('.g-popup-wrapper').hide();
                 vm.Comments = '';
@@ -365,10 +369,35 @@
             }
         }
 
+        vm.SaveClickActivity = function () {
+            if (vm.ProjectId) {
+                HomeService.url = '/api/SolutionBaseData/';
+                HomeService.loadById(vm.ProjectId, function (response) {
+                    $.unblockUI();
+                });
+            }
+        }
+        
+        vm.SaveShareActivity = function () {
+            if (vm.ProjectId) {
+                vm.SolutionModel = {};
+                vm.SolutionModel.Id = vm.ProjectId;
+                HomeService.url = '/api/SolutionBaseData/';
+                HomeService.save(vm.SolutionModel, function (response) {
+                    $.unblockUI();
+                });
+            }
+        }
+
         $(document).on('click', '[data-toggle="lightbox"]', function (event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
+
+        vm.getRatingId = function (ratingid) {
+            vm.RatingId = ratingid;
+            vm.showReply = true;
+        }
 
         vm.resetdata = function () {
             if (vm.searchString) {

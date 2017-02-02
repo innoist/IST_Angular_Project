@@ -100,7 +100,6 @@ namespace IST.WebApi2.Controllers
         [HttpPost]
         public IHttpActionResult Post(SolutionRatingModel model)
         {
-
             if (model.RatingId == 0)
                 SetAllValues(model);
             else
@@ -109,19 +108,7 @@ namespace IST.WebApi2.Controllers
             return Ok(result);
         }
 
-        [Route("api/Project/ClickActivity")]
-        [HttpPost]
-        public IHttpActionResult ClickActivity(int solutionid)
-        {
-            return Ok();
-        }
-
-        [Route("api/Project/ShareActivity")]
-        [HttpPost]
-        public IHttpActionResult ShareActivity(int solutionid)
-        {
-            return Ok();
-        }
+        
         #endregion
     }
 }
