@@ -20,14 +20,18 @@ namespace IST.WebApi2.Controllers
         private readonly ISolutionService solutionService;
         private readonly IFilterCategoryService filterCategoryService;
         private readonly ISolutionRatingService solutionRatingService;
+        private readonly IUsageHistoryService usageService;
+
         #endregion
 
         #region Constructor
-        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService)
+        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService,
+            IUsageHistoryService usageService)
         {
             this.solutionService = solutionService;
             this.filterCategoryService = filterCategoryService;
             this.solutionRatingService = solutionRatingService;
+            this.usageService = usageService;
         }
         #endregion
 
@@ -113,6 +117,7 @@ namespace IST.WebApi2.Controllers
         [HttpPost]
         public IHttpActionResult ClickActivity(int solutionid)
         {
+            usageService.SaveUsage(solutionid, (int)Commons.UsageType.Clicked);
             return Ok();
         }
 
@@ -120,6 +125,7 @@ namespace IST.WebApi2.Controllers
         [HttpPost]
         public IHttpActionResult ShareActivity(int solutionid)
         {
+            usageService.SaveUsage(solutionid, (int)Commons.UsageType.Shared);
             return Ok();
         }
         #endregion

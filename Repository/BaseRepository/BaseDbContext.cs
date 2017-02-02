@@ -125,6 +125,7 @@ namespace IST.Repository.BaseRepository
         public DbSet<Solution> Solutions { get; set; }
         public DbSet<SolutionRating> SolutionRatings { get; set; }
         public DbSet<SolutionSearchHistory> SolutionSearchHistories { get; set; }
+        public DbSet<SolutionUsageHistory> SolutionUsageHistories { get; set; }
 
 
         /// <summary>

@@ -33,6 +33,7 @@ namespace IST.Repository
             unityContainer.RegisterType<ITagGroupRepository, TagGroupRepository>();
             unityContainer.RegisterType<ISolutionRatingRepository, SolutionRatingRepository>();
             unityContainer.RegisterType<ISolutionSearchHistoryRepository, SolutionSearchHistoryRepository>();
+            unityContainer.RegisterType<IUsageHistoryRepository, UsageHistoryRepository>();
         }
     }
 }

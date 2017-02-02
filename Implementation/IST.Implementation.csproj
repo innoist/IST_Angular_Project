@@ -170,6 +170,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TagGroupService.cs" />
     <Compile Include="Services\TagService.cs" />
+    <Compile Include="Services\UsageHistoryService.cs" />
     <Compile Include="Services\UsersService.cs" />
     <Compile Include="Services\WebApiAuthenticationService.cs" />
     <Compile Include="TypeRegistrations.cs" />

@@ -36,6 +36,7 @@ namespace IST.Implementation
             unityContainer.RegisterType<IFilterService, FilterService>();
             unityContainer.RegisterType<IFilterCategoryService, FilterCategoryService>();
             unityContainer.RegisterType<ISolutionRatingService, SolutionRatingService>();
+            unityContainer.RegisterType<IUsageHistoryService, UsageHistoryService>();
         }
     }
 }
