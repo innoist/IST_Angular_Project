@@ -165,12 +165,12 @@
                 <input type="text" placeholder="Your name" ng-model="hc.username" class="form-control" ng-disabled="true">
             </label>
             <label class="input margin-bottom-20">
-                <input type="email" placeholder="Your Friend's email" ng-model="hc.FriendsEmail"class="form-control">
+                <input type="email" placeholder="Your Friend's email" ng-model="hc.FriendsEmail" class="form-control">
             </label>
             <div contenteditable="true" class="editable-div" ng-model="hc.EmailBody">
                 <div contenteditable="false" class="display-inline">
                     <a target="_blank" href="{{hc.ProjectLocation}}">Here</a>
-                </div> is the link to Solution.
+                </div> <span>is the link to Solution.</span>
             </div>
             <label class="input">
                 <button class="btn btn-default" type="button" ng-click="hc.SaveShareActivity()">Share</button>
@@ -210,6 +210,7 @@
                         </div>
                         <div class="product-comment-dtl col-md-11">
                             <h4>{{reply.Username}} <!--<small>{{reply.reviewdate}}</small>--></h4>
+                            <p>{{r
                             <p>{{reply.Comments}}</p>
                         </div>
                     </div>
@@ -250,7 +251,7 @@
                             <ul class="list-inline product-ratings">
                                 <li class="reply">Review</li>
                                 <li>
-                                    <div class="stars-ratings stars-ratings-label" 
+                                    <div class="stars-ratings stars-ratings-label"
                                          uib-tooltip="{{'Rating is Required'}}"
                                          uib-tooltip-trigger="focus"
                                          tooltip-class="tooltip-danger">
