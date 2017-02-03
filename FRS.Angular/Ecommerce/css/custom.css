@@ -148,3 +148,13 @@
 .display-inline {
     display: inline;
 }
+
+/*Red tooltip*/
+.tooltip-danger .tooltip-inner{
+    color: white !important;
+    background-color: #f05050 !important;
+}
+
+.tooltip.tooltip-danger .tooltip-arrow {
+    border-top-color:#f05050;
+}
