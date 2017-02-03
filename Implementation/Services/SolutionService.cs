@@ -28,6 +28,7 @@ namespace IST.Implementation.Services
         private readonly IUserRepository userRepository;
         private readonly ISolutionRatingRepository solutionRatingRepository;
         private readonly ISolutionSearchHistoryRepository searchHistoryRepository;
+        private readonly IUsageHistoryRepository usageHistoryRepository;
 
         #endregion
 
@@ -39,7 +40,8 @@ namespace IST.Implementation.Services
         public SolutionService(ITagRepository tagRepository, IFilterRepository filterRepository,
             ISolutionRepository solutionRepository, ISolutionTypeRepository solutionTypeRepository,
             ISolutionOwnerRepository solutionOwnerRepository, IUserRepository userRepository,
-            ISolutionRatingRepository solutionRatingRepository, ISolutionSearchHistoryRepository searchHistoryRepository)
+            ISolutionRatingRepository solutionRatingRepository, ISolutionSearchHistoryRepository searchHistoryRepository,
+            IUsageHistoryRepository usageHistoryRepository)
         {
 
             this.tagRepository = tagRepository;
@@ -50,6 +52,7 @@ namespace IST.Implementation.Services
             this.solutionTypeRepository = solutionTypeRepository;
             this.solutionRatingRepository = solutionRatingRepository;
             this.searchHistoryRepository = searchHistoryRepository;
+            this.usageHistoryRepository = usageHistoryRepository;
         }
 
         #endregion
@@ -167,6 +170,12 @@ namespace IST.Implementation.Services
 
             solutionRepository.SaveChanges();
             return true;
+        }
+
+        public string GetLinkByExternalClick(string userId, string email, int solutionId)
+        {
+            var usageHistory = usageHistoryRepository.GetLinkByExternalClick(userId, email, solutionId);
+            return usageHistory.Solution.Location;
         }
 
         #endregion

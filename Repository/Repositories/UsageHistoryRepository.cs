@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
 using IST.Repository.BaseRepository;
@@ -13,5 +14,9 @@ namespace IST.Repository.Repositories
         }
 
         protected override IDbSet<SolutionUsageHistory> DbSet => db.SolutionUsageHistories;
+        public SolutionUsageHistory GetLinkByExternalClick(string userId, string email, int solutionId)
+        {
+            return DbSet.FirstOrDefault(x=>x.SolutionId == solutionId && x.RecCreatedById == userId);
+        }
     }
 }
