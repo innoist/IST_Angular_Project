@@ -379,7 +379,7 @@
                 });
             }
         }
-        
+
         vm.SaveShareActivity = function () {
             if (vm.ProjectId) {
                 vm.EmailModel = {};
