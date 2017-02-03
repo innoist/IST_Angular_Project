@@ -369,10 +369,12 @@
             }
         }
 
-        vm.SaveClickActivity = function () {
-            if (vm.ProjectId) {
+        vm.SaveClickActivity = function (projectId) {
+            if (projectId) {
+                vm.SolutionModel = {};
+                vm.SolutionModel.Id = projectId;
                 HomeService.url = '/api/SolutionBaseData/';
-                HomeService.loadById(vm.ProjectId, function (response) {
+                HomeService.save(vm.SolutionModel, function (response) {
                     $.unblockUI();
                 });
             }
@@ -380,12 +382,13 @@
         
         vm.SaveShareActivity = function () {
             if (vm.ProjectId) {
-                vm.SolutionModel = {};
-                vm.SolutionModel.Id = vm.ProjectId;
-                HomeService.url = '/api/SolutionBaseData/';
-                HomeService.save(vm.SolutionModel, function (response) {
+                vm.EmailModel = {};
+                vm.EmailModel.SolutionId = vm.ProjectId;
+                vm.EmailModel.SenderEmail = vm.FriendsEmail;
+                vm.EmailModel.EmailBody = vm.EmailBody;
+                HomeService.save(vm.EmailModel, function (response) {
                     $.unblockUI();
-                });
+                },null,'/api/ShareActivity/');
             }
         }
 

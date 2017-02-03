@@ -12,13 +12,17 @@ namespace IST.WebApi2.Controllers
         #region Private
 
         private readonly ISolutionService solutionService;
+        private readonly IUsageHistoryService usageService;
+
         #endregion
 
         #region Constructor
-        public SolutionBaseDataController(ISolutionService solutionService)
+        public SolutionBaseDataController(ISolutionService solutionService, IUsageHistoryService usageService)
         {
             this.solutionService = solutionService;
+            this.usageService = usageService;
         }
+
         #endregion
         // GET: SolutionBaseData
 
@@ -35,20 +39,21 @@ namespace IST.WebApi2.Controllers
         /// <summary>
         /// For Click Activity (Client Side)
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Post(SolutionModel model)
         {
+            usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked);
             return Ok();
         }
 
         /// <summary>
         /// For Share Activity (Client Side)
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public IHttpActionResult Post(SolutionModel model)
+        [Route("api/ShareActivity")]
+        [HttpPost]
+        public IHttpActionResult Post(EmailModel model)
         {
+            usageService.SaveUsage(model.SolutionId, (int)Commons.UsageType.Shared);
+            Commons.Utility.Utility.SendEmailAsync(model.SenderEmail, model.EmailBody);
             return Ok();
         }
     }

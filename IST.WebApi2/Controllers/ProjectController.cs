@@ -20,18 +20,15 @@ namespace IST.WebApi2.Controllers
         private readonly ISolutionService solutionService;
         private readonly IFilterCategoryService filterCategoryService;
         private readonly ISolutionRatingService solutionRatingService;
-        private readonly IUsageHistoryService usageService;
 
         #endregion
 
         #region Constructor
-        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService,
-            IUsageHistoryService usageService)
+        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService)
         {
             this.solutionService = solutionService;
             this.filterCategoryService = filterCategoryService;
             this.solutionRatingService = solutionRatingService;
-            this.usageService = usageService;
         }
         #endregion
 

@@ -178,7 +178,7 @@ namespace IST.Commons.Utility
             }
         }
 
-        public static Task SendEmailAsync(string email, string subject, string body)
+        public static bool SendEmailAsync(string email, string body)
         {
             //Get Configuration from Web Config
             string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
@@ -189,7 +189,7 @@ namespace IST.Commons.Utility
             MailMessage oEmail = new MailMessage
             {
                 From = new MailAddress(fromAddress, fromDisplayName),
-                Subject = subject,
+                Subject = "Check it out",
                 IsBodyHtml = true,
                 Body = body,
                 Priority = MailPriority.High
@@ -203,7 +203,8 @@ namespace IST.Commons.Utility
                 EnableSsl = enableSsl == "1",
                 Credentials = new NetworkCredential(fromAddress, fromPwd)
             };
-            return client.SendMailAsync(oEmail);
+            client.SendMailAsync(oEmail);
+            return true;
         }
     }
 }
