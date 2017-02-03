@@ -9,6 +9,7 @@ using IST.Models.LoggerModels;
 using IST.Models.MenuModels;
 using Microsoft.Practices.Unity;
 
+
 namespace IST.Repository.BaseRepository
 {
     /// <summary>
@@ -152,6 +153,24 @@ namespace IST.Repository.BaseRepository
                 new ObjectParameter("UserDomainKey", typeof(long));
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<long?>("GetRootParentHireGroup", hireGroupDetailIdParameter, userDomainKeyParameter);
+        }
+
+        public void DeleteFilter(int? filterId)
+        {
+            var filterIdParameter = filterId.HasValue ?
+                new ObjectParameter("FilterId", filterId) :
+                new ObjectParameter("FilterId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFilter", filterIdParameter);
+        }
+
+        public void DeleteFilterCategory(int? filterCategoryId)
+        {
+            var filterCategoryIdParameter = filterCategoryId.HasValue ?
+                new ObjectParameter("FilterCategoryId", filterCategoryId) :
+                new ObjectParameter("FilterCategoryId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFilterCategory", filterCategoryIdParameter);
         }
 
         #endregion

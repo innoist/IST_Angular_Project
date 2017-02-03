@@ -166,12 +166,12 @@
           <Property Name="SolutionId" Type="int" Nullable="false" />
           <Property Name="Rating" Type="int" />
           <Property Name="Comments" Type="nvarchar(max)" />
-          <Property Name="IsReply" Type="bit" />
-          <Property Name="ReplyParentId" Type="int" />
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsReply" Type="bit" />
+          <Property Name="ReplyParentId" Type="int" />
         </EntityType>
         <EntityType Name="SolutionSearchHistory">
           <Key>
@@ -212,12 +212,12 @@
           <Property Name="SolutionId" Type="int" Nullable="false" />
           <Property Name="UsageType" Type="int" Nullable="false" />
           <Property Name="UsageTime" Type="datetime" Nullable="false" />
+          <Property Name="SentTo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsOpened" Type="bit" Nullable="false" />
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
-          <Property Name="SentTo" Type="nvarchar" MaxLength="50" />
-          <Property Name="IsOpened" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -492,6 +492,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SolutionRating_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="RecCreatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionRating_AspNetUsersUpdated">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionRating_Solution">
+          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Role="SolutionOwner" Type="Self.SolutionOwner" Multiplicity="1" />
           <End Role="Solution" Type="Self.Solution" Multiplicity="*" />
@@ -684,6 +720,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DeleteFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilterId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteFilterCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilterCategoryId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="angularModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -784,6 +826,18 @@
           <AssociationSet Name="FK_SolutionOwner_AspNetUsers_UpdatedById" Association="Self.FK_SolutionOwner_AspNetUsers_UpdatedById">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_AspNetUsers" Association="Self.FK_SolutionRating_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_AspNetUsersUpdated" Association="Self.FK_SolutionRating_AspNetUsersUpdated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_Solution" Association="Self.FK_SolutionRating_Solution">
+            <End Role="Solution" EntitySet="Solution" />
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
           </AssociationSet>
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
@@ -1015,6 +1069,12 @@
             <End Role="SolutionRating" EntitySet="SolutionRatings" />
             <End Role="SolutionRating1" EntitySet="SolutionRatings" />
           </AssociationSet>
+          <FunctionImport Name="DeleteFilter">
+            <Parameter Name="FilterId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteFilterCategory">
+            <Parameter Name="FilterCategoryId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="UserRole">
           <Key>
@@ -1609,7 +1669,7 @@
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_SolutionUsageHistory_AspNetUsers" FromRole="SolutionUsageHistory" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_SolutionUsageHistory_AspNetUsersUpdated" FromRole="SolutionUsageHistory" ToRole="AspNetUser" />
           <NavigationProperty Name="Solution" Relationship="angularModel.FK_SolutionUsageHistory_Solution" FromRole="SolutionUsageHistory" ToRole="Solution" />
-          <Property Name="SentTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SentTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsOpened" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_SolutionUsageHistory_AspNetUsers">
@@ -1957,6 +2017,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteFilter" FunctionName="angularModel.Store.DeleteFilter" />
+          <FunctionImportMapping FunctionImportName="DeleteFilterCategory" FunctionName="angularModel.Store.DeleteFilterCategory" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

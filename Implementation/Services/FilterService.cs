@@ -4,6 +4,7 @@ using System.Linq;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
+using IST.Repository.BaseRepository;
 
 namespace IST.Implementation.Services
 {
@@ -57,13 +58,16 @@ namespace IST.Implementation.Services
 
         public bool DeleteFilter(int filterId)
         {
-            var toDelete = filterRepository.Find(filterId);
-            if (toDelete.Solutions.Any())
-            {
-                throw new Exception("You cannot delete " + toDelete.DisplayValue + " as it is being used in Solutions.");
-            }
-            filterRepository.Delete(toDelete);
-            filterRepository.SaveChanges();
+            //var toDelete = filterRepository.Find(filterId);
+            //if (toDelete.Solutions.Any())
+            //{
+            //    throw new Exception("You cannot delete " + toDelete.DisplayValue + " as it is being used in Solutions.");
+            //}
+            //filterRepository.Delete(toDelete);
+            //filterRepository.SaveChanges();
+            //return true;
+            BaseDbContext context = new BaseDbContext();
+            context.DeleteFilter(filterId);
             return true;
         }
 
