@@ -3,7 +3,7 @@ using IST.Models.Common.DropDown;
 
 namespace IST.WebApi2.Models
 {
-    public class FilterModel:BaseModel
+    public class FilterModel : BaseModel
     {
         public int Id { get; set; }
         public int FilterCategoryId { get; set; }
@@ -15,6 +15,6 @@ namespace IST.WebApi2.Models
     public class FilterViewModel
     {
         public FilterModel FilterModel { get; set; }
-        public List<DropDownModel> FilterCategories { get; set; } 
+        public List<DropDownModel> FilterCategories { get; set; }
     }
 }

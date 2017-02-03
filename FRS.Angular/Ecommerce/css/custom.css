@@ -139,11 +139,12 @@
     color: #fff;
     box-shadow: none;
     font-weight: normal;
-    height: 70px;
+    height: 100px;
     text-align: left;
     padding: 10px;
     margin-bottom: 20px;
     font-size: 14px;
+    overflow-y: scroll;
 }
 .display-inline {
     display: inline;
@@ -158,3 +159,12 @@
 .tooltip.tooltip-danger .tooltip-arrow {
     border-top-color:#f05050;
 }
+
+.g-popup--discount {
+    width: 45%;
+}
+.g-popup--discount h3{
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+

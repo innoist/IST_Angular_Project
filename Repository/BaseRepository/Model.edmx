@@ -74,6 +74,7 @@
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="FilterCategory">
           <Key>
@@ -85,6 +86,7 @@
           <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -127,6 +129,7 @@
           <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="SolutionFavourite">
           <Key>
@@ -213,6 +216,8 @@
           <Property Name="RecCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="SentTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsOpened" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -225,6 +230,7 @@
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="TagGroup">
           <Key>
@@ -236,6 +242,7 @@
           <Property Name="RecLastUpdatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecCreatedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RecLastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -482,54 +489,6 @@
             </Principal>
             <Dependent Role="SolutionOwner">
               <PropertyRef Name="RecLastUpdatedById" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SolutionRating_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SolutionRating">
-              <PropertyRef Name="RecCreatedById" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SolutionRating_AspNetUsersUpdated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SolutionRating">
-              <PropertyRef Name="RecLastUpdatedById" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SolutionRating_Solution">
-          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
-          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Solution">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SolutionRating">
-              <PropertyRef Name="SolutionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SolutionRating_SolutionRating">
-          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="0..1" />
-          <End Role="SolutionRating1" Type="Self.SolutionRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SolutionRating">
-              <PropertyRef Name="RatingId" />
-            </Principal>
-            <Dependent Role="SolutionRating1">
-              <PropertyRef Name="ReplyParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -825,22 +784,6 @@
           <AssociationSet Name="FK_SolutionOwner_AspNetUsers_UpdatedById" Association="Self.FK_SolutionOwner_AspNetUsers_UpdatedById">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SolutionRating_AspNetUsers" Association="Self.FK_SolutionRating_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="SolutionRating" EntitySet="SolutionRating" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SolutionRating_AspNetUsersUpdated" Association="Self.FK_SolutionRating_AspNetUsersUpdated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="SolutionRating" EntitySet="SolutionRating" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SolutionRating_Solution" Association="Self.FK_SolutionRating_Solution">
-            <End Role="Solution" EntitySet="Solution" />
-            <End Role="SolutionRating" EntitySet="SolutionRating" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SolutionRating_SolutionRating" Association="Self.FK_SolutionRating_SolutionRating">
-            <End Role="SolutionRating" EntitySet="SolutionRating" />
-            <End Role="SolutionRating1" EntitySet="SolutionRating" />
           </AssociationSet>
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
@@ -1261,6 +1204,7 @@
           <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Filter_AspNetUsers_CreatedById" FromRole="Filter" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Filter_AspNetUsers_UpdatedById" FromRole="Filter" ToRole="AspNetUser" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="FilterCategory">
           <Key>
@@ -1275,6 +1219,7 @@
           <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_FilterCategory_AspNetUsers_CreatedById" FromRole="FilterCategory" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_FilterCategory_AspNetUsers_UpdatedById" FromRole="FilterCategory" ToRole="AspNetUser" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="SolutionOwner">
           <Key>
@@ -1319,6 +1264,7 @@
           <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_Tag_AspNetUsers_CreatedById" FromRole="Tag" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_Tag_AspNetUsers_UpdatedById" FromRole="Tag" ToRole="AspNetUser" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="TagGroup">
           <Key>
@@ -1333,6 +1279,7 @@
           <Property Name="RecLastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_TagGroup_AspNetUsers_CreatedById" FromRole="TagGroup" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" FromRole="TagGroup" ToRole="AspNetUser" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Filters_FilterCategories">
           <End Type="angularModel.FilterCategory" Role="FilterCategory" Multiplicity="1" />
@@ -1385,6 +1332,7 @@
           <NavigationProperty Name="AspNetUsers" Relationship="angularModel.SolutionFavourite" FromRole="Solution" ToRole="AspNetUser" />
           <NavigationProperty Name="SolutionRatings" Relationship="angularModel.FK_SolutionRating_Solution" FromRole="Solution" ToRole="SolutionRating" />
           <NavigationProperty Name="SolutionUsageHistories" Relationship="angularModel.FK_SolutionUsageHistory_Solution" FromRole="Solution" ToRole="SolutionUsageHistory" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Solutions_SolutionOwners">
           <End Type="angularModel.SolutionOwner" Role="SolutionOwner" Multiplicity="1" />
@@ -1661,6 +1609,8 @@
           <NavigationProperty Name="CreatedByUser" Relationship="angularModel.FK_SolutionUsageHistory_AspNetUsers" FromRole="SolutionUsageHistory" ToRole="AspNetUser" />
           <NavigationProperty Name="UpdatedByUser" Relationship="angularModel.FK_SolutionUsageHistory_AspNetUsersUpdated" FromRole="SolutionUsageHistory" ToRole="AspNetUser" />
           <NavigationProperty Name="Solution" Relationship="angularModel.FK_SolutionUsageHistory_Solution" FromRole="SolutionUsageHistory" ToRole="Solution" />
+          <Property Name="SentTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsOpened" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_SolutionUsageHistory_AspNetUsers">
           <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -1842,6 +1792,7 @@
           <EntitySetMapping Name="Filters">
             <EntityTypeMapping TypeName="angularModel.Filter">
               <MappingFragment StoreEntitySet="Filter">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
                 <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
                 <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
@@ -1855,6 +1806,7 @@
           <EntitySetMapping Name="FilterCategories">
             <EntityTypeMapping TypeName="angularModel.FilterCategory">
               <MappingFragment StoreEntitySet="FilterCategory">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
                 <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
                 <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
@@ -1891,6 +1843,7 @@
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="angularModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
                 <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
                 <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
@@ -1904,6 +1857,7 @@
           <EntitySetMapping Name="TagGroups">
             <EntityTypeMapping TypeName="angularModel.TagGroup">
               <MappingFragment StoreEntitySet="TagGroup">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
                 <ScalarProperty Name="RecCreatedById" ColumnName="RecCreatedById" />
                 <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
@@ -1916,6 +1870,7 @@
           <EntitySetMapping Name="Solutions">
             <EntityTypeMapping TypeName="angularModel.Solution">
               <MappingFragment StoreEntitySet="Solution">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
                 <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
                 <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />
@@ -1976,6 +1931,8 @@
           <EntitySetMapping Name="SolutionUsageHistories">
             <EntityTypeMapping TypeName="angularModel.SolutionUsageHistory">
               <MappingFragment StoreEntitySet="SolutionUsageHistory">
+                <ScalarProperty Name="IsOpened" ColumnName="IsOpened" />
+                <ScalarProperty Name="SentTo" ColumnName="SentTo" />
                 <ScalarProperty Name="RecLastUpdatedOn" ColumnName="RecLastUpdatedOn" />
                 <ScalarProperty Name="RecLastUpdatedById" ColumnName="RecLastUpdatedById" />
                 <ScalarProperty Name="RecCreatedOn" ColumnName="RecCreatedOn" />

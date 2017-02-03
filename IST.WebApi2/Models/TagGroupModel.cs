@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using IST.Models.DomainModels;
-
-namespace IST.WebApi2.Models
+﻿namespace IST.WebApi2.Models
 {
-    public class TagGroupModel:BaseModel
+    public class TagGroupModel : BaseModel
     {
         public int Id { get; set; }
         public string DisplayValue { get; set; }
