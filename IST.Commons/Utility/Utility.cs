@@ -183,7 +183,7 @@ namespace IST.Commons.Utility
             //Get Configuration from Web Config
             string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
             string fromPwd = ConfigurationManager.AppSettings["FromPassword"];
-            string fromDisplayName = ConfigurationManager.AppSettings["FromDisplayNameA"];
+            string fromDisplayName = ConfigurationManager.AppSettings["FromDisplayName"];
             
             //Getting the file from config, to send
             MailMessage oEmail = new MailMessage

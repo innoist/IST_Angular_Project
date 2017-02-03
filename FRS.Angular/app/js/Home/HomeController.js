@@ -385,10 +385,16 @@
                 vm.EmailModel = {};
                 vm.EmailModel.SolutionId = vm.ProjectId;
                 vm.EmailModel.SenderEmail = vm.FriendsEmail;
-                vm.EmailModel.EmailBody = vm.EmailBody;
+                vm.EmailModel.EmailBody = "<a href='" + angular.element('.editable-div').children().children()[0].href + "'>Here </a>" + angular.element('.editable-div span')[0].textContent;
                 HomeService.save(vm.EmailModel, function (response) {
                     $.unblockUI();
-                },null,'/api/ShareActivity/');
+                    var status = response;
+                }, function (response) {
+                    $.unblockUI();
+                    vm.EmailModel.EmailBody = '';
+                    vm.EmailModel.SenderEmail = '';
+                    angular.element('.g-popup-wrapper').hide();
+                }, 'vm.EmailModel.EmailBody =/api/ShareActivity/');
             }
         }
 
