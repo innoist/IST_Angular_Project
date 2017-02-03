@@ -80,6 +80,7 @@
     <Compile Include="IServices\IRegisterUserService.cs" />
     <Compile Include="IServices\ITagGroupService.cs" />
     <Compile Include="IServices\ITagService.cs" />
+    <Compile Include="IServices\IUsageHistoryService.cs" />
     <Compile Include="IServices\IUsersService.cs" />
     <Compile Include="IServices\IWebApiAuthenticationService.cs" />
     <Compile Include="Repository\IFilterCategoryRepository.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Repository\ILogRepository.cs" />
     <Compile Include="Repository\ISolutionOwnerRepository.cs" />
     <Compile Include="Repository\ISolutionRepository.cs" />
+    <Compile Include="Repository\ISolutionSearchHistoryRepository.cs" />
     <Compile Include="Repository\ISolutionTypeRepository.cs" />
     <Compile Include="Repository\IAspNetRoleRepository.cs" />
     <Compile Include="Repository\IMenuRepository.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Repository\IBaseRepository.cs" />
     <Compile Include="Repository\ITagGroupRepository.cs" />
     <Compile Include="Repository\ITagRepository.cs" />
+    <Compile Include="Repository\IUsageHistoryRepository.cs" />
     <Compile Include="Repository\IUserDetailsRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\IMenuRightRepository.cs" />

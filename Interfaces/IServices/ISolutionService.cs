@@ -19,5 +19,6 @@ namespace IST.Interfaces.IServices
         IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds);
         bool SaveFavorite(int solutionId, bool saveOrDelete);
         bool DeleteSolution(int solutionId);
+        string GetLinkByExternalClick(string userId, string email, int solutionId);
     }
 }

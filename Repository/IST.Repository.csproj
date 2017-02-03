@@ -191,6 +191,7 @@
     <Compile Include="Repositories\FilterCategoryRepository.cs" />
     <Compile Include="Repositories\SolutionOwnerRepository.cs" />
     <Compile Include="Repositories\SolutionRepository.cs" />
+    <Compile Include="Repositories\SolutionSearchHistoryRepository.cs" />
     <Compile Include="Repositories\SolutionTypeRepository.cs" />
     <Compile Include="Repositories\AspNetRoleRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Repositories\MenuRightRepository.cs" />
     <Compile Include="Repositories\TagGroupRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
+    <Compile Include="Repositories\UsageHistoryRepository.cs" />
     <Compile Include="Repositories\UserDetailsRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleStore.cs" />

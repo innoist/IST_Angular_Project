@@ -116,7 +116,7 @@
                             </div>
                         </a>
 
-                        <a class="product-review" target="_blank" ng-href="{{project.Location}}" uib-tooltip="{{project.Name.length > 25 ? project.Name:''}}">{{project.Name | customLimitTo : 25}}</a>
+                        <a class="product-review" target="_blank" ng-href="{{project.Location}}" uib-tooltip="{{project.Name.length > 25 ? project.Name:''}}" ng-click="hc.SaveClickActivity(project.Id)">{{project.Name | customLimitTo : 25}} </a>
                         <!--<a class="add-to-cart" target="_blank" ng-href="{{project.Location}}"><i class="fa fa-shopping-cart"></i></a>-->
                         <!--<a class="shop-rgba-dark-green rgba-banner" target="_blank" ng-href="{{project.Location}}">Live</a>-->
                     </div>
@@ -165,11 +165,11 @@
                 <input type="text" placeholder="Your name" ng-model="hc.username" class="form-control" ng-disabled="true">
             </label>
             <label class="input margin-bottom-20">
-                <input type="email" placeholder="Your Friend's email" class="form-control">
+                <input type="email" placeholder="Your Friend's email" ng-model="hc.FriendsEmail"class="form-control">
             </label>
             <div contenteditable="true" class="editable-div">
                 <div contenteditable="false" class="display-inline">
-                    <a target="_blank" href="{{hc.ProjectLocation}}" ng-click="hc.SaveClickActivity()">Here</a>
+                    <a target="_blank" href="{{hc.ProjectLocation}}">Here</a>
                 </div> is the link to Solution.
             </div>
             <label class="input">

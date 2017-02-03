@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using Castle.Core.Internal;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.Common.DropDown;
@@ -26,6 +27,8 @@ namespace IST.Implementation.Services
         private readonly ISolutionOwnerRepository solutionOwnerRepository;
         private readonly IUserRepository userRepository;
         private readonly ISolutionRatingRepository solutionRatingRepository;
+        private readonly ISolutionSearchHistoryRepository searchHistoryRepository;
+        private readonly IUsageHistoryRepository usageHistoryRepository;
 
         #endregion
 
@@ -36,7 +39,9 @@ namespace IST.Implementation.Services
         /// </summary>
         public SolutionService(ITagRepository tagRepository, IFilterRepository filterRepository,
             ISolutionRepository solutionRepository, ISolutionTypeRepository solutionTypeRepository,
-            ISolutionOwnerRepository solutionOwnerRepository, IUserRepository userRepository, ISolutionRatingRepository solutionRatingRepository)
+            ISolutionOwnerRepository solutionOwnerRepository, IUserRepository userRepository,
+            ISolutionRatingRepository solutionRatingRepository, ISolutionSearchHistoryRepository searchHistoryRepository,
+            IUsageHistoryRepository usageHistoryRepository)
         {
 
             this.tagRepository = tagRepository;
@@ -46,6 +51,8 @@ namespace IST.Implementation.Services
             this.userRepository = userRepository;
             this.solutionTypeRepository = solutionTypeRepository;
             this.solutionRatingRepository = solutionRatingRepository;
+            this.searchHistoryRepository = searchHistoryRepository;
+            this.usageHistoryRepository = usageHistoryRepository;
         }
 
         #endregion
@@ -54,6 +61,27 @@ namespace IST.Implementation.Services
 
         public SearchTemplateResponse<Solution> Search(SolutionSearchRequest searchRequest)
         {
+            try
+            {
+                if (!searchRequest.Name.IsNullOrEmpty() && searchRequest.PageNo == 1 && !searchRequest.ClientRequest.IsNullOrEmpty())
+                {
+                    SolutionSearchHistory historyToSave = new SolutionSearchHistory
+                    {
+                        SearchString = searchRequest.Name,
+                        SearchTime = DateTime.Now,
+                        RecCreatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
+                        RecCreatedOn = DateTime.Now,
+                        RecLastUpdatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
+                        RecLastUpdatedOn = DateTime.Now
+                    };
+                    searchHistoryRepository.Add(historyToSave);
+                    searchHistoryRepository.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return solutionRepository.Search(searchRequest);
         }
 
@@ -143,7 +171,13 @@ namespace IST.Implementation.Services
             solutionRepository.SaveChanges();
             return true;
         }
-        
+
+        public string GetLinkByExternalClick(string userId, string email, int solutionId)
+        {
+            var usageHistory = usageHistoryRepository.GetLinkByExternalClick(userId, email, solutionId);
+            return usageHistory.Solution.Location;
+        }
+
         #endregion
 
         #region Private Methods
@@ -223,7 +257,7 @@ namespace IST.Implementation.Services
                 solutionToUpdate.Tags.Clear();
             }
         }
-        
+
         public IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds)
         {
             return solutionRepository.SearchForTypeAhead(name, filterIds);
