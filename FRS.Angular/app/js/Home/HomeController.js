@@ -384,8 +384,9 @@
             if (vm.ProjectId) {
                 vm.EmailModel = {};
                 vm.EmailModel.SolutionId = vm.ProjectId;
-                vm.EmailModel.SenderEmail = vm.FriendsEmail;
-                vm.EmailModel.EmailBody = "<a href='" + angular.element('.editable-div').children().children()[0].href + "'>Here </a>" + angular.element('.editable-div span')[0].textContent;
+                vm.EmailModel.RecieverEmail = vm.FriendsEmail;
+                var hrf = vm.apiUrl + "/api/Redirect?userId=" + $localStorage.authorizationData.userId + "&receiveremail=" + vm.EmailModel.RecieverEmail + "&solutionId=" + vm.EmailModel.SolutionId;
+                vm.EmailModel.EmailBody = "<a href='" + hrf + "'>Here </a>" + angular.element('.editable-div span')[0].textContent;
                 HomeService.save(vm.EmailModel, function (response) {
                     $.unblockUI();
                     var status = response;
@@ -394,7 +395,7 @@
                     vm.EmailModel.EmailBody = '';
                     vm.EmailModel.SenderEmail = '';
                     angular.element('.g-popup-wrapper').hide();
-                }, 'vm.EmailModel.EmailBody =/api/ShareActivity/');
+                }, '/api/ShareActivity/');
             }
         }
 

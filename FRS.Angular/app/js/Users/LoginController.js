@@ -45,6 +45,7 @@
                             $localStorage['authorizationData'] = {
                                 token: response.access_token,
                                 userName: response.userName,
+                                userId: response.UserId,
                                 userFullName: response.UserFullName,
                                 email: response.email,
                                 UserRole: response.UserRole,

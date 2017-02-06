@@ -49,8 +49,8 @@
     <div ui-view="" class="wrapper" id="client-wrapper"></div>
     <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
 
-    <script src="/Ecommerce/plugins/jquery/jquery.min.js"></script>
-    <script src="../../vendor/datatables/media/js/jquery.dataTables.js"></script>
+    <script ng-if="window.location.href.indexOf('GoCentralize')===-1" src="/Ecommerce/plugins/jquery/jquery.min.js"></script>
+    <script ng-if="window.location.href.indexOf('GoCentralize')===-1" src="../../vendor/datatables/media/js/jquery.dataTables.js"></script>
     <script src="/Ecommerce/plugins/jquery/jquery-migrate.min.js"></script>
     <script src="/Ecommerce/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- JS Implementing Plugins -->

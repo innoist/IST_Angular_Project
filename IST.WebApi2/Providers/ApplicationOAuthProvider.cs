@@ -67,6 +67,9 @@ namespace IST.WebApi2.Providers
                     },
                     {
                         "UserFullName", user.FirstName +" "+ user.LastName
+                    },
+                    {
+                        "UserId", user.Id
                     }
                 });
 

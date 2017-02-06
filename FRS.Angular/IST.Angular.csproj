@@ -90,7 +90,6 @@
     <Content Include="app\js\lazymodules.js" />
     <Content Include="app\js\partials\SidebarController.js" />
     <Content Include="app\js\partials\UserBlockController.js" />
-    <Content Include="app\js\ProjectDetail\ProjectDetailController.js" />
     <Content Include="app\js\shared\UtilityService.js" />
     <Content Include="app\js\Dashboard\DashboardController.js" />
     <Content Include="app\js\Solution\SolutionController.js" />

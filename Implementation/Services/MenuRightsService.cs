@@ -109,7 +109,7 @@ namespace IST.Implementation.Services
         public IEnumerable<MenuView> GetForRole()
         {
             Claim userRoleClaim = ClaimHelper.GetClaimToString(ClaimTypes.Role);
-            if (userRoleClaim == null || string.IsNullOrEmpty(userRoleClaim.Value))
+            if (string.IsNullOrEmpty(userRoleClaim?.Value))
             {
                 return null;
             }

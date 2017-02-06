@@ -1,5 +1,7 @@
-﻿using System.Web.Http;
+﻿using System.Security.Claims;
+using System.Web.Http;
 using IST.Interfaces.IServices;
+using Microsoft.AspNet.Identity;
 
 namespace IST.WebApi2.Controllers
 {
@@ -23,9 +25,9 @@ namespace IST.WebApi2.Controllers
         #region Public
 
         [AllowAnonymous]
-        public IHttpActionResult Get(string userId, string email, int solutionId)
+        public IHttpActionResult Get(string userId, string receiveremail, int solutionId)
         {
-            string url = solutionService.GetLinkByExternalClick(userId, email, solutionId);
+            string url = solutionService.GetLinkByExternalClick(userId, receiveremail, solutionId);
             System.Uri uri = new System.Uri(url);
             return Redirect(uri);
         }

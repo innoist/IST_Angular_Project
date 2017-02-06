@@ -38,7 +38,7 @@ namespace IST.WebApi2.Controllers
 
         #region Public
         /// <summary>
-        /// Recieves the timezone offset value as id
+        /// 
         /// </summary>
         /// <returns>Menu entries list</returns>
         [Authorize]

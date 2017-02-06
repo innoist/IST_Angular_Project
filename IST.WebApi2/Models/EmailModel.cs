@@ -3,7 +3,7 @@
     public class EmailModel
     {
         public int SolutionId { get; set; }
-        public string SenderEmail { get; set; }
+        public string RecieverEmail { get; set; }
         public string EmailBody { get; set; }
     }
 }

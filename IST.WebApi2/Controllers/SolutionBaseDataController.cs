@@ -53,7 +53,7 @@ namespace IST.WebApi2.Controllers
         public IHttpActionResult Post(EmailModel model)
         {
             var saved = usageService.SaveUsage(model.SolutionId, (int)Commons.UsageType.Shared);
-            var status = Commons.Utility.Utility.SendEmailAsync(model.SenderEmail, model.EmailBody);
+            var status = Commons.Utility.Utility.SendEmailAsync(model.RecieverEmail, model.EmailBody);
             return Ok(status);
         }
     }
