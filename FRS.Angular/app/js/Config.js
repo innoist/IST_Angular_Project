@@ -175,6 +175,40 @@
                  controllerAs: 'ctgc',
                  resolve: helper.resolveFor('oitozero.ngSweetAlert', 'TagGroup.module', 'filestyle', 'ui.select')
              })
+            //Solution Owner
+            .state('app.SolutionOwner', {
+                url: '/SolutionOwners',
+                title: 'Solution Owner',
+                templateUrl: helper.basepath('../../../../app/views/SolutionOwner/SolutionOwner.html'),
+                controller: 'SolutionOwnerController',
+                controllerAs: 'vm',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'SolutionOwner.module')
+            })
+             .state('app.CreateSolutionOwner', {
+                 url: '/CreateSolutionOwner/:Id',
+                 title: 'Solution Owner - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/SolutionOwner/CreateSolutionOwner.html'),
+                 controller: 'CreateSolutionOwnerController',
+                 controllerAs: 'vm',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'SolutionOwner.module', 'filestyle', 'ui.select')
+             })
+            //Solution Type
+            .state('app.SolutionType', {
+                url: '/SolutionTypes',
+                title: 'Solution Type',
+                templateUrl: helper.basepath('../../../../app/views/SolutionType/SolutionType.html'),
+                controller: 'SolutionTypeController',
+                controllerAs: 'vm',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'datatables', 'ui.select', 'SolutionType.module')
+            })
+             .state('app.CreateSolutionType', {
+                 url: '/CreateSolutionType/:Id',
+                 title: 'Solution Type - Add/Edit',
+                 templateUrl: helper.basepath('../../../../app/views/SolutionType/CreateSolutionType.html'),
+                 controller: 'CreateSolutionTypeController',
+                 controllerAs: 'vm',
+                 resolve: helper.resolveFor('oitozero.ngSweetAlert', 'SolutionType.module', 'filestyle', 'ui.select')
+             })
             //Profile
             .state('app.Profile', {
                 url: '/Profile/:userName',

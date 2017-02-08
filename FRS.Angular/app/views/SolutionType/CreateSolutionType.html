@@ -1,0 +1,56 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <button ng-click="vm.save(false)" ng-disabled="!vm.formValidate.$valid" type="button" class="btn btn-labeled btn-success" ng-if="vm.edit">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span>
+            <span class="hidden-480" ng-if="!vm.update">Save</span>
+            <span class="hidden-480" ng-if="vm.update">Update</span>
+        </button>
+        <button class="btn btn-labeled bg-info-light" ng-if="vm.update" ng-click="vm.edit = !vm.edit" ng-hide="vm.edit">
+            <span class="btn-label">
+                <i class="fa fa-pencil"></i>
+            </span><span class="hidden-480">Edit</span>
+        </button>
+        <button ng-click="vm.save(true)" ng-disabled="!vm.formValidate.$valid" ng-if="!vm.update" type="button" class="btn btn-labeled btn-info">
+            <span class="btn-label">
+                <i class="fa fa-plus"></i>
+            </span><span class="hidden-480">Save and New</span>
+        </button>
+        <button class="btn btn-labeled btn-danger" ng-click="vm.cancelBtn()">
+            <span class="btn-label">
+                <i class="fa fa-times"></i>
+            </span><span class="hidden-480">Cancel</span>
+        </button>
+    </div>
+    <!-- END Language list -->
+    Solution Type
+    <small>Add/Edit</small>
+</h3>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal form-validate" name="vm.formValidate" novalidate="">
+            <div class="form-group">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-md-12" ng-class="{ 'has-error': vm.validateInput(vm.formValidate.DisplayValue, 'required') }">
+                                <label for="Name" class="control-label requiredLabel">Name</label>
+                                <input id="Name" type="text" placeholder="Enter Name Here"
+                                       ng-model="vm.SolutionType.DisplayValue" name="Name"
+                                       uib-tooltip="{{ vm.validateInput(vm.formValidate.DisplayValue, 'required') ? 'Name field is required.' : '' }}"
+                                       uib-tooltip-trigger="focus"
+                                       tooltip-class="tooltip-danger"
+                                       required class="form-control"
+                                       ng-disabled="!vm.edit"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+</div>

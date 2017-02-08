@@ -279,6 +279,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FilterCategoryController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
+    <Compile Include="Controllers\SolutionOwnerController.cs" />
+    <Compile Include="Controllers\SolutionTypeController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -294,6 +296,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelMappers\SolutionOwnerMapper.cs" />
     <Compile Include="ModelMappers\SolutionRatingMapper.cs" />
     <Compile Include="ModelMappers\TagGroupMapper.cs" />
     <Compile Include="ModelMappers\SolutionMapper.cs" />
@@ -305,6 +308,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\SolutionOwnerModel.cs" />
     <Compile Include="Models\TagGroupModel.cs" />
     <Compile Include="Models\FilterCategoryModel.cs" />
     <Compile Include="Models\FilterModel.cs" />

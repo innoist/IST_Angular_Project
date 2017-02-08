@@ -175,6 +175,10 @@ namespace IST.Implementation.Services
         public string GetLinkByExternalClick(string userId, string email, int solutionId)
         {
             var usageHistory = usageHistoryRepository.GetLinkByExternalClick(userId, email, solutionId);
+            usageHistory.IsOpened = true;
+            usageHistoryRepository.Update(usageHistory);
+            usageHistoryRepository.SaveChanges();
+
             return usageHistory.Solution.Location;
         }
 

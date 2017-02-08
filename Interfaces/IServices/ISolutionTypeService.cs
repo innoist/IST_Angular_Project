@@ -7,7 +7,7 @@ namespace IST.Interfaces.IServices
     {
         IEnumerable<SolutionType> GetAll();
         SolutionType FindSolutionTypeById(int solutionTypeId);
-        bool SaveSolutionType(SolutionType solutionType);
+        bool SaveOrUpdate(SolutionType solutionType);
         bool UpdateSolutionType(SolutionType solutionType);
         bool DeleteSolutionType(int solutionTypeId);
     }
