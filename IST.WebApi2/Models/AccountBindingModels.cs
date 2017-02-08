@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System;
+
 namespace IST.WebApi2.Models
 {
     // Models used as parameters to AccountController actions.
@@ -7,7 +7,7 @@ namespace IST.WebApi2.Models
     public class AddExternalLoginBindingModel
     {
         [Required]
-        [Display(Name = "External access token")]
+        [Display(Name = @"External access token")]
         public string ExternalAccessToken { get; set; }
     }
 
@@ -15,31 +15,31 @@ namespace IST.WebApi2.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = @"Current password")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = @"The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = @"New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = @"Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = @"The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class RegisterBindingModel
     {
-        [Required(ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = @"Email is required")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "First Name is Required")]
+        [Required(ErrorMessage = @"First Name is Required")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last Name is required")]
+        [Required(ErrorMessage = @"Last Name is required")]
         public string LastName { get; set; }
 
         //[Required (ErrorMessage = "Address is required")]
@@ -52,8 +52,7 @@ namespace IST.WebApi2.Models
         //[Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
-        //[Required(ErrorMessage = "Confirm Password is required")]
-        //[Compare("Password", ErrorMessage = "Passwords donot match")]
+        [Compare("Password", ErrorMessage = @"Passwords don't match")]
         public string ConfirmPassword { get; set; }
 
     }
@@ -61,32 +60,32 @@ namespace IST.WebApi2.Models
     public class RegisterExternalBindingModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = @"Email")]
         public string Email { get; set; }
     }
 
     public class RemoveLoginBindingModel
     {
         [Required]
-        [Display(Name = "Login provider")]
+        [Display(Name = @"Login provider")]
         public string LoginProvider { get; set; }
 
         [Required]
-        [Display(Name = "Provider key")]
+        [Display(Name = @"Provider key")]
         public string ProviderKey { get; set; }
     }
 
     public class SetPasswordBindingModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = @"The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = @"New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = @"Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = @"The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -94,18 +93,18 @@ namespace IST.WebApi2.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = @"Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = @"The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = @"Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = @"Confirm password")]
+        [Compare("Password", ErrorMessage = @"The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -114,8 +113,8 @@ namespace IST.WebApi2.Models
     public class ForgotPasswordViewModel
     {
         [Required]
-        [EmailAddress (ErrorMessage = "Email is not valid")]
-        [Display(Name = "Email")]
+        [EmailAddress (ErrorMessage = @"Email is not valid")]
+        [Display(Name = @"Email")]
         public string Email { get; set; }
     }
 

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using IST.Implementation.Identity;
-using IST.Interfaces.IServices;
-using IST.Models.DomainModels;
 using IST.Models.IdentityModels;
 using IST.WebApi2.Models;
 using IST.WebApi2.Providers;
@@ -410,13 +406,12 @@ namespace IST.WebApi2.Controllers
                 //if(existingUser == null)
                 //    throw new Exception("User not found.");
 
-                //existingUser.KeyId = model.DomainKey;
                 existingUser.Telephone = model.Telephone;
                 existingUser.Address = model.Address;
                 existingUser.FirstName = model.FirstName;
                 existingUser.LastName = model.LastName;
                 existingUser.Email = model.Email;
-                existingUser.UserName = model.Email;
+                existingUser.UserName = model.Username;
 
                 var updateResult = await UserManager.UpdateAsync(existingUser);
                 if (updateResult.Succeeded)
@@ -426,10 +421,9 @@ namespace IST.WebApi2.Controllers
             }
             #endregion
 
-
             var user = new AspNetUser
             {
-                UserName = model.Email,
+                UserName = model.Username,
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -446,14 +440,9 @@ namespace IST.WebApi2.Controllers
                 await SendAccountCredentials(model.Email, user.UserName, model.Password);
                 return Ok(true);
             }
-
-
             return GetErrorResult(result);
 
         }
-
-
-
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

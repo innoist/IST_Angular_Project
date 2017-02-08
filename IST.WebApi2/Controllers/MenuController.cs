@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using IST.Interfaces.IServices;
-using IST.WebBase.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace IST.WebApi2.Controllers
@@ -41,8 +40,6 @@ namespace IST.WebApi2.Controllers
         /// 
         /// </summary>
         /// <returns>Menu entries list</returns>
-        [Authorize]
-        [ApiException]
         public IHttpActionResult Get()
         {
             //Fetch menu list

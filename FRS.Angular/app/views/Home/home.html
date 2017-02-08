@@ -47,7 +47,6 @@
                 </div>
             </div>
             <!--/end panel group-->
-            <!--/end panel group-->
             <div class="panel-group margin-bottom-30" id="accordion-v6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -107,7 +106,7 @@
                 <h1>No solution matches your search!</h1>
             </div>
 
-            <div class="col-md-4 illustration-v2 repeated-item" ng-repeat="project in hc.Projects" style="height: 385px">
+            <div class="col-md-4 col-sm-6 illustration-v2 repeated-item" ng-repeat="project in hc.Projects" style="height: 385px">
                 <div ng-class="{'shadow-emboss' : project.isNew}">
                     <div class="product-img product-img-brd">
                         <a ng-href="{{project.Image? hc.apiUrl + project.Image : '/Ecommerce/img/blog/project.png'}}" data-title="{{project.Name}}" data-toggle="lightbox" data-type="image">
@@ -154,7 +153,7 @@
     </div>
 </div>
 
-<!-- Popup for send to freind -->
+<!-- Popup for send to friend -->
 <div class="g-popup-wrapper" id="sendtofriend">
     <div class="g-popup g-popup--discount height-450 col-md-5">
         <!--<p class="margin-bottom-5">Enter your email</p>-->
@@ -188,10 +187,10 @@
         <scrollable height="170">
             <div class="g-popup--subscribe-message margin-bottom110 red" ng-if="!hc.SolutionRatings.length">No Reviews found!</div>
             <div class="g-popup--subscribe-message margin-bottom110" ng-if="hc.SolutionRatings" ng-repeat="rating in hc.SolutionRatings | filter : {IsReply : false}">
-                <div class="col-md-1">
+                <!--<div class="col-md-1">
                     <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
-                </div>
-                <div class="product-comment-dtl col-md-11">
+                </div>-->
+                <div class="product-comment-dtl col-md-12">
                     <h4>{{rating.Username}} <small>{{rating.reviewdate}}</small></h4>
                     <p>{{rating.Comments}}</p>
                     <ul class="list-inline product-ratings">
@@ -205,12 +204,11 @@
 
                     </ul>
                     <div ng-repeat="reply in rating.Replies">
-                        <div class="col-md-1">
+                        <!--<div class="col-md-1">
                             <img class="product-comment-img rounded-x" src="/Ecommerce/img/team/01.jpg" alt="" style="width: 40px">
-                        </div>
-                        <div class="product-comment-dtl col-md-11">
+                        </div>-->
+                        <div class="product-comment-dtl col-md-12">
                             <h4>{{reply.Username}} <!--<small>{{reply.reviewdate}}</small>--></h4>
-                            <p>{{r
                             <p>{{reply.Comments}}</p>
                         </div>
                     </div>

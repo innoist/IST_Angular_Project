@@ -81,11 +81,6 @@
         ];
         vm.dtInstance = {};
 
-        vm.filterData = function (toFilter) {
-            vm.isReset = toFilter;
-            vm.dtInstance.reloadData(function (json) { }, true);
-        }
-
         SolutionService.getAll(function (response) {
             $.unblockUI();
             vm.SolutionTypes = response.SolutionTypes;
@@ -114,5 +109,11 @@
                 }
             });
         }
+
+        vm.filterData = function (toFilter) {
+            vm.isReset = toFilter;
+            vm.dtInstance.reloadData(function (json) { }, true);
+        }
+
     }
 })();
