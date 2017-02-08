@@ -34,9 +34,19 @@ namespace IST.Implementation.Services
             return solutionTypeRepository.Find(solutionTypeId);
         }
 
-        public bool SaveSolutionType(SolutionType solutionType)
+        public bool SaveOrUpdate(SolutionType solutionType)
         {
-            solutionTypeRepository.Add(solutionType);
+            if (solutionType.Id > 0)
+            {
+                var recordToUpdate = solutionTypeRepository.Find(solutionType.Id);
+                recordToUpdate.DisplayValue = solutionType.DisplayValue;
+                recordToUpdate.RecLastUpdatedById = solutionType.RecLastUpdatedById;
+                recordToUpdate.RecLastUpdatedOn = solutionType.RecLastUpdatedOn;
+            }
+            else
+            {
+                solutionTypeRepository.Add(solutionType);
+            }
             solutionTypeRepository.SaveChanges();
             return true;
         }

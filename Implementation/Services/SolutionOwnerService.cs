@@ -34,9 +34,19 @@ namespace IST.Implementation.Services
             return solutionOwnerRepository.Find(solutionOwnerId);
         }
 
-        public bool SaveSolutionOwner(SolutionOwner solutionOwner)
+        public bool SaveOrUpdate(SolutionOwner solutionOwner)
         {
-            solutionOwnerRepository.Add(solutionOwner);
+            if (solutionOwner.Id > 0)
+            {
+                var recordToUpdate = solutionOwnerRepository.Find(solutionOwner.Id);
+                recordToUpdate.DisplayValue = solutionOwner.DisplayValue;
+                recordToUpdate.RecLastUpdatedById = solutionOwner.RecLastUpdatedById;
+                recordToUpdate.RecLastUpdatedOn = solutionOwner.RecLastUpdatedOn;
+            }
+            else
+            {
+                solutionOwnerRepository.Add(solutionOwner);
+            }
             solutionOwnerRepository.SaveChanges();
             return true;
         }

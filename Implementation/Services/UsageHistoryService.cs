@@ -16,20 +16,29 @@ namespace IST.Implementation.Services
             this.usageHistoryRepository = usageHistoryRepository;
         }
 
-        public bool SaveUsage(int solutionId, int usageType)
+        public bool SaveUsage(int solutionId, int usageType, string email, string emailBody)
         {
-            SolutionUsageHistory usageToSave = new SolutionUsageHistory
+            try
             {
-                SolutionId = solutionId,
-                UsageType = usageType,
-                UsageTime = DateTime.Now,
-                RecCreatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
-                RecCreatedOn = DateTime.Now,
-                RecLastUpdatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
-                RecLastUpdatedOn = DateTime.Now
-            };
-            usageHistoryRepository.Add(usageToSave);
-            usageHistoryRepository.SaveChanges();
+                SolutionUsageHistory usageToSave = new SolutionUsageHistory
+                {
+                    SolutionId = solutionId,
+                    UsageType = usageType,
+                    UsageTime = DateTime.Now,
+                    RecCreatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
+                    RecCreatedOn = DateTime.Now,
+                    RecLastUpdatedById = ClaimsPrincipal.Current.Identity.GetUserId(),
+                    RecLastUpdatedOn = DateTime.Now,
+                    SentTo = email
+                };
+                usageHistoryRepository.Add(usageToSave);
+                usageHistoryRepository.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            Commons.Utility.Utility.SendEmailAsync(email, emailBody);
             return true;
         }
     }

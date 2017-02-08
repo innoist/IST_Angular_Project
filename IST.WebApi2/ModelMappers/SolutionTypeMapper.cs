@@ -22,7 +22,11 @@ namespace IST.WebApi2.ModelMappers
             return new SolutionType
             {
                 Id = source.Id,
-                DisplayValue = source.DisplayValue
+                DisplayValue = source.DisplayValue,
+                RecCreatedById = source.RecCreatedById,
+                RecCreatedOn = source.RecCreatedOn,
+                RecLastUpdatedById = source.RecLastUpdatedById,
+                RecLastUpdatedOn = source.RecLastUpdatedOn
             };
         }
     }

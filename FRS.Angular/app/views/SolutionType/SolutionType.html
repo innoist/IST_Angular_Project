@@ -1,0 +1,91 @@
+﻿<h3>
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a ui-sref="app.CreateSolutionType" class="btn btn-info btn-labeled">
+            <span class="btn-label">
+                <i class="fa fa-plus"></i>
+            </span><span class="hidden-480">New</span>
+        </a>
+        <button class="btn btn-warning btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
+            <span class="btn-label">
+                <i class="fa fa-search"></i>
+            </span>Search
+        </button>
+    </div>
+    <!-- END Language list -->
+    Solution Types
+    <small>Detail</small>
+</h3>
+
+<div class="container-fluid" ng-hide="isFilterOpen">
+    <div class="panel panel-default">
+        <form class="panel-body" ng-submit="vm.filterData(false)">
+            <div class="col-md-6 col-xs-5 col-sm-7">
+                <input type="text"
+                       placeholder="Name"
+                       ng-change="vm.filterData(false)"
+                       class="form-control"
+                       ng-model="vm.Name" />
+            </div>
+            <button class="btn btn-success" type="submit">Search</button>
+            <button class="btn btn-default" ng-click="vm.filterData(true)">Reset</button>
+            <a class="pull-right"
+               uib-tooltip="{{'Hide filter'}}"
+               uib-tooltip-trigger="focus"
+               ng-click="isFilterOpen = !isFilterOpen">
+                <i class="fa fa-compress"></i>
+            </a>
+        </form>
+    </div>
+</div>
+
+<div class="">
+    <!-- Grid view to show listview with searching, sorting and pagination-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <!-- If serverside paging -->
+            <!--<table datatable="" dt-options="tgc.dtOptions" dt-columns="tgc.dtColumns" dt-instance="tgc.dtInstance" class="row-border hover"></table>-->
+            <!-- If no serverSide paging -->
+            <table datatable="ng"
+                   dt-options="vm.dtOptions"
+                   ng-if="vm.IsDataLoaded"
+                   dt-columns="vm.dtColumns"
+                   dt-instanse="vm.dtInstance"
+                   class="row-border hover" id="dataTable">
+                <thead>
+                    <tr>
+                        <!--<th>Id</th>-->
+                        <th>Name</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="solutionType in vm.SolutionTypes">
+
+                        <td>{{solutionType.DisplayValue}}</td>
+                        <td class="text-right">
+                            <div>
+                                <a ui-sref="app.CreateSolutionType({Id : solutionType.Id})"
+                                   class="btn btn-xs btn-info"
+                                   uib-tooltip="{{'View'}}"
+                                   uib-tooltip-trigger="focus">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                &nbsp;
+                                <button ng-click="vm.delete(solutionType)"
+                                        class="btn btn-xs btn-danger"
+                                        uib-tooltip="{{'Remove'}}"
+                                        uib-tooltip-trigger="focus"
+                                        tooltip-class="tooltip-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

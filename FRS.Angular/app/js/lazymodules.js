@@ -247,6 +247,16 @@
                                                   '/app/js/shared/ReferenceDataService.js']
               },
               {
+                  name: 'SolutionOwner.module', files: ['/app/js/SolutionOwner/SolutionOwnerController.js',
+                                                  '/app/js/SolutionOwner/CreateSolutionOwnerController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
+                  name: 'SolutionType.module', files: ['/app/js/SolutionType/SolutionTypeController.js',
+                                                  '/app/js/SolutionType/CreateSolutionTypeController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
+              },
+              {
                   name: 'Utility.module', files: ['/app/js/shared/UtilityService.js']
               },
               {
