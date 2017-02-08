@@ -2,6 +2,7 @@
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
+using IST.Repository.BaseRepository;
 
 namespace IST.Implementation.Services
 {
@@ -60,9 +61,8 @@ namespace IST.Implementation.Services
 
         public bool DeleteSolutionType(int solutionTypeId)
         {
-            var toDelete = solutionTypeRepository.Find(solutionTypeId);
-            solutionTypeRepository.Delete(toDelete);
-            solutionTypeRepository.SaveChanges();
+            BaseDbContext context = new BaseDbContext();
+            context.DeleteSolutionType(solutionTypeId);
             return true;
         }
 

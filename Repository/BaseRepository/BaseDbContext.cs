@@ -155,6 +155,8 @@ namespace IST.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<long?>("GetRootParentHireGroup", hireGroupDetailIdParameter, userDomainKeyParameter);
         }
 
+        #region Stored Procedured
+
         public void DeleteFilter(int? filterId)
         {
             var filterIdParameter = filterId.HasValue ?
@@ -172,6 +174,26 @@ namespace IST.Repository.BaseRepository
 
             ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFilterCategory", filterCategoryIdParameter);
         }
+
+        public void DeleteSolutionOwner(int? ownerId)
+        {
+            var ownerIdParameter = ownerId.HasValue ?
+                new ObjectParameter("OwnerId", ownerId) :
+                new ObjectParameter("OwnerId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSolutionOwner", ownerIdParameter);
+        }
+
+        public void DeleteSolutionType(int? typeId)
+        {
+            var typeIdParameter = typeId.HasValue ?
+                new ObjectParameter("TypeId", typeId) :
+                new ObjectParameter("TypeId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSolutionType", typeIdParameter);
+        }
+
+        #endregion
 
         #endregion
     }

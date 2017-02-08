@@ -2,6 +2,7 @@
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
+using IST.Repository.BaseRepository;
 
 namespace IST.Implementation.Services
 {
@@ -60,9 +61,8 @@ namespace IST.Implementation.Services
 
         public bool DeleteSolutionOwner(int solutionOwnerId)
         {
-            var toDelete = solutionOwnerRepository.Find(solutionOwnerId);
-            solutionOwnerRepository.Delete(toDelete);
-            solutionOwnerRepository.SaveChanges();
+            BaseDbContext context = new BaseDbContext();
+            context.DeleteSolutionOwner(solutionOwnerId);
             return true;
         }
 
