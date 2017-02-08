@@ -49,7 +49,7 @@ namespace IST.WebApi2.Controllers
             var toReturn = new ProjectListView
             {
                 Data = response.Data.ToList().Select(x => x.ClientCreateFrom()).ToList(),
-                FilterCategories = filterCategoryService.GetAll().Select(x => x.MapFromServerToClient()).ToList(),
+                FilterCategories = filterCategoryService.GetAll().Select(x => x.MapFromServerToClient()).Where(x => x.Filters.Count > 0).ToList(),
                 recordsFiltered = response.FilteredCount,
                 recordsTotal = response.TotalCount
             };
@@ -109,7 +109,7 @@ namespace IST.WebApi2.Controllers
             return Ok(result);
         }
 
-        
+
         #endregion
     }
 }

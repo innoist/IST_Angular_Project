@@ -23,7 +23,6 @@
             <div class="col-md-6 col-xs-5 col-sm-7">
                 <input type="text"
                        placeholder="Name"
-                       ng-change="fc.filterData(false)"
                        class="form-control"
                        ng-model="fc.Name" />
             </div>
@@ -45,9 +44,6 @@
         <div class="panel-heading">
         </div>
         <div class="panel-body">
-            <!-- If serverside paging -->
-            <!--<table datatable="" dt-options="fc.dtOptions" dt-columns="fc.dtColumns" dt-instance="fc.dtInstance" class="row-border hover"></table>-->
-            <!-- If no serverSide paging -->
             <table datatable="ng"
                    dt-options="fc.dtOptions"
                    ng-if="fc.IsDataLoaded"

@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
-using IST.Models.Common.DropDown;
-using IST.Models.RequestModels;
 using IST.WebApi2.Models;
 
 namespace IST.WebApi2.Controllers
@@ -41,8 +39,8 @@ namespace IST.WebApi2.Controllers
         /// </summary>
         public IHttpActionResult Post(SolutionModel model)
         {
-            usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null);
-            return Ok();
+            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked);
+            return Ok(saved);
         }
 
         /// <summary>

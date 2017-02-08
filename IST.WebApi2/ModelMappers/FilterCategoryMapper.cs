@@ -8,12 +8,13 @@ namespace IST.WebApi2.ModelMappers
     {
         public static FilterCategoryModel MapFromServerToClient(this FilterCategory source)
         {
-            return new FilterCategoryModel
+            var toReturn = new FilterCategoryModel
             {
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
-                Filters = source.Filters.Select(x => x.MapFromServerToClient()).ToList()
+                Filters = source.Filters.Select(x => x.MapFromServerToClient()).Where(x => x.SolutionCount > 0).ToList()
             };
+            return toReturn;
         }
         public static FilterCategory MapFromClientToServer(this FilterCategoryModel source)
         {

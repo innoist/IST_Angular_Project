@@ -79,6 +79,21 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
+                            <div class="col-md-12" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.Username, 'required') }">
+                                <label for="Username" class="control-label requiredLabel">Username</label>
+                                <input id="Username" type="text" placeholder="Enter Username Here"
+                                       ng-model="upc.user.Username" name="Username"
+                                       uib-tooltip="{{ upc.validateInput(upc.formValidate.Username, 'required') ? 'Username is required.' : '' }}"
+                                       uib-tooltip-trigger="focus"
+                                       tooltip-class="tooltip-danger"
+                                       required=""
+                                       class="form-control"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
                             <div class="col-md-12">
                                 <label for="Address" class="control-label">Address</label>
                                 <input id="Address" type="text" placeholder="Enter Address Here"
@@ -93,6 +108,37 @@
                                 <label for="Phone" class="control-label">Phone</label>
                                 <input id="Phone" type="text" placeholder="Enter Phone Here"
                                        ng-model="upc.user.Telephone" name="Phone"
+                                       class="form-control"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-md-12" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.Password, 'required') }">
+                                <label for="UserPassword" class="control-label requiredLabel">Password</label>
+                                <input id="UserPassword" type="password" placeholder="Enter Password Here"
+                                       ng-model="upc.user.Password" name="UserPassword"
+                                       uib-tooltip="{{ upc.validateInput(upc.formValidate.Password, 'required') ? 'Password is required.' : '' }}"
+                                       uib-tooltip-trigger="focus"
+                                       tooltip-class="tooltip-danger"
+                                       required=""
+                                       class="form-control"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-md-12" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.ConfirmPassword, 'required') || !upc.matchPassword }">
+                                <label for="ConfirmUserPassword" class="control-label requiredLabel">Confrim Password</label>
+                                <input id="ConfirmUserPassword" type="password" placeholder="Enter Confirm Password Here"
+                                       ng-model="upc.user.ConfirmPassword" name="ConfirmUserPassword"
+                                       uib-tooltip="{{ upc.matchPassword ? '': 'Password don\'t match!'}}"
+                                       uib-tooltip-trigger="focus"
+                                       tooltip-class="tooltip-danger"
+                                       required=""
                                        class="form-control"
                                        maxlength="50">
                             </div>

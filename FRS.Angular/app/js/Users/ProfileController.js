@@ -9,14 +9,21 @@
 
     function ProfileController($scope, $stateParams, $state, $localStorage, ProfileService, toaster, SweetAlert) {
         var vm = this;
-        var userName = "";
+        var userName = '';
         vm.Admin = true;
         $scope.disabled = false;
-
+        vm.matchPassword = true;
         ProfileService.url = '/api/UserBaseData/';
-       
+
         vm.save = function (isNew) {
             if (vm.formValidate.$valid) {
+
+                if (!angular.equals(vm.user.Password, vm.user.ConfirmPassword)) {
+                    vm.matchPassword = false;
+                    toaster.error('Alert', 'Password don\'t match');
+                    return false;
+                }
+
                 ProfileService.save(vm.user, function (response) {
                     $.unblockUI();
                     if (response) {
@@ -35,6 +42,7 @@
                         }
                     }
                 }, function (err) {
+                    $.unblockUI();
                     toaster.pop("error", "Alert", showErrors(err));
                 }, '/api/Account/Register');
             }
@@ -59,7 +67,6 @@
                 vm.user = response;
                 vm.update = true;
             }
-
         });
 
         vm.cancelBtn = function () {
