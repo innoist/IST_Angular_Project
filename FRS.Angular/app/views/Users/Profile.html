@@ -99,6 +99,7 @@
                                 <input id="Address" type="text" placeholder="Enter Address Here"
                                        ng-model="upc.user.Address" name="Address"
                                        class="form-control">
+                                <span class="fa fa-location-arrow form-control-feedback width70 text-muted"></span>
                             </div>
                         </div>
                     </div>
@@ -110,6 +111,7 @@
                                        ng-model="upc.user.Telephone" name="Phone"
                                        class="form-control"
                                        maxlength="50">
+                                <span class="fa fa-phone form-control-feedback width70 text-muted"></span>
                             </div>
                         </div>
                     </div>
@@ -126,12 +128,13 @@
                                        required=""
                                        class="form-control"
                                        maxlength="50">
+                                <span class="fa fa-lock form-control-feedback width70 text-muted"></span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-md-12" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.ConfirmPassword, 'required') || !upc.matchPassword }">
+                            <div class="col-md-12 form-group has-feedback" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.ConfirmPassword, 'required') || !upc.matchPassword }">
                                 <label for="ConfirmUserPassword" class="control-label requiredLabel">Confrim Password</label>
                                 <input id="ConfirmUserPassword" type="password" placeholder="Enter Confirm Password Here"
                                        ng-model="upc.user.ConfirmPassword" name="ConfirmUserPassword"
@@ -141,6 +144,7 @@
                                        required=""
                                        class="form-control"
                                        maxlength="50">
+                                <span class="fa fa-lock form-control-feedback width70 text-muted"></span>
                             </div>
                         </div>
                     </div>

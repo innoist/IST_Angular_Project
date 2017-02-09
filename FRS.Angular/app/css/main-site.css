@@ -81,20 +81,20 @@ nav li ul li {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: #1797be;
+    background-color: #2b957a;
     border-radius: 8px;
     border: 1px solid #333333;
 }
 
-    .sidebar::-webkit-scrollbar-thumb:hover {
-        background-color: #1797be;
-        border: 1px solid #333333;
-    }
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #2b957a;
+    border: 1px solid #333333;
+}
 
-    .sidebar::-webkit-scrollbar-thumb:active {
-        background-color: #1797be;
-        border: 1px solid #333333;
-    }
+.sidebar::-webkit-scrollbar-thumb:active {
+    background-color: #2b957a;
+    border: 1px solid #333333;
+}
 
 /* End MENU FIXING with scroll bar*/
 
@@ -572,4 +572,16 @@ body.ngdialog-open, html.ngdialog-open {
 
 .tooltip.tooltip-danger .tooltip-arrow {
     border-top-color:#f05050;
+}
+
+.user-block .user-block-info .user-block-role {
+    color: white;
+}
+
+.user-block .user-block-info .user-block-name {
+    color: white;
+}
+
+.width70 {
+    width: 70px;
 }

@@ -27,7 +27,7 @@
                        ng-model="fcc.Name" />
             </div>
             <button class="btn btn-success" type="submit">Search</button>
-            <button class="btn btn-default" type="button" ng-click="fcc.filterData(true)">Reset</button>
+            <button class="btn btn-default" ng-click="fcc.filterData(true)">Reset</button>
             <a class="pull-right"
                uib-tooltip="{{'Hide filter'}}"
                uib-tooltip-trigger="focus"
@@ -52,7 +52,7 @@
                    ng-if="fcc.IsDataLoaded"
                    dt-columns="fcc.dtColumns"
                    dt-instanse="fcc.dtInstance"
-                   class="row-border hover" id="filtercategoryDataTable">
+                   class="row-border hover" id="filterCategoryDataTable">
                 <thead>
                     <tr>
                         <!--<th>Id</th>-->

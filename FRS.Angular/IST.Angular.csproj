@@ -78,6 +78,10 @@
     <Content Include="app\img\logo.png" />
     <Content Include="app\img\user\default.png" />
     <Content Include="app\js\Dashboard\AdminDashboardController.js" />
+    <Content Include="app\js\SolutionOwner\CreateSolutionOwnerController.js" />
+    <Content Include="app\js\SolutionOwner\SolutionOwnerController.js" />
+    <Content Include="app\js\SolutionType\CreateSolutionTypeController.js" />
+    <Content Include="app\js\SolutionType\SolutionTypeController.js" />
     <Content Include="app\js\Tag\CreateTagController.js" />
     <Content Include="app\js\Tag\TagController.js" />
     <Content Include="app\js\Filter\CreateFilterController.js" />
@@ -102,6 +106,10 @@
     <Content Include="app\js\Modules.js" />
     <Content Include="app\js\shared\ReferenceDataService.js" />
     <Content Include="app\views\EcommerceHeader.html" />
+    <Content Include="app\views\SolutionOwner\CreateSolutionOwner.html" />
+    <Content Include="app\views\SolutionOwner\SolutionOwner.html" />
+    <Content Include="app\views\SolutionType\CreateSolutionType.html" />
+    <Content Include="app\views\SolutionType\SolutionType.html" />
     <Content Include="app\views\Tag\CreateTag.html" />
     <Content Include="app\views\Tag\Tag.html" />
     <Content Include="app\views\Filter\CreateFilter.html" />

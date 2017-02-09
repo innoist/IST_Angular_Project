@@ -86,7 +86,7 @@
 
             vm.filterData = function (isReset) {
                 vm.Name = isReset ? '' : vm.Name;
-                $('#dataTable').DataTable().draw();
+                $('#filterCategoryDataTable').DataTable().draw();
             }
         }
     }
