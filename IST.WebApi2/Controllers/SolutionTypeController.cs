@@ -60,6 +60,16 @@ namespace IST.WebApi2.Controllers
 
         #endregion
 
+        #region Delete
+
+        public IHttpActionResult Delete(int id)
+        {
+            var result = solutionTypeService.DeleteSolutionType(id);
+            return Ok(result);
+        }
+
+        #endregion
+
         #endregion
     }
 }
