@@ -38,7 +38,10 @@ namespace IST.Implementation.Services
             {
                 throw new Exception(e.Message);
             }
-            Commons.Utility.Utility.SendEmailAsync(email, emailBody);
+            if (usageType == 1 && email != null)
+            {
+                Commons.Utility.Utility.SendEmailAsync(email, emailBody);
+            }
             return true;
         }
     }

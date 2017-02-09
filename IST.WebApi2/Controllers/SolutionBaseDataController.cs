@@ -39,7 +39,7 @@ namespace IST.WebApi2.Controllers
         /// </summary>
         public IHttpActionResult Post(SolutionModel model)
         {
-            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked);
+            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null);
             return Ok(saved);
         }
 

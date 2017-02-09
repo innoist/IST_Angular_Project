@@ -8,6 +8,6 @@
         /// <summary>
         /// IST General Exception
         /// </summary>
-        public static string AversionGeneralException = "AversionGeneralException";
+        public static string GoCentralizeGeneralException = "GoCentralizeGeneralException";
     }
 }

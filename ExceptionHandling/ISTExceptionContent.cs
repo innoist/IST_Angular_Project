@@ -14,6 +14,6 @@ namespace IST.ExceptionHandling
         /// <summary>
         /// IST Exception Type
         /// </summary>
-        public string ExceptionType => ISTExceptionTypes.AversionGeneralException;
+        public string ExceptionType => ISTExceptionTypes.GoCentralizeGeneralException;
     }
 }

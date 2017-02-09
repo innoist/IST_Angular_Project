@@ -157,9 +157,9 @@ namespace IST.WebApi2.Controllers
 
                 var emailTemplate = "<div style='text-align: center;'>" +
                                         "<div style='background: #3a3f51;'>" +
-                                            "<img style='height:90px' alt='Aversion Logo' src='http://aversiontech.com.au/app/img/preloader/preloader.empty.png'/>" +
+                                            "<img style='height:90px' alt='Go Centralize Logo' src='http://aversiontech.com.au/app/img/preloader/preloader.empty.png'/>" +
                                         "</div>" +
-                                    "<h2>AversionTech</h2>" +
+                                    "<h2>Go Centralize</h2>" +
                                     "<p>Reset your password by clicking the link below (or copy and paste the URL into your browser):</p><br/>" +
                                     "<a href='" + callbackUrl + "'>" + callbackUrl + "</a></div>";
 
