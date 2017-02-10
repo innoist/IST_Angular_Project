@@ -1,18 +1,18 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <button ng-click="ctgc.save(false)" ng-disabled="!ctgc.formValidate.$valid" type="button" class="btn btn-labeled btn-success" ng-if="ctgc.edit">
+        <button ng-click="ctgc.save(false)" ng-disabled="!ctgc.formValidate.$valid" type="button" class="btn btn-labeled btn-info" ng-if="ctgc.edit">
             <span class="btn-label">
                 <i class="fa fa-check"></i>
             </span><span class="hidden-480" ng-if="!ctgc.update">Save</span>
             <span class="hidden-480" ng-if="ctgc.update">Update</span>
         </button>
-        <button class="btn btn-labeled bg-info-light" ng-if="ctgc.update" ng-click="ctgc.edit = !ctgc.edit" ng-hide="ctgc.edit">
+        <button class="btn btn-labeled btn-info" ng-if="ctgc.update" ng-click="ctgc.edit = !ctgc.edit" ng-hide="ctgc.edit">
             <span class="btn-label">
                 <i class="fa fa-pencil"></i>
             </span><span class="hidden-480">Edit</span>
         </button>
-        <button ng-click="ctgc.save(true)" ng-disabled="!ctgc.formValidate.$valid" ng-if="!ctgc.update" type="button" class="btn btn-labeled btn-info">
+        <button ng-click="ctgc.save(true)" ng-disabled="!ctgc.formValidate.$valid" ng-if="!ctgc.update" type="button" class="btn btn-labeled btn-green">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">Save and New</span>

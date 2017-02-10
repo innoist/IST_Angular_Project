@@ -9,7 +9,7 @@ namespace IST.Models.DomainModels
         public DateTime RecCreatedOn { get; set; }
         public string RecLastUpdatedById { get; set; }
         public DateTime RecLastUpdatedOn { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
         public virtual AspNetUser CreatedByUser { get; set; }
         public virtual AspNetUser UpdatedByUser { get; set; }
     }

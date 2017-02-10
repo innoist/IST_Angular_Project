@@ -86,15 +86,15 @@ nav li ul li {
     border: 1px solid #333333;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background-color: #2b957a;
-    border: 1px solid #333333;
-}
+    .sidebar::-webkit-scrollbar-thumb:hover {
+        background-color: #2b957a;
+        border: 1px solid #333333;
+    }
 
-.sidebar::-webkit-scrollbar-thumb:active {
-    background-color: #2b957a;
-    border: 1px solid #333333;
-}
+    .sidebar::-webkit-scrollbar-thumb:active {
+        background-color: #2b957a;
+        border: 1px solid #333333;
+    }
 
 /* End MENU FIXING with scroll bar*/
 
@@ -565,13 +565,13 @@ body.ngdialog-open, html.ngdialog-open {
     height: auto !important;
 }
 /*Red tooltip*/
-.tooltip-danger .tooltip-inner{
+.tooltip-danger .tooltip-inner {
     color: white !important;
     background-color: #f05050 !important;
 }
 
 .tooltip.tooltip-danger .tooltip-arrow {
-    border-top-color:#f05050;
+    border-top-color: #f05050;
 }
 
 .user-block .user-block-info .user-block-role {
@@ -584,4 +584,12 @@ body.ngdialog-open, html.ngdialog-open {
 
 .width70 {
     width: 70px;
+}
+
+.left-63 {
+    left: -63px;
+}
+
+.min-width111 {
+    min-width: 111px;
 }

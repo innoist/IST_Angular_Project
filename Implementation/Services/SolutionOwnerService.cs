@@ -27,12 +27,12 @@ namespace IST.Implementation.Services
 
         public IEnumerable<SolutionOwner> GetAll()
         {
-            return solutionOwnerRepository.GetAll();
+            return solutionOwnerRepository.GetAllSolutionOwners();
         }
 
         public SolutionOwner FindSolutionOwnerById(int solutionOwnerId)
         {
-            return solutionOwnerRepository.Find(solutionOwnerId);
+            return solutionOwnerRepository.FindSolutionOwnerById(solutionOwnerId);
         }
 
         public bool SaveOrUpdate(SolutionOwner solutionOwner)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Collections.Generic;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
@@ -30,12 +27,12 @@ namespace IST.Implementation.Services
 
         public IEnumerable<FilterCategory> GetAll()
         {
-            return filterCategoryRepository.GetAll();
+            return filterCategoryRepository.GetAllFilterCategories();
         }
 
         public FilterCategory FindFilterCategoryById(int filterCategoryId)
         {
-            return filterCategoryRepository.Find(filterCategoryId);
+            return filterCategoryRepository.FindFilterCategoryById(filterCategoryId);
         }
 
         public bool SaveOrUpdateFilterCategory(FilterCategory filterCategory)

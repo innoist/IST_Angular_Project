@@ -69,12 +69,12 @@
             DTColumnBuilder.newColumn('Type').withTitle('Type').notSortable(),
             DTColumnBuilder.newColumn('Owner').withTitle('Owner').notSortable(),
             DTColumnBuilder.newColumn('Active').withTitle('Active').renderWith(function (data, type, full, meta) {
-                return "<span ng-class={'text-success':" + full.Active + ",'text-danger':" + !full.Active + "}><i class='fa' ng-class={'fa-check':" + full.Active + ",'fa-times':" + !full.Active + "}></i></span>";
+                return "<span ng-class={'text-green':" + full.Active + ",'text-danger':" + !full.Active + "}><i class='fa' ng-class={'fa-check':" + full.Active + ",'fa-times':" + !full.Active + "}></i></span>";
             }).notSortable(),
             DTColumnBuilder.newColumn(null).withTitle('Actions').withClass('text-right').notSortable()
             .renderWith(function (data, type, full, meta) {
                 return '<div>' +
-                    '<a ui-sref="app.CreateSolution({Id : \'' + data.Id + '\'})" uib-tooltip="{{\'View\'}}" class="btn btn-xs btn-info"><i class="fa fa-search"></i></a>' +
+                    '<a ui-sref="app.CreateSolution({Id : \'' + data.Id + '\'})" uib-tooltip="{{\'View\'}}" class="btn btn-xs btn-green"><i class="fa fa-search"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;<button"button" ng-click="sc.delete(\'' + data.Id + '\')" uib-tooltip="{{\'Remove\'}}" tooltip-class="tooltip-danger" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>' +
                     '</div>';
             })

@@ -27,12 +27,12 @@ namespace IST.Implementation.Services
 
         public IEnumerable<SolutionType> GetAll()
         {
-            return solutionTypeRepository.GetAll();
+            return solutionTypeRepository.GetAllSolutionTypes();
         }
 
         public SolutionType FindSolutionTypeById(int solutionTypeId)
         {
-            return solutionTypeRepository.Find(solutionTypeId);
+            return solutionTypeRepository.FindSolutionTypeById(solutionTypeId);
         }
 
         public bool SaveOrUpdate(SolutionType solutionType)

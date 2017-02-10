@@ -11,8 +11,8 @@
     function UsersController($scope, $rootScope, $localStorage, UsersService, SweetAlert, DTOptionsBuilder, DTColumnBuilder, $compile, toaster, $state) {
         var vm = this;
         UsersService.url = '/api/Users';
-        vm.SystemAdmin = false;
-        vm.SysAdmin = true;
+        //vm.SystemAdmin = false;
+        //vm.SysAdmin = true;
 
         //if ($localStorage['authorizationData'].UserRole === "Client") {
         //    vm.SysAdmin = false;
@@ -75,7 +75,7 @@
         vm.dtColumns.push(DTColumnBuilder.newColumn('Telephone').withTitle('Phone').notSortable());
         vm.dtColumns.push(DTColumnBuilder.newColumn(null).withTitle('Actions').withClass('text-right').notSortable()
             .renderWith(function (data, type, full, meta) {
-                return '<a ui-sref="app.Profile({userName : \'' + data.UserName + '\'})" uib-tooltip="{{\'View\'}}" uib-tooltip-trigger="focus" class="btn btn-xs btn-info"><i class="fa fa-search"></i></a>';
+                return '<a ui-sref="app.Profile({userName : \'' + data.UserName + '\'})" uib-tooltip="{{\'View\'}}" uib-tooltip-trigger="focus" class="btn btn-xs btn-green"><i class="fa fa-search"></i></a>';
                 //+ '&nbsp;&nbsp;<button type="button" ng-click="uc.delete(\'' + data.UserName + '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>';
 
             }));

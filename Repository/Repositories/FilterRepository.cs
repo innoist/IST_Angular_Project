@@ -21,5 +21,14 @@ namespace IST.Repository.Repositories
             return DbSet.Where(x => ids.Contains(x.Id));
         }
 
+        public IEnumerable<Filter> GetAllFilters()
+        {
+            return DbSet.Where(x => !x.IsDeleted);
+        }
+
+        public Filter FindFilterById(int filterId)
+        {
+            return DbSet.FirstOrDefault(x => x.Id == filterId && !x.IsDeleted);
+        }
     }
 }

@@ -1,12 +1,12 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <a ui-sref="app.Profile" class="btn btn-info btn-labeled" ng-if="uc.SysAdmin">
+        <a ui-sref="app.Profile" class="btn btn-green btn-labeled">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">New</span>
         </a>
-        <button class="btn btn-warning btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
+        <button class="btn btn-info btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
             <span class="btn-label">
                 <i class="fa fa-search"></i>
             </span><span class="hidden-480">Search</span>
@@ -23,22 +23,22 @@
                 <input type="text"
                        placeholder="Name"
                        ng-change="uc.fiterData()"
-                       class="form-control" 
+                       class="form-control"
                        ng-model="uc.name" />
             </div>
             <div class="col-md-3">
                 <input type="text"
                        placeholder="Email"
                        ng-change="uc.fiterData()"
-                       class="form-control" 
-                       ng-model="uc.email"/>
+                       class="form-control"
+                       ng-model="uc.email" />
             </div>
             <div class="col-md-3">
                 <input type="text"
                        placeholder="Username"
                        ng-change="uc.fiterData()"
-                       class="form-control" 
-                       ng-model="uc.userName"/>
+                       class="form-control"
+                       ng-model="uc.userName" />
             </div>
             <!-- Dropdown List -->
             <!--<div class="col-md-3">
@@ -50,7 +50,7 @@
                 </ui-select>
             </div>-->
             <div class="col-md-3">
-                <button class="btn btn-success" type="submit">Search</button>
+                <button class="btn btn-info" type="submit">Search</button>
                 <button class="btn btn-default" ng-click="uc.resetFilter()">Reset</button>
                 <a class="pull-right"
                    uib-tooltip="{{'Hide filter'}}"
@@ -60,10 +60,8 @@
                 </a>
             </div>
         </form>
-
     </div>
 </div>
-
 <div class="">
     <div class="panel panel-default">
         <div class="panel-heading">

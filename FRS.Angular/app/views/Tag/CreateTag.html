@@ -1,18 +1,18 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <button ng-click="ctc.save(false)" ng-disabled="!ctc.formValidate.$valid" type="button" class="btn btn-labeled btn-success" ng-if="ctc.edit">
+        <button ng-click="ctc.save(false)" ng-disabled="!ctc.formValidate.$valid" type="button" class="btn btn-labeled btn-info" ng-if="ctc.edit">
             <span class="btn-label">
                 <i class="fa fa-check"></i>
             </span><span class="hidden-480" ng-if="!ctc.update">Save</span>
             <span class="hidden-480" ng-if="ctc.update">Update</span>
         </button>
-        <button class="btn btn-labeled bg-info-light" ng-if="ctc.update" ng-click="ctc.edit = !ctc.edit" ng-hide="ctc.edit">
+        <button class="btn btn-labeled btn-info" ng-if="ctc.update" ng-click="ctc.edit = !ctc.edit" ng-hide="ctc.edit">
             <span class="btn-label">
                 <i class="fa fa-pencil"></i>
             </span><span class="hidden-480">Edit</span>
         </button>
-        <button ng-click="ctc.save(true)" ng-disabled="!ctc.formValidate.$valid" ng-if="!ctc.update" type="button" class="btn btn-labeled btn-info">
+        <button ng-click="ctc.save(true)" ng-disabled="!ctc.formValidate.$valid" ng-if="!ctc.update" type="button" class="btn btn-labeled btn-green">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">Save and New</span>

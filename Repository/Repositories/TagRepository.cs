@@ -20,5 +20,15 @@ namespace IST.Repository.Repositories
         {
             return DbSet.Where(x=>ids.Contains(x.Id));
         }
+
+        public IEnumerable<Tag> GetAllTags()
+        {
+            return DbSet.Where(x => !x.IsDeleted);
+        }
+
+        public Tag FindTagById(int id)
+        {
+            return DbSet.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
+        }
     }
 }

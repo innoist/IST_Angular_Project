@@ -28,12 +28,12 @@ namespace IST.Implementation.Services
 
         public IEnumerable<Tag> GetAll()
         {
-            return tagRepository.GetAll();
+            return tagRepository.GetAllTags();
         }
 
         public Tag FindTagById(int tagId)
         {
-            return tagRepository.Find(tagId);
+            return tagRepository.FindTagById(tagId);
         }
 
         public bool SaveOrUpdateTag(Tag tag)

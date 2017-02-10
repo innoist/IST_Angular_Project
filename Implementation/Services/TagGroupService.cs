@@ -24,12 +24,12 @@ namespace IST.Implementation.Services
 
         public IEnumerable<TagGroup> GetAll()
         {
-            return tagGroupRepository.GetAll();
+            return tagGroupRepository.GetAllTagGroups();
         }
 
         public TagGroup FindTagGroupById(int tagGroupId)
         {
-            return tagGroupRepository.Find(tagGroupId);
+            return tagGroupRepository.FindTagGroupById(tagGroupId);
         }
 
         public bool SaveOrUpdateTagGroup(TagGroup tagGroup)

@@ -1,18 +1,18 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <button ng-click="cfc.save(false)" ng-disabled="!cfc.formValidate.$valid" type="button" class="btn btn-labeled btn-success" ng-if="cfc.edit">
+        <button ng-click="cfc.save(false)" ng-disabled="!cfc.formValidate.$valid" type="button" class="btn btn-labeled btn-info" ng-if="cfc.edit">
             <span class="btn-label">
                 <i class="fa fa-check"></i>
             </span><span class="hidden-480" ng-if="!cfc.update">Save</span>
             <span class="hidden-480" ng-if="cfc.update">Update</span>
         </button>
-        <button class="btn btn-labeled bg-info-light" ng-if="cfc.update" ng-click="cfc.edit = !cfc.edit" ng-hide="cfc.edit">
+        <button class="btn btn-labeled btn-info" ng-if="cfc.update" ng-click="cfc.edit = !cfc.edit" ng-hide="cfc.edit">
             <span class="btn-label">
                 <i class="fa fa-pencil"></i>
             </span><span class="hidden-480">Edit</span>
         </button>
-        <button ng-click="cfc.save(true)" ng-disabled="!cfc.formValidate.$valid" ng-if="!cfc.update" type="button" class="btn btn-labeled btn-info">
+        <button ng-click="cfc.save(true)" ng-disabled="!cfc.formValidate.$valid" ng-if="!cfc.update" type="button" class="btn btn-labeled btn-green">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">Save and New</span>

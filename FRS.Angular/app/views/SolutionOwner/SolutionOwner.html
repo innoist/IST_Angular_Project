@@ -1,12 +1,12 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <a ui-sref="app.CreateSolutionOwner" class="btn btn-info btn-labeled">
+        <a ui-sref="app.CreateSolutionOwner" class="btn btn-green btn-labeled">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">New</span>
         </a>
-        <button class="btn btn-warning btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
+        <button class="btn btn-info btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
             <span class="btn-label">
                 <i class="fa fa-search"></i>
             </span>Search
@@ -27,7 +27,7 @@
                        class="form-control"
                        ng-model="vm.Name"/>
             </div>
-            <button class="btn btn-success" type="submit">Search</button>
+            <button class="btn btn-info" type="submit">Search</button>
             <button class="btn btn-default" ng-click="vm.filterData(true)">Reset</button>
             <a class="pull-right"
                uib-tooltip="{{'Hide filter'}}"
@@ -68,19 +68,30 @@
                         <td class="text-right">
                             <div>
                                 <a ui-sref="app.CreateSolutionOwner({Id : solutionOwner.Id})"
-                                   class="btn btn-xs btn-info"
+                                   class="btn btn-xs btn-green"
                                    uib-tooltip="{{'View'}}"
                                    uib-tooltip-trigger="focus">
                                     <i class="fa fa-search"></i>
                                 </a>
                                 &nbsp;
-                                <button ng-click="vm.delete(solutionOwner)"
+                                <!--<button ng-click="vm.delete(solutionOwner)"
                                         class="btn btn-xs btn-danger"
                                         uib-tooltip="{{'Remove'}}"
                                         uib-tooltip-trigger="focus"
                                         tooltip-class="tooltip-danger">
                                     <i class="fa fa-trash"></i>
-                                </button>
+                                </button>-->
+
+                                <div uib-dropdown="dropdown" class="btn-group">
+                                    <a ng-click="vm.delete(solutionOwner)" uib-tooltip="{{'Remove'}}" tooltip-class="tooltip-danger" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    <button type="button" class="btn btn-danger btn-xs dropdown-toggle" uib-dropdown-toggle="">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul role="menu" class="dropdown-menu animated flipInX left-63 min-width111">
+                                        <li><a><i class="icon-trash"></i>&nbsp;&nbsp;Delete</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </td>
                     </tr>

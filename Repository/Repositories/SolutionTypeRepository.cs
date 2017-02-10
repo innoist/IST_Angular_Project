@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
 using IST.Repository.BaseRepository;
@@ -13,5 +15,15 @@ namespace IST.Repository.Repositories
         }
 
         protected override IDbSet<SolutionType> DbSet => db.SolutionTypes;
+
+        public SolutionType FindSolutionTypeById(int solutionTypeId)
+        {
+            return DbSet.FirstOrDefault(x => x.Id == solutionTypeId && !x.IsDeleted);
+        }
+
+        public IEnumerable<SolutionType> GetAllSolutionTypes()
+        {
+            return DbSet.Where(x => !x.IsDeleted);
+        }
     }
 }

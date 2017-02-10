@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
 using IST.Repository.BaseRepository;
@@ -13,5 +15,15 @@ namespace IST.Repository.Repositories
         }
 
         protected override IDbSet<FilterCategory> DbSet => db.FilterCategories;
+
+        public IEnumerable<FilterCategory> GetAllFilterCategories()
+        {
+            return DbSet.Where(x => !x.IsDeleted);
+        }
+
+        public FilterCategory FindFilterCategoryById(int filterCategoryId)
+        {
+            return DbSet.FirstOrDefault(x => x.Id == filterCategoryId && !x.IsDeleted);
+        }
     }
 }

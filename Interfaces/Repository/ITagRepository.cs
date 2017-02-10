@@ -6,5 +6,7 @@ namespace IST.Interfaces.Repository
     public interface ITagRepository : IBaseRepository<Tag, long>
     {
         IEnumerable<Tag> GetByTagIds(int[] ids);
+        IEnumerable<Tag> GetAllTags();
+        Tag FindTagById(int id);
     }
 }

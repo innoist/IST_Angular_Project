@@ -57,7 +57,8 @@ namespace IST.Repository.Repositories
             if (searchRequest.ClientRequest == null)
             {
                 query =
-                    s => ((searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
+                    s => (!s.IsDeleted
+                          && (searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
                           && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id)))
                           && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId))
                           && (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
@@ -70,7 +71,7 @@ namespace IST.Repository.Repositories
             else
             {
                 query =
-                 s => ((s.Active.Value)
+                 s => ((s.Active.Value) && !s.IsDeleted
                        && (searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
                        && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id)))
                        && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId))
@@ -109,6 +110,7 @@ namespace IST.Repository.Repositories
             var result = DbSet.Where(s => ((name == null || s.Name.ToLower().Contains(name.ToLower()))
                                        || (name == null || s.Description.ToLower().Contains(name.ToLower()))) 
                                        && (!s.Active.HasValue || s.Active.Value)
+                                       && !s.IsDeleted
                                        && (!filterIds.Any() || s.Filters.Any(f => filterIds.Contains(f.Id))));
             return result;
         }

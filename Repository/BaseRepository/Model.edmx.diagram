@@ -4,59 +4,58 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4c82f04103114739a6a03c5186c1df21" Name="Diagram1" ZoomLevel="83">
-        <EntityTypeShape EntityType="angularModel.UserRole" Width="1.5" PointX="14" PointY="5.875" />
-        <EntityTypeShape EntityType="angularModel.UserClaim" Width="1.5" PointX="12.125" PointY="3.5" />
-        <EntityTypeShape EntityType="angularModel.UserLogin" Width="1.5" PointX="12.375" PointY="1.25" />
-        <EntityTypeShape EntityType="angularModel.AspNetUser" Width="1.5" PointX="9.625" PointY="1.25" />
-        <EntityTypeShape EntityType="angularModel.Menu" Width="1.875" PointX="16.125" PointY="0.875" />
-        <EntityTypeShape EntityType="angularModel.MenuRight" Width="1.5" PointX="19" PointY="5.125" />
+      <Diagram DiagramId="4c82f04103114739a6a03c5186c1df21" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="angularModel.UserRole" Width="1.5" PointX="8" PointY="0.75" />
+        <EntityTypeShape EntityType="angularModel.UserClaim" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="angularModel.UserLogin" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="angularModel.AspNetUser" Width="1.5" PointX="0.5" PointY="0.75" />
+        <EntityTypeShape EntityType="angularModel.Menu" Width="1.875" PointX="12.5" PointY="0.75" />
+        <EntityTypeShape EntityType="angularModel.MenuRight" Width="1.5" PointX="10.25" PointY="0.75" />
         <AssociationConnector Association="angularModel.FK_dbo_MenuRight_dbo_AspNetRoles_Role_Id" />
         <AssociationConnector Association="angularModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="angularModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="angularModel.FK_dbo_Menu_dbo_Menu_ParentItem_MenuId" />
         <AssociationConnector Association="angularModel.FK_dbo_MenuRight_dbo_Menu_Menu_MenuId" />
         <AssociationConnector Association="angularModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="angularModel.Filter" Width="1.5" PointX="2.75" PointY="3.5" />
-        <EntityTypeShape EntityType="angularModel.FilterCategory" Width="1.5" PointX="0.5" PointY="3.75" />
-        <EntityTypeShape EntityType="angularModel.SolutionOwner" Width="1.5" PointX="0.5" PointY="7" />
-        <EntityTypeShape EntityType="angularModel.SolutionType" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="angularModel.Tag" Width="1.5" PointX="7.25" PointY="3.5" />
-        <EntityTypeShape EntityType="angularModel.TagGroup" Width="1.5" PointX="7.25" PointY="8" />
-        <AssociationConnector Association="angularModel.FK_Filters_FilterCategories" />
-        <AssociationConnector Association="angularModel.FK_Tags_TagGroups" />
-        <EntityTypeShape EntityType="angularModel.Solution" Width="1.5" PointX="4.875" PointY="0.5" />
-        <AssociationConnector Association="angularModel.FK_Solutions_SolutionOwners" />
-        <AssociationConnector Association="angularModel.FK_Solutions_SolutionTypes" />
-        <AssociationConnector Association="angularModel.SolutionFilter" />
-        <AssociationConnector Association="angularModel.SolutionTag" />
+        <EntityTypeShape EntityType="angularModel.SolutionRating" Width="1.5" PointX="7.875" PointY="5.5" />
+        <AssociationConnector Association="angularModel.FK_SolutionRating_AspNetUsers" />
+        <AssociationConnector Association="angularModel.FK_SolutionRating_AspNetUsersUpdated" />
+        <EntityTypeShape EntityType="angularModel.SolutionSearchHistory" Width="1.5" PointX="8.25" PointY="11.75" />
+        <AssociationConnector Association="angularModel.FK_SolutionSearchHistory_AspNetUsersCreated" />
+        <AssociationConnector Association="angularModel.FK_SolutionSearchHistory_AspNetUsersUpdated" />
+        <AssociationConnector Association="angularModel.FK_SolutionRating_SolutionRating" />
+        <EntityTypeShape EntityType="angularModel.SolutionUsageHistory" Width="1.5" PointX="10.25" PointY="11.75" />
+        <AssociationConnector Association="angularModel.FK_SolutionUsageHistory_AspNetUsers" />
+        <AssociationConnector Association="angularModel.FK_SolutionUsageHistory_AspNetUsersUpdated" />
+        <EntityTypeShape EntityType="angularModel.SolutionType" Width="1.5" PointX="4.125" PointY="11.75" />
+        <AssociationConnector Association="angularModel.FK_SolutionType_AspNetUsers_CreatedById" />
+        <AssociationConnector Association="angularModel.FK_SolutionType_AspNetUsers_UpdatedById" />
+        <EntityTypeShape EntityType="angularModel.SolutionOwner" Width="1.5" PointX="6.25" PointY="11.75" />
+        <AssociationConnector Association="angularModel.FK_SolutionOwner_AspNetUsers_CreatedById" />
+        <AssociationConnector Association="angularModel.FK_SolutionOwner_AspNetUsers_UpdatedById" />
+        <EntityTypeShape EntityType="angularModel.Filter" Width="1.5" PointX="10.25" PointY="3.125" />
+        <EntityTypeShape EntityType="angularModel.FilterCategory" Width="1.5" PointX="10.25" PointY="6.75" />
+        <EntityTypeShape EntityType="angularModel.Tag" Width="1.5" PointX="3.375" PointY="5.5" />
+        <EntityTypeShape EntityType="angularModel.TagGroup" Width="1.5" PointX="5.5" PointY="5.5" />
         <AssociationConnector Association="angularModel.FK_Filter_AspNetUsers_CreatedById" />
         <AssociationConnector Association="angularModel.FK_Filter_AspNetUsers_UpdatedById" />
         <AssociationConnector Association="angularModel.FK_FilterCategory_AspNetUsers_CreatedById" />
         <AssociationConnector Association="angularModel.FK_FilterCategory_AspNetUsers_UpdatedById" />
-        <AssociationConnector Association="angularModel.FK_Solution_AspNetUsers_CreatedById" />
-        <AssociationConnector Association="angularModel.FK_Solution_AspNetUsers_UpdatedById" />
-        <AssociationConnector Association="angularModel.FK_SolutionOwner_AspNetUsers_CreatedById" />
-        <AssociationConnector Association="angularModel.FK_SolutionOwner_AspNetUsers_UpdatedById" />
-        <AssociationConnector Association="angularModel.FK_SolutionType_AspNetUsers_CreatedById" />
-        <AssociationConnector Association="angularModel.FK_SolutionType_AspNetUsers_UpdatedById" />
         <AssociationConnector Association="angularModel.FK_Tag_AspNetUsers_CreatedById" />
         <AssociationConnector Association="angularModel.FK_Tag_AspNetUsers_UpdatedById" />
         <AssociationConnector Association="angularModel.FK_TagGroup_AspNetUsers_CreatedById" />
         <AssociationConnector Association="angularModel.FK_TagGroup_AspNetUsers_UpdatedById" />
-        <AssociationConnector Association="angularModel.SolutionFavourite" />
-        <EntityTypeShape EntityType="angularModel.SolutionRating" Width="1.5" PointX="11.875" PointY="9" />
-        <AssociationConnector Association="angularModel.FK_SolutionRating_AspNetUsers" />
-        <AssociationConnector Association="angularModel.FK_SolutionRating_AspNetUsersUpdated" />
-        <AssociationConnector Association="angularModel.FK_SolutionRating_Solution" />
-        <EntityTypeShape EntityType="angularModel.SolutionSearchHistory" Width="1.5" PointX="11.875" PointY="13.5" />
-        <AssociationConnector Association="angularModel.FK_SolutionSearchHistory_AspNetUsersCreated" />
-        <AssociationConnector Association="angularModel.FK_SolutionSearchHistory_AspNetUsersUpdated" />
-        <AssociationConnector Association="angularModel.FK_SolutionRating_SolutionRating" />
-        <EntityTypeShape EntityType="angularModel.SolutionUsageHistory" Width="1.5" PointX="14.875" PointY="9.125" />
-        <AssociationConnector Association="angularModel.FK_SolutionUsageHistory_AspNetUsers" />
-        <AssociationConnector Association="angularModel.FK_SolutionUsageHistory_AspNetUsersUpdated" />
+        <AssociationConnector Association="angularModel.FK_Filters_FilterCategories" />
+        <AssociationConnector Association="angularModel.FK_Tags_TagGroups" />
+        <EntityTypeShape EntityType="angularModel.Solution" Width="1.5" PointX="0.5" PointY="11.75" />
+        <AssociationConnector Association="angularModel.FK_Solution_AspNetUsers_CreatedById" />
+        <AssociationConnector Association="angularModel.FK_Solution_AspNetUsers_UpdatedById" />
+        <AssociationConnector Association="angularModel.FK_Solutions_SolutionOwners" />
+        <AssociationConnector Association="angularModel.FK_Solutions_SolutionTypes" />
         <AssociationConnector Association="angularModel.FK_SolutionUsageHistory_Solution" />
+        <AssociationConnector Association="angularModel.SolutionFavourite" />
+        <AssociationConnector Association="angularModel.SolutionFilter" />
+        <AssociationConnector Association="angularModel.SolutionTag" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

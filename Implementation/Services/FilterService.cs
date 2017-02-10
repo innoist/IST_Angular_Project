@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
@@ -29,12 +27,12 @@ namespace IST.Implementation.Services
 
         public IEnumerable<Filter> GetAll()
         {
-            return filterRepository.GetAll();
+            return filterRepository.GetAllFilters();
         }
 
         public Filter FindFilterById(int filterId)
         {
-            return filterRepository.Find(filterId);
+            return filterRepository.FindFilterById(filterId);
         }
         
         public bool SaveOrUpdateFilter(Filter filter)
