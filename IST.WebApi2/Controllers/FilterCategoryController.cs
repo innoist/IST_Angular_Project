@@ -55,8 +55,8 @@ namespace IST.WebApi2.Controllers
 
         public IHttpActionResult DeleteCascade(int id)
         {
-            //var result = filterCategoryService.DeleteFilterCategory(id);
-            return Ok();
+            var result = filterCategoryService.DeleteFilterCategory(id);
+            return Ok(result);
         }
 
         #endregion

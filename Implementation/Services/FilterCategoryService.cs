@@ -62,15 +62,14 @@ namespace IST.Implementation.Services
 
         public bool DeleteFilterCategory(int filterCategoryId)
         {
-            //var toDelete = filterCategoryRepository.Find(filterCategoryId);
+            var toDelete = filterCategoryRepository.Find(filterCategoryId);
             //if (toDelete.Filters.Any())
             //{
             //    throw new Exception("You cannot delete " + toDelete.DisplayValue + " as it is being used in Filter.");
             //}
-            //filterCategoryRepository.Delete(toDelete);
-            //filterCategoryRepository.SaveChanges();
-            BaseDbContext context = new BaseDbContext();
-            context.DeleteFilterCategory(filterCategoryId);
+            filterCategoryRepository.Delete(toDelete);
+            filterCategoryRepository.SaveChanges();
+
             return true;
         }
 

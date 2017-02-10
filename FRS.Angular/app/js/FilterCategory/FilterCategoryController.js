@@ -61,30 +61,30 @@
 
             vm.delete = function (isCascade, filtercategory) {
                 if (isCascade) {
-                    //SweetAlert.swal({
-                    //    title: 'Are you sure, you want to delete this?',
-                    //    text: 'It can\'t recover!',
-                    //    type: 'warning',
-                    //    showCancelButton: true,
-                    //    confirmButtonColor: '#ee3d3d',
-                    //    confirmButtonText: 'Yes, Delete!',
-                    //    cancelButtonText: 'No!',
-                    //    closeOnConfirm: true,
-                    //    closeOnCancel: true
-                    //}, function (isConfirm) {
-                    //    if (isConfirm) {
-                    //        FilterCategoryService.url = "/api/FilterCategory/DeleteCascade/";
-                    //        FilterCategoryService.delete(filtercategory.Id, function (response) {
-                    //            $.unblockUI();
-                    //            if (response) {
-                    //                var index = vm.FilterCategories.indexOf(filtercategory);
-                    //                vm.FilterCategories.splice(index, 1);
-                    //                toaster.success("", "Deleted successfully.");
-                    //                FilterCategoryService.url = "/api/FilterCategory/";
-                    //            }
-                    //        });
-                    //    }
-                    //});
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It can\'t recover!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            FilterCategoryService.url = "/api/FilterCategory/DeleteCascade/";
+                            FilterCategoryService.delete(filtercategory.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.FilterCategories.indexOf(filtercategory);
+                                    vm.FilterCategories.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    FilterCategoryService.url = "/api/FilterCategory/";
+                                }
+                            });
+                        }
+                    });
                 } else {
                     SweetAlert.swal({
                         title: 'Are you sure, you want to remove this?',

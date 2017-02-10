@@ -60,33 +60,62 @@
 
             vm.dtInstance = {};
 
-            vm.delete = function (filter) {
-                SweetAlert.swal({
-                    title: 'Are you sure, you want to delete this?',
-                    text: 'It cannot be undone!',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ee3d3d',
-                    confirmButtonText: 'Yes, Delete!',
-                    cancelButtonText: 'No!',
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        FilterService.url = "/api/Filter/DeleteSoft/";
-                        FilterService.delete(filter.Id, function (response) {
-                            $.unblockUI();
-                            if (response) {
-                                var index = vm.Filters.indexOf(filter);
-                                vm.Filters.splice(index, 1);
-                                toaster.success("", "Deleted successfully.");
-                                FilterService.url = "/api/Filter/";
-                            } else {
-                                toaster.error("Notification", "You cannot delete " + filter.DisplayValue + " as it is being used in Filter.");
-                            }
-                        });
-                    }
-                });
+            vm.delete = function (isCascade,filter) {
+                if (isCascade) {
+                    //SweetAlert.swal({
+                    //    title: 'Are you sure, you want to delete this?',
+                    //    text: 'It cannot be undone!',
+                    //    type: 'warning',
+                    //    showCancelButton: true,
+                    //    confirmButtonColor: '#ee3d3d',
+                    //    confirmButtonText: 'Yes, Delete!',
+                    //    cancelButtonText: 'No!',
+                    //    closeOnConfirm: true,
+                    //    closeOnCancel: true
+                    //}, function(isConfirm) {
+                    //    if (isConfirm) {
+                    //        FilterService.url = "/api/Filter/DeleteCascade/";
+                    //        FilterService.delete(filter.Id, function(response) {
+                    //            $.unblockUI();
+                    //            if (response) {
+                    //                var index = vm.Filters.indexOf(filter);
+                    //                vm.Filters.splice(index, 1);
+                    //                toaster.success("", "Deleted successfully.");
+                    //                FilterService.url = "/api/Filter/";
+                    //            } else {
+                    //                toaster.error("Notification", "You cannot delete " + filter.DisplayValue + " as it is being used in Filter.");
+                    //            }
+                    //        });
+                    //    }
+                    //});
+                } else {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It cannot be undone!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            FilterService.url = "/api/Filter/DeleteSoft/";
+                            FilterService.delete(filter.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.Filters.indexOf(filter);
+                                    vm.Filters.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    FilterService.url = "/api/Filter/";
+                                } else {
+                                    toaster.error("Notification", "You cannot delete " + filter.DisplayValue + " as it is being used in Filter.");
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             vm.filterData = function (isReset) {
