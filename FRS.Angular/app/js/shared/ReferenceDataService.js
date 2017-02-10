@@ -50,9 +50,9 @@
 
         this.loadById = function (Id, onReady, onError) {
             $.blockUI({ message: '<div class="line-spin-fade-loader" style="left:50%; top:50%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>' });
-            var urlMetaData = frsApiUrl + this.url + Id;
+            var urlMetaData = frsApiUrl + this.url + "?id=" + Id;
 
-            onError = onError || function() {
+            onError = onError || function () {
                 alert('Failure loading Data');
                 $.unblockUI();
             };

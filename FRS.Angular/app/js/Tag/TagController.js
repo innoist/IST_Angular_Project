@@ -73,12 +73,14 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
+                        TagService.url = "/api/Tag/DeleteSoft/";
                         TagService.delete(tag.Id, function (response) {
                             $.unblockUI();
                             if (response) {
                                 var index = vm.Tags.indexOf(tag);
                                 vm.Tags.splice(index, 1);
                                 toaster.success("", "Deleted successfully.");
+                                TagService.url = "/api/Tag/";
                             } else {
                                 toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
                             }

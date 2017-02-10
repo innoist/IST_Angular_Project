@@ -98,7 +98,7 @@ namespace IST.WebApi2.Controllers
             var status = solutionService.SaveOrUpdate(response);
             return Ok(status);
         }
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult DeleteSoft(int id)
         {
             var result = solutionService.DeleteSolution(id);
             return Ok(result);

@@ -62,7 +62,7 @@ namespace IST.WebApi2.Controllers
 
         #region Delete
 
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult DeleteSoft(int id)
         {
             var result = solutionTypeService.DeleteSolutionType(id);
             return Ok(result);

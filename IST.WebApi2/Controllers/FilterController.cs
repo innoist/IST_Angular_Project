@@ -59,7 +59,7 @@ namespace IST.WebApi2.Controllers
         }
 
         //DELETE api/<controller>/5
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult DeleteSoft(int id)
         {
             var result = filterService.DeleteFilter(id);
             return Ok(result);

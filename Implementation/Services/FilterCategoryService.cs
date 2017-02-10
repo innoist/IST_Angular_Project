@@ -53,6 +53,13 @@ namespace IST.Implementation.Services
             return true;
         }
 
+        public bool RemoveFilterCategory(int filterCategoryId)
+        {
+            BaseDbContext context = new BaseDbContext();
+            context.DeleteFilterCategory(filterCategoryId);
+            return true;
+        }
+
         public bool DeleteFilterCategory(int filterCategoryId)
         {
             //var toDelete = filterCategoryRepository.Find(filterCategoryId);

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.WebApi2.ModelMappers;
@@ -52,7 +49,7 @@ namespace IST.WebApi2.Controllers
         }
 
         //DELETE api/<controller>/5
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult DeleteSoft(int id)
         {
             var result = tagGroupService.DeleteTagGroup(id);
             return Ok(result);

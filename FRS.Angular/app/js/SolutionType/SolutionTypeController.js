@@ -72,12 +72,14 @@
                     closeOnCancel: true
                 }, function (isConfirm) {
                     if (isConfirm) {
+                        SolutionTypeService.url = "/api/SolutionType/DeleteSoft/";
                         SolutionTypeService.delete(solutionType.Id, function (response) {
                             $.unblockUI();
                             if (response) {
                                 var index = vm.SolutionTypes.indexOf(solutionType);
                                 vm.SolutionTypes.splice(index, 1);
                                 toaster.success("", "Deleted successfully.");
+                                SolutionTypeService.url = "/api/SolutionType/";
                             }
                         });
                     }

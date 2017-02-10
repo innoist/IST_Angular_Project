@@ -47,12 +47,16 @@ namespace IST.WebApi2.Controllers
             var status = filterCategoryService.SaveOrUpdateFilterCategory(model.MapFromClientToServer());
             return Ok(status);
         }
-
-        //DELETE api/<controller>/5
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult DeleteSoft(int id)
         {
-            var result = filterCategoryService.DeleteFilterCategory(id);
+            var result = filterCategoryService.RemoveFilterCategory(id);
             return Ok(result);
+        }
+
+        public IHttpActionResult DeleteCascade(int id)
+        {
+            //var result = filterCategoryService.DeleteFilterCategory(id);
+            return Ok();
         }
 
         #endregion
