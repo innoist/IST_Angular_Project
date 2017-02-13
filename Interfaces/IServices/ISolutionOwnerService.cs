@@ -10,5 +10,6 @@ namespace IST.Interfaces.IServices
         bool SaveOrUpdate(SolutionOwner solutionOwner);
         bool UpdateSolutionOwner(SolutionOwner solutionOwner);
         bool DeleteSolutionOwner(int solutionOwnerId);
+        bool RemoveSolutionOwner(int solutionOwnerId);
     }
 }

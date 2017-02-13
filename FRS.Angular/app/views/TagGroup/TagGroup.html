@@ -83,13 +83,13 @@
                                 </button>-->
 
                                 <div uib-dropdown="dropdown" class="btn-group">
-                                    <a ng-click="tgc.delete(tagGroup)" uib-tooltip="{{'Remove'}}" tooltip-class="tooltip-danger" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    <a ng-click="tgc.delete(false, tagGroup)" uib-tooltip="{{'Remove'}}" tooltip-class="tooltip-danger" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></a>
                                     <button type="button" class="btn btn-danger btn-xs dropdown-toggle" uib-dropdown-toggle="">
                                         <span class="caret"></span>
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <ul role="menu" class="dropdown-menu animated flipInX left-63 min-width111">
-                                        <li><a><i class="icon-trash"></i>&nbsp;&nbsp;Delete</a></li>
+                                        <li><a ng-click="tgc.delete(true, tagGroup)"><i class="icon-trash"></i>&nbsp;&nbsp;Delete</a></li>
                                     </ul>
                                 </div>
                             </div>

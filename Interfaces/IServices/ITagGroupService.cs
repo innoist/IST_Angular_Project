@@ -8,6 +8,7 @@ namespace IST.Interfaces.IServices
         IEnumerable<TagGroup> GetAll();
         TagGroup FindTagGroupById(int tagGroupId);
         bool SaveOrUpdateTagGroup(TagGroup tagGroup);
+        bool RemoveTagGroup(int tagGroupId);
         bool DeleteTagGroup(int tagGroupId);
     }
 }

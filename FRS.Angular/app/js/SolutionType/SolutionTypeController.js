@@ -47,7 +47,6 @@
 
             vm.dtOptions = DTOptionsBuilder.newOptions()
                             .withOption('bFilter', true)
-                            .withOption("scrollX", true)
                             .withOption('aLengthMenu', [10, 25, 100, 500])
                             .withPaginationType('full_numbers');
 
@@ -59,31 +58,58 @@
 
             vm.dtInstance = {};
 
-            vm.delete = function (solutionType) {
-                SweetAlert.swal({
-                    title: 'Are you sure, you want to delete this?',
-                    text: 'It cannot be undone!',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ee3d3d',
-                    confirmButtonText: 'Yes, Delete!',
-                    cancelButtonText: 'No!',
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        SolutionTypeService.url = "/api/SolutionType/DeleteSoft/";
-                        SolutionTypeService.delete(solutionType.Id, function (response) {
-                            $.unblockUI();
-                            if (response) {
-                                var index = vm.SolutionTypes.indexOf(solutionType);
-                                vm.SolutionTypes.splice(index, 1);
-                                toaster.success("", "Deleted successfully.");
-                                SolutionTypeService.url = "/api/SolutionType/";
-                            }
-                        });
-                    }
-                });
+            vm.delete = function (isCascade, solutionType) {
+                if (isCascade) {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It cannot be undone!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            SolutionTypeService.url = "/api/SolutionType/DeleteCascade/";
+                            SolutionTypeService.delete(solutionType.Id, function(response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.SolutionTypes.indexOf(solutionType);
+                                    vm.SolutionTypes.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    SolutionTypeService.url = "/api/SolutionType/";
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to remove this?',
+                        text: '',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Remove!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            SolutionTypeService.url = "/api/SolutionType/DeleteSoft/";
+                            SolutionTypeService.delete(solutionType.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.SolutionTypes.indexOf(solutionType);
+                                    vm.SolutionTypes.splice(index, 1);
+                                    toaster.success("", "Removed successfully.");
+                                    SolutionTypeService.url = "/api/SolutionType/";
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             vm.filterData = function (isReset) {

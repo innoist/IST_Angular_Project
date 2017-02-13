@@ -47,7 +47,7 @@
 
             vm.dtOptions = DTOptionsBuilder.newOptions()
                             .withOption('bFilter', true)
-                            .withOption("scrollX", true)
+                            //.withOption("scrollX", true)
                             .withOption('aLengthMenu', [10, 25, 100, 500])
                             .withPaginationType('full_numbers');
 
@@ -59,31 +59,58 @@
 
             vm.dtInstance = {};
 
-            vm.delete = function (tagGroup) {
-                SweetAlert.swal({
-                    title: 'Are you sure, you want to delete this?',
-                    text: 'It cannot be undone!',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ee3d3d',
-                    confirmButtonText: 'Yes, Delete!',
-                    cancelButtonText: 'No!',
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        TagGroupService.url = "/api/TagGroup/DeleteSoft/";
-                        TagGroupService.delete(tagGroup.Id, function (response) {
-                            $.unblockUI();
-                            if (response) {
-                                var index = vm.TagGroups.indexOf(tagGroup);
-                                vm.TagGroups.splice(index, 1);
-                                toaster.success("", "Deleted successfully.");
-                                TagGroupService.url = "/api/TagGroup/";
-                            }
-                        });
-                    }
-                });
+            vm.delete = function (isCascade, tagGroup) {
+                if (isCascade) {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It cannot be undone!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            TagGroupService.url = "/api/TagGroup/DeleteCascade/";
+                            TagGroupService.delete(tagGroup.Id, function(response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.TagGroups.indexOf(tagGroup);
+                                    vm.TagGroups.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    TagGroupService.url = "/api/TagGroup/";
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to remove this?',
+                        text: '',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            TagGroupService.url = "/api/TagGroup/DeleteSoft/";
+                            TagGroupService.delete(tagGroup.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.TagGroups.indexOf(tagGroup);
+                                    vm.TagGroups.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    TagGroupService.url = "/api/TagGroup/";
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             vm.filterData = function (isReset) {

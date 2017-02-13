@@ -58,8 +58,13 @@ namespace IST.WebApi2.Controllers
             return Ok(status);
         }
 
-        //DELETE api/<controller>/5
         public IHttpActionResult DeleteSoft(int id)
+        {
+            var result = tagService.RemoveTag(id);
+            return Ok(result);
+        }
+
+        public IHttpActionResult DeleteCascade(int id)
         {
             var result = tagService.DeleteTag(id);
             return Ok(result);

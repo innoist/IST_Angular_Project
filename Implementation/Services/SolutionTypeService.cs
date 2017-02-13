@@ -59,10 +59,18 @@ namespace IST.Implementation.Services
             return true;
         }
 
-        public bool DeleteSolutionType(int solutionTypeId)
+        public bool RemoveSolutionType(int solutionTypeId)
         {
             BaseDbContext context = new BaseDbContext();
             context.DeleteSolutionType(solutionTypeId);
+            return true;
+        }
+
+        public bool DeleteSolutionType(int solutionTypeId)
+        {
+            var toDelete = solutionTypeRepository.Find(solutionTypeId);
+            solutionTypeRepository.Delete(toDelete);
+            solutionTypeRepository.SaveChanges();
             return true;
         }
 

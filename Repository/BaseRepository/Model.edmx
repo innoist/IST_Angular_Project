@@ -411,9 +411,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Filters_FilterCategories">
-          <End Role="FilterCategory" Type="Self.FilterCategory" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="FilterCategory" Type="Self.FilterCategory" Multiplicity="1" />
           <End Role="Filter" Type="Self.Filter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FilterCategory">
@@ -493,6 +491,18 @@
             </Principal>
             <Dependent Role="SolutionOwner">
               <PropertyRef Name="RecLastUpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolutionRating_Solution">
+          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+          <End Role="SolutionRating" Type="Self.SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="SolutionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -617,7 +627,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SolutionUsageHistory_Solution">
-          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+          <End Role="Solution" Type="Self.Solution" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SolutionUsageHistory" Type="Self.SolutionUsageHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Solution">
@@ -689,10 +701,24 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="DeleteFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DeleteType" Type="bit" Mode="In" />
           <Parameter Name="FilterId" Type="int" Mode="In" />
         </Function>
         <Function Name="DeleteFilterCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DeleteType" Type="bit" Mode="In" />
           <Parameter Name="FilterCategoryId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSolutionOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OwnerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSolutionType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TagId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTagGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TagGroupId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="angularModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -794,6 +820,10 @@
           <AssociationSet Name="FK_SolutionOwner_AspNetUsers_UpdatedById" Association="Self.FK_SolutionOwner_AspNetUsers_UpdatedById">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_Solution" Association="Self.FK_SolutionRating_Solution">
+            <End Role="Solution" EntitySet="Solution" />
+            <End Role="SolutionRating" EntitySet="SolutionRating" />
           </AssociationSet>
           <AssociationSet Name="FK_Solutions_SolutionOwners" Association="Self.FK_Solutions_SolutionOwners">
             <End Role="SolutionOwner" EntitySet="SolutionOwner" />
@@ -918,10 +948,12 @@
             <End Role="SolutionRating1" EntitySet="SolutionRatings" />
           </AssociationSet>
           <FunctionImport Name="DeleteFilter">
-          <Parameter Name="FilterId" Mode="In" Type="Int32" />
+            <Parameter Name="DeleteType" Mode="In" Type="Boolean" />
+            <Parameter Name="FilterId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteFilterCategory">
-          <Parameter Name="FilterCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="DeleteType" Mode="In" Type="Boolean" />
+            <Parameter Name="FilterCategoryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="SolutionUsageHistories" EntityType="angularModel.SolutionUsageHistory" />
           <AssociationSet Name="FK_SolutionUsageHistory_AspNetUsers" Association="angularModel.FK_SolutionUsageHistory_AspNetUsers">
@@ -1033,6 +1065,22 @@
             <End Role="Solution" EntitySet="Solutions" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
+          <AssociationSet Name="FK_SolutionRating_Solution" Association="angularModel.FK_SolutionRating_Solution">
+            <End Role="Solution" EntitySet="Solutions" />
+            <End Role="SolutionRating" EntitySet="SolutionRatings" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteSolutionOwner1">
+          <Parameter Name="OwnerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSolutionType1">
+          <Parameter Name="TypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTag">
+          <Parameter Name="TagId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTagGroup">
+          <Parameter Name="TagGroupId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="UserRole">
           <Key>
@@ -1225,6 +1273,7 @@
           <Property Name="ReplyParentId" Type="Int32" />
           <NavigationProperty Name="SolutionRatings" Relationship="angularModel.FK_SolutionRating_SolutionRating" FromRole="SolutionRating" ToRole="SolutionRating1" />
           <NavigationProperty Name="ParentItem" Relationship="angularModel.FK_SolutionRating_SolutionRating" FromRole="SolutionRating1" ToRole="SolutionRating" />
+          <NavigationProperty Name="Solution" Relationship="angularModel.FK_SolutionRating_Solution" FromRole="SolutionRating" ToRole="Solution" />
         </EntityType>
         <Association Name="FK_SolutionRating_AspNetUsers">
           <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -1633,6 +1682,7 @@
           <NavigationProperty Name="AspNetUsers" Relationship="angularModel.SolutionFavourite" FromRole="Solution" ToRole="AspNetUser" />
           <NavigationProperty Name="Filters" Relationship="angularModel.SolutionFilter" FromRole="Solution" ToRole="Filter" />
           <NavigationProperty Name="Tags" Relationship="angularModel.SolutionTag" FromRole="Solution" ToRole="Tag" />
+          <NavigationProperty Name="SolutionRatings" Relationship="angularModel.FK_SolutionRating_Solution" FromRole="Solution" ToRole="SolutionRating" />
         </EntityType>
         <Association Name="FK_Solution_AspNetUsers_CreatedById">
           <End Type="angularModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -1705,6 +1755,18 @@
         <Association Name="SolutionTag">
           <End Type="angularModel.Solution" Role="Solution" Multiplicity="*" />
           <End Type="angularModel.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SolutionRating_Solution">
+          <End Type="angularModel.Solution" Role="Solution" Multiplicity="1" />
+          <End Type="angularModel.SolutionRating" Role="SolutionRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolutionRating">
+              <PropertyRef Name="SolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1969,6 +2031,10 @@
               <ScalarProperty Name="Id" ColumnName="SolutionId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteSolutionOwner1" FunctionName="angularModel.Store.DeleteSolutionOwner" />
+          <FunctionImportMapping FunctionImportName="DeleteSolutionType1" FunctionName="angularModel.Store.DeleteSolutionType" />
+          <FunctionImportMapping FunctionImportName="DeleteTag" FunctionName="angularModel.Store.DeleteTag" />
+          <FunctionImportMapping FunctionImportName="DeleteTagGroup" FunctionName="angularModel.Store.DeleteTagGroup" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

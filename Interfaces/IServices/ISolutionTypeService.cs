@@ -9,6 +9,7 @@ namespace IST.Interfaces.IServices
         SolutionType FindSolutionTypeById(int solutionTypeId);
         bool SaveOrUpdate(SolutionType solutionType);
         bool UpdateSolutionType(SolutionType solutionType);
+        bool RemoveSolutionType(int solutionTypeId);
         bool DeleteSolutionType(int solutionTypeId);
     }
 }

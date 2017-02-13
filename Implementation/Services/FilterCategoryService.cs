@@ -53,23 +53,10 @@ namespace IST.Implementation.Services
             return true;
         }
 
-        public bool RemoveFilterCategory(int filterCategoryId)
+        public bool DeleteFilterCategory(bool deletetype, int id)
         {
             BaseDbContext context = new BaseDbContext();
-            context.DeleteFilterCategory(filterCategoryId);
-            return true;
-        }
-
-        public bool DeleteFilterCategory(int filterCategoryId)
-        {
-            var toDelete = filterCategoryRepository.Find(filterCategoryId);
-            //if (toDelete.Filters.Any())
-            //{
-            //    throw new Exception("You cannot delete " + toDelete.DisplayValue + " as it is being used in Filter.");
-            //}
-            filterCategoryRepository.Delete(toDelete);
-            filterCategoryRepository.SaveChanges();
-
+            context.DeleteFilterCategory(deletetype, id);
             return true;
         }
 

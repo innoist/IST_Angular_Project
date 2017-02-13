@@ -47,7 +47,7 @@
 
             vm.dtOptions = DTOptionsBuilder.newOptions()
                             .withOption('bFilter', true)
-                            .withOption("scrollX", true)
+                            //.withOption("scrollX", true)
                             .withOption('aLengthMenu', [10, 25, 100, 500])
                             .withPaginationType('full_numbers');
 
@@ -60,33 +60,62 @@
 
             vm.dtInstance = {};
 
-            vm.delete = function (tag) {
-                SweetAlert.swal({
-                    title: 'Are you sure, you want to delete this?',
-                    text: 'It cannot be undone!',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ee3d3d',
-                    confirmButtonText: 'Yes, Delete!',
-                    cancelButtonText: 'No!',
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        TagService.url = "/api/Tag/DeleteSoft/";
-                        TagService.delete(tag.Id, function (response) {
-                            $.unblockUI();
-                            if (response) {
-                                var index = vm.Tags.indexOf(tag);
-                                vm.Tags.splice(index, 1);
-                                toaster.success("", "Deleted successfully.");
-                                TagService.url = "/api/Tag/";
-                            } else {
-                                toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
-                            }
-                        });
-                    }
-                });
+            vm.delete = function (isCascade, tag) {
+                if (isCascade) {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It cannot be undone!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            TagService.url = "/api/Tag/DeleteCascade/";
+                            TagService.delete(tag.Id, function(response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.Tags.indexOf(tag);
+                                    vm.Tags.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    TagService.url = "/api/Tag/";
+                                } else {
+                                    toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to remove this?',
+                        text: '',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            TagService.url = "/api/Tag/DeleteSoft/";
+                            TagService.delete(tag.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.Tags.indexOf(tag);
+                                    vm.Tags.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    TagService.url = "/api/Tag/";
+                                } else {
+                                    toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             vm.filterData = function (isReset) {

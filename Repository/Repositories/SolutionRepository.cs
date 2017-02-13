@@ -84,13 +84,13 @@ namespace IST.Repository.Repositories
                        || s.Filters.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))));
             }
             IEnumerable<Solution> data = searchRequest.IsAsc
-                ? DbSet
+                ? DbSet.Include(x => x.SolutionRatings)
                     .Where(query)
                     .OrderBy(orderClause[searchRequest.OrderByColumn])
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList()
-                : DbSet
+                : DbSet.Include(x => x.SolutionRatings)
                     .Where(query)
                     .OrderByDescending(orderClause[searchRequest.OrderByColumn])
                     .Skip(fromRow)
@@ -100,15 +100,15 @@ namespace IST.Repository.Repositories
             return new SearchTemplateResponse<Solution>
             {
                 Data = data,
-                TotalCount = DbSet.Select(x => x.Id).Count(),
+                TotalCount = DbSet.Count(x => !x.IsDeleted),
                 FilteredCount = DbSet.Count(query)
             };
         }
-        
+
         public IEnumerable<Solution> SearchForTypeAhead(string name, List<int> filterIds)
         {
             var result = DbSet.Where(s => ((name == null || s.Name.ToLower().Contains(name.ToLower()))
-                                       || (name == null || s.Description.ToLower().Contains(name.ToLower()))) 
+                                       || (name == null || s.Description.ToLower().Contains(name.ToLower())))
                                        && (!s.Active.HasValue || s.Active.Value)
                                        && !s.IsDeleted
                                        && (!filterIds.Any() || s.Filters.Any(f => filterIds.Contains(f.Id))));

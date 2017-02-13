@@ -34,8 +34,7 @@ namespace IST.WebApi2.Controllers
             return toReturn;
         }
 
-        // POST api/<controller>
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         [ValidateFilter]
         public IHttpActionResult Post(TagGroupModel model)
         {
@@ -50,6 +49,11 @@ namespace IST.WebApi2.Controllers
 
         //DELETE api/<controller>/5
         public IHttpActionResult DeleteSoft(int id)
+        {
+            var result = tagGroupService.RemoveTagGroup(id);
+            return Ok(result);
+        }
+        public IHttpActionResult DeleteCascade(int id)
         {
             var result = tagGroupService.DeleteTagGroup(id);
             return Ok(result);

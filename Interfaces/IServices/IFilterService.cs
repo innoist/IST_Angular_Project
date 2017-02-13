@@ -8,6 +8,6 @@ namespace IST.Interfaces.IServices
         IEnumerable<Filter> GetAll();
         Filter FindFilterById(int filterId);
         bool SaveOrUpdateFilter(Filter filter);
-        bool DeleteFilter(int filterId);
+        bool DeleteFilter(bool deletetype, int filterId);
     }
 }

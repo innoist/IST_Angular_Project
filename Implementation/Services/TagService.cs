@@ -4,6 +4,7 @@ using System.Linq;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
+using IST.Repository.BaseRepository;
 
 namespace IST.Implementation.Services
 {
@@ -55,13 +56,20 @@ namespace IST.Implementation.Services
             return true;
         }
 
+        public bool RemoveTag(int tagId)
+        {
+            BaseDbContext context = new BaseDbContext();
+            context.DeleteTag(tagId);
+            return true;
+        }
+
         public bool DeleteTag(int tagId)
         {
             var tagToDelete = tagRepository.Find(tagId);
-            if (tagToDelete.Solutions.Any())
-            {
-                throw new Exception("You cannot delete " + tagToDelete.DisplayValue + " as it is being used in Solutions.");
-            }
+            //if (tagToDelete.Solutions.Any())
+            //{
+            //    throw new Exception("You cannot delete " + tagToDelete.DisplayValue + " as it is being used in Solutions.");
+            //}
             tagRepository.Delete(tagToDelete);
             tagRepository.SaveChanges();
             return true;

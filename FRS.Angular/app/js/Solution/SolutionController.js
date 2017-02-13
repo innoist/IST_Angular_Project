@@ -55,7 +55,7 @@
         .withOption('processing', true)
         .withOption('serverSide', true)
         .withOption('bFilter', false)
-        .withOption('scrollX', true)
+        //.withOption('scrollX', true)
         .withOption('createdRow', function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);

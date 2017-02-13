@@ -20,42 +20,34 @@ namespace IST.WebApi2.Controllers
             this.filterCategoryService = filterCategoryService;
         }
 
-        // GET api/<controller>
         public IEnumerable<FilterCategoryModel> Get()
         {
             var filterCategories = filterCategoryService.GetAll()?.Select(x => x.MapFromServerToClient()).ToList();
             return filterCategories;
         }
 
-        // GET api/<controller>/5
         public FilterCategoryModel Get(int id)
         {
             var toReturn = filterCategoryService.FindFilterCategoryById(id)?.MapFromServerToClient();
             return toReturn;
         }
 
-        // POST api/<controller>
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         [ValidateFilter]
-        public IHttpActionResult Post(FilterCategoryModel model)
+        public IHttpActionResult PostSave(FilterCategoryModel model)
         {
             if (model.Id == 0)
                 SetAllValues(model);
             else
                 SetUpdatedValues(model);
-            
+
             var status = filterCategoryService.SaveOrUpdateFilterCategory(model.MapFromClientToServer());
             return Ok(status);
         }
-        public IHttpActionResult DeleteSoft(int id)
-        {
-            var result = filterCategoryService.RemoveFilterCategory(id);
-            return Ok(result);
-        }
 
-        public IHttpActionResult DeleteCascade(int id)
+        public IHttpActionResult PostDelete(DeleteModel model)
         {
-            var result = filterCategoryService.DeleteFilterCategory(id);
+            var result = filterCategoryService.DeleteFilterCategory(model.DeleteType, model.Id);
             return Ok(result);
         }
 

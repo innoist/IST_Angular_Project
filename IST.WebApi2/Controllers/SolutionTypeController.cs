@@ -64,6 +64,11 @@ namespace IST.WebApi2.Controllers
 
         public IHttpActionResult DeleteSoft(int id)
         {
+            var result = solutionTypeService.RemoveSolutionType(id);
+            return Ok(result);
+        }
+        public IHttpActionResult DeleteCascade(int id)
+        {
             var result = solutionTypeService.DeleteSolutionType(id);
             return Ok(result);
         }

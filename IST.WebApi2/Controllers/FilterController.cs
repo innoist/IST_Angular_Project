@@ -47,7 +47,7 @@ namespace IST.WebApi2.Controllers
         // POST api/<controller>
         [HttpPost]
         [ValidateFilter]
-        public IHttpActionResult Post(FilterModel model)
+        public IHttpActionResult PostSave(FilterModel model)
         {
             if (model.Id == 0)
                 SetAllValues(model);
@@ -58,16 +58,9 @@ namespace IST.WebApi2.Controllers
             return Ok(status);
         }
 
-        //DELETE api/<controller>/5
-        public IHttpActionResult DeleteSoft(int id)
+        public IHttpActionResult PostDelete(DeleteModel model)
         {
-            var result = filterService.DeleteFilter(id);
-            return Ok(result);
-        }
-
-        public IHttpActionResult DeleteCascade(int id)
-        {
-            var result = filterService.DeleteFilter(id);
+            var result = filterService.DeleteFilter(model.DeleteType, model.Id);
             return Ok(result);
         }
 

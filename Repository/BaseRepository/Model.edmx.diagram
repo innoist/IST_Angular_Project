@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4c82f04103114739a6a03c5186c1df21" Name="Diagram1" ZoomLevel="66">
+      <Diagram DiagramId="4c82f04103114739a6a03c5186c1df21" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="angularModel.UserRole" Width="1.5" PointX="8" PointY="0.75" />
         <EntityTypeShape EntityType="angularModel.UserClaim" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="angularModel.UserLogin" Width="1.5" PointX="3.375" PointY="0.75" />
@@ -56,6 +56,7 @@
         <AssociationConnector Association="angularModel.SolutionFavourite" />
         <AssociationConnector Association="angularModel.SolutionFilter" />
         <AssociationConnector Association="angularModel.SolutionTag" />
+        <AssociationConnector Association="angularModel.FK_SolutionRating_Solution" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

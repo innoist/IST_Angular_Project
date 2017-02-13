@@ -47,7 +47,6 @@
 
             vm.dtOptions = DTOptionsBuilder.newOptions()
                             .withOption('bFilter', true)
-                            .withOption("scrollX", true)
                             .withOption('aLengthMenu', [10, 25, 100, 500])
                             .withPaginationType('full_numbers');
 
@@ -59,31 +58,58 @@
 
             vm.dtInstance = {};
 
-            vm.delete = function (solutionOwner) {
-                SweetAlert.swal({
-                    title: 'Are you sure, you want to delete this?',
-                    text: 'It cannot be undone!',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ee3d3d',
-                    confirmButtonText: 'Yes, Delete!',
-                    cancelButtonText: 'No!',
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        SolutionOwnerService.url = "/api/SolutionOwner/DeleteSoft/";
-                        SolutionOwnerService.delete(solutionOwner.Id, function (response) {
-                            $.unblockUI();
-                            if (response) {
-                                var index = vm.SolutionOwners.indexOf(solutionOwner);
-                                vm.SolutionOwners.splice(index, 1);
-                                toaster.success("", "Deleted successfully.");
-                                SolutionOwnerService.url = "/api/SolutionOwner/";
-                            }
-                        });
-                    }
-                });
+            vm.delete = function (isCascade, solutionOwner) {
+                if (isCascade) {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It cannot be undone!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            SolutionOwnerService.url = "/api/SolutionOwner/DeleteCascade/";
+                            SolutionOwnerService.delete(solutionOwner.Id, function(response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.SolutionOwners.indexOf(solutionOwner);
+                                    vm.SolutionOwners.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    SolutionOwnerService.url = "/api/SolutionOwner/";
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to remove this?',
+                        text: '',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Remove!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            SolutionOwnerService.url = "/api/SolutionOwner/DeleteSoft/";
+                            SolutionOwnerService.delete(solutionOwner.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.SolutionOwners.indexOf(solutionOwner);
+                                    vm.SolutionOwners.splice(index, 1);
+                                    toaster.success("", "Removed successfully.");
+                                    SolutionOwnerService.url = "/api/SolutionOwner/";
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             vm.filterData = function (isReset) {

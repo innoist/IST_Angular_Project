@@ -61,11 +61,18 @@ namespace IST.Implementation.Services
 
         public bool DeleteSolutionOwner(int solutionOwnerId)
         {
+            var toDelete = solutionOwnerRepository.Find(solutionOwnerId);
+            solutionOwnerRepository.Delete(toDelete);
+            solutionOwnerRepository.SaveChanges();
+            return true;
+        }
+
+        public bool RemoveSolutionOwner(int solutionOwnerId)
+        {
             BaseDbContext context = new BaseDbContext();
             context.DeleteSolutionOwner(solutionOwnerId);
             return true;
         }
-
         #endregion
     }
 }

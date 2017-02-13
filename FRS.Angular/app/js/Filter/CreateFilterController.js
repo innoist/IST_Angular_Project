@@ -31,7 +31,7 @@
                 return false;
             }
             vm.Filter.FilterCategoryId = vm.FilterCategories.selected ? vm.FilterCategories.selected.Id : null;
-            FilterService.save(vm.Filter, onSuccess, onError);
+            FilterService.save(vm.Filter, onSuccess, onError,'/api/Filter/PostSave/');
             function onSuccess(response) {
                 $.unblockUI();
                 if (response.data === true) {

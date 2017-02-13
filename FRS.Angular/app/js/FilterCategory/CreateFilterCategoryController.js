@@ -31,7 +31,7 @@
                 return false;
             }
 
-            FilterCategoryService.save(vm.FilterCategory, onSuccess, onError);
+            FilterCategoryService.save(vm.FilterCategory, onSuccess, onError, '/api/FilterCategory/PostSave');
             function onSuccess(response) {
                 $.unblockUI();
                 if (response.data === true) {
@@ -48,10 +48,11 @@
                         $state.go('app.FilterCategory');
                     }
                 } else {
-                    toaster.error("Notification", "Quantity Scale with this code already exists.");
+                    toaster.error("Notification", "Filter Category with this name already exists.");
                 }
             }
             function onError(err) {
+                $.unblockUI();
                 toaster.error(err.statusText, err.data.Message);
                 showErrors(err);
             }
