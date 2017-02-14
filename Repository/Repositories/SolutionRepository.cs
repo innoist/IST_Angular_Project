@@ -84,13 +84,13 @@ namespace IST.Repository.Repositories
                        || s.Filters.Any(x => x.DisplayValue.ToLower().Contains(searchRequest.Name.ToLower()))));
             }
             IEnumerable<Solution> data = searchRequest.IsAsc
-                ? DbSet.Include(x => x.SolutionRatings)
+                ? DbSet
                     .Where(query)
                     .OrderBy(orderClause[searchRequest.OrderByColumn])
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList()
-                : DbSet.Include(x => x.SolutionRatings)
+                : DbSet
                     .Where(query)
                     .OrderByDescending(orderClause[searchRequest.OrderByColumn])
                     .Skip(fromRow)

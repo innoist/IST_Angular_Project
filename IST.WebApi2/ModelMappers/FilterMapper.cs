@@ -13,7 +13,7 @@ namespace IST.WebApi2.ModelMappers
                 Id = source.Id,
                 DisplayValue = source.DisplayValue,
                 FilterCategoryId = source.FilterCategoryId,
-                SolutionCount = source.Solutions.Where(x => x.Active == true).ToList().Count,
+                SolutionCount = source.Solutions.Where(x => x.Active == true && !x.IsDeleted).ToList().Count,
                 FilterCategoryName = source.FilterCategory.DisplayValue
             };
         }
