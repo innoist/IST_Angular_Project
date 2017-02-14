@@ -25,5 +25,6 @@ namespace IST.Interfaces.Repository
         UsersSearchResponse GetUsersSearchResponse(UsersSearchRequest searchRequest);
         AspNetUser FindUserByUserName(string userName);
         Task<AspNetUser> GetByUserNameAsync(string userName);
+        bool UsernameExistsOrNot(string username);
     }
 }

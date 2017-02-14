@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
 using IST.Models.Common.DropDown;
 
 namespace IST.Commons.Utility
@@ -178,7 +177,7 @@ namespace IST.Commons.Utility
             }
         }
 
-        public static bool SendEmailAsync(string email, string body)
+        public static bool SendEmailAsync(string email, string subject, string body)
         {
             //Get Configuration from Web Config
             string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
@@ -189,10 +188,10 @@ namespace IST.Commons.Utility
             MailMessage oEmail = new MailMessage
             {
                 From = new MailAddress(fromAddress, fromDisplayName),
-                Subject = "Check it out",
+                Subject = subject,
                 IsBodyHtml = true,
                 Body = body,
-                Priority = MailPriority.High
+                Priority = MailPriority.Normal
             };
             oEmail.To.Add(email);
             string smtpServer = ConfigurationManager.AppSettings["SMTPServer"];

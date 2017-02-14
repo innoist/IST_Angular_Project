@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using IST.Models.IdentityModels;
+using System.Net.Http;
 using IST.WebApi2.Models;
-using IST.WebApi2.Providers;
 using IST.WebApi2.Results;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+using IST.WebApi2.Providers;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
+using IST.Models.IdentityModels;
+using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.Cookies;
 
 namespace IST.WebApi2.Controllers
 {
@@ -398,11 +398,11 @@ namespace IST.WebApi2.Controllers
                 return BadRequest(ModelState);
             }
 
+            var existingUser = await UserManager.FindByNameAsync(model.Username);
             //Update Case
             #region Update User
-            if (!string.IsNullOrEmpty(model.Username))
+            if (existingUser != null)
             {
-                var existingUser = await UserManager.FindByNameAsync(model.Username);
                 //if(existingUser == null)
                 //    throw new Exception("User not found.");
 
@@ -489,11 +489,19 @@ namespace IST.WebApi2.Controllers
         private async Task SendAccountCredentials(string email, string username, string password)
         {
             //var callbackUrl = this.Url.Link("/",null);
-            await UserManager.SendEmailAsync(email, "Login Credentials",
+            try
+            {
+                await UserManager.SendEmailAsync(email, "Login Credentials",
                 "Your Email is: " + email +
                 "<br/>Your Username is: " + username +
                 "<br/>Your Password is: " + password +
                 "<br>Click <a href=\"" + "" + "\">here</a> to login.");
+            }
+            catch (Exception exception)
+            {
+
+                throw;
+            }
         }
 
         private IAuthenticationManager Authentication

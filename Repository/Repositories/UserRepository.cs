@@ -77,6 +77,10 @@ namespace IST.Repository.Repositories
             return DbSet.FirstOrDefault(user => user.UserName == userName);
         }
 
+        public bool UsernameExistsOrNot(string username)
+        {
+            return DbSet.Any(x => x.UserName.ToLower().Contains(username.ToLower()));
+        }
         /// <summary>
         /// Get User By Domain Key
         /// </summary>

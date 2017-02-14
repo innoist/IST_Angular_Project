@@ -79,14 +79,15 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-md-12" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.Username, 'required') }">
+                            <div class="col-md-12" ng-class="{ 'has-error': upc.userTaken }">
                                 <label for="Username" class="control-label requiredLabel">Username</label>
                                 <input id="Username" type="text" placeholder="Enter Username Here"
-                                       ng-model="upc.user.Username" name="Username"
-                                       uib-tooltip="{{ upc.validateInput(upc.formValidate.Username, 'required') ? 'Username is required.' : '' }}"
+                                       ng-model="upc.user.UserName" name="Username"
+                                       uib-tooltip="{{ upc.userTaken ? 'Username is not available.' : '' }}"
                                        uib-tooltip-trigger="focus"
                                        tooltip-class="tooltip-danger"
                                        required=""
+                                       ng-change="upc.checkUserName()"
                                        class="form-control"
                                        maxlength="50">
                             </div>

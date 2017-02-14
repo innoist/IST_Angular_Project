@@ -13,6 +13,7 @@
         vm.Admin = true;
         $scope.disabled = false;
         vm.matchPassword = true;
+        vm.userTaken = false;
         ProfileService.url = '/api/UserBaseData/';
 
         vm.save = function (isNew) {
@@ -23,7 +24,6 @@
                     toaster.error('Alert', 'Password don\'t match');
                     return false;
                 }
-
                 ProfileService.save(vm.user, function (response) {
                     $.unblockUI();
                     if (response) {
@@ -43,11 +43,10 @@
                     }
                 }, function (err) {
                     $.unblockUI();
-                    toaster.pop("error", "Alert", showErrors(err));
+                    toaster.error("Alert", showErrors(err));
                 }, '/api/Account/Register');
             }
         }
-
 
         vm.validateInput = function (property, type) {
             if (!property || !type) {
@@ -61,7 +60,7 @@
         }
 
         userName = $stateParams.userName;
-        ProfileService.load('/api/UserBaseData?userName=' + userName, null, function (response) {
+        ProfileService.load('/api/UserBaseData/GetUser?userName=' + userName, null, function (response) {
             $.unblockUI();
             if (response) {
                 vm.user = response;
@@ -80,5 +79,21 @@
                 });
             }
         }
+
+        vm.checkUserName = function () {
+            var val = vm.user.UserName;
+            //Check if input is more that 1 char and less than 10
+            if (val.length >= 4 && val.length < 20)
+                return ProfileService.load('/api/UserBaseData/GetUserName?username=' + val, null, function(response) {
+                    $.unblockUI();
+                    if (response) {
+                        vm.userTaken = true;
+                    } else {
+                        vm.userTaken = false;
+                    }
+                });
+        }
+
+
     }
 })();

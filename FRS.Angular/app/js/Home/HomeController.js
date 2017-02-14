@@ -385,12 +385,13 @@
                 vm.EmailModel = {};
                 vm.EmailModel.SolutionId = vm.ProjectId;
                 vm.EmailModel.RecieverEmail = vm.FriendsEmail;
+                vm.EmailModel.EmailSubject = vm.subject;
+
                 var hrf = vm.apiUrl + "/api/Redirect?userId=" + $localStorage.authorizationData.userId + "&receiveremail=" + vm.EmailModel.RecieverEmail + "&solutionId=" + vm.EmailModel.SolutionId;
                 vm.EmailModel.EmailBody = "<a href='" + hrf + "'>Here </a>" + angular.element('.editable-div span')[0].textContent;
-                HomeService.save(vm.EmailModel, function (response) {
+                HomeService.save(vm.EmailModel, function () {
                     $.unblockUI();
-                    var status = response;
-                }, function (response) {
+                }, function () {
                     $.unblockUI();
                     vm.EmailModel.EmailBody = '';
                     vm.EmailModel.SenderEmail = '';

@@ -22,7 +22,6 @@ namespace IST.WebApi2.Controllers
         }
 
         #endregion
-        // GET: SolutionBaseData
 
         public IHttpActionResult Get()
         {
@@ -39,7 +38,7 @@ namespace IST.WebApi2.Controllers
         /// </summary>
         public IHttpActionResult Post(SolutionModel model)
         {
-            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null);
+            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null, null);
             return Ok(saved);
         }
 
@@ -50,8 +49,7 @@ namespace IST.WebApi2.Controllers
         [HttpPost]
         public IHttpActionResult Post(EmailModel model)
         {
-            var saved = usageService.SaveUsage(model.SolutionId, (int)Commons.UsageType.Shared, model.RecieverEmail, model.EmailBody);
-            //var status = Commons.Utility.Utility.SendEmailAsync(model.RecieverEmail, model.EmailBody);
+            var saved = usageService.SaveUsage(model.SolutionId, (int)Commons.UsageType.Shared, model.RecieverEmail, model.EmailSubject, model.EmailBody);
             return Ok(saved);
         }
     }

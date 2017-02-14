@@ -1,6 +1,6 @@
 ﻿/**=========================================================
- * Module: ReferenceDataService
- * ReferenceDataService
+                 * Module: ReferenceDataService
+                 * ReferenceDataService
  =========================================================*/
 
 (function () {
@@ -174,6 +174,7 @@
                     defered.resolve(response);
                 })
                 .error(function (err) {
+                    $.unblockUI();
                     showErrors(err);
                 });
 

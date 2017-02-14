@@ -16,7 +16,7 @@ namespace IST.Implementation.Services
             this.usageHistoryRepository = usageHistoryRepository;
         }
 
-        public bool SaveUsage(int solutionId, int usageType, string email, string emailBody)
+        public bool SaveUsage(int solutionId, int usageType, string email, string subject, string emailBody)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace IST.Implementation.Services
             }
             if (usageType == 1 && email != null)
             {
-                Commons.Utility.Utility.SendEmailAsync(email, emailBody);
+                Commons.Utility.Utility.SendEmailAsync(email, subject, emailBody);
             }
             return true;
         }

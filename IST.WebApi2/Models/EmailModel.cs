@@ -4,6 +4,7 @@
     {
         public int SolutionId { get; set; }
         public string RecieverEmail { get; set; }
+        public string EmailSubject { get; set; }
         public string EmailBody { get; set; }
     }
 }

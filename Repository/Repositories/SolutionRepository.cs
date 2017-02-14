@@ -13,9 +13,6 @@ using Microsoft.Practices.Unity;
 
 namespace IST.Repository.Repositories
 {
-    /// <summary>
-    /// Project Repository
-    /// </summary>
     public sealed class SolutionRepository : BaseRepository<Solution>, ISolutionRepository
     {
         #region Constructor

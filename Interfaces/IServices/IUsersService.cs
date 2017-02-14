@@ -14,5 +14,6 @@ namespace IST.Interfaces.IServices
         Task<AspNetUser> GetUserAsync(string userName);
         UsersSearchResponse GetAllUsers(UsersSearchRequest searchRequest);
         IEnumerable<UserRole> GetAllRoles();
+        bool UsernameExistsOrNot(string username);
     }
 }

@@ -51,7 +51,6 @@ namespace IST.WebApi2.Models
         public string RoleId { get; set; }
         //[Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
-
         [Compare("Password", ErrorMessage = @"Passwords don't match")]
         public string ConfirmPassword { get; set; }
 

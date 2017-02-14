@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.WebApi2.ModelMappers;
-using IST.WebApi2.Models;
 
 namespace IST.WebApi2.Controllers
 {
@@ -28,11 +27,17 @@ namespace IST.WebApi2.Controllers
         //}
 
         [HttpGet]
-        public IHttpActionResult Get(string userName)
+        public IHttpActionResult GetUser(string userName)
         {
             var user = usersService.GetUser(userName)?.MapUserFromServerToClient();
             return Ok(user);
         }
+        public IHttpActionResult GetUserName(string username)
+        {
+            var status = usersService.UsernameExistsOrNot(username);
+            return Ok(status);
+        }
         
+
     }
 }

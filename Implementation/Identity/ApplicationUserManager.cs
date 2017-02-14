@@ -40,7 +40,7 @@ namespace IST.Implementation.Identity
              
             string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
             string fromPwd = ConfigurationManager.AppSettings["FromPassword"];
-            string fromDisplayName = ConfigurationManager.AppSettings["FromDisplayNameA"];
+            string fromDisplayName = ConfigurationManager.AppSettings["FromDisplayName"];
             //string cc = ConfigurationManager.AppSettings["CC"];
             //string bcc = ConfigurationManager.AppSettings["BCC"];
 

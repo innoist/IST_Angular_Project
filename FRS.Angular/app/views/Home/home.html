@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-3 filter-by-block md-margin-bottom-60">
             <h1>Refine By</h1>
-            <div class="panel-group" id="accordion">
+            <div class="panel-group margin-top-20" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
@@ -22,7 +22,7 @@
                                 <label class="control-label needsclick">
                                     <input type="checkbox" ng-model="hc.Favorites" ng-click="hc.seeFavorites()" name="IsImportant" class="needsclick checkbox checkbox-inline"><span class="fa fa-heart" style="border-color: #18ba9b"></span>
                                 </label><strong>Favorites</strong>
-                                <hr style="margin-bottom: 0" />
+                                <hr class="margin-bottom0 margin-top15" />
                             </div>
 
                             <ul class="list-unstyled checkbox-list">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="col-md-9">
-            <div class="row margin-bottom-5">
+            <div class="row margin-bottom3">
                 <div class="col-md-12 padding-leftright30">
                     <form ng-submit="hc.searchSolutions()">
                         <div class="input-group">
@@ -155,13 +155,16 @@
 
 <!-- Popup for send to friend -->
 <div class="g-popup-wrapper" id="sendtofriend">
-    <div class="g-popup g-popup--discount height-450 col-md-5">
+    <div class="g-popup g-popup--discount min-height-480 col-md-5">
         <!--<p class="margin-bottom-5">Enter your email</p>-->
         <h3>Share with your friend.</h3>
         <!--<p class="margin-bottom-40 font-size24">Share with your friend.</p>-->
-        <form action="#" class="sky-form">
+        <form ng-submit="hc.SaveShareActivity()" class="sky-form">
             <label class="input margin-bottom-20">
                 <input type="text" placeholder="Your name" ng-model="hc.username" class="form-control" ng-disabled="true">
+            </label>
+            <label class="input margin-bottom-20">
+                <input type="text" placeholder="Subject" ng-model="hc.subject" class="form-control">
             </label>
             <label class="input margin-bottom-20">
                 <input type="email" placeholder="Your Friend's email" ng-model="hc.FriendsEmail" class="form-control">
@@ -172,7 +175,7 @@
                 </div> <span>is the link to Solution.</span>
             </div>
             <label class="input">
-                <button class="btn btn-default" type="button" ng-click="hc.SaveShareActivity()">Share</button>
+                <button class="btn btn-default" type="submit">Share</button>
             </label>
         </form>
 

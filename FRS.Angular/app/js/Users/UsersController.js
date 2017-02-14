@@ -77,7 +77,6 @@
             .renderWith(function (data, type, full, meta) {
                 return '<a ui-sref="app.Profile({userName : \'' + data.UserName + '\'})" uib-tooltip="{{\'View\'}}" uib-tooltip-trigger="focus" class="btn btn-xs btn-green"><i class="fa fa-search"></i></a>';
                 //+ '&nbsp;&nbsp;<button type="button" ng-click="uc.delete(\'' + data.UserName + '\')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>';
-
             }));
 
 
