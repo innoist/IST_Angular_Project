@@ -21,7 +21,6 @@ namespace IST.Implementation.Services
             this.aspNetRoleRepository = aspNetRoleRepository;
         }
 
-
         public IEnumerable<AspNetUser> GetAllUsers()
         {
             return userRepository.GetAll();

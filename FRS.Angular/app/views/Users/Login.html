@@ -9,16 +9,35 @@
       <div class="panel-body">
          <p class="text-center pv">SIGN IN TO CONTINUE.</p>
          <form role="form" ng-submit="login.login()" name="login.loginForm" novalidate="" class="form-validate mb-lg">
-            <div class="form-group has-feedback">
-               <input id="exampleInputEmail1" type="email" name="account_email" placeholder="Enter email" autocomplete="off" ng-model="login.account.email" required="" class="form-control" />
+            <div class="form-group has-feedback" ng-class="{'has-error': (login.loginForm.account_email.$dirty && login.loginForm.account_email.$error.required) || (login.loginForm.account_email.$dirty && login.loginForm.account_email.$error.email)}">
+                <input id="exampleInputEmail1"
+                       type="email"
+                       name="account_email"
+                       placeholder="Enter email"
+                       ng-model="login.account.email"
+                       required=""
+                       uib-tooltip="{{login.loginForm.account_email.$dirty && login.loginForm.account_email.$error.required? 'Please enter email address': login.loginForm.account_email.$dirty && login.loginForm.account_email.$error.email? 'Please enter valid email address' : ''}}"
+                       tooltip-class="tooltip-danger"
+                       tooltip-placement="left"
+                       class="form-control" />
                <span class="fa fa-envelope form-control-feedback text-muted"></span>
-               <span ng-show="login.loginForm.account_email.$dirty &amp;&amp; login.loginForm.account_email.$error.required" class="text-danger">This field is required</span>
-               <span ng-show="login.loginForm.account_email.$dirty &amp;&amp; login.loginForm.account_email.$error.email" class="text-danger">This field must be a valid email address</span>
+               <!--<span ng-show="login.loginForm.account_email.$dirty &amp;&amp; login.loginForm.account_email.$error.required" class="text-danger">This field is required</span>-->
+               <!--<span ng-show="login.loginForm.account_email.$dirty &amp;&amp; login.loginForm.account_email.$error.email" class="text-danger">This field must be a valid email address</span>-->
             </div>
-            <div class="form-group has-feedback">
-               <input id="exampleInputPassword1" type="password" name="account_password" placeholder="Password" ng-model="login.account.password" required="" class="form-control" />
+            <div class="form-group has-feedback" ng-class="{'has-error':login.loginForm.account_password.$dirty && login.loginForm.account_password.$error.required}">
+                <input id="exampleInputPassword1"
+                       type="password"
+                       name="account_password"
+                       placeholder="Password"
+                       autocomplete="new-password"
+                       ng-model="login.account.password"
+                       required=""
+                       uib-tooltip="{{login.loginForm.account_password.$dirty && login.loginForm.account_password.$error.required? 'Please enter password': ''}}"
+                       tooltip-class="tooltip-danger"
+                       tooltip-placement="left"
+                       class="form-control" />
                <span class="fa fa-lock form-control-feedback text-muted"></span>
-               <span ng-show="login.loginForm.account_password.$dirty &amp;&amp; login.loginForm.account_password.$error.required" class="text-danger">This field is required</span>
+               <!--<span ng-show="login.loginForm.account_password.$dirty &amp;&amp; login.loginForm.account_password.$error.required" class="text-danger">This field is required</span>-->
             </div>
             <div class="clearfix">
                <div class="checkbox c-checkbox pull-left mt0">

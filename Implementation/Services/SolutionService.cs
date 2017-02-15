@@ -13,9 +13,6 @@ using Microsoft.AspNet.Identity;
 
 namespace IST.Implementation.Services
 {
-    /// <summary>
-    /// QuantityScale Service
-    /// </summary>
     public sealed class SolutionService : ISolutionService
     {
         #region Private
@@ -115,7 +112,7 @@ namespace IST.Implementation.Services
                 basedata.Solution = id > 0 ? solutionRepository.GetById(id) : null;
                 basedata.SolutionRatings = solutionRatingRepository.GetRatingBySolutionId(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception();
             }

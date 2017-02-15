@@ -14,6 +14,7 @@
         $scope.disabled = false;
         vm.matchPassword = true;
         vm.userTaken = false;
+        vm.hidePasswordFields = false;
         ProfileService.url = '/api/UserBaseData/';
 
         vm.save = function (isNew) {
@@ -65,6 +66,7 @@
             if (response) {
                 vm.user = response;
                 vm.update = true;
+                vm.hidePasswordFields = true;
             }
         });
 

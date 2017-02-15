@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IST.Models.Common;
 
 namespace IST.Models.RequestModels
@@ -13,6 +12,7 @@ namespace IST.Models.RequestModels
         public List<int> FilterIds { get; set; }
         public string ClientRequest { get; set; }
         public bool IsFavorite { get; set; }
+        public double AverageRating { get; set; }
         public OrderBySolution OrderByColumn
         {
             get

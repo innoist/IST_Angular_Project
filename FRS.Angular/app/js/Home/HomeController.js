@@ -180,6 +180,19 @@
             }
         }
 
+        vm.searchOnRating = function (id) {
+            if ($('#' + id).is(':checked')) {
+                vm.ProjectSearchRequest.AverageRating = parseInt(id.slice(-1));
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromServer();
+            } else {
+                vm.ProjectSearchRequest.AverageRating = 0;
+                vm.ProjectSearchRequest.PageNo = 1;
+                vm.getDataFromServer();
+            }
+        }
+
+
         /************************************/
         /************* Typeahead ************/
         /************************************/
@@ -400,10 +413,10 @@
             }
         }
 
-        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        vm.showLightboxImage = function (id) {
             event.preventDefault();
-            $(this).ekkoLightbox();
-        });
+            $('#lightbox' + id).ekkoLightbox();
+        }
 
         vm.getRatingId = function (ratingid) {
             vm.RatingId = ratingid;
@@ -419,11 +432,15 @@
             }
         }
 
-        vm.resetCategories = function () {
+        vm.resetAllFilters = function () {
             var filtersarr = vm.ProjectSearchRequest.FilterIds;
             angular.forEach(filtersarr, function (id) {
                 $('#' + id)[0].checked = $('#' + id)[0].checked ? false : true;
             });
+            for (var i = 1; i < 6; i++) {
+                angular.element('#stars-rating-main-' + i)[0].checked = false;
+            }
+            vm.ProjectSearchRequest.AverageRating = 0;
             vm.ProjectSearchRequest.FilterIds = [];
             vm.ProjectSearchRequest.PageNo = 1;
             vm.getDataFromServer();

@@ -89,6 +89,7 @@
                                        required=""
                                        ng-change="upc.checkUserName()"
                                        class="form-control"
+                                       ng-disabled="upc.hidePasswordFields"
                                        maxlength="50">
                             </div>
                         </div>
@@ -117,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" ng-if="!upc.hidePasswordFields">
                         <div class="col-sm-12">
                             <div class="col-md-12" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.Password, 'required') }">
                                 <label for="UserPassword" class="control-label requiredLabel">Password</label>
@@ -127,13 +128,14 @@
                                        uib-tooltip-trigger="focus"
                                        tooltip-class="tooltip-danger"
                                        required=""
+                                       autocomplete="new-password"
                                        class="form-control"
                                        maxlength="50">
                                 <span class="fa fa-lock form-control-feedback width70 text-muted"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" ng-if="!upc.hidePasswordFields">
                         <div class="col-sm-12">
                             <div class="col-md-12 form-group has-feedback" ng-class="{ 'has-error': upc.validateInput(upc.formValidate.ConfirmPassword, 'required') || !upc.matchPassword }">
                                 <label for="ConfirmUserPassword" class="control-label requiredLabel">Confrim Password</label>
@@ -143,6 +145,7 @@
                                        uib-tooltip-trigger="focus"
                                        tooltip-class="tooltip-danger"
                                        required=""
+                                       autocomplete="new-password"
                                        class="form-control"
                                        maxlength="50">
                                 <span class="fa fa-lock form-control-feedback width70 text-muted"></span>
