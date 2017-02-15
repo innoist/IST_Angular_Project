@@ -495,9 +495,9 @@ namespace IST.WebApi2.Controllers
                 "Your Email is: " + email +
                 "<br/>Your Username is: " + username +
                 "<br/>Your Password is: " + password +
-                "<br>Click <a href=\"" + "" + "\">here</a> to login.");
+                "<br>Click <a href=\"" + "http://gocentralize.azurewebsites.net/#/account/login" + "\">here</a> to login.");
             }
-            catch (Exception exception)
+            catch (Exception)
             {
 
                 throw;

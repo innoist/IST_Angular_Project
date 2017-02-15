@@ -581,11 +581,9 @@
     <Content Include="app\js\Users\ForgetPasswordController.js" />
     <Content Include="app\js\Users\LoginController.js" />
     <Content Include="app\js\Users\ProfileController.js" />
-    <Content Include="app\js\Users\ProfileService.js" />
     <Content Include="app\js\Users\RegisterController.js" />
     <Content Include="app\js\Users\ResetPasswordController.js" />
     <Content Include="app\js\Users\UsersController.js" />
-    <Content Include="app\js\Users\UsersService.js" />
     <Content Include="app\vendor\datatable-bootstrap\images\Sorting icons.psd" />
     <Content Include="app\views\dashboard-admin.html" />
     <Content Include="app\views\Dashboard\Dashboard.html" />
