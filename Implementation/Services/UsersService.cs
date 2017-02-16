@@ -48,7 +48,7 @@ namespace IST.Implementation.Services
 
         public IEnumerable<UserRole> GetAllRoles()
         {
-            return aspNetRoleRepository.GetAll().Where(x => x.Name != ISTApplicationRoles.SystemAdministrator);
+            return aspNetRoleRepository.GetAll();
         }
 
         public bool UsernameExistsOrNot(string username)

@@ -11,20 +11,14 @@
         var vm = this;
         var userName = '';
         vm.Admin = true;
-        $scope.disabled = false;
-        vm.matchPassword = true;
+        vm.disabled = false;
         vm.userTaken = false;
-        vm.hidePasswordFields = false;
+        vm.appUserRoles = [];
         ProfileService.url = '/api/UserBaseData/';
 
         vm.save = function (isNew) {
             if (vm.formValidate.$valid) {
-
-                if (!angular.equals(vm.user.Password, vm.user.ConfirmPassword)) {
-                    vm.matchPassword = false;
-                    toaster.error('Alert', 'Password don\'t match');
-                    return false;
-                }
+                vm.user.RoleId = vm.appUserRoles.selected ? vm.appUserRoles.selected.Name : 0;
                 ProfileService.save(vm.user, function (response) {
                     $.unblockUI();
                     if (response) {
@@ -66,7 +60,18 @@
             if (response) {
                 vm.user = response;
                 vm.update = true;
-                vm.hidePasswordFields = true;
+                vm.disabled = true;
+                if (vm.user.Role) {
+                    vm.appUserRoles.selected = vm.appUserRoles.find(x => x.Id === vm.user.Role);
+                }
+            }
+        });
+
+        ProfileService.load('/api/UserBaseData/GetRoles/', null, function (response) {
+            $.unblockUI();
+            if (response) {
+                vm.appUserRoles = response;
+                vm.update = true;
             }
         });
 
@@ -86,7 +91,7 @@
             var val = vm.user.UserName;
             //Check if input is more that 1 char and less than 10
             if (val.length >= 4 && val.length < 20)
-                return ProfileService.load('/api/UserBaseData/GetUserName?username=' + val, null, function(response) {
+                return ProfileService.load('/api/UserBaseData/GetUserName?username=' + val, null, function (response) {
                     $.unblockUI();
                     if (response) {
                         vm.userTaken = true;
@@ -96,6 +101,9 @@
                 });
         }
 
-
+        vm.clearAppUserRoles = function ($event) {
+            $event.stopPropagation();
+            vm.appUserRoles.selected = null;
+        }
     }
 })();

@@ -1,6 +1,9 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
+using IST.WebApi2.Models;
 using IST.Interfaces.IServices;
 using IST.WebApi2.ModelMappers;
+using System.Collections.Generic;
 
 namespace IST.WebApi2.Controllers
 {
@@ -20,11 +23,11 @@ namespace IST.WebApi2.Controllers
 
         // GET: api/UserBaseData
         //[HttpGet]
-        //public IEnumerable<RoleDDL> Get()
-        //{
-        //    var roles = usersService.GetAllRoles().Select(x => x.MapRoleFromServerToClient()).ToList();
-        //    return roles;
-        //}
+        public IEnumerable<RoleDDL> GetRoles()
+        {
+            var roles = usersService.GetAllRoles().Select(x => x.MapRoleFromServerToClient()).ToList();
+            return roles;
+        }
 
         [HttpGet]
         public IHttpActionResult GetUser(string userName)

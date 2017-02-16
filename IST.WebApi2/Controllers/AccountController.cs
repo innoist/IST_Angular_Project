@@ -11,7 +11,9 @@ using Microsoft.Owin.Security;
 using IST.Models.IdentityModels;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -389,7 +391,7 @@ namespace IST.WebApi2.Controllers
         }
 
         // POST api/Account/Register
-        [Authorize(Roles = "Admin, SystemAdministrator")]
+        [Authorize(Roles = "Admin")]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
@@ -399,27 +401,40 @@ namespace IST.WebApi2.Controllers
             }
 
             var existingUser = await UserManager.FindByNameAsync(model.Username);
-            //Update Case
-            #region Update User
+
+            //update case
             if (existingUser != null)
             {
-                //if(existingUser == null)
-                //    throw new Exception("User not found.");
-
                 existingUser.Telephone = model.Telephone;
                 existingUser.Address = model.Address;
                 existingUser.FirstName = model.FirstName;
                 existingUser.LastName = model.LastName;
                 existingUser.Email = model.Email;
                 existingUser.UserName = model.Username;
+                if (model.Password != null)
+                {
+                    UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
 
+                    userManager.RemovePassword(existingUser.Id);
+
+                    userManager.AddPassword(existingUser.Id, model.Password);
+                }
                 var updateResult = await UserManager.UpdateAsync(existingUser);
+
                 if (updateResult.Succeeded)
+                {
+                    var oldRoleName = existingUser.AspNetRoles.SingleOrDefault()?.Name;
+
+                    if (oldRoleName != model.RoleId)
+                    {
+                        await UserManager.RemoveFromRoleAsync(existingUser.Id, oldRoleName);
+                        await UserManager.AddToRoleAsync(existingUser.Id, model.RoleId);
+                    }
                     return Ok(updateResult.Succeeded);
+                }
 
                 return InternalServerError(new Exception("User not updated."));
             }
-            #endregion
 
             var user = new AspNetUser
             {
@@ -435,13 +450,15 @@ namespace IST.WebApi2.Controllers
             if (string.IsNullOrEmpty(model.Password))
                 model.Password = "123456";
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var newuser = await UserManager.FindByNameAsync(model.Username);
+
             if (result.Succeeded)
             {
+                await UserManager.AddToRoleAsync(newuser.Id, model.RoleId);
                 await SendAccountCredentials(model.Email, user.UserName, model.Password);
                 return Ok(true);
             }
             return GetErrorResult(result);
-
         }
 
         // POST api/Account/RegisterExternal

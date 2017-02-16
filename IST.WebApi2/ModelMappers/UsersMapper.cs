@@ -1,4 +1,5 @@
-﻿using IST.Models.IdentityModels;
+﻿using System.Linq;
+using IST.Models.IdentityModels;
 using IST.WebApi2.Models;
 
 namespace IST.WebApi2.ModelMappers
@@ -18,6 +19,7 @@ namespace IST.WebApi2.ModelMappers
                 LastName = source.LastName,
                 Telephone = source.Telephone,
                 UserName = source.UserName,
+                Role = source.AspNetRoles.FirstOrDefault()?.Id
             };
             return toReturn;
         }

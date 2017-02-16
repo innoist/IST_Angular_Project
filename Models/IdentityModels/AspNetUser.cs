@@ -32,7 +32,6 @@ namespace IST.Models.IdentityModels
         public string LastName { get; set; }
         public string Telephone { get; set; }
         public string UserComments { get; set; }
-        public int TimeOffset { get; set; }
 
         public virtual ICollection<UserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<UserLogin> AspNetUserLogins { get; set; }
