@@ -223,15 +223,15 @@
                 title: 'Change Password',
                 templateUrl: helper.basepath('../../../../app/views/Users/ChangePassword.html'),
                 controller: 'changePasswordController',
-                controllerAs: 'changePassword',
-                resolve: helper.resolveFor('changePassword.module')
+                controllerAs: 'cpc',
+                resolve: helper.resolveFor('oitozero.ngSweetAlert', 'changePassword.module')
             })
             .state('app.rightsManagement', {
                 url: '/RightsManagement',
                 title: 'Rights Management',
-                templateUrl: helper.basepath('../../../../app/views/RightsManagement/index.html'),
+                templateUrl: helper.basepath('../../../../app/views/RightsManagement/RightManagement.html'),
                 controller: 'RightsManagementController',
-                controllerAs: 'rightsManagement',
+                controllerAs: 'rmc',
                 resolve: helper.resolveFor('rightsManagement.module', 'ui.grid', 'loaders.css', 'spinkit', 'ui.select')
             })
 
@@ -263,7 +263,7 @@
                 title: 'Recover',
                 templateUrl: 'app/Views/Users/Recover.html',
                 controller: 'ForgotPasswordController',
-                controllerAs: 'forgotPassword',
+                controllerAs: 'fpc',
                 resolve: helper.resolveFor('recover.module')
             })
             .state('account.lock', {

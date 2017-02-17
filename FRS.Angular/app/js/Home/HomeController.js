@@ -23,18 +23,19 @@
         var vm = this;
 
         HomeService.url = "/api/Project/";
+
         vm.apiUrl = frsApiUrl;
 
         vm.RatingId = 0;
 
         vm.ProjectId = 0;
-
+        //to show hide reply panel on project detail popup
         vm.showReply = false;
 
         vm.CategoryId = 0;
         //To show hide favorite solutions
         vm.Favorites = false;
-
+        //to store solutions
         vm.Projects = [];
         //For first call to server
         vm.firstCall = true;
@@ -180,6 +181,7 @@
             }
         }
 
+        //Filter projects on the basis of average rating
         vm.searchOnRating = function (id) {
             if ($('#' + id).is(':checked')) {
                 vm.ProjectSearchRequest.AverageRating = parseInt(id.slice(-1));
@@ -191,7 +193,6 @@
                 vm.getDataFromServer();
             }
         }
-
 
         /************************************/
         /************* Typeahead ************/

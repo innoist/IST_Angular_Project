@@ -102,10 +102,11 @@
     <Content Include="app\js\app.js" />
     <Content Include="app\js\Config.js" />
     <Content Include="app\js\RightsManagement\rightsManagement.service.js" />
-    <Content Include="app\js\RightsManagement\rightsManagement.controller.js" />
+    <Content Include="app\js\RightsManagement\rightsManagementController.js" />
     <Content Include="app\js\Modules.js" />
     <Content Include="app\js\shared\ReferenceDataService.js" />
     <Content Include="app\views\EcommerceHeader.html" />
+    <Content Include="app\views\Shared\404.html" />
     <Content Include="app\views\SolutionOwner\CreateSolutionOwner.html" />
     <Content Include="app\views\SolutionOwner\SolutionOwner.html" />
     <Content Include="app\views\SolutionType\CreateSolutionType.html" />
@@ -117,7 +118,6 @@
     <Content Include="app\views\FilterCategory\CreateFilterCategory.html" />
     <Content Include="app\views\FilterCategory\FilterCategory.html" />
     <Content Include="app\views\ProjectDetail\ProjectDetail.html" />
-    <Content Include="app\views\SignIn\SignIn.html" />
     <Content Include="app\views\EcommerceFooter.html" />
     <Content Include="app\views\Solution\Solution.html" />
     <Content Include="app\views\Solution\CreateSolution.html" />
@@ -589,7 +589,7 @@
     <Content Include="app\views\Dashboard\Dashboard.html" />
     <Content Include="app\views\Dashboard\RoomStudents.html" />
     <Content Include="app\views\static.html" />
-    <Content Include="app\views\RightsManagement\index.html" />
+    <Content Include="app\views\RightsManagement\RightManagement.html" />
     <Content Include="app\views\Users\ChangePassword.html" />
     <Content Include="app\views\Users\Profile.html" />
     <Content Include="app\views\Users\ResetPassword.html" />
@@ -705,7 +705,7 @@
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.ttf" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.woff" />
     <Content Include="vendor\weather-icons\font\weathericons-regular-webfont.woff2" />
-    <Content Include="app\js\Users\changePassword.controller.js" />
+    <Content Include="app\js\Users\changePasswordController.js" />
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\aversion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\aversion - Web Deploy.pubxml" />

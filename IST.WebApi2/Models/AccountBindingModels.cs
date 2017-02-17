@@ -112,7 +112,7 @@ namespace IST.WebApi2.Models
     public class ForgotPasswordViewModel
     {
         [Required]
-        [EmailAddress (ErrorMessage = @"Email is not valid")]
+        [EmailAddress (ErrorMessage = @"Email Address is not valid")]
         [Display(Name = @"Email")]
         public string Email { get; set; }
     }

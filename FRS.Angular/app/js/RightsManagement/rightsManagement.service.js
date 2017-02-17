@@ -12,7 +12,6 @@
     // ReSharper disable FunctionsUsedBeforeDeclared
     core.lazy.service('RightsManagementService', RightsManagementService);
 
-
     RightsManagementService.$inject = ['$http'];
     // ReSharper restore FunctionsUsedBeforeDeclared
 
@@ -20,12 +19,12 @@
     function RightsManagementService($http) {
         // ReSharper restore InconsistentNaming
 
-        this.rightsUri = window.frsApiUrl + '/api/system/RightsManagement';
+        this.rightsUri = '/api/RightsManagement/';
 
         this.get = function (data, onReady, onError) {
             onError = onError || function () { alert('Failed to load rights'); };
             $http
-              .get(this.rightsUri + "/?RoleId=" + (data || ""))
+              .get(this.rightsUri + "?RoleId=" + (data || ""))
               .success(onReady)
               .error(onError);
         }

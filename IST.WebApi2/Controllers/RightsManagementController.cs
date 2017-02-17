@@ -13,13 +13,10 @@ using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
-    [Authorize]
-    public class RightsManagementController : ApiController
+    public class RightsManagementController : BaseController
     {
         #region Private
-
         private readonly IMenuRightsService menuRightsService;
-
         #endregion
 
         #region Constructor
@@ -41,8 +38,7 @@ namespace IST.WebApi2.Controllers
 
         #region Public
 
-        [Authorize(Roles = "SystemAdministrator")]
-        [ApiException]
+        //[Authorize(Roles = "SystemAdministrator")]
         public RightsManagementViewModel Get([FromUri] RightsManagementRequest request)
         {
             if (request == null || !ModelState.IsValid)
@@ -54,7 +50,7 @@ namespace IST.WebApi2.Controllers
             RightsManagementViewModel rightsManagementViewModel = new RightsManagementViewModel
             {
                 Roles =
-                    response.Roles != null ? response.Roles.Select(role => new UserRole { Id = role.Id, Name =  role.Name }).ToList() : new List<UserRole>(),
+                    response.Roles?.Select(role => new UserRole { Id = role.Id, Name =  role.Name }).ToList() ?? new List<UserRole>(),
                 Rights = response.Menus.Select(
                     m =>
                     new Models.MenuRight
@@ -78,12 +74,10 @@ namespace IST.WebApi2.Controllers
         /// <summary>
         /// Update Rights
         /// </summary>
-        [Authorize(Roles = "SystemAdministrator")]
-        [ApiException]
-        [ValidateFilter]
+        //[Authorize(Roles = "SystemAdministrator")]
         public void Post(RightsManagementRequest request)
         {
-            if (request == null || string.IsNullOrEmpty(request.RoleId))
+            if (string.IsNullOrEmpty(request?.RoleId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }

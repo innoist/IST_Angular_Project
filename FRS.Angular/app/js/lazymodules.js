@@ -198,8 +198,8 @@
                                                              '../../vendor/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js']
               },
               {
-                  name: 'rightsManagement.module', files: ['/app/js/RightsManagement/rightsManagement.controller.js',
-                                                             '/app/js/RightsManagement/rightsManagement.service.js']
+                  name: 'rightsManagement.module', files: ['/app/js/RightsManagement/rightsManagementController.js',
+                                                            '/app/js/shared/ReferenceDataService.js']
               },
               {
                   name: 'login.module', files: ['/app/js/Users/LoginController.js']
@@ -208,7 +208,8 @@
                   name: 'register.module', files: ['/app/js/Users/RegisterController.js']
               },
               {
-                  name: 'recover.module', files: ['/app/js/Users/ForgetPasswordController.js']
+                  name: 'recover.module', files: ['/app/js/Users/ForgetPasswordController.js',
+                                                  '/app/js/shared/ReferenceDataService.js']
               },
               {
                   name: 'resetPassword.module', files: ['/app/js/Users/ResetPasswordController.js']
@@ -275,8 +276,8 @@
               }
               ,
               {
-                  name: 'changePassword.module', files: ['/app/js/Users/changePassword.controller.js',
-                                                        '/app/js/Users/changePassword.service.js']
+                  name: 'changePassword.module', files: ['/app/js/Users/changePasswordController.js',
+                                                        '/app/js/shared/ReferenceDataService.js']
               },
               {
                   name: 'partials.module', files: ['/app/js/partials/SidebarController.js',

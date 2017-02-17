@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Linq;
 using System.Web.Http;
 using System.Net.Http;
 using IST.WebApi2.Models;
@@ -11,12 +12,11 @@ using Microsoft.Owin.Security;
 using IST.Models.IdentityModels;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IST.WebApi2.Controllers
 {
@@ -40,7 +40,6 @@ namespace IST.WebApi2.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
@@ -51,11 +50,10 @@ namespace IST.WebApi2.Controllers
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin?.LoginProvider
             };
         }
 
-        // POST api/Account/Logout
         [AllowAnonymous]
         [Route("Logout")]
         public IHttpActionResult Logout()
@@ -72,7 +70,6 @@ namespace IST.WebApi2.Controllers
             return Ok();
         }
 
-        // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
@@ -84,16 +81,10 @@ namespace IST.WebApi2.Controllers
                 return null;
             }
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
-
-            foreach (UserLogin linkedAccount in user.AspNetUserLogins)
+            List<UserLoginInfoViewModel> logins = user.AspNetUserLogins.Select(linkedAccount => new UserLoginInfoViewModel
             {
-                logins.Add(new UserLoginInfoViewModel
-                {
-                    LoginProvider = linkedAccount.LoginProvider,
-                    ProviderKey = linkedAccount.ProviderKey
-                });
-            }
+                LoginProvider = linkedAccount.LoginProvider, ProviderKey = linkedAccount.ProviderKey
+            }).ToList();
 
             if (user.PasswordHash != null)
             {
@@ -113,8 +104,6 @@ namespace IST.WebApi2.Controllers
             };
         }
 
-        // POST api/Account/ChangePassword
-        [Route("ChangePassword")]
         [HttpPost]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -134,7 +123,6 @@ namespace IST.WebApi2.Controllers
             return Ok(true);
         }
 
-        // POST api/Account/ForgotPassword
         [Route("ForgotPassword", Name = "ForgotPassword")]
         [HttpPost]
         [AllowAnonymous]
@@ -159,7 +147,7 @@ namespace IST.WebApi2.Controllers
 
                 var emailTemplate = "<div style='text-align: center;'>" +
                                         "<div style='background: #3a3f51;'>" +
-                                            "<img style='height:90px' alt='Go Centralize Logo' src='http://aversiontech.com.au/app/img/preloader/preloader.empty.png'/>" +
+                                            "<img style='height:90px' alt='Go Centralize Logo' src='http://gocentralize.azurewebsites.net/app/img/gocentralized-logo.png'/>" +
                                         "</div>" +
                                     "<h2>Go Centralize</h2>" +
                                     "<p>Reset your password by clicking the link below (or copy and paste the URL into your browser):</p><br/>" +
@@ -174,7 +162,6 @@ namespace IST.WebApi2.Controllers
             return BadRequest(ModelState);
         }
 
-        // Get api/Account/ResetPassword
         [Route("ResetPassword", Name = "ResetPassword")]
         [HttpPost]
         [AllowAnonymous]
@@ -203,7 +190,6 @@ namespace IST.WebApi2.Controllers
             return BadRequest(ModelState);
         }
 
-        // POST api/Account/SetPassword
         [Route("SetPassword")]
         [AllowAnonymous]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
@@ -223,7 +209,6 @@ namespace IST.WebApi2.Controllers
             return Ok();
         }
 
-        // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
@@ -261,7 +246,6 @@ namespace IST.WebApi2.Controllers
             return Ok();
         }
 
-        // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
@@ -290,7 +274,6 @@ namespace IST.WebApi2.Controllers
             return Ok();
         }
 
-        // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
@@ -349,7 +332,6 @@ namespace IST.WebApi2.Controllers
             return Ok();
         }
 
-        // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
         [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
@@ -390,7 +372,6 @@ namespace IST.WebApi2.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
         [Authorize(Roles = "Admin")]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
@@ -461,7 +442,6 @@ namespace IST.WebApi2.Controllers
             return GetErrorResult(result);
         }
 
-        // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
@@ -613,7 +593,7 @@ namespace IST.WebApi2.Controllers
 
                 if (strengthInBits % bitsPerByte != 0)
                 {
-                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
+                    throw new ArgumentException(@"strengthInBits must be evenly divisible by 8.", nameof(strengthInBits));
                 }
 
                 int strengthInBytes = strengthInBits / bitsPerByte;

@@ -33,7 +33,7 @@
                 vm.authMsg = '';
 
                 if (vm.loginForm.$valid) {
-                    var data = "grant_type=password&username=" + vm.account.email + "&password=" + vm.account.password + "&userTimeZone=" + (new Date()).getTimezoneOffset();
+                    var data = "grant_type=password&username=" + vm.account.email + "&password=" + vm.account.password;
                     vm.submitButton = true;
                     $http
                         .post(window.frsApiUrl + '/token', data, {
@@ -59,25 +59,30 @@
                             $http.defaults.headers.common = {
                                 'Authorization': 'Bearer ' + $localStorage['authorizationData'].token
                             };
-                            $("div#mainSpinner").hide();
+
                             switch (response.UserRole) {
                                 case 'Admin':
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
-                                    else {
-                                        //$state.go('app.dashboard');
+                                    else 
                                         $state.go('home.index');
-                                    }
                                     break;
-                                case 'Client':
+                                case 'User':
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
                                     else
-                                        //$state.go('app.prepareMeals');
                                         $state.go('home.index');
                                     break;
-                                case 'SystemAdministrator':
-                                    //$state.go('app.adminDashboard');
+                                case 'Solution Editor':
+                                    if ($stateParams.returnUrl)
+                                        $state.go($stateParams.returnUrl);
+                                    else
+                                    $state.go('home.index');
+                                    break;
+                                case 'Solution Manager':
+                                    if ($stateParams.returnUrl)
+                                        $state.go($stateParams.returnUrl);
+                                    else
                                     $state.go('home.index');
                                     break;
                             }

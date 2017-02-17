@@ -3,31 +3,41 @@
     <div class="panel panel-dark panel-flat">
         <div class="panel-heading text-center">
             <a ui-sref="account.login">
-                <img src="/app/img/preloader/preloader.empty.png" alt="Image" height="80" class="block-center img-rounded" />
+                <img src="/app/img/gocentralized-logo.png" alt="Image" height="80" class="block-center img-rounded" />
             </a>
         </div>
         <div class="panel-body">
          <p class="text-center pv">FORGOT PASSWORD</p>
-            <form role="form" name="forgotPassword.recoverForm" novalidate="" class="form-validate" ng-submit="forgotPassword.recoverPassword()">
-              <p class="text-center">Enter your e-mail address to receive the link, to reset your password.</p>
-                <div class="form-group has-feedback">
-                    <label class="text-muted">Email address</label>
-                    <input type="email" name="email" placeholder="Enter email" autocomplete="off" ng-model="forgotPassword.Email" required="" class="form-control" ng-disabled="forgotPassword.submitButton" />
+            <form role="form" name="fpc.recoverForm" novalidate="" class="form-validate" ng-submit="fpc.recoverPassword()">
+                <p class="text-center">Enter your e-mail address to receive the link, to reset your password.</p>
+                <br/>
+                <div class="form-group has-feedback" ng-class="{'has-error': (fpc.recoverForm.email.$dirty && fpc.recoverForm.email.$error.required) || (fpc.recoverForm.email.$dirty && fpc.recoverForm.email.$error.email)}">
+                    <!--<label class="text-muted">Email address</label>-->
+                    <input type="email"
+                           name="email"
+                           placeholder="Email Address"
+                           autocomplete="off"
+                           ng-model="fpc.Email"
+                           required=""
+                           uib-tooltip="{{fpc.recoverForm.email.$dirty && fpc.recoverForm.email.$error.required? 'Please enter email address': fpc.recoverForm.email.$dirty && fpc.recoverForm.email.$error.email? 'Please enter a valid email address': ''}}"
+                           tooltip-class="tooltip-danger"
+                           tooltip-placement="left"
+                           class="form-control"/>
                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
-                    <span ng-show="forgotPassword.recoverForm.email.$dirty &amp;&amp; forgotPassword.recoverForm.email.$error.required" class="text-danger">This field is required</span>
-                    <span ng-show="forgotPassword.recoverForm.email.$dirty &amp;&amp; forgotPassword.recoverForm.email.$error.email" class="text-danger">This field must be a valid email address</span>
+                    <!--<span ng-show="fpc.recoverForm.email.$dirty &amp;&amp; fpc.recoverForm.email.$error.required" class="text-danger">This field is required</span>-->
+                    <!--<span ng-show="fpc.recoverForm.email.$dirty &amp;&amp; fpc.recoverForm.email.$error.email" class="text-danger">This field must be a valid email address</span>-->
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" ng-disabled="forgotPassword.submitButton">Reset</button>
+                <button type="submit" class="btn btn-green btn-block" ng-disabled="(fpc.recoverForm.email.$dirty && fpc.recoverForm.email.$error.required) || (fpc.recoverForm.email.$dirty && fpc.recoverForm.email.$error.email)">Reset</button>
             </form>
             <br />
-            <div ng-show="forgotPassword.authMsg" class="text-left col-md-12">
-                <div class="alert row" ng-class="{'alert-danger' : forgotPassword.hasError, 'alert-success' : !forgotPassword.hasError}">
+            <div ng-show="fpc.authMsg" class="text-left col-md-12">
+                <div class="alert row" ng-class="{'alert-danger' : fpc.hasError, 'alert-success' : !fpc.hasError}">
                     <div class="col-md-2">
-                        <i class="fa fa-2x"
-                           ng-class="{'fa-exclamation-triangle' : forgotPassword.hasError, 'fa-check-square' : !forgotPassword.hasError}">
+                        <i class="fa fa-1x"
+                           ng-class="{'fa-exclamation-triangle' : fpc.hasError, 'fa-check-square' : !fpc.hasError, 'margin-top15': !fpc.hasError}">
                         </i>
                     </div>
-                    <div class="col-md-10" ng-bind-html="forgotPassword.authMsg"></div>
+                    <div class="col-md-10" ng-bind-html="fpc.authMsg"></div>
                 </div>
             </div>
         </div>
