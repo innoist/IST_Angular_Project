@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
+using IST.WebApi2.Custom_Attributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
@@ -20,14 +20,14 @@ namespace IST.WebApi2.Controllers
             this.tagGroupService = tagGroupService;
         }
 
-        // GET api/<controller>
+        [SiteAuthorize(PermissionKey = "TagGroupsDetail")]
         public IEnumerable<TagGroupModel> Get()
         {
             var taggroups = tagGroupService.GetAll()?.Select(x => x.MapFromServerToClient()).ToList();
             return taggroups;
         }
 
-        // GET api/<controller>/5
+        
         public TagGroupModel Get(int id)
         {
             var toReturn = tagGroupService.FindTagGroupById(id)?.MapFromServerToClient();
@@ -47,12 +47,13 @@ namespace IST.WebApi2.Controllers
             return Ok(status);
         }
 
-        //DELETE api/<controller>/5
+        
         public IHttpActionResult DeleteSoft(int id)
         {
             var result = tagGroupService.RemoveTagGroup(id);
             return Ok(result);
         }
+
         public IHttpActionResult DeleteCascade(int id)
         {
             var result = tagGroupService.DeleteTagGroup(id);

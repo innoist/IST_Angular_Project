@@ -29,5 +29,8 @@ namespace IST.Interfaces.IServices
         /// Returns a complete menu for client side
         /// </summary>
         IEnumerable<MenuView> GetForRole();
+
+        string FindUserId();
+        IEnumerable<string> GetUserPermissions(string userId);
     }
 }

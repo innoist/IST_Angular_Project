@@ -9,7 +9,6 @@ using IST.Models.IdentityModels;
 using IST.Models.MenuModels;
 using IST.Models.RequestModels;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {

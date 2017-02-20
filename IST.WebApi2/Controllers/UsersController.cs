@@ -4,9 +4,9 @@ using System.Web;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.RequestModels;
+using IST.WebApi2.Custom_Attributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
@@ -28,7 +28,7 @@ namespace IST.WebApi2.Controllers
 
         #region Public
 
-        [ApiException]
+        [SiteAuthorize(PermissionKey = "UsersDetail")]
         public UsersListViewModel Get([FromUri]UsersSearchRequest searchRequest)
         {
             if (searchRequest == null || !ModelState.IsValid)

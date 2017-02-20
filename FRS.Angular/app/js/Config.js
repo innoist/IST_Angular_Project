@@ -272,9 +272,9 @@
                 templateUrl: 'app/Views/Users/Lock.html'
             })
             .state('account.404', {
-                url: '/404',
+                url: '/401',
                 title: 'Not Found',
-                templateUrl: 'app/pages/404.html'
+                templateUrl: 'app/views/Shared/404.html'
             })
             .state('account.ResetPassword', {
                 url: '/ResetPassword?:email:code',

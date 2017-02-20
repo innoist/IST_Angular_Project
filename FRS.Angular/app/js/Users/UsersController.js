@@ -48,7 +48,10 @@
             url: frsApiUrl + UsersService.url,
             type: 'GET',
             complete: function (data) {
-                $.unblockUI();
+                if (data.responseJSON.ExceptionMessage === '401') {
+                    $.unblockUI();
+                    $state.go('account.404');
+                }
             }
         })
         .withDataProp('Data')

@@ -47,6 +47,7 @@
         vm.endOfSolutions = false;
         //To store current project location
         vm.ProjectLocation = '';
+
         vm.SolutionRatingModel = {};
 
         vm.ProjectSearchRequest = {
@@ -57,6 +58,7 @@
             ClientRequest: HomeService.url
         }
 
+        //to show filled stars for average rating after save rating for solution
         var selectedStars = function (project) {
             project.RoundRating = Math.round(project.AverageRating);
             var j = 1;
@@ -213,6 +215,7 @@
                     });
         }
 
+        //on scroll load solutions
         vm.IsDataLoaded = false;
         $(window).scroll(function () {
 
@@ -347,6 +350,7 @@
         }
         //#endregion
 
+        //to save rating of solutions given by specific user
         vm.SaveSolutionRating = function (projectid, isreply) {
             angular.element('#client-wrapper').toggleClass('position-fixed');
             if (isreply) {
@@ -383,6 +387,7 @@
             }
         }
 
+        //save which user click which solution
         vm.SaveClickActivity = function (projectId) {
             if (projectId) {
                 vm.SolutionModel = {};
@@ -394,6 +399,7 @@
             }
         }
 
+        //to save which user share which solution
         vm.SaveShareActivity = function () {
             if (vm.ProjectId) {
                 vm.EmailModel = {};
@@ -414,6 +420,7 @@
             }
         }
 
+        //lightbox
         vm.showLightboxImage = function (id) {
             event.preventDefault();
             $('#lightbox' + id).ekkoLightbox();
@@ -424,6 +431,7 @@
             vm.showReply = true;
         }
 
+        //reset search string
         vm.resetdata = function () {
             if (vm.searchString) {
                 vm.searchString = '';
@@ -432,7 +440,7 @@
                 vm.getDataFromServer();
             }
         }
-
+        //reset filters and rating
         vm.resetAllFilters = function () {
             var filtersarr = vm.ProjectSearchRequest.FilterIds;
             angular.forEach(filtersarr, function (id) {

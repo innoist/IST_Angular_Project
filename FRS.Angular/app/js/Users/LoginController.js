@@ -62,24 +62,28 @@
 
                             switch (response.UserRole) {
                                 case 'Admin':
+                                    $rootScope.CurrentUserRole = 'Admin';
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
                                     else 
                                         $state.go('home.index');
                                     break;
                                 case 'User':
+                                    $rootScope.CurrentUserRole = 'User';
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
                                     else
                                         $state.go('home.index');
                                     break;
                                 case 'Solution Editor':
+                                    $rootScope.CurrentUserRole = 'Editor';
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
                                     else
                                     $state.go('home.index');
                                     break;
                                 case 'Solution Manager':
+                                    $rootScope.CurrentUserRole = 'Manager';
                                     if ($stateParams.returnUrl)
                                         $state.go($stateParams.returnUrl);
                                     else

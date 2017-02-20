@@ -1,20 +1,40 @@
-﻿<div class="row space-top-8 space-8 row-table">
-    <div class="col-5 col-middle">
-        <h1 class="text-jumbo text-ginormous">Oops!</h1>
-        <h2>We can't seem to find the page you're looking for.</h2>
-        <h6>Error code: 404</h6>
-        <ul class="list-unstyled">
-            <li>Here are some helpful links instead:</li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/search">Search</a></li>
-            <li><a href="/help">Help</a></li>
-            <li><a href="/help/getting-started/how-to-travel">Traveling on Airbnb</a></li>
-            <li><a href="/info/why_host">Hosting on Airbnb</a></li>
-            <li><a href="/trust">Trust &amp; Safety</a></li>
-            <li><a href="/sitemaps">Sitemap</a></li>
-        </ul>
+﻿<div class="abs-center wd-xl">
+    <!-- START panel-->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="text-center mb-xl">
+        <div class="text-lg mb-lg">401</div>
+        <p class="lead m0">You aren't authorize to access this page.</p>
+        <p>Contact with administrator.</p>
     </div>
-    <div class="col-5 col-middle text-center">
-        <img src="https://a0.muscache.com/airbnb/static/error_pages/404-Airbnb_final-d652ff855b1335dd3eedc3baa8dc8b69.gif" width="313" height="428" alt="Girl has dropped her ice cream.">
+    <!--<div class="input-group mb-xl">
+        <input type="text" placeholder="Try with a search" class="form-control" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default">
+                <em class="fa fa-search"></em>
+            </button>
+        </span>
+    </div>-->
+    <ul class="list-inline text-center text-sm mb-xl">
+        <li>
+            <a ui-sref="home.index" class="text-muted">Go to App</a>
+        </li>
+        <!--<li class="text-muted">|</li>
+        <li><a href="" ui-sref="page.login" class="text-muted">Login</a>
+        </li>
+        <li class="text-muted">|</li>
+        <li><a href="" ui-sref="page.register" class="text-muted">Register</a>
+        </li>-->
+    </ul>
+    <div class="p-lg text-center">
+        <span>&copy;</span>
+        <span ng-bind="app.year"></span>
+        <span>-</span>
+        <span ng-bind="app.name"></span>
+        <br />
+        <span ng-bind="app.description"></span>
     </div>
 </div>

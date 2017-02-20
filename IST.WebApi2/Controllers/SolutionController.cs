@@ -7,9 +7,9 @@ using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.RequestModels;
 using IST.Models.ResponseModels;
+using IST.WebApi2.Custom_Attributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 using Newtonsoft.Json;
 
 namespace IST.WebApi2.Controllers
@@ -33,8 +33,8 @@ namespace IST.WebApi2.Controllers
         #endregion
 
         #region Public
-
-        [ValidateFilter]
+        [SiteAuthorize(PermissionKey = "SolutionsDetail")]
+        //[ValidateFilter]
         public IHttpActionResult Get([FromUri]SolutionSearchRequest searchRequest)
         {
             if (searchRequest == null || !ModelState.IsValid)

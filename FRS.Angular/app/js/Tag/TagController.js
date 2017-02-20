@@ -43,6 +43,11 @@
                     vm.Tags = response;
                     vm.IsDataLoaded = true;
                 }
+            }, function (response) {
+                $.unblockUI();
+                if (response.ExceptionMessage === '401') {
+                    $state.go('account.404');
+                }
             });
 
             vm.dtOptions = DTOptionsBuilder.newOptions()

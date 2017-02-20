@@ -47,8 +47,11 @@
             },
             url: frsApiUrl + "/api/Solution/",
             type: 'GET',
-            complete: function (data) {
-                $.unblockUI();
+            complete: function(data) {
+                if (data.responseJSON.ExceptionMessage==='401') {
+                    $.unblockUI();
+                    $state.go('account.404');
+                }
             }
         })
         .withDataProp('Data')

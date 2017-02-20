@@ -5,7 +5,7 @@ using IST.ExceptionHandling;
 using IST.Interfaces.IServices;
 using Newtonsoft.Json;
 
-namespace IST.WebBase.Mvc
+namespace IST.WebApi2.Custom_Attributes
 {
     /// <summary>
     /// Api Exception filter attribute for Api controller methods
@@ -53,7 +53,7 @@ namespace IST.WebBase.Mvc
         {
             ISTExceptionContent contents = new ISTExceptionContent
             {
-                Message = string.IsNullOrEmpty(filterContext.Exception.Message) ? Resources.GeneralErrors.ErrorPerformingOperation : filterContext.Exception.Message
+                Message = string.IsNullOrEmpty(filterContext.Exception.Message) ? "There is some problem while performing this operation." : filterContext.Exception.Message
             };
             filterContext.Response = new HttpResponseMessage
             {

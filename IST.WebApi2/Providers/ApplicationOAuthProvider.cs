@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IST.Interfaces.IServices;
 using IST.Models.IdentityModels;
+using IST.Models.MenuModels;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Practices.Unity;
 
 namespace IST.WebApi2.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
-        private readonly string _publicClientId;
+        private readonly string publicClientId;
         public ApplicationOAuthProvider(string publicClientId)
         {
             if (publicClientId == null)
             {
-                throw new ArgumentNullException("publicClientId");
+                throw new ArgumentNullException(nameof(publicClientId));
             }
-            _publicClientId = publicClientId;
+            this.publicClientId = publicClientId;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -50,7 +53,7 @@ namespace IST.WebApi2.Providers
                    OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                     CookieAuthenticationDefaults.AuthenticationType);
-
+                SetUserPermissions(user, context);
                 var props = new AuthenticationProperties(new Dictionary<string, string>
                 {
                     {
@@ -77,7 +80,7 @@ namespace IST.WebApi2.Providers
                 context.Validated(ticket);
                 context.Request.Context.Authentication.SignIn(cookiesIdentity);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 context.SetError("invalid_grant", "Something went wrong while signing in. Contact Development Team");
             }
@@ -107,7 +110,7 @@ namespace IST.WebApi2.Providers
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            if (context.ClientId == _publicClientId)
+            if (context.ClientId == publicClientId)
             {
                 Uri expectedRootUri = new Uri(context.Request.Uri, "/");
 
@@ -127,6 +130,27 @@ namespace IST.WebApi2.Providers
                 { "userName", userName }
             };
             return new AuthenticationProperties(data);
+        }
+
+        private void SetUserPermissions(AspNetUser userResult, OAuthGrantResourceOwnerCredentialsContext context)
+        {
+            try
+            {
+                var role = userResult.AspNetRoles.FirstOrDefault();
+                var menuRightsService = UnityConfig.Container.Resolve<IMenuRightsService>();
+                IList<MenuRight> userRights = menuRightsService.FindMenuItemsByRoleId(role?.Id).ToList();
+
+                var userPermisions = TCache<List<string>>.Get(userResult.Id, 300, () =>
+                    userRights.Select(user => user.Menu.PermissionKey).ToList());
+                if (userPermisions != null && userPermisions.Count != 0)
+                {
+                    context.Request.Environment.Add(userResult.Id, userPermisions);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

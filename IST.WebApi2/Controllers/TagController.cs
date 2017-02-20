@@ -3,9 +3,9 @@ using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.Common.DropDown;
+using IST.WebApi2.Custom_Attributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
@@ -26,14 +26,13 @@ namespace IST.WebApi2.Controllers
 
         #region Public
 
-        // GET api/<controller>
+        [SiteAuthorize(PermissionKey = "TagsDetail")]
         public IEnumerable<TagModel> Get()
         {
             var tags = tagService.GetAll()?.Select(x => x.MapFromServerToClient()).ToList();
             return tags;
         }
 
-        // GET api/<controller>/5
         public IHttpActionResult Get(int id)
         {
             var toReturn = new TagViewModel
@@ -44,7 +43,6 @@ namespace IST.WebApi2.Controllers
             return Ok(toReturn);
         }
 
-        // POST api/<controller>
         [HttpPost]
         [ValidateFilter]
         public IHttpActionResult Post(TagModel model)

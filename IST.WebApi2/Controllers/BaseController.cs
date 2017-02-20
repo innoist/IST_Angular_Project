@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Web.Http;
-using IST.WebBase.Mvc;
 using Microsoft.AspNet.Identity;
 
 namespace IST.WebApi2.Controllers
 {
     [RoutePrefix("api/Account")]
     [Authorize]
-    [ApiException]
+    [Custom_Attributes.ApiException]
     public class BaseController : ApiController
     {
         protected void SetAllValues(Models.BaseModel model)

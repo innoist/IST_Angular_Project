@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
+using IST.WebApi2.Custom_Attributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
@@ -19,7 +19,7 @@ namespace IST.WebApi2.Controllers
         {
             this.filterCategoryService = filterCategoryService;
         }
-
+        [SiteAuthorize(PermissionKey = "FilterCategoriesDetail")]
         public IEnumerable<FilterCategoryModel> Get()
         {
             var filterCategories = filterCategoryService.GetAll()?.Select(x => x.MapFromServerToClient()).ToList();

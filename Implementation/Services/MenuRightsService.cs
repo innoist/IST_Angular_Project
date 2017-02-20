@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Web;
 using IST.Commons;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.IdentityModels;
 using IST.Models.MenuModels;
+using Microsoft.AspNet.Identity;
 
 namespace IST.Implementation.Services
 {
@@ -18,14 +20,14 @@ namespace IST.Implementation.Services
         #region Private
         private readonly IMenuRightRepository menuRightRepository;
         private readonly IMenuRepository menuRepository;
-
+        private readonly IUserRepository userRepository;
         #endregion
 
         #region Constructor
         /// <summary>
         /// Constructor
         /// </summary>
-        public MenuRightsService(IMenuRightRepository menuRightRepository, IMenuRepository menuRepository)
+        public MenuRightsService(IMenuRightRepository menuRightRepository, IMenuRepository menuRepository, IUserRepository userRepository)
         {
             if (menuRightRepository == null)
             {
@@ -38,6 +40,7 @@ namespace IST.Implementation.Services
 
             this.menuRightRepository = menuRightRepository;
             this.menuRepository = menuRepository;
+            this.userRepository = userRepository;
         }
 
         #endregion
@@ -166,6 +169,21 @@ namespace IST.Implementation.Services
                 }
             }
             return menuViews;
+        }
+
+        public string FindUserId()
+        {
+            return HttpContext.Current.User.Identity.GetUserId();
+        }
+
+        public IEnumerable<string> GetUserPermissions(string userId)
+        {
+            var user = userRepository.FindUserById(userId);
+            var role = user.AspNetRoles.FirstOrDefault();
+            var userRights = FindMenuItemsByRoleId(role?.Id);
+            var permissions = userRights.Select(x => x.Menu.PermissionKey).ToList();
+
+            return permissions;
         }
 
         #endregion

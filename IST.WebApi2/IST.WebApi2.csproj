@@ -329,11 +329,20 @@
     <Compile Include="Models\UsersListViewModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="MultipartMediaTypeFormatter.cs" />
+    <Compile Include="Custom Attributes\ApiException.cs" />
+    <Compile Include="Custom Attributes\LogExceptionFilterAttribute.cs" />
+    <Compile Include="Custom Attributes\LoggerCategories.cs" />
+    <Compile Include="Custom Attributes\SecurityExceptionFilter.cs" />
+    <Compile Include="Custom Attributes\SiteAuthorizeAttribute.cs" />
+    <Compile Include="Custom Attributes\ValidateFilterAttribute.cs" />
+    <Compile Include="Custom Attributes\WebApiAuthenticationChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TCache.cs" />
+    <Compile Include="TypeRegistrations.cs" />
+    <Compile Include="WebApi\JsonNetFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -449,10 +458,6 @@
     <ProjectReference Include="..\Repository\IST.Repository.csproj">
       <Project>{852bdc39-3388-4cb1-a959-f3bd06e9df92}</Project>
       <Name>IST.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebBase\IST.WebBase.csproj">
-      <Project>{bcb8bcfd-0163-430c-8088-224074d6e384}</Project>
-      <Name>IST.WebBase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

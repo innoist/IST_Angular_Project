@@ -3,9 +3,9 @@ using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.Common.DropDown;
+using IST.WebApi2.Custom_Attributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
-using IST.WebBase.Mvc;
 
 namespace IST.WebApi2.Controllers
 {
@@ -26,14 +26,14 @@ namespace IST.WebApi2.Controllers
 
         #region Public
 
-        // GET api/<controller>
+        [SiteAuthorize(PermissionKey = "FiltersDetail")]
         public IEnumerable<FilterModel> Get()
         {
             var filters = filterService.GetAll()?.Select(x => x.MapFromServerToClient()).ToList();
             return filters;
         }
 
-        // GET api/<controller>/5
+        
         public IHttpActionResult Get(int id)
         {
             var toReturn = new FilterViewModel
