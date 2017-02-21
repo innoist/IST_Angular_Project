@@ -42,7 +42,7 @@
             })
             .state('home', {
                 url: '/home',
-                templateUrl: helper.basepath('../../../../app/views/static.html'),
+                templateUrl: helper.basepath('../../../../app/views/Shared/static.html'),
                 controller: ['$rootScope', '$localStorage', '$scope', function ($rootScope, $localStorage, $scope) {
                     $rootScope.app.layout.isBoxed = false;
                     if ($localStorage['authorizationData'] && $localStorage['authorizationData'].isAuthenticated) {
@@ -59,12 +59,6 @@
                 controllerAs: 'hc',
                 templateUrl: helper.basepath('../../../../app/views/Home/home.html'),
                 resolve: helper.resolveFor('Home.module', 'oitozero.ngSweetAlert', 'toaster', 'datatables', 'slimscroll', 'login.module')
-            })
-            .state('home.signin', {
-                url: '/SignIn?:returnUrl',
-                title: 'Sign In',
-                templateUrl: helper.basepath('../../../../app/views/SignIn/SignIn.html'),
-                resolve: helper.resolveFor('flot-chart', 'flot-chart-plugins', 'weather-icons', 'login.module', 'slimscroll')
             })
             .state('app.dashboard', {
                 url: '/dashboard',
@@ -246,6 +240,7 @@
                     }
                 ]
             })
+
             .state('account.login', {
                 url: '/login?:returnUrl',
                 title: 'Login',
@@ -258,6 +253,7 @@
                 templateUrl: 'app/Views/Users/Register.html',
                 resolve: helper.resolveFor('register.module')
             })
+
             .state('account.recover', {
                 url: '/recover',
                 title: 'Recover',

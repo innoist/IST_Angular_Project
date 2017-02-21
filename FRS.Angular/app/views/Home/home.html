@@ -1,5 +1,5 @@
 ﻿<!--=== Header v5 ===-->
-<div ng-include="'../../app/views/EcommerceHeader.html'"></div>
+<div ng-include="'../../app/views/Shared/EcommerceHeader.html'"></div>
 
 <!--=== Content Part ===-->
 <div class="content container">
@@ -148,11 +148,12 @@
             <!--/end filter results-->
             <div ng-if="hc.endOfSolutions && hc.Projects.length" class="filter-by-block col-md-12 padding-leftright30" style="text-align: center">
                 <h4>End of results!</h4>
+
+                <span>&copy; {{app.year}} - {{ app.name }}</span>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Popup for send to friend -->
 <div class="g-popup-wrapper" id="sendtofriend">
     <div class="g-popup g-popup--discount min-height-480 col-md-5">

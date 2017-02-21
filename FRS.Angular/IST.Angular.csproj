@@ -105,8 +105,9 @@
     <Content Include="app\js\RightsManagement\rightsManagementController.js" />
     <Content Include="app\js\Modules.js" />
     <Content Include="app\js\shared\ReferenceDataService.js" />
-    <Content Include="app\views\EcommerceHeader.html" />
     <Content Include="app\views\Shared\401.html" />
+    <Content Include="app\views\Shared\EcommerceHeader.html" />
+    <Content Include="app\views\Shared\static.html" />
     <Content Include="app\views\SolutionOwner\CreateSolutionOwner.html" />
     <Content Include="app\views\SolutionOwner\SolutionOwner.html" />
     <Content Include="app\views\SolutionType\CreateSolutionType.html" />
@@ -117,8 +118,6 @@
     <Content Include="app\views\Filter\Filter.html" />
     <Content Include="app\views\FilterCategory\CreateFilterCategory.html" />
     <Content Include="app\views\FilterCategory\FilterCategory.html" />
-    <Content Include="app\views\ProjectDetail\ProjectDetail.html" />
-    <Content Include="app\views\EcommerceFooter.html" />
     <Content Include="app\views\Solution\Solution.html" />
     <Content Include="app\views\Solution\CreateSolution.html" />
     <Content Include="app\views\TagGroup\CreateTagGroup.html" />
@@ -588,7 +587,6 @@
     <Content Include="app\views\dashboard-admin.html" />
     <Content Include="app\views\Dashboard\Dashboard.html" />
     <Content Include="app\views\Dashboard\RoomStudents.html" />
-    <Content Include="app\views\static.html" />
     <Content Include="app\views\RightsManagement\RightManagement.html" />
     <Content Include="app\views\Users\ChangePassword.html" />
     <Content Include="app\views\Users\Profile.html" />
@@ -752,7 +750,6 @@
     <Content Include="app\img\logo1.png" />
     <Content Include="app\img\mb-sample.jpg" />
     <Content Include="app\img\mockup.png" />
-    <Content Include="app\img\profile-bg.jpg" />
     <Content Include="app\img\user\01.jpg" />
     <Content Include="app\img\user\02.jpg" />
     <Content Include="app\img\user\03.jpg" />
@@ -795,8 +792,6 @@
     <Content Include="app\views\partials\sidebar.html" />
     <Content Include="app\views\partials\top-navbar-h.html" />
     <Content Include="app\views\partials\top-navbar.html" />
-    <Content Include="app\views\profile.html" />
-    <Content Include="app\views\template.html" />
     <Content Include="index.html" />
     <Content Include="vendor\ag-grid\dist\ag-grid.css" />
     <Content Include="vendor\ag-grid\dist\ag-grid.js" />

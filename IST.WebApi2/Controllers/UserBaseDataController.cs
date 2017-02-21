@@ -14,15 +14,13 @@ namespace IST.WebApi2.Controllers
 
         private readonly IUsersService usersService;
 
+        #endregion
+
         public UserBaseDataController(IUsersService usersService)
         {
             this.usersService = usersService;
         }
 
-        #endregion
-
-        // GET: api/UserBaseData
-        //[HttpGet]
         public IEnumerable<RoleDDL> GetRoles()
         {
             var roles = usersService.GetAllRoles().Select(x => x.MapRoleFromServerToClient()).ToList();

@@ -2042,7 +2042,6 @@
             ,
             link: link
         };
-        $("div#mainSpinner").hide();
         return directive;
 
         ///////

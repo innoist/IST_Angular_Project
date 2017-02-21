@@ -19,7 +19,7 @@
                     <ui-select-match placeholder="Select a Role">
                         {{$select.selected.Name}}
                     </ui-select-match>
-                    <ui-select-choices repeat="role in rmc.roles | propsFilter: {Name: $select.search}" class="animated fadeInDown">
+                    <ui-select-choices repeat="role in rmc.roles | propsFilter: {Name: $select.search}" class="animated flipInX">
                         <div ng-bind-html="role.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
