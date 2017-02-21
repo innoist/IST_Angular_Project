@@ -46,7 +46,7 @@
             }, function (response) {
                 $.unblockUI();
                 if (response.ExceptionMessage === '401') {
-                    $state.go('account.404');
+                    $state.go('account.401');
                 }
             });
 
@@ -87,8 +87,6 @@
                                     vm.Tags.splice(index, 1);
                                     toaster.success("", "Deleted successfully.");
                                     TagService.url = "/api/Tag/";
-                                } else {
-                                    toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
                                 }
                             });
                         }
@@ -100,7 +98,7 @@
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#ee3d3d',
-                        confirmButtonText: 'Yes, Delete!',
+                        confirmButtonText: 'Yes, Remove!',
                         cancelButtonText: 'No!',
                         closeOnConfirm: true,
                         closeOnCancel: true
@@ -112,10 +110,8 @@
                                 if (response) {
                                     var index = vm.Tags.indexOf(tag);
                                     vm.Tags.splice(index, 1);
-                                    toaster.success("", "Deleted successfully.");
+                                    toaster.success("", "Removed successfully.");
                                     TagService.url = "/api/Tag/";
-                                } else {
-                                    toaster.error("Notification", "You cannot delete " + tag.DisplayValue + " as it is being used in Tag.");
                                 }
                             });
                         }

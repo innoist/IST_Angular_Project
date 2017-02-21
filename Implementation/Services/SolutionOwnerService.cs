@@ -51,11 +51,11 @@ namespace IST.Implementation.Services
             solutionOwnerRepository.SaveChanges();
             return true;
         }
-
-        public bool UpdateSolutionOwner(SolutionOwner solutionOwner)
+        
+        public bool RemoveSolutionOwner(int solutionOwnerId)
         {
-            solutionOwnerRepository.Update(solutionOwner);
-            solutionOwnerRepository.SaveChanges();
+            BaseDbContext context = new BaseDbContext();
+            context.RemoveSolutionOwner(solutionOwnerId);
             return true;
         }
 
@@ -67,12 +67,6 @@ namespace IST.Implementation.Services
             return true;
         }
 
-        public bool RemoveSolutionOwner(int solutionOwnerId)
-        {
-            BaseDbContext context = new BaseDbContext();
-            context.DeleteSolutionOwner(solutionOwnerId);
-            return true;
-        }
         #endregion
     }
 }

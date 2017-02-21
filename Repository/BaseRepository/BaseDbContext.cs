@@ -157,22 +157,27 @@ namespace IST.Repository.BaseRepository
 
         #region Stored Procedured
 
-        public void DeleteFilter(bool deletetype, int? filterId)
+        public void RemoveFilter(int? filterId)
         {
-            var filterIdParameter = filterId.HasValue ?
-                new ObjectParameter("FilterId", filterId) :
-                new ObjectParameter("FilterId", typeof(int));
-            var deletetypeparameter = new ObjectParameter("DeleteType", deletetype);
+            //var filterIdParameter = filterId.HasValue ?
+            //    new ObjectParameter("FilterId", filterId) :
+            //    new ObjectParameter("FilterId", typeof(int));
+            //var deletetypeparameter = new ObjectParameter("DeleteType", deletetype);
 
             //((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFilter", deletetypeparameter, filterIdParameter);
+            var idParameter = filterId.HasValue ?
+                new ObjectParameter("FilterId", filterId) :
+                new ObjectParameter("FilterId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveFilter", idParameter);
         }
 
-        public void DeleteFilterCategory(bool deletetype, int? filterCategoryId)
+        public void RemoveFilterCategory(int? filterCategoryId)
         {
-            var filterCategoryIdParameter = filterCategoryId.HasValue
-                 ? new ObjectParameter("FilterCategoryId", filterCategoryId)
-                 : new ObjectParameter("FilterCategoryId", typeof(int));
-            var deletetypeparameter = new ObjectParameter("DeleteType", deletetype);
+            //var filterCategoryIdParameter = filterCategoryId.HasValue
+            //     ? new ObjectParameter("FilterCategoryId", filterCategoryId)
+            //     : new ObjectParameter("FilterCategoryId", typeof(int));
+            //var deletetypeparameter = new ObjectParameter("DeleteType", deletetype);
             //try
             //{
             //    ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFilterCategory", deletetypeparameter, filterCategoryIdParameter);
@@ -181,42 +186,48 @@ namespace IST.Repository.BaseRepository
             //{
             //    ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFilterCategory", deletetypeparameter, filterCategoryIdParameter);
             //}
-            
+
+            var idParameter = filterCategoryId.HasValue ?
+                new ObjectParameter("FilterCategoryId", filterCategoryId) :
+                new ObjectParameter("FilterCategoryId", typeof(int));
+
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveFilterCategory", idParameter);
+
         }
-        public void DeleteTag(int? tagId)
+        public void RemoveTag(int? tagId)
         {
             var tagIdParameter = tagId.HasValue ?
                 new ObjectParameter("TagId", tagId) :
                 new ObjectParameter("TagId", typeof(int));
 
-            //((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteTag", tagIdParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveTag", tagIdParameter);
         }
 
-        public void DeleteTagGroup(int? tagGroupId)
+        public void RemoveTagGroup(int? tagGroupId)
         {
             var tagGroupIdParameter = tagGroupId.HasValue ?
                 new ObjectParameter("TagGroupId", tagGroupId) :
                 new ObjectParameter("TagGroupId", typeof(int));
 
-            //((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteTagGroup", tagGroupIdParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveTagGroup", tagGroupIdParameter);
         }
 
-        public void DeleteSolutionOwner(int? ownerId)
+        public void RemoveSolutionOwner(int? ownerId)
         {
             var ownerIdParameter = ownerId.HasValue ?
                 new ObjectParameter("OwnerId", ownerId) :
                 new ObjectParameter("OwnerId", typeof(int));
 
-            //((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSolutionOwner", ownerIdParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveSolutionOwner", ownerIdParameter);
         }
 
-        public void DeleteSolutionType(int? typeId)
+        public void RemoveSolutionType(int? typeId)
         {
             var typeIdParameter = typeId.HasValue ?
                 new ObjectParameter("TypeId", typeId) :
                 new ObjectParameter("TypeId", typeof(int));
 
-            //((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSolutionType", typeIdParameter);
+            ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveSolutionType", typeIdParameter);
         }
 
         #endregion

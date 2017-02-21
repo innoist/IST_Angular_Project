@@ -2,7 +2,7 @@
 using IST.Interfaces.IServices;
 using IST.Interfaces.Security;
 
-namespace IST.WebApi2.Custom_Attributes
+namespace IST.WebApi2.CustomAttributes
 {
     /// <summary>
     /// Web Api Authentication Checket that checks the WebApiUser authentication

@@ -62,7 +62,7 @@ namespace IST.Implementation.Services
         public bool RemoveSolutionType(int solutionTypeId)
         {
             BaseDbContext context = new BaseDbContext();
-            context.DeleteSolutionType(solutionTypeId);
+            context.RemoveSolutionType(solutionTypeId);
             return true;
         }
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
-using IST.WebApi2.Custom_Attributes;
+using IST.WebApi2.CustomAttributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 
@@ -45,9 +45,15 @@ namespace IST.WebApi2.Controllers
             return Ok(status);
         }
 
-        public IHttpActionResult PostDelete(DeleteModel model)
+        public IHttpActionResult DeleteSoft(int id)
         {
-            var result = filterCategoryService.DeleteFilterCategory(model.DeleteType, model.Id);
+            var result = filterCategoryService.RemoveFilterCategory(id);
+            return Ok(result);
+        }
+
+        public IHttpActionResult DeleteCascade(int id)
+        {
+            var result = filterCategoryService.DeleteFilterCategory(id);
             return Ok(result);
         }
 

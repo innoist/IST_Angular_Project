@@ -8,7 +8,6 @@ namespace IST.Interfaces.IServices
         IEnumerable<SolutionOwner> GetAll();
         SolutionOwner FindSolutionOwnerById(int solutionOwnerId);
         bool SaveOrUpdate(SolutionOwner solutionOwner);
-        bool UpdateSolutionOwner(SolutionOwner solutionOwner);
         bool DeleteSolutionOwner(int solutionOwnerId);
         bool RemoveSolutionOwner(int solutionOwnerId);
     }

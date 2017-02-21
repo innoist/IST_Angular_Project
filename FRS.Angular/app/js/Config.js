@@ -238,7 +238,7 @@
             //Account
             .state('account', {
                 url: '/account',
-                templateUrl: 'app/pages/page.html',
+                templateUrl: 'app/views/Shared/page.html',
                 resolve: helper.resolveFor('modernizr', 'icons', 'toaster', 'whirl', 'loaders.css', 'spinkit'),
                 controller: [
                     '$rootScope', function ($rootScope) {
@@ -271,10 +271,10 @@
                 title: 'Lock',
                 templateUrl: 'app/Views/Users/Lock.html'
             })
-            .state('account.404', {
+            .state('account.401', {
                 url: '/401',
-                title: 'Not Found',
-                templateUrl: 'app/views/Shared/404.html'
+                title: 'Not Authorized',
+                templateUrl: 'app/views/Shared/401.html'
             })
             .state('account.ResetPassword', {
                 url: '/ResetPassword?:email:code',

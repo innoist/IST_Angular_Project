@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using IST.Interfaces.IServices;
 using IST.Models.Common.DropDown;
-using IST.WebApi2.Custom_Attributes;
+using IST.WebApi2.CustomAttributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 
@@ -32,7 +32,6 @@ namespace IST.WebApi2.Controllers
             var filters = filterService.GetAll()?.Select(x => x.MapFromServerToClient()).ToList();
             return filters;
         }
-
         
         public IHttpActionResult Get(int id)
         {
@@ -44,7 +43,6 @@ namespace IST.WebApi2.Controllers
             return Ok(toReturn);
         }
 
-        // POST api/<controller>
         [HttpPost]
         [ValidateFilter]
         public IHttpActionResult PostSave(FilterModel model)
@@ -58,9 +56,15 @@ namespace IST.WebApi2.Controllers
             return Ok(status);
         }
 
-        public IHttpActionResult PostDelete(DeleteModel model)
+        public IHttpActionResult DeleteSoft(int id)
         {
-            var result = filterService.DeleteFilter(model.DeleteType, model.Id);
+            var result = filterService.RemoveFilter(id);
+            return Ok(result);
+        }
+
+        public IHttpActionResult DeleteCascade(int id)
+        {
+            var result = filterService.DeleteFilter(id);
             return Ok(result);
         }
 

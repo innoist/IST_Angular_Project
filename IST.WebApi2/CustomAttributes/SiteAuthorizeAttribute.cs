@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using System.Web.Mvc;
 using IST.Interfaces.IServices;
-using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 
-namespace IST.WebApi2.Custom_Attributes
+namespace IST.WebApi2.CustomAttributes
 {
     /// <summary>
     /// Site Authorize Attribute
@@ -51,27 +46,7 @@ namespace IST.WebApi2.Custom_Attributes
             }
             IsAuthorized();
         }
-        /// <summary>
-        /// Redirects request to unauthroized request page
-        /// </summary>
-        //protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
-        //{
-        //    if (filterContext.HttpContext.User == null || !filterContext.HttpContext.User.Identity.IsAuthenticated)
-        //    {
-        //        base.HandleUnauthorizedRequest(filterContext);
-        //    }
-        //    else
-        //    {
-        //        //filterContext.Result =
-        //        //    new RedirectToRouteResult(
-        //        //        new RouteValueDictionary(
-        //        //            new { area = "", controller = "UnauthorizedRequest", action = "Index" }));
-        //        filterContext.Result = new HttpUnauthorizedResult("401 : You are Unauthorized for this action.");
-        //    }
-        //}
-        /// <summary>
-        /// Permission Key attribute to be set on caller method
-        /// </summary>
+
         public string PermissionKey { get; set; }
 
     }

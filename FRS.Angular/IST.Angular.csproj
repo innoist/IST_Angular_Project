@@ -106,7 +106,7 @@
     <Content Include="app\js\Modules.js" />
     <Content Include="app\js\shared\ReferenceDataService.js" />
     <Content Include="app\views\EcommerceHeader.html" />
-    <Content Include="app\views\Shared\404.html" />
+    <Content Include="app\views\Shared\401.html" />
     <Content Include="app\views\SolutionOwner\CreateSolutionOwner.html" />
     <Content Include="app\views\SolutionOwner\SolutionOwner.html" />
     <Content Include="app\views\SolutionType\CreateSolutionType.html" />
@@ -767,10 +767,9 @@
     <Content Include="app\img\user\12.jpg" />
     <Content Include="app\img\user\13.jpg" />
     <Content Include="app\js\base.js" />
-    <Content Include="app\pages\404.html" />
     <Content Include="app\views\Users\Lock.html" />
     <Content Include="app\views\Users\Login.html" />
-    <Content Include="app\pages\page.html" />
+    <Content Include="app\views\Shared\page.html" />
     <Content Include="app\views\Users\Recover.html" />
     <Content Include="app\views\Users\Register.html" />
     <Content Include="app\vendor\datatable-bootstrap\css\dataTables.bootstrap.css" />

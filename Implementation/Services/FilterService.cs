@@ -54,13 +54,21 @@ namespace IST.Implementation.Services
             return true;
         }
 
-        public bool DeleteFilter(bool deletetype, int filterId)
+        public bool RemoveFilter(int filterId)
         {
             BaseDbContext context = new BaseDbContext();
-            context.DeleteFilter(deletetype, filterId);
+            context.RemoveFilter(filterId);
             return true;
         }
-        
+
+        public bool DeleteFilter(int id)
+        {
+            var toDelete = filterRepository.Find(id);
+            filterRepository.Delete(toDelete);
+            filterRepository.SaveChanges();
+            return true;
+        }
+
         #endregion
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
@@ -54,17 +52,13 @@ namespace IST.Implementation.Services
         public bool RemoveTagGroup(int tagGroupId)
         {
             BaseDbContext context = new BaseDbContext();
-            context.DeleteTagGroup(tagGroupId);
+            context.RemoveTagGroup(tagGroupId);
             return true;
         }
 
         public bool DeleteTagGroup(int tagGroupId)
         {
             var tagGroupToDelete = tagGroupRepository.Find(tagGroupId);
-            //if (tagGroupToDelete.Tags.Any())
-            //{
-            //    throw new Exception("You cannot delete " + tagGroupToDelete.DisplayValue + " as it is being used in Tag.");
-            //}
             tagGroupRepository.Delete(tagGroupToDelete);
             tagGroupRepository.SaveChanges();
             return true;

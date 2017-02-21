@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using IST.Interfaces.IServices;
 using Microsoft.Practices.Unity;
 
-namespace IST.WebApi2.Custom_Attributes
+namespace IST.WebApi2.CustomAttributes
 {
     /// <summary>
     /// Log Exception Filter Attribute

@@ -285,14 +285,6 @@ namespace IST.Implementation.Services
         public bool DeleteSolution(int solutionId)
         {
             var toDelete = solutionRepository.Find(solutionId);
-            if (toDelete.Tags.Any())
-            {
-                throw new Exception("You cannot delete " + toDelete.Name + " as it is being used in Tags.");
-            }
-            if (toDelete.Filters.Any())
-            {
-                throw new Exception("You cannot delete " + toDelete.Name + " as it is being used in Filters.");
-            }
             solutionRepository.Delete(toDelete);
             solutionRepository.SaveChanges();
             return true;

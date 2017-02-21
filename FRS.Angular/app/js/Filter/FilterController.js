@@ -46,7 +46,7 @@
             }, function (response) {
                 $.unblockUI();
                 if (response.ExceptionMessage === '401') {
-                    $state.go('account.404');
+                    $state.go('account.401');
                 }
             });
 
@@ -65,36 +65,58 @@
 
             vm.dtInstance = {};
 
-            vm.delete = function (deletetype, filter) {
-                SweetAlert.swal({
-                    title: 'Are you sure, you want to delete this?',
-                    text: 'It can\'t recover!',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ee3d3d',
-                    confirmButtonText: 'Yes, Delete!',
-                    cancelButtonText: 'No!',
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        var deleteModel = { Id: filter.Id, DeleteType: deletetype }
-                        FilterService.save(deleteModel, onSuccess, onError, '/api/Filter/PostDelete/');
-                        function onSuccess(response) {
-                            $.unblockUI();
-                            if (response) {
-                                var index = vm.Filters.indexOf(filter);
-                                vm.Filters.splice(index, 1);
-                                toaster.success("", "Deleted successfully.");
-                            }
+            vm.delete = function (isCascade, filter) {
+                if (isCascade) {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to delete this?',
+                        text: 'It cannot be undone!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            FilterService.url = "/api/Filter/DeleteCascade/";
+                            FilterService.delete(filter.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.Filters.indexOf(filter);
+                                    vm.Filters.splice(index, 1);
+                                    toaster.success("", "Deleted successfully.");
+                                    FilterService.url = "/api/Filter/";
+                                }
+                            });
                         }
-                        function onError(err) {
-                            $.unblockUI();
-                            toaster.error(err.statusText, err.data.Message);
-                            showErrors(err);
+                    });
+                } else {
+                    SweetAlert.swal({
+                        title: 'Are you sure, you want to remove this?',
+                        text: '',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ee3d3d',
+                        confirmButtonText: 'Yes, Remove!',
+                        cancelButtonText: 'No!',
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            FilterService.url = "/api/Filter/DeleteSoft/";
+                            FilterService.delete(filter.Id, function (response) {
+                                $.unblockUI();
+                                if (response) {
+                                    var index = vm.Filters.indexOf(filter);
+                                    vm.Filters.splice(index, 1);
+                                    toaster.success("", "Removed successfully.");
+                                    FilterService.url = "/api/Filter/";
+                                }
+                            });
                         }
-                    }
-                });
+                    });
+                }
             }
 
             vm.filterData = function (isReset) {

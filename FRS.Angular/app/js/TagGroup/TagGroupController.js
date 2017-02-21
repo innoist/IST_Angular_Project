@@ -46,7 +46,7 @@
             }, function (response) {
                 $.unblockUI();
                 if (response.ExceptionMessage === '401') {
-                    $state.go('account.404');
+                    $state.go('account.401');
                 }
             });
 

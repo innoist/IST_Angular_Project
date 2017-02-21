@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.DomainModels;
@@ -11,9 +9,7 @@ namespace IST.Implementation.Services
     class TagService : ITagService
     {
         #region Private
-
         private readonly ITagRepository tagRepository;
-
         #endregion
 
         #region Constructor
@@ -59,17 +55,13 @@ namespace IST.Implementation.Services
         public bool RemoveTag(int tagId)
         {
             BaseDbContext context = new BaseDbContext();
-            context.DeleteTag(tagId);
+            context.RemoveTag(tagId);
             return true;
         }
 
         public bool DeleteTag(int tagId)
         {
             var tagToDelete = tagRepository.Find(tagId);
-            //if (tagToDelete.Solutions.Any())
-            //{
-            //    throw new Exception("You cannot delete " + tagToDelete.DisplayValue + " as it is being used in Solutions.");
-            //}
             tagRepository.Delete(tagToDelete);
             tagRepository.SaveChanges();
             return true;

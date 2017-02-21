@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Security;
 using System.Web.Http.Filters;
 
-namespace IST.WebApi2.Custom_Attributes
+namespace IST.WebApi2.CustomAttributes
 {
     /// <summary>
     /// Security Exception Filter

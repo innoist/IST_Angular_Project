@@ -6,7 +6,7 @@ namespace IST.WebApi2.Controllers
 {
     [RoutePrefix("api/Account")]
     [Authorize]
-    [Custom_Attributes.ApiException]
+    [CustomAttributes.ApiException]
     public class BaseController : ApiController
     {
         protected void SetAllValues(Models.BaseModel model)

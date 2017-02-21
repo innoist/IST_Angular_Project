@@ -1,5 +1,5 @@
 ﻿
-namespace IST.WebApi2.Custom_Attributes
+namespace IST.WebApi2.CustomAttributes
 {
     public static class LoggerCategories
     {

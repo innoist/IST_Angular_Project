@@ -7,7 +7,7 @@ using IST.Interfaces.IServices;
 using IST.Interfaces.Repository;
 using IST.Models.RequestModels;
 using IST.Models.ResponseModels;
-using IST.WebApi2.Custom_Attributes;
+using IST.WebApi2.CustomAttributes;
 using IST.WebApi2.ModelMappers;
 using IST.WebApi2.Models;
 using Newtonsoft.Json;
@@ -98,7 +98,8 @@ namespace IST.WebApi2.Controllers
             var status = solutionService.SaveOrUpdate(response);
             return Ok(status);
         }
-        public IHttpActionResult DeleteSoft(int id)
+
+        public IHttpActionResult DeleteCascade(int id)
         {
             var result = solutionService.DeleteSolution(id);
             return Ok(result);

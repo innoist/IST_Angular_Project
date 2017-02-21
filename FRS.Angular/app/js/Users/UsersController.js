@@ -48,9 +48,9 @@
             url: frsApiUrl + UsersService.url,
             type: 'GET',
             complete: function (data) {
+                $.unblockUI();
                 if (data.responseJSON.ExceptionMessage === '401') {
-                    $.unblockUI();
-                    $state.go('account.404');
+                    $state.go('account.401');
                 }
             }
         })
@@ -97,7 +97,7 @@
                 confirmButtonText: 'Yes, Delete!',
                 cancelButtonText: 'No!',
                 closeOnConfirm: true,
-                closeOnCancel: true,
+                closeOnCancel: true
             }, function (isConfirm) {
                 if (isConfirm) {
                     $state.go('app.Allergy');

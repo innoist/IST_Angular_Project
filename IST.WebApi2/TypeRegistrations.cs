@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using IST.WebApi2.Custom_Attributes;
+using IST.WebApi2.CustomAttributes;
 using Microsoft.Practices.Unity;
 
 namespace IST.WebBase
