@@ -95,10 +95,37 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 controls" ng-class="{ 'has-error': csc.validateInput(csc.formValidate.SolutionTypes, 'required') }">
+                                <label for="SolutionTypes" class="control-label requiredLabel">Solution Type</label>
+                                <ui-select on-select="csc.CustomLocation(csc.SolutionTypes.selected)"
+                                           required=""
+                                           name="SolutionTypes" 
+                                           id="SolutionTypes"
+                                           uib-tooltip="{{ csc.validateInput(csc.formValidate.SolutionTypes, 'required') ? 'Solution Type is required.' : '' }}"
+                                           uib-tooltip-trigger="focus"
+                                           tooltip-class="tooltip-danger"
+                                           ng-model="csc.SolutionTypes.selected"
+                                           theme="bootstrap"
+                                           ng-disabled="!csc.edit">
+                                    <ui-select-match placeholder="Select a Solution Type">
+                                        {{$select.selected.DisplayName}}
+                                        <span class="resetDdl" ng-click="csc.clearSolutionTypes($event)" ng-if="csc.edit">
+                                            <i class="fa fa-times"></i>
+                                        </span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="obj in csc.SolutionTypes | propsFilter: {DisplayName: $select.search}" class="animated fadeInDown">
+                                        <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="col-md-12" ng-class="{ 'has-error': csc.validateInput(csc.formValidate.Location, 'required') }">
                                 <label for="Location" class="control-label requiredLabel">Location</label>
-                                <input id="Location" type="url" placeholder="Enter Location Here i.e. https://www.example.com"
+                                <input id="Location" type="url" placeholder="Enter Location Here {{csc.LocationPlaceholder}}"
                                        ng-model="csc.Solution.Location" name="Location"
                                        class="form-control"
                                        maxlength="100">
@@ -122,28 +149,6 @@
                                         </span>
                                     </ui-select-match>
                                     <ui-select-choices repeat="obj in csc.SolutionOwners | propsFilter: {DisplayName: $select.search}" class="animated fadeInDown">
-                                        <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12 controls" ng-class="{ 'has-error': csc.validateInput(csc.formValidate.SolutionTypes, 'required') }">
-                                <label for="SolutionTypes" class="control-label requiredLabel">Solution Type</label>
-                                <ui-select required="" name="SolutionTypes" id="SolutionTypes"
-                                           uib-tooltip="{{ csc.validateInput(csc.formValidate.SolutionTypes, 'required') ? 'Solution Type is required.' : '' }}"
-                                           uib-tooltip-trigger="focus"
-                                           tooltip-class="tooltip-danger"
-                                           ng-model="csc.SolutionTypes.selected" theme="bootstrap" ng-disabled="!csc.edit">
-                                    <ui-select-match placeholder="Select a Solution Type">
-                                        {{$select.selected.DisplayName}}
-                                        <span class="resetDdl" ng-click="csc.clearSolutionTypes($event)" ng-if="csc.edit">
-                                            <i class="fa fa-times"></i>
-                                        </span>
-                                    </ui-select-match>
-                                    <ui-select-choices repeat="obj in csc.SolutionTypes | propsFilter: {DisplayName: $select.search}" class="animated fadeInDown">
                                         <div ng-bind-html="obj.DisplayName | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>

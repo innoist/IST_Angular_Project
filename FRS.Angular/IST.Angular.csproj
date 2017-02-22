@@ -63,11 +63,11 @@
     <Content Include="app\documentation\readme.md" />
     <Content Include="app\i18n\es_AR.json" />
     <Content Include="app\img\image-default.png" />
+    <Content Include="app\img\logo-single.gif" />
     <Content Include="app\img\img_placeholder.jpg" />
     <Content Include="app\img\loading.gif" />
     <Content Include="app\img\gocentralized-logo.png" />
     <Content Include="app\img\logo2.png" />
-    <Content Include="app\img\logo-single3.png" />
     <Content Include="app\img\logo-single.png" />
     <Content Include="app\img\logo5.png" />
     <Content Include="app\img\preloader\preloader.full2.png" />
@@ -576,7 +576,6 @@
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="vendor\underscore-min.js" />
-    <Content Include="app\js\Users\changePassword.service.js" />
     <Content Include="app\js\Users\ForgetPasswordController.js" />
     <Content Include="app\js\Users\LoginController.js" />
     <Content Include="app\js\Users\ProfileController.js" />
@@ -746,7 +745,6 @@
     <Content Include="app\img\bg9.jpg" />
     <Content Include="app\img\dummy.png" />
     <Content Include="app\img\lock-bg.jpg" />
-    <Content Include="app\img\logo-single2.png" />
     <Content Include="app\img\logo1.png" />
     <Content Include="app\img\mb-sample.jpg" />
     <Content Include="app\img\mockup.png" />
@@ -1178,11 +1176,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>7614</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:7614/</IISUrl>
+          <IISUrl>http://localhost:7666/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

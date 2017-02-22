@@ -14,7 +14,7 @@
         vm.submitted = false;
         vm.Solution = {};
         vm.formdata = new FormData();
-
+        vm.LocationPlaceholder = "";
         //Api Url
         SolutionService.url = "/api/Solution/";
 
@@ -191,10 +191,19 @@
         vm.clearSolutionTypes = function ($event) {
             $event.stopPropagation();
             vm.SolutionTypes.selected = null;
+            vm.LocationPlaceholder = "";
         };
         vm.clearSolutionOwners = function ($event) {
             $event.stopPropagation();
             vm.SolutionOwners.selected = null;
         };
+
+        vm.CustomLocation = function (type) {
+            if (type.DisplayName === 'File Share') {
+                vm.LocationPlaceholder = "i.e. \\\\servername\\sharename\\path\\filename";
+            } else if (type.DisplayName === 'Web') {
+                vm.LocationPlaceholder = "i.e. https://www.example.com";
+            }
+        }
     }
 })();
