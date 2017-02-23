@@ -14,16 +14,6 @@
 
     function ReferenceDataService($http, toaster, $localStorage, $state, $q) {
 
-        var sharedData = {};
-
-        this.setSharedData = function (value) {
-            sharedData = value;
-        }
-
-        this.getSharedData = function () {
-            return sharedData;
-        }
-
         this.url = "";
 
         this.getAll = function (onReady, onError, url) {

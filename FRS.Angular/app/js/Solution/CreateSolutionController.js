@@ -199,10 +199,10 @@
         };
 
         vm.CustomLocation = function (type) {
-            if (type.DisplayName === 'File Share') {
-                vm.LocationPlaceholder = "i.e. \\\\servername\\sharename\\path\\filename";
+            if (type.DisplayName === 'Fileshare') {
+                vm.LocationType = true;
             } else if (type.DisplayName === 'Web') {
-                vm.LocationPlaceholder = "i.e. https://www.example.com";
+                vm.LocationType = false;
             }
         }
     }

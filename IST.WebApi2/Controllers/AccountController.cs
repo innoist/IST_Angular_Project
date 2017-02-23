@@ -371,9 +371,7 @@ namespace IST.WebApi2.Controllers
 
             return logins;
         }
-
-        [Authorize(Roles = "Admin")]
-        [Route("Register")]
+        
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
