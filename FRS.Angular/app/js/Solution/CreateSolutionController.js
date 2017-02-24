@@ -21,14 +21,14 @@
         vm.dtInstance = {};
         vm.ResetImage = function () {
             vm.Solution.Image = null;
-            $('.SolutionImage').attr('src', '/app/img/image-default.png');
+            angular.element('.SolutionImage').attr('src', '/app/img/image-default.png');
         }
 
         vm.multiple = {};
 
         $timeout(function () {
             //to remove input field that contains name of image.
-            $('.bootstrap-filestyle.input-group input').css("display", "none");
+            angular.element('.bootstrap-filestyle.input-group input').css("display", "none");
         }, 1000);
 
         //Upload File

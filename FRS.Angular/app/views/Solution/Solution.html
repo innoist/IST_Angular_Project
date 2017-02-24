@@ -1,7 +1,7 @@
 ﻿<h3>
     <!-- START Language list-->
     <div class="pull-right">
-        <a ui-sref="app.CreateSolution" class="btn btn-green btn-labeled">
+        <a ng-if="user.role!=='Solution Editor'" ui-sref="app.CreateSolution" class="btn btn-green btn-labeled">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span><span class="hidden-480">New</span>
