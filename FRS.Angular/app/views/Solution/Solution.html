@@ -16,13 +16,14 @@
     Solutions
     <small>Detail</small>
 </h3>
+
 <div class="container-fluid" ng-hide="isFilterOpen">
     <div class="panel panel-default">
         <form class="panel-body" ng-submit="sc.filterData(false)">
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-12">
                 <input type="text" placeholder="Name" class="form-control" ng-model="sc.SolutionName"/>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-12">
                 <ui-select ng-model="sc.SolutionTypes.selected" theme="bootstrap">
                     <ui-select-match placeholder="Select a Solution Type">{{$select.selected.DisplayName}}</ui-select-match>
                     <ui-select-choices repeat="obj in sc.SolutionTypes | propsFilter: {DisplayName: $select.search}" class="animated flipInX">
@@ -30,14 +31,16 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
-            <button class="btn btn-info" type="submit">Search</button>
-            <button class="btn btn-default" ng-click="sc.filterData(true)">Reset</button>
-            <a class="pull-right"
-               uib-tooltip="{{'Hide filter'}}"
-               uib-tooltip-trigger="focus"
-               ng-click="isFilterOpen = !isFilterOpen">
-                <i class="fa fa-compress"></i>
-            </a>
+            <div class="col-md-6 col-xs-12">
+                <button class="btn btn-info" type="submit">Search</button>
+                <button class="btn btn-default" ng-click="sc.filterData(true)">Reset</button>
+                <a class="pull-right"
+                   uib-tooltip="{{'Hide filter'}}"
+                   uib-tooltip-trigger="focus"
+                   ng-click="isFilterOpen = !isFilterOpen">
+                    <i class="fa fa-compress"></i>
+                </a>
+            </div>
         </form>
     </div>
 </div>

@@ -63,6 +63,7 @@
     <Content Include="app\documentation\readme.md" />
     <Content Include="app\i18n\es_AR.json" />
     <Content Include="app\img\gocentralized-logo.png" />
+    <Content Include="app\img\logo-icon.png" />
     <Content Include="app\img\logo-single.png" />
     <Content Include="app\img\image-default.png" />
     <Content Include="app\img\user\img_placeholder.jpg" />

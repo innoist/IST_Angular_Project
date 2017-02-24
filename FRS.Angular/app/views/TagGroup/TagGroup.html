@@ -9,7 +9,8 @@
         <button class="btn btn-info btn-labeled" ng-click="isFilterOpen = !isFilterOpen" ng-hide="!isFilterOpen">
             <span class="btn-label">
                 <i class="fa fa-search"></i>
-            </span>Search
+            </span>
+            <span class="hidden-480">Search</span>
         </button>
     </div>
     <!-- END Language list    -->
@@ -27,8 +28,8 @@
                        class="form-control"
                        ng-model="tgc.Name" />
             </div>
-            <button class="btn btn-info" type="submit">Search</button>
-            <button class="btn btn-default" ng-click="tgc.filterData(true)">Reset</button>
+            <button class="btn btn-info" title="Search" type="submit"><span ng-if="isMobileView" class="fa fa-search"></span><span ng-if="!isMobileView">Search</span></button>
+            <button class="btn btn-default" title="Reset" ng-click="tgc.filterData(true)"><span ng-if="isMobileView" class="fa fa-undo"></span><span ng-if="!isMobileView">Reset</span></button>
             <a class="pull-right"
                uib-tooltip="{{'Hide filter'}}"
                uib-tooltip-trigger="focus"

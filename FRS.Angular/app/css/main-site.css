@@ -27,7 +27,6 @@
         display: none;
     }
 }
-
 .requiredLabel:after {
     content: " *";
     font-weight: bold;
@@ -399,6 +398,7 @@ table.dataTable tfoot th, table.dataTable tfoot td {
     .btn-label {
         position: static;
         padding: 6px 0px 6px 0px;
+        background: transparent;
     }
 
     .buttonText {
@@ -573,6 +573,7 @@ body.ngdialog-open, html.ngdialog-open {
 .tooltip.tooltip-danger .tooltip-arrow {
     border-top-color: #f05050;
 }
+
 .tooltip.tooltip-danger .tooltip-arrow {
     border-left-color: #f05050;
 }
@@ -595,4 +596,8 @@ body.ngdialog-open, html.ngdialog-open {
 
 .min-width111 {
     min-width: 111px;
+}
+
+.width-230 {
+    width: 230px;
 }
