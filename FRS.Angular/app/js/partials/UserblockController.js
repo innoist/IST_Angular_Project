@@ -58,14 +58,6 @@
                         showErrors(err);
                     });
             }
-
-            window.onresize = function () {
-                if (window.innerWidth <= 480) {
-                    $rootScope.isMobileView = true;
-                }else{
-                    $rootScope.isMobileView = false;
-                }
-            }
             
         }
 

@@ -152,11 +152,6 @@
     <Content Include="Ecommerce\css\theme-colors\purple.css" />
     <Content Include="Ecommerce\css\theme-colors\red.css" />
     <Content Include="Ecommerce\favicon.ico" />
-    <Content Include="Ecommerce\img\1.jpg" />
-    <Content Include="Ecommerce\img\2.jpg" />
-    <Content Include="Ecommerce\img\3.jpg" />
-    <Content Include="Ecommerce\img\4.jpg" />
-    <Content Include="Ecommerce\img\5.jpg" />
     <Content Include="Ecommerce\img\backgroundimage.jpg" />
     <Content Include="Ecommerce\img\blank.gif" />
     <Content Include="Ecommerce\img\blog\01.jpg" />
@@ -728,7 +723,6 @@
     <Content Include="app\css\theme-h.css" />
     <Content Include="app\i18n\en.js" />
     <Content Include="app\img\dummy.png" />
-    <Content Include="app\img\lock-bg.jpg" />
     <Content Include="app\js\base.js" />
     <Content Include="app\views\Users\Lock.html" />
     <Content Include="app\views\Users\Login.html" />

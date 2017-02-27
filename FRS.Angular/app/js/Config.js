@@ -277,7 +277,7 @@
                 title: 'Reset Password',
                 templateUrl: 'app/Views/Users/ResetPassword.html',
                 controller: 'ResetPasswordController',
-                controllerAs: 'resetPassword',
+                controllerAs: 'rpc',
                 resolve: helper.resolveFor('resetPassword.module', 'toaster')
             });
 

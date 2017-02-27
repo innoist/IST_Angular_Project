@@ -28,8 +28,8 @@
                        class="form-control"
                        ng-model="tgc.Name" />
             </div>
-            <button class="btn btn-info" title="Search" type="submit"><span ng-if="isMobileView" class="fa fa-search"></span><span ng-if="!isMobileView">Search</span></button>
-            <button class="btn btn-default" title="Reset" ng-click="tgc.filterData(true)"><span ng-if="isMobileView" class="fa fa-undo"></span><span ng-if="!isMobileView">Reset</span></button>
+            <button class="btn btn-info" title="Search" type="submit"><span class="fa fa-search"></span></button>
+            <button class="btn btn-default" title="Reset" ng-click="tgc.filterData(true)"><span class="fa fa-remove"></span></button>
             <a class="pull-right"
                uib-tooltip="{{'Hide filter'}}"
                uib-tooltip-trigger="focus"

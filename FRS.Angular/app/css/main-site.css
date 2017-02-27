@@ -573,11 +573,6 @@ body.ngdialog-open, html.ngdialog-open {
 .tooltip.tooltip-danger .tooltip-arrow {
     border-top-color: #f05050;
 }
-
-.tooltip.tooltip-danger .tooltip-arrow {
-    border-left-color: #f05050;
-}
-
 .user-block .user-block-info .user-block-role {
     color: white;
 }

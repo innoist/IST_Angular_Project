@@ -18,7 +18,7 @@
                        required=""
                        uib-tooltip="{{login.loginForm.account_email.$dirty && login.loginForm.account_email.$error.required? 'Please enter email address': login.loginForm.account_email.$dirty && login.loginForm.account_email.$error.email? 'Please enter valid email address' : ''}}"
                        tooltip-class="tooltip-danger"
-                       tooltip-placement="left"
+                       tooltip-placement="top"
                        class="form-control" />
                <span class="fa fa-envelope form-control-feedback text-muted"></span>
             </div>
@@ -32,7 +32,7 @@
                        required=""
                        uib-tooltip="{{login.loginForm.account_password.$dirty && login.loginForm.account_password.$error.required? 'Please enter password': ''}}"
                        tooltip-class="tooltip-danger"
-                       tooltip-placement="left"
+                       tooltip-placement="top"
                        class="form-control" />
                <span class="fa fa-lock form-control-feedback text-muted"></span>
             </div>
