@@ -22,8 +22,6 @@
 
         var vm = this;
 
-        HomeService.url = "/api/Project/";
-
         vm.apiUrl = frsApiUrl;
 
         vm.RatingId = 0;
@@ -37,8 +35,6 @@
         vm.Favorites = false;
         //to store solutions
         vm.Projects = [];
-        //For first call to server
-        vm.firstCall = true;
         //to check if user scroll or not
         vm.isScrolled = false;
         //For no no more solutions
@@ -55,8 +51,12 @@
             PageNo: 1,
             IsAsc: true,
             OrderByColumn: 1,
-            ClientRequest: HomeService.url
+            ClientRequest: '/api/project/'
         }
+
+        HomeService.getAll(function(response) {
+            vm.FilterCategories = response;
+        }, null, "/api/Project/GetFilterCategories/");
 
         //to show filled stars for average rating after save rating for solution
         var selectedStars = function (project) {
@@ -77,10 +77,6 @@
         var onSuccessLoadProjects = function (response) {
             //if response is not against scroll then override project list
             if (!vm.isScrolled) {
-                //set categories only if it is first call to server
-                if (vm.firstCall) {
-                    vm.FilterCategories = response.FilterCategories;
-                }
                 vm.Projects = [];
                 angular.forEach(response.Data, function (project) {
                     project.isNew = true;
@@ -106,10 +102,6 @@
                     $.unblockUI();
                 }
             } else {
-                //set categories only if it is first call to server
-                if (vm.firstCall) {
-                    vm.FilterCategories = response.FilterCategories;
-                }
                 angular.forEach(vm.Projects, function (project) {
                     project.isNew = false;
                 });
@@ -140,7 +132,7 @@
         }
 
         vm.getDataFromServer = function () {
-            HomeService.load(HomeService.url, vm.ProjectSearchRequest, onSuccessLoadProjects);
+            HomeService.load('/api/Project/GetSolutions/', vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
         vm.getDataFromServer();
@@ -149,7 +141,6 @@
         vm.ProjectSearchRequest.FilterIds = [];
         vm.filterProjects = function (id) {
 
-            vm.firstCall = false;
             if ($('#' + id)[0].checked) {
                 vm.ProjectSearchRequest.FilterIds.push(id);
                 vm.ProjectSearchRequest.PageNo = 1;
@@ -200,19 +191,19 @@
         /************* Typeahead ************/
         /************************************/
         vm.getSolutions = function (val) {
-            var url = "/api/ProjectBaseData";
 
             //Check if input is more that 1 char and less than 10
-            if (val.length >= 3 && val.length < 15)
-                return HomeService.retrieveItems(url, val, vm.ProjectSearchRequest.FilterIds)
-                    .then(function (res) {
+            if (val.length >= 3 && val.length < 15) {
+                return HomeService.retrieveItems('/api/Project/GetForTypeAhead/', val, vm.ProjectSearchRequest.FilterIds)
+                    .then(function(res) {
                         //local array to store items from server response
                         var items = [];
-                        angular.forEach(res.data, function (item) {
+                        angular.forEach(res.data, function(item) {
                             items.push(item);
                         });
                         return items;
                     });
+            }
         }
 
         //on scroll load solutions
@@ -243,6 +234,8 @@
 
         //project detail popup
         vm.OpenProjectDetail = function (id) {
+
+            HomeService.url = "/api/Project/GetById/";
             angular.element('#projectdetail').show();
             angular.element('#client-wrapper').toggleClass('position-fixed');
             HomeService.loadById(id, function (response) {
@@ -316,7 +309,7 @@
                 }
             });
             vm.Solution.IsFavorite = solution.IsFavorite;
-            HomeService.save(vm.Solution, onSuccess, onError);
+            HomeService.save(vm.Solution, onSuccess, onError, '/api/Project/PostFavoriteSolution/');
             function onSuccess(response) {
                 $.unblockUI();
                 if (response.data === true) {
@@ -367,7 +360,7 @@
                     vm.SolutionRatingModel.Rating = i;
                 }
             }
-            HomeService.save(vm.SolutionRatingModel, onSuccess, null, '/api/ProjectBaseData');
+            HomeService.save(vm.SolutionRatingModel, onSuccess, null, '/api/Project/PostSolutionRating/');
             function onSuccess(response) {
                 $.unblockUI();
                 vm.ProejctModel = {};
@@ -392,7 +385,7 @@
             if (projectId) {
                 vm.SolutionModel = {};
                 vm.SolutionModel.Id = projectId;
-                HomeService.url = '/api/SolutionBaseData/';
+                HomeService.url = '/api/Project/PostClickActivity/';
                 HomeService.save(vm.SolutionModel, function (response) {
                     $.unblockUI();
                 });
@@ -416,7 +409,7 @@
                     vm.EmailModel.EmailBody = '';
                     vm.EmailModel.SenderEmail = '';
                     angular.element('.g-popup-wrapper').hide();
-                }, '/api/ShareActivity/');
+                }, '/api/Project/PostShareActivity/');
             }
         }
 

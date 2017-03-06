@@ -12,7 +12,7 @@ namespace IST.WebApi2.Controllers
 {
 
     //**********************************************//
-                    //For Client Side//
+    //For Client Side//
     //**********************************************//
     public class ProjectController : BaseController
     {
@@ -20,22 +20,23 @@ namespace IST.WebApi2.Controllers
         private readonly ISolutionService solutionService;
         private readonly IFilterCategoryService filterCategoryService;
         private readonly ISolutionRatingService solutionRatingService;
-
+        private readonly IUsageHistoryService usageService;
         #endregion
 
         #region Constructor
-        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService)
+        public ProjectController(ISolutionService solutionService, IFilterCategoryService filterCategoryService, ISolutionRatingService solutionRatingService, IUsageHistoryService usageService)
         {
             this.solutionService = solutionService;
             this.filterCategoryService = filterCategoryService;
             this.solutionRatingService = solutionRatingService;
+            this.usageService = usageService;
         }
         #endregion
 
         #region Public
 
         [ValidateFilter]
-        public IHttpActionResult Get([FromUri]SolutionSearchRequest searchRequest)
+        public IHttpActionResult GetSolutions([FromUri]SolutionSearchRequest searchRequest)
         {
             if (searchRequest == null || !ModelState.IsValid)
             {
@@ -49,13 +50,22 @@ namespace IST.WebApi2.Controllers
             var toReturn = new ProjectListView
             {
                 Data = response.Data.ToList().Select(x => x.ClientCreateFrom()).ToList(),
-                FilterCategories = filterCategoryService.GetAll().Select(x => x.MapFromServerToClient()).Where(x => x.Filters.Count > 0).ToList(),
                 recordsFiltered = response.FilteredCount,
                 recordsTotal = response.TotalCount
             };
             return Ok(toReturn);
         }
-        public IHttpActionResult Get(int id)
+
+        public IHttpActionResult GetFilterCategories()
+        {
+            var toreturn =
+                filterCategoryService.GetAll()
+                    .Select(x => x.MapFromServerToClient())
+                    .Where(x => x.Filters.Count > 0)
+                    .ToList();
+            return Ok(toreturn);
+        }
+        public IHttpActionResult GetById(int id)
         {
             var baseData = solutionService.GetProjectBaseData(id);
             var viewModel = new ProjectViewModel
@@ -67,8 +77,7 @@ namespace IST.WebApi2.Controllers
         }
 
         #region TypeAhead
-        [Route("api/ProjectBaseData")]
-        public IHttpActionResult Get(string name, [FromUri]List<int> filterIds)
+        public IHttpActionResult GetForTypeAhead(string name, [FromUri]List<int> filterIds)
         {
             var response = solutionService.SearchForTypeAhead(name, filterIds).ToList().Select(s => new DropDownModel
             {
@@ -81,7 +90,7 @@ namespace IST.WebApi2.Controllers
         #endregion
 
         [HttpPost]
-        public IHttpActionResult Post(SolutionModel model)
+        public IHttpActionResult PostFavoriteSolution(SolutionModel model)
         {
             if (model.IsFavorite)
             {
@@ -97,9 +106,8 @@ namespace IST.WebApi2.Controllers
             }
         }
 
-        [Route("api/ProjectBaseData")]
         [HttpPost]
-        public IHttpActionResult Post(SolutionRatingModel model)
+        public IHttpActionResult PostSolutionRating(SolutionRatingModel model)
         {
             if (model.RatingId == 0)
                 SetAllValues(model);
@@ -108,8 +116,19 @@ namespace IST.WebApi2.Controllers
             var result = solutionRatingService.SaveOrUpdate(model.MapFromClientToServer());
             return Ok(result);
         }
-
-
+        
+        public IHttpActionResult PostClickActivity(SolutionModel model)
+        {
+            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null, null);
+            return Ok(saved);
+        }
+        
+        [HttpPost]
+        public IHttpActionResult PostShareActivity(EmailModel model)
+        {
+            var saved = usageService.SaveUsage(model.SolutionId, (int)Commons.UsageType.Shared, model.RecieverEmail, model.EmailSubject, model.EmailBody);
+            return Ok(saved);
+        }
         #endregion
     }
 }

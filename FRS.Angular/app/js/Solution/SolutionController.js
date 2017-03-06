@@ -1,6 +1,6 @@
 ﻿/**=========================================================
- * Module: Allergy
- * Allergy view Controller
+ * Module: Solution
+ * Solution view Controller
  =========================================================*/
 
 (function () {

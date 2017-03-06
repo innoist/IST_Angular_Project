@@ -10,7 +10,6 @@ namespace IST.WebApi2.Controllers
         #region Private
 
         private readonly ISolutionService solutionService;
-        private readonly IUsageHistoryService usageService;
 
         #endregion
 
@@ -18,7 +17,6 @@ namespace IST.WebApi2.Controllers
         public SolutionBaseDataController(ISolutionService solutionService, IUsageHistoryService usageService)
         {
             this.solutionService = solutionService;
-            this.usageService = usageService;
         }
 
         #endregion
@@ -33,24 +31,5 @@ namespace IST.WebApi2.Controllers
             return Ok(toReturn);
         }
 
-        /// <summary>
-        /// For Click Activity (Client Side)
-        /// </summary>
-        public IHttpActionResult Post(SolutionModel model)
-        {
-            var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null, null);
-            return Ok(saved);
-        }
-
-        /// <summary>
-        /// For Share Activity (Client Side)
-        /// </summary>
-        [Route("api/ShareActivity")]
-        [HttpPost]
-        public IHttpActionResult Post(EmailModel model)
-        {
-            var saved = usageService.SaveUsage(model.SolutionId, (int)Commons.UsageType.Shared, model.RecieverEmail, model.EmailSubject, model.EmailBody);
-            return Ok(saved);
-        }
     }
 }
