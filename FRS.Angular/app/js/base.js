@@ -71,8 +71,9 @@
      */
 
     //window.frsApiUrl = "http://testprojectapp.azurewebsites.net";
+    window.currentVersion = 1.0;
 
-     ajaxData = function(params) {
+    ajaxData = function (params) {
         params.PageNo = Math.ceil(params.start / params.length) + 1;
         if (params.PageNo === 0) {
             params.PageNo = 1;
@@ -8202,7 +8203,7 @@
             function done(status, nativeStatusText, responses, headers) {
                 var isSuccess, success, error, response, modified,
                     statusText = nativeStatusText;
-                
+
                 // Called once
                 if (state === 2) {
                     return;

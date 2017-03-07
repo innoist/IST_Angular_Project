@@ -198,90 +198,90 @@
                                                              '../../vendor/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js']
               },
               {
-                  name: 'rightsManagement.module', files: ['/app/js/RightsManagement/rightsManagementController.js',
-                                                            '/app/js/shared/ReferenceDataService.js']
+                  name: 'rightsManagement.module', files: ['/app/js/RightsManagement/rightsManagementController.js?v=' + currentVersion,
+                                                            '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'login.module', files: ['/app/js/Users/LoginController.js']
+                  name: 'login.module', files: ['/app/js/Users/LoginController.js?v=' + currentVersion]
               },
               {
-                  name: 'register.module', files: ['/app/js/Users/RegisterController.js']
+                  name: 'register.module', files: ['/app/js/Users/RegisterController.js?v=' + currentVersion]
               },
               {
-                  name: 'recover.module', files: ['/app/js/Users/ForgetPasswordController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'recover.module', files: ['/app/js/Users/ForgetPasswordController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'resetPassword.module', files: ['/app/js/Users/ResetPasswordController.js']
+                  name: 'resetPassword.module', files: ['/app/js/Users/ResetPasswordController.js?v=' + currentVersion]
               },
               {
-                  name: 'users.module', files: ['/app/js/Users/UsersController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'users.module', files: ['/app/js/Users/UsersController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'Home.module', files: ['/app/js/Home/HomeController.js',
-                                                '/app/js/shared/ReferenceDataService.js']
+                  name: 'Home.module', files: ['/app/js/Home/HomeController.js?v=' + currentVersion,
+                                                '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'Solution.module', files: ['/app/js/Solution/SolutionController.js',
-                                                  '/app/js/Solution/CreateSolutionController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'Solution.module', files: ['/app/js/Solution/SolutionController.js?v=' + currentVersion,
+                                                  '/app/js/Solution/CreateSolutionController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'FilterCategory.module', files: ['/app/js/FilterCategory/FilterCategoryController.js',
-                                                  '/app/js/FilterCategory/CreateFilterCategoryController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'FilterCategory.module', files: ['/app/js/FilterCategory/FilterCategoryController.js?v=' + currentVersion,
+                                                  '/app/js/FilterCategory/CreateFilterCategoryController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'Filter.module', files: ['/app/js/Filter/FilterController.js',
-                                                  '/app/js/Filter/CreateFilterController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'Filter.module', files: ['/app/js/Filter/FilterController.js?v=' + currentVersion,
+                                                  '/app/js/Filter/CreateFilterController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'Tag.module', files: ['/app/js/Tag/TagController.js',
-                                                  '/app/js/Tag/CreateTagController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'Tag.module', files: ['/app/js/Tag/TagController.js?v=' + currentVersion,
+                                                  '/app/js/Tag/CreateTagController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'TagGroup.module', files: ['/app/js/TagGroup/TagGroupController.js',
-                                                  '/app/js/TagGroup/CreateTagGroupController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'TagGroup.module', files: ['/app/js/TagGroup/TagGroupController.js?v=' + currentVersion,
+                                                  '/app/js/TagGroup/CreateTagGroupController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'SolutionOwner.module', files: ['/app/js/SolutionOwner/SolutionOwnerController.js',
-                                                  '/app/js/SolutionOwner/CreateSolutionOwnerController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'SolutionOwner.module', files: ['/app/js/SolutionOwner/SolutionOwnerController.js?v=' + currentVersion,
+                                                  '/app/js/SolutionOwner/CreateSolutionOwnerController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'SolutionType.module', files: ['/app/js/SolutionType/SolutionTypeController.js',
-                                                  '/app/js/SolutionType/CreateSolutionTypeController.js',
-                                                  '/app/js/shared/ReferenceDataService.js']
+                  name: 'SolutionType.module', files: ['/app/js/SolutionType/SolutionTypeController.js?v=' + currentVersion,
+                                                  '/app/js/SolutionType/CreateSolutionTypeController.js?v=' + currentVersion,
+                                                  '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'Utility.module', files: ['/app/js/shared/UtilityService.js']
+                  name: 'Utility.module', files: ['/app/js/shared/UtilityService.js?v=' + currentVersion]
               },
               {
-                  name: 'Dashboard.module', files: ['/app/js/Dashboard/DashboardController.js',
-                                                          '/app/js/shared/ReferenceDataService.js']
+                  name: 'Dashboard.module', files: ['/app/js/Dashboard/DashboardController.js?v=' + currentVersion,
+                                                          '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
 
               },
               {
-                  name: 'AdminDashboard.module', files: ['/app/js/Dashboard/AdminDashboardController.js',
-                                                          '/app/js/shared/ReferenceDataService.js']
+                  name: 'AdminDashboard.module', files: ['/app/js/Dashboard/AdminDashboardController.js?v=' + currentVersion,
+                                                          '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               }
               ,
               {
-                  name: 'profile.module', files: ['/app/js/Users/ProfileController.js',
-                                                '/app/js/shared/ReferenceDataService.js']
+                  name: 'profile.module', files: ['/app/js/Users/ProfileController.js?v=' + currentVersion,
+                                                '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               }
               ,
               {
-                  name: 'changePassword.module', files: ['/app/js/Users/changePasswordController.js',
-                                                        '/app/js/shared/ReferenceDataService.js']
+                  name: 'changePassword.module', files: ['/app/js/Users/changePasswordController.js?v=' + currentVersion,
+                                                        '/app/js/shared/ReferenceDataService.js?v=' + currentVersion]
               },
               {
-                  name: 'partials.module', files: ['/app/js/partials/SidebarController.js',
-                                                   '/app/js/partials/UserBlockController.js']
+                  name: 'partials.module', files: ['/app/js/partials/SidebarController.js?v=' + currentVersion,
+                                                   '/app/js/partials/UserBlockController.js?v=' + currentVersion]
               }
             ]
         })

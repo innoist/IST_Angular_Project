@@ -196,3 +196,26 @@
 .min-height-480 {
     min-height: 480px;
 }
+
+.height-55 {
+    height: 55px;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.padding-top-10 {
+    padding-top: 10px;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .topbar-v3 .left-topbar, .topbar-v3 .right-topbar {
+        text-align: right;
+        float: none !important;
+    }
+}

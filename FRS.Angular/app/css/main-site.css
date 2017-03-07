@@ -24,7 +24,7 @@
 
 @media (max-width: 480px) {
     .hidden-480 {
-        display: none;
+        display: none !important;
     }
 }
 .requiredLabel:after {
@@ -593,6 +593,6 @@ body.ngdialog-open, html.ngdialog-open {
     min-width: 111px;
 }
 
-.width-230 {
-    width: 230px;
+.width-280 {
+    width: 280px;
 }

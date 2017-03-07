@@ -43,7 +43,7 @@
         vm.endOfSolutions = false;
         //To store current project location
         vm.ProjectLocation = '';
-
+        vm.ajaxStatus = false;
         vm.SolutionRatingModel = {};
 
         vm.ProjectSearchRequest = {
@@ -54,7 +54,8 @@
             ClientRequest: '/api/project/'
         }
 
-        HomeService.getAll(function(response) {
+        //Get all filter categories
+        HomeService.getAll(function (response) {
             vm.FilterCategories = response;
         }, null, "/api/Project/GetFilterCategories/");
 
@@ -74,7 +75,9 @@
             }
         }
 
+        //success loading solutions
         var onSuccessLoadProjects = function (response) {
+            vm.ajaxStatus = false;
             //if response is not against scroll then override project list
             if (!vm.isScrolled) {
                 vm.Projects = [];
@@ -132,6 +135,7 @@
         }
 
         vm.getDataFromServer = function () {
+            vm.ajaxStatus = true;
             HomeService.load('/api/Project/GetSolutions/', vm.ProjectSearchRequest, onSuccessLoadProjects);
         }
 
@@ -195,10 +199,10 @@
             //Check if input is more that 1 char and less than 10
             if (val.length >= 3 && val.length < 15) {
                 return HomeService.retrieveItems('/api/Project/GetForTypeAhead/', val, vm.ProjectSearchRequest.FilterIds)
-                    .then(function(res) {
+                    .then(function (res) {
                         //local array to store items from server response
                         var items = [];
-                        angular.forEach(res.data, function(item) {
+                        angular.forEach(res.data, function (item) {
                             items.push(item);
                         });
                         return items;
@@ -385,10 +389,9 @@
             if (projectId) {
                 vm.SolutionModel = {};
                 vm.SolutionModel.Id = projectId;
-                HomeService.url = '/api/Project/PostClickActivity/';
                 HomeService.save(vm.SolutionModel, function (response) {
                     $.unblockUI();
-                });
+                }, null, '/api/Project/PostClickActivity/');
             }
         }
 

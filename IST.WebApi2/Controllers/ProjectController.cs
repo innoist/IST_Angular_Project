@@ -116,13 +116,13 @@ namespace IST.WebApi2.Controllers
             var result = solutionRatingService.SaveOrUpdate(model.MapFromClientToServer());
             return Ok(result);
         }
-        
+        [HttpPost]
         public IHttpActionResult PostClickActivity(SolutionModel model)
         {
             var saved = usageService.SaveUsage(model.Id, (int)Commons.UsageType.Clicked, null, null, null);
             return Ok(saved);
         }
-        
+
         [HttpPost]
         public IHttpActionResult PostShareActivity(EmailModel model)
         {

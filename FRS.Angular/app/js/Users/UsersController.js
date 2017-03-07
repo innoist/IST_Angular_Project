@@ -10,7 +10,7 @@
 
     function UsersController($scope, $rootScope, $localStorage, UsersService, SweetAlert, DTOptionsBuilder, DTColumnBuilder, $compile, toaster, $state) {
         var vm = this;
-        UsersService.url = '/api/Users';
+        UsersService.url = '/api/Users/';
         //vm.SystemAdmin = false;
         //vm.SysAdmin = true;
 
@@ -74,7 +74,7 @@
             DTColumnBuilder.newColumn('UserName').withTitle('Username')
         ];
 
-        vm.dtColumns.push(DTColumnBuilder.newColumn('Address').withTitle('Address'));
+        vm.dtColumns.push(DTColumnBuilder.newColumn('Role').withTitle('Role'));
         vm.dtColumns.push(DTColumnBuilder.newColumn('Telephone').withTitle('Phone').notSortable());
         vm.dtColumns.push(DTColumnBuilder.newColumn(null).withTitle('Actions').withClass('text-right').notSortable()
             .renderWith(function (data, type, full, meta) {

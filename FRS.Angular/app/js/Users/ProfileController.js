@@ -64,6 +64,8 @@
                 if (vm.user.Role) {
                     vm.appUserRoles.selected = vm.appUserRoles.find(x => x.Id === vm.user.Role);
                 }
+            } else {
+                vm.update = false;
             }
         });
 

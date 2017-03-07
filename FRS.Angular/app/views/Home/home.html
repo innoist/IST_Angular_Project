@@ -10,8 +10,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Categories
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="font-size: 18px">
+                                CATEGORIES
                                 <i class="fa fa-angle-down"></i>
                             </a>
                         </h2>
@@ -21,17 +21,23 @@
                             <div class="col-md-12 checkbox c-checkbox needsclick" style="padding-left: 0" ng-if="isAuthenticated">
                                 <label class="control-label needsclick">
                                     <input type="checkbox" ng-model="hc.Favorites" ng-click="hc.seeFavorites()" name="IsImportant" class="needsclick checkbox checkbox-inline"><span class="fa fa-heart" style="border-color: #18ba9b"></span>
-                                </label><strong>Favorites</strong>
+                                </label><strong>FAVORITES</strong>
                                 <hr class="margin-bottom0 margin-top15" />
                             </div>
 
                             <ul class="list-unstyled checkbox-list">
                                 <li ng-repeat="category in hc.FilterCategories">
                                     <dl>
-                                        <dt><strong><a data-toggle="collapse" data-parent="#collapseOne" href="#collapseTwo{{$index}}" ng-click="arrow = !arrow"><i ng-class="{'fa fa-angle-down':!arrow,'fa fa-angle-right':arrow}"></i> {{category.DisplayValue}}</a></strong></dt>
+                                        <dt>
+                                            <strong>
+                                                <a data-toggle="collapse" class="text-uppercase" data-parent="#collapseOne" href="#collapseTwo{{$index}}" ng-click="arrow = !arrow">
+                                                    <i ng-class="{'fa fa-angle-down':!arrow,'fa fa-angle-right':arrow}"></i>  {{category.DisplayValue}}
+                                                </a>
+                                            </strong>
+                                        </dt>
                                         <div id="collapseTwo{{$index}}" class="collapse in">
                                             <label class="checkbox" ng-repeat="filter in category.Filters">
-                                                <dd class="margin-top4" style="display: inline">
+                                                <dd class="margin-top4 text-uppercase" style="display: inline">
                                                     <input type="checkbox" name="checkbox" id="{{filter.Id}}" ng-click="hc.clicked=!hc.clicked; hc.filterProjects(filter.Id)" ng-model="category$index" ng-change="" />
                                                     <i></i>
                                                     {{filter.DisplayValue}}
@@ -51,8 +57,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion-v6" href="#collapseSix">
-                                Rating
+                            <a data-toggle="collapse" data-parent="#accordion-v6" href="#collapseSix" style="font-size: 18px">
+                                RATING
                                 <i class="fa fa-angle-down"></i>
                             </a>
                         </h2>
@@ -76,7 +82,7 @@
                 </div>
             </div>
             <!--/end panel group-->
-            <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-lg btn-u-sea-shop btn-block" ng-click="hc.resetAllFilters()">Reset</button>
+            <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-lg btn-u-sea-shop btn-block" ng-click="hc.resetAllFilters()">RESET</button>
         </div>
 
         <div class="col-md-9">
@@ -84,13 +90,13 @@
                 <div class="col-md-12 padding-leftright30">
                     <form ng-submit="hc.searchSolutions()">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" ng-model="hc.searchString"
+                            <input type="text" class="form-control font-size-12" placeholder="SEARCH" ng-model="hc.searchString"
                                    uib-typeahead="solution as solution.DisplayName for solution in hc.getSolutions($viewValue)"
                                    typeahead-loading="loadingSolutions"
                                    typeahead-on-select="hc.searchSolutions()"
                                    typeahead-template-url="customTemplate.html"
                                    autocomplete="off">
-                            <span class="input-group-btn" title="Search">
+                            <span class="input-group-btn" title="SEARCH">
                                 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                             </span>
                             <span class="input-group-btn" title="Reset">
@@ -102,8 +108,11 @@
             </div><!--/end result category-->
             <br>
 
-            <div class="filter-by-block col-md-12 padding-leftright30" ng-if="!hc.Projects.length">
-                <h1>No solution matches your search!</h1>
+            <div class="filter-by-block col-md-12 padding-leftright30" ng-if="!hc.Projects.length && !hc.ajaxStatus">
+                <h1 >No solution matches your search!</h1>
+            </div>
+            <div class="filter-by-block col-md-12 padding-leftright30" ng-if="hc.ajaxStatus">
+                <h1>Loading...</h1>
             </div>
 
             <div class="col-md-4 col-sm-6 illustration-v2 repeated-item" ng-repeat="project in hc.Projects" style="height: 385px">
@@ -122,8 +131,8 @@
                     <div class="product-description product-description-brd margin-bottom-30">
                         <div class="overflow-h margin-bottom-5">
                             <div class="pull-left projectDivHeight">
-                                <h6 class="title-price">
-                                    <span uib-tooltip="{{project.Description.length > 50 ? project.Description:''}}" tooltip-placement="left">{{project.Description | customLimitTo : 50}}</span>
+                                <h6 class="text-uppercase">
+                                    <span uib-tooltip="{{project.Description.length > 55 ? project.Description:''}}" tooltip-placement="left">{{project.Description | customLimitTo : 55}}</span>
                                 </h6>
                             </div>
                         </div>

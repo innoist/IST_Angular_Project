@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Claims;
+using System.Web;
 using IST.Models.DomainModels;
 using IST.WebApi2.Models;
 using Microsoft.AspNet.Identity;
@@ -40,7 +41,7 @@ namespace IST.WebApi2.ModelMappers
                 Location = source.Location,
                 Image = source.Image,
                 Active = source.Active.HasValue ? source.Active : true,
-                IsFavorite = source.AspNetUsers.FirstOrDefault() != null,
+                IsFavorite = source.AspNetUsers.FirstOrDefault() != null && source.AspNetUsers.Any(x => x.Id.Equals(HttpContext.Current.User.Identity.GetUserId())),
                 AverageRating = source.SolutionRatings.Count > 0 ? source.SolutionRatings.Select(x => x.Rating).Average() : 0,
                 IsRated = source.SolutionRatings.Count > 0 && source.SolutionRatings.Any(x => x.RecCreatedById == ClaimsPrincipal.Current.Identity.GetUserId())
             };

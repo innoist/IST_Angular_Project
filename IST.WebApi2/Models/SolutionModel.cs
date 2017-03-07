@@ -35,7 +35,6 @@ namespace IST.WebApi2.Models
         }
 
         public IEnumerable<SolutionModel> Data { get; set; }
-        public IEnumerable<FilterCategoryModel> FilterCategories { get; set; }
         public int recordsTotal { get; set; }
         public int recordsFiltered { get; set; }
     }

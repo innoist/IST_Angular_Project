@@ -19,7 +19,7 @@ namespace IST.WebApi2.ModelMappers
                 LastName = source.LastName,
                 Telephone = source.Telephone,
                 UserName = source.UserName,
-                Role = source.AspNetRoles.FirstOrDefault()?.Id
+                Role = source.AspNetRoles.FirstOrDefault()?.Name
             };
             return toReturn;
         }

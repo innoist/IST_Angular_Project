@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
 using IST.Interfaces.Repository;
 using IST.Models.Common;
 using IST.Models.DomainModels;
 using IST.Models.RequestModels;
 using IST.Models.ResponseModels;
 using IST.Repository.BaseRepository;
+using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 
 namespace IST.Repository.Repositories
@@ -51,6 +53,7 @@ namespace IST.Repository.Repositories
             Expression<Func<Solution, bool>> query;
             int fromRow = (searchRequest.PageNo - 1) * searchRequest.PageSize;
             int toRow = searchRequest.PageSize;
+            var currentuserid = HttpContext.Current.User.Identity.GetUserId();
             if (searchRequest.ClientRequest == null)
             {
                 query =
@@ -72,7 +75,7 @@ namespace IST.Repository.Repositories
                        && (searchRequest.TypeId == null || searchRequest.TypeId.Value.Equals(s.TypeId))
                        && (!searchRequest.FilterIds.Any() || s.Filters.Any(f => searchRequest.FilterIds.Contains(f.Id)))
                        && (searchRequest.OwnerId == null || searchRequest.OwnerId.Value.Equals(s.OwnerId))
-                       && (searchRequest.IsFavorite == false || s.AspNetUsers.FirstOrDefault() != null)
+                       && (searchRequest.IsFavorite == false || (s.AspNetUsers.FirstOrDefault() != null && s.AspNetUsers.Any(x => x.Id.Equals(currentuserid))))
                        && (searchRequest.AverageRating.Equals(0) || Math.Round((double)s.SolutionRatings.Select(x => x.Rating).Average()).Equals(searchRequest.AverageRating))
                        && (searchRequest.Name == null || s.Name.ToLower().Contains(searchRequest.Name.ToLower())
                        || s.Description.ToLower().Contains(searchRequest.Name.ToLower())
